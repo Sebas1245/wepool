@@ -2,7 +2,7 @@
 Mobile application to organize carpool rides within an organization.
 
 ## WePool Mobile App 
-This is a [React Native](https://reactnative.dev/) app built with (Expo)[https://expo.dev/]. 
+This is a [React Native](https://reactnative.dev/) app built with [Expo](https://expo.dev/). 
 ### Local development setup
 #### Prerequisites
 - [Node.JS v18.15.0](https://nodejs.org/en/). For MacOS users, we recommend using [`nvm`](https://formulae.brew.sh/formula/nvm) and installing with Homebrew.
