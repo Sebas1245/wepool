@@ -7,7 +7,7 @@ provider:
 
 functions:
   graphql:
-    handler: src/apollo-server.graphqlServer
+    handler: src/graphql-api/apollo-server.graphqlServer
     events:
       - http:
           path: graphql
@@ -16,6 +16,13 @@ functions:
       - http:
           path: graphql
           method: get
+          cors: true
+  auth:
+    handler: src/api/auth/auth.authHandler
+    events:
+      - http:
+          path: auth
+          method: post
           cors: true
 
 plugins:
