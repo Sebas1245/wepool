@@ -22,7 +22,7 @@ To start the application, run
 npm start
 ```
 
-## WePool SLS Apollo Server
+## WePool SLS Backend
 A Serverless GraphQL Server to expose a GraphQL API to be consumed by the React Native client. Visit the [serverless framwework documentation](https://www.serverless.com/) or [Apollo Server documentation](https://www.apollographql.com/docs/) for more information on these techonologies.
 ### Local development setup
 #### Prerequisites
@@ -36,7 +36,7 @@ git clone https://github.com/Sebas1245/wepool.git
 ```
 Move into the Serverless Apollo Server project directory and install all dependencies with
 ```
-cd wepool-app && npm install
+cd sls-backend && npm install
 ```
 
 To start the application, run 
