@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   overwrite: true,
   schema: "src/schema.graphql",
   generates: {
-    "src/types/generated/graphql.ts": {
+    "src/graphql-api/types/generated/graphql.ts": {
       plugins: ["typescript", "typescript-resolvers", "typescript-document-nodes"]
     }
   }
