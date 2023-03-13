@@ -36,7 +36,7 @@ git clone https://github.com/Sebas1245/wepool.git
 ```
 Move into the Serverless Apollo Server project directory and install all dependencies with
 ```
-cd wepool-app && npm install
+cd sls-backend && npm install
 ```
 
 To start the application, run 
