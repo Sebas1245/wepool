@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StartScreen from './src/screens/StartScreens/StartScreen';
 import LoginScreen from './src/screens/StartScreens/LoginScreen';
+import SignUpScreen from './src/screens/StartScreens/SignUpScreen';
 import { RootStackParamList } from './src/navigation/types';
 
 const Stack = createNativeStackNavigator();
@@ -16,12 +17,9 @@ export default function App() {
           <Stack.Navigator initialRouteName="StartScreen">
             <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}} />
             <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
-            <StatusBar style="auto" />
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown: false}}/>
           </Stack.Navigator>
-          {/* <View style={styles.container}>
-            <StartScreen/>
-            <LoginScreen/>
-          </View> */}
+          <StatusBar style="auto" />
         
         </NavigationContainer>
         <StatusBar />

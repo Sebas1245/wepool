@@ -39,14 +39,14 @@ export default function TextInput({label,placeholder, errorText, description, pr
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    marginVertical: 35
   },
   input: {
       backgroundColor: '#fff',
       paddingHorizontal: 10,
       paddingVertical: 5,
       borderColor: Colors.black,
-      borderWidth: 2
+      borderWidth: 2,
+      borderRadius: 15,
   },
   description: {
     fontSize: 13,

@@ -8,6 +8,7 @@ import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 export type RootStackParamList = {
     StartScreen: undefined;
     LoginScreen: undefined;
+    SignUpScreen: undefined;
   };
   
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =

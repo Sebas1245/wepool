@@ -16,11 +16,11 @@ const logoWidth = (screen.width * 0.9)
 
 const logoStyle = {
       resizeMode: 'contain',
-      width: logoWidth - 15,
+      width: logoWidth,
       height: (logoWidth / 2.5),
 }
 
-export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScreen'>) {
+export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpScreen'>) {
 //   const [email, setEmail] = useState({ value: '', error: '' })
 //   const [password, setPassword] = useState({ value: '', error: '' })
 
@@ -44,45 +44,20 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
       <View style = {{marginTop:50}}>
         <Logo style={logoStyle} />
       </View>
-      <Header text='Welcome back.'/>
+      <Header text='Create your profile'/>
       <TextInput
         label="Email"
-        placeholder='User email'
-        // returnKeyType="next"
-        // value={email.value}
-        // onChangeText={(text) => setEmail({ value: text, error: '' })}
-        // error={!!email.error}
-        // errorText={email.error}
-        // autoCapitalize="none"
-        // autoCompleteType="email"
-        // textContentType="emailAddress"
-        // keyboardType="email-address"
+        placeholder='Enter your email'
       />
       <TextInput
         label="Password"
-        // isPassword = {true}
         props={{'secureTextEntry': true}}
-        // returnKeyType="done"
-        // value={password.value}
-        // onChangeText={(text) => setPassword({ value: text, error: '' })}
-        // error={!!password.error}
-        // errorText={password.error}
-        // secureTextEntry
       />
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-        //   onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
-        <Text text='Forgot your password?'/>
-      </TouchableOpacity>
-      </View>
-      <Button text='Login'/>
-      <View style={styles.row}>
-        <Text text='Don’t have an account?'/>
-        <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-          <Text text = 'Sign up'/>
-        </TouchableOpacity>
-      </View>
+      <TextInput
+        label="Confirm Password"
+        props={{'secureTextEntry': true}}
+      />
+      <Button text='Sign in'/>
     </View>
   )
 }
@@ -93,24 +68,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 35,
-    marginTop: 35,
-    marginBottom: 10,
+    marginTop: 35
+  },
+  row: {
+    flexDirection: 'row',
+    marginTop: 4,
   },
   forgotPassword: {
     width: '100%',
     alignItems: 'flex-end',
     marginBottom: 24,
   },
-  row: {
-    flexDirection: 'row',
-    marginTop: 4,
-  },
-  forgot: {
-    fontSize: 13,
-    color: theme.colors.secondary,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-})
+}
+)

@@ -19,7 +19,7 @@ export default function StartScreen({navigation}: RootStackScreenProps<'StartScr
         />
         <Button
             text="Sign up"
-            // onPress={() => navigation.navigate('RegisterScreen')}
+            onPress={() => navigation.navigate('SignUpScreen')}
         />
     </View>
   )
