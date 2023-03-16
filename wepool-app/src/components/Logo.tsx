@@ -1,0 +1,28 @@
+import React from 'react'
+import { Dimensions, Image, StyleSheet } from 'react-native'
+import { theme } from '../core/theme'
+
+type Props = {
+  style?: any
+}
+
+export default function Logo({style} : Props) {
+  return <Image source={require('../assets/logo.png')} style={ style ? style : styles.image} />
+}
+
+const screen = Dimensions.get('window')
+const logoWidth = (screen.width * 0.9)
+
+const styles = StyleSheet.create({
+    image: {
+      resizeMode: 'contain',
+      width: logoWidth,
+      height: (logoWidth / 2.5),
+      marginLeft: 25,
+      marginBottom: 25, 
+      marginTop: 50
+      
+      // borderColor: theme.colors.text, 
+      // borderWidth: 2
+    },
+  })
