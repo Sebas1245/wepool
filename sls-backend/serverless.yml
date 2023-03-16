@@ -1,11 +1,15 @@
 service: wepool-apollo-server
 
+useDotenv: true
+
 provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
   httpApi:
     cors: true
+  environment:
+    NODE_ENV: dev # change this when doing deploys
 
 functions:
   graphql:

@@ -24,6 +24,11 @@ export type Driver = {
   lname: Scalars['String'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createRide?: Maybe<Scalars['Boolean']>;
+};
+
 export type Passenger = {
   __typename?: 'Passenger';
   fname: Scalars['String'];
@@ -114,6 +119,7 @@ export type ResolversTypes = {
   Driver: ResolverTypeWrapper<Driver>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   Passenger: ResolverTypeWrapper<Passenger>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
@@ -125,6 +131,7 @@ export type ResolversParentTypes = {
   Driver: Driver;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
+  Mutation: {};
   Passenger: Passenger;
   Query: {};
   String: Scalars['String'];
@@ -138,6 +145,10 @@ export type DriverResolvers<ContextType = any, ParentType extends ResolversParen
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  createRide?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
 };
 
 export type PassengerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Passenger'] = ResolversParentTypes['Passenger']> = {
@@ -157,6 +168,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type Resolvers<ContextType = any> = {
   Driver?: DriverResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Passenger?: PassengerResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
