@@ -1,4 +1,28 @@
-import { gql } from "apollo-server-lambda";
-import { readFileSync } from "fs";
+export const typeDefs = `#graphql
+  type Query {
+    getDriver: Driver
+    getPassenger: Passenger
+  }
 
-export const typeDefs = readFileSync("../schema.graphql", { encoding: "utf-8" });
+  type Driver {
+    id: ID!
+    fname: String!
+    lname: String!
+    home_address: String!
+    home_latitude: Int!
+    home_longitude: Int!
+  }
+
+  type Passenger {
+    id: ID!
+    fname: String!
+    lname: String!
+    home_address: String!
+    home_latitude: Int!
+    home_longitude: Int!
+  }
+
+  schema {
+    query: Query
+  }
+`;

@@ -26,13 +26,17 @@ npm start
 A Serverless GraphQL Server to expose a GraphQL API to be consumed by the React Native client. Visit the [serverless framwework documentation](https://www.serverless.com/) or [Apollo Server documentation](https://www.apollographql.com/docs/) for more information on these techonologies.
 ### Local development setup
 #### Prerequisites
-- [Node.JS v18.15.0](https://nodejs.org/en/). For MacOS users, we recommend using [`nvm`](https://formulae.brew.sh/formula/nvm) and installing with Homebrew.
+- [Node.JS v16.19.1](https://nodejs.org/en/). For MacOS users, we recommend using [`nvm`](https://formulae.brew.sh/formula/nvm) and installing with Homebrew.
 - Serverless framework installed on your Node.JS version. If you don't have it installed, run `npm install -g serverless`.
 
 #### Getting started
 Clone this repo by running
 ```
 git clone https://github.com/Sebas1245/wepool.git
+```
+To start using the correct Node.JS version, run 
+```
+nvm use
 ```
 Move into the Serverless Apollo Server project directory and install all dependencies with
 ```
@@ -43,6 +47,25 @@ To start the application, run
 ```
 npm start
 ```
+##### Running MySQL on MacOS
+For MacOS, we recommend instaling MySQL through [Homebrew](https://brew.sh/). First run
+```
+brew doctor && brew upgrade
+```
+Then, run 
+```
+brew install mysql
+```
 
+Verify the installation by logging into your root user, using your profile's user password.
+```
+mysql -u root -p
+```
 
-
+Create a `.env.development` file in `sls-backend/` directory, and add the following variables
+```.env
+MYSQL_HOST = localhost
+MYSQL_USER = <your_username>
+MYSQL_PASSWORD = <your_password>
+MYSQL_DB = wepool_dev
+```
