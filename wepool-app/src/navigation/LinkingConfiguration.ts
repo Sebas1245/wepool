@@ -15,7 +15,8 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       StartScreen: 'StartScreen',
       LoginScreen: 'LoginScreen',
-      SignUpScreen: 'SignUpScreen'
+      SignUpScreen: 'SignUpScreen',
+      SelectProfile: 'SelectProfile',
     },
   },
 };

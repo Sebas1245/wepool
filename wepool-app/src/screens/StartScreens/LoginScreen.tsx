@@ -76,7 +76,7 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         <Text text='Forgot your password?'/>
       </TouchableOpacity>
       </View>
-      <Button text='Login'/>
+      <Button text='Login' onPress={() => navigation.navigate('SelectProfile')}/>
       <View style={styles.row}>
         <Text text='Don’t have an account?'/>
         <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>

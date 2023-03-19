@@ -9,6 +9,7 @@ export type RootStackParamList = {
     StartScreen: undefined;
     LoginScreen: undefined;
     SignUpScreen: undefined;
+    SelectProfile: undefined;
   };
   
 export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =

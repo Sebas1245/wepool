@@ -57,7 +57,7 @@ export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpS
         label="Confirm Password"
         props={{'secureTextEntry': true}}
       />
-      <Button text='Sign in'/>
+      <Button text='Sign in' onPress={() => navigation.navigate('SelectProfile')}/>
     </View>
   )
 }
