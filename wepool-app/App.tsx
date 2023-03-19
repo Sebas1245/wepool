@@ -3,35 +3,27 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StartScreen from './src/screens/StartScreens/StartScreen';
-import LoginScreen from './src/screens/StartScreens/LoginScreen';
-import SignUpScreen from './src/screens/StartScreens/SignUpScreen';
+import useCachedResources from './src/hooks/useCachedResources';
+import useColorScheme from './src/hooks/useColorScheme';
+import Navigation from './src/navigation'
+// import StartScreen from './src/screens/StartScreens/StartScreen';
+// import LoginScreen from './src/screens/StartScreens/LoginScreen';
+// import SignUpScreen from './src/screens/StartScreens/SignUpScreen';
 import { RootStackParamList } from './src/navigation/types';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  return (
+  const isLoadingComplete = useCachedResources();
+  const colorScheme = useColorScheme();
+  if (!isLoadingComplete) {
+    return null;
+  } else {
+    return (
       <SafeAreaProvider>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="StartScreen">
-            <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}} />
-            <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
-            <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown: false}}/>
-          </Stack.Navigator>
-          <StatusBar style="auto" />
-        
-        </NavigationContainer>
-        <StatusBar />
+        <Navigation colorScheme={colorScheme} />
+        <StatusBar style="auto" />    
       </SafeAreaProvider>
-  );
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

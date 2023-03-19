@@ -13,7 +13,7 @@ export default function BackButton({size, onPress, props}: btnProps) {
     <TouchableOpacity onPress={onPress} style={styles.container} {...props}>
       <Image
         style={styles.image}
-        source={require('../assets/arrow_back.png')}
+        source={require('../assets/img/arrow_back.png')}
       />
     </TouchableOpacity>
   )

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { View, SafeAreaView, StyleSheet, TextInput as Input } from 'react-native'
 import Text from './Text'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
-import { theme } from '../core/theme'
+import Theme from '../core/Colors'
 
 type Props = {
     label? : string,
@@ -24,7 +24,7 @@ export default function TextInput({label,placeholder, errorText, description, pr
             value= {text}
             onChangeText= {onChangeText}
             placeholder= {placeholder}
-            selectionColor={theme.colors.secondary}
+            selectionColor={Theme.light.colors.secondary}
             {...props}
             
         />
@@ -50,12 +50,12 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 13,
-    color: theme.colors.secondary,
+    color: Theme.light.colors.secondary,
     paddingTop: 8,
   },
   error: {
     fontSize: 13,
-    color: theme.colors.error,
+    color: Theme.light.colors.error,
     paddingTop: 8,
   },
 })

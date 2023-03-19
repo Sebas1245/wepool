@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { theme } from "../core/theme";
+import Theme from '../core/Colors'
 
 type btnProps = {
   text: string,
@@ -25,7 +25,7 @@ const buttonWidth = screen.width / 2;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: Theme.light.colors.primary,
     // flex: 1, 
     width: buttonWidth,
     height: Math.floor(buttonWidth * 0.2 ),

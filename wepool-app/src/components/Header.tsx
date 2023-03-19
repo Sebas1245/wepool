@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import { theme } from '../core/theme'
+import Theme from '../core/Colors'
 
 type Props = {
   text: string;
@@ -13,7 +13,7 @@ export default function Header({text}: Props) {
 const styles = StyleSheet.create({
   header: {
     fontSize: 35,
-    color: theme.colors.primary,
+    color: Theme.light.colors.primary,
     fontWeight: 'bold',
     paddingVertical: 12,
   },
