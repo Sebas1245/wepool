@@ -28,4 +28,7 @@ module.exports = {
     extensions: [".ts", ".js"],
   },
   target: "node",
+  experiments: {
+    topLevelAwait: true,
+  },
 };

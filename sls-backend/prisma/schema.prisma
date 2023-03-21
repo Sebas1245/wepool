@@ -1,0 +1,90 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "typegraphql-prisma"
+  output   = "../prisma/generated/type-graphql"
+  emitTranspiledCode = true
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  fname String
+  lname String
+  latitude Float
+  longitude Float
+  // address fields
+  street String?
+  number Int?
+  zipCode Int?
+  city String?
+  state String?
+  country String?
+  // associations
+  car Car?
+  driverRides Ride[]
+  passengerRides RidePassengers[]
+}
+
+model Car {
+  id Int @id @default(autoincrement())
+  brand String
+  model String
+  year Int
+  plateNumber String
+  capacity Int
+  // associations
+  driver User @relation(fields: [driverId], references: [id])
+  driverId Int @unique
+}
+
+model Company {
+  id Int @id @default(autoincrement())
+  name String
+  latitude Float
+  longitude Float
+  // address
+  street String
+  number Int
+  zipCode Int
+  city String
+  state String
+  country String
+}
+
+model Ride {
+  id Int @id @default(autoincrement())
+  kmToGoalLocation Float
+  availableSeats Int
+  status RideStatus
+  // association
+  driver User @relation(fields: [driverId], references: [id])
+  driverId Int @unique
+  passengers RidePassengers[]
+}
+
+enum RideStatus {
+  OPEN
+  CLOSED
+}
+
+model RidePassengers {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  // association
+  passenger User @relation(fields: [passengerId], references: [id])
+  passengerId Int @unique
+  ride Ride @relation(fields: [rideId], references: [id])
+  rideId Int @unique
+}
