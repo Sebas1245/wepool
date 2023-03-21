@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserCrudResolver = exports.RidePassengersCrudResolver = exports.RideCrudResolver = exports.CompanyCrudResolver = exports.CarCrudResolver = void 0;
+var CarCrudResolver_1 = require("./Car/CarCrudResolver");
+Object.defineProperty(exports, "CarCrudResolver", { enumerable: true, get: function () { return CarCrudResolver_1.CarCrudResolver; } });
+var CompanyCrudResolver_1 = require("./Company/CompanyCrudResolver");
+Object.defineProperty(exports, "CompanyCrudResolver", { enumerable: true, get: function () { return CompanyCrudResolver_1.CompanyCrudResolver; } });
+var RideCrudResolver_1 = require("./Ride/RideCrudResolver");
+Object.defineProperty(exports, "RideCrudResolver", { enumerable: true, get: function () { return RideCrudResolver_1.RideCrudResolver; } });
+var RidePassengersCrudResolver_1 = require("./RidePassengers/RidePassengersCrudResolver");
+Object.defineProperty(exports, "RidePassengersCrudResolver", { enumerable: true, get: function () { return RidePassengersCrudResolver_1.RidePassengersCrudResolver; } });
+var UserCrudResolver_1 = require("./User/UserCrudResolver");
+Object.defineProperty(exports, "UserCrudResolver", { enumerable: true, get: function () { return UserCrudResolver_1.UserCrudResolver; } });

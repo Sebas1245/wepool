@@ -4,8 +4,8 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2022"],
-    "module": "ES2022",
+    "lib": ["ES2022", "ESNext.AsyncIterable"],
+    "module": "CommonJS",
     "moduleResolution": "node",
     "outDir": ".build",
     "preserveConstEnums": true,
@@ -17,7 +17,6 @@
     "strict": true,
     "typeRoots": ["node_modules/@types", "src/@types"]
   },
-  "files": ["src/@types/graphql.d.ts"],
   "exclude": ["node_modules", "src/**/*.test.ts"],
   "include": ["src/**/*"]
 }

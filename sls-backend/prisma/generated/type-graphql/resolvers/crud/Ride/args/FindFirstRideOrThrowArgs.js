@@ -1,0 +1,51 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FindFirstRideOrThrowArgs = void 0;
+const tslib_1 = require("tslib");
+const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
+const RideOrderByWithRelationInput_1 = require("../../../inputs/RideOrderByWithRelationInput");
+const RideWhereInput_1 = require("../../../inputs/RideWhereInput");
+const RideWhereUniqueInput_1 = require("../../../inputs/RideWhereUniqueInput");
+const RideScalarFieldEnum_1 = require("../../../../enums/RideScalarFieldEnum");
+let FindFirstRideOrThrowArgs = class FindFirstRideOrThrowArgs {
+};
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => RideWhereInput_1.RideWhereInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", RideWhereInput_1.RideWhereInput)
+], FindFirstRideOrThrowArgs.prototype, "where", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => [RideOrderByWithRelationInput_1.RideOrderByWithRelationInput], {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Array)
+], FindFirstRideOrThrowArgs.prototype, "orderBy", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => RideWhereUniqueInput_1.RideWhereUniqueInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", RideWhereUniqueInput_1.RideWhereUniqueInput)
+], FindFirstRideOrThrowArgs.prototype, "cursor", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], FindFirstRideOrThrowArgs.prototype, "take", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], FindFirstRideOrThrowArgs.prototype, "skip", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => [RideScalarFieldEnum_1.RideScalarFieldEnum], {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Array)
+], FindFirstRideOrThrowArgs.prototype, "distinct", void 0);
+FindFirstRideOrThrowArgs = tslib_1.__decorate([
+    TypeGraphQL.ArgsType()
+], FindFirstRideOrThrowArgs);
+exports.FindFirstRideOrThrowArgs = FindFirstRideOrThrowArgs;

@@ -1,27 +1,28 @@
-import { Driver, Passenger, Resolvers } from "./types/generated/graphql";
-
-export const resolvers: Resolvers = {
+import { User } from "../../prisma/generated/type-graphql";
+export const resolvers = {
   Query: {
     getDriver: () => {
-      const newDriver : Driver = {
-        id: "123",
+      const newDriver : User = {
+        id: 12356,
         fname: "Sebas",
-        home_address: "Paseo Milan 375",
-        home_latitude: 65.65,
-        home_longitude: 120.23,
-        lname: "Saldana"
-      }
+        lname: "Saldana",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        latitude: 0,
+        longitude: 0
+    }
 
       return newDriver;
     },
     getPassenger: () => {
-      const newPassenger : Passenger = {
-        id: "1234512",
-        fname: "Sebas",
-        home_address: "Paseo Milan 375",
-        home_latitude: 65.65,
-        home_longitude: 120.23,
-        lname: "Saldana"
+      const newPassenger : User = {
+          id: 12356,
+          fname: "Sebas",
+          lname: "Saldana",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          latitude: 0,
+          longitude: 0
       }
       return newPassenger;
     }

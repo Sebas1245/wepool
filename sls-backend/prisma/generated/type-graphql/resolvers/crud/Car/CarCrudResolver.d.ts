@@ -1,0 +1,35 @@
+import type { GraphQLResolveInfo } from "graphql";
+import { AggregateCarArgs } from "./args/AggregateCarArgs";
+import { CreateManyCarArgs } from "./args/CreateManyCarArgs";
+import { CreateOneCarArgs } from "./args/CreateOneCarArgs";
+import { DeleteManyCarArgs } from "./args/DeleteManyCarArgs";
+import { DeleteOneCarArgs } from "./args/DeleteOneCarArgs";
+import { FindFirstCarArgs } from "./args/FindFirstCarArgs";
+import { FindFirstCarOrThrowArgs } from "./args/FindFirstCarOrThrowArgs";
+import { FindManyCarArgs } from "./args/FindManyCarArgs";
+import { FindUniqueCarArgs } from "./args/FindUniqueCarArgs";
+import { FindUniqueCarOrThrowArgs } from "./args/FindUniqueCarOrThrowArgs";
+import { GroupByCarArgs } from "./args/GroupByCarArgs";
+import { UpdateManyCarArgs } from "./args/UpdateManyCarArgs";
+import { UpdateOneCarArgs } from "./args/UpdateOneCarArgs";
+import { UpsertOneCarArgs } from "./args/UpsertOneCarArgs";
+import { Car } from "../../../models/Car";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateCar } from "../../outputs/AggregateCar";
+import { CarGroupBy } from "../../outputs/CarGroupBy";
+export declare class CarCrudResolver {
+    aggregateCar(ctx: any, info: GraphQLResolveInfo, args: AggregateCarArgs): Promise<AggregateCar>;
+    createManyCar(ctx: any, info: GraphQLResolveInfo, args: CreateManyCarArgs): Promise<AffectedRowsOutput>;
+    createOneCar(ctx: any, info: GraphQLResolveInfo, args: CreateOneCarArgs): Promise<Car>;
+    deleteManyCar(ctx: any, info: GraphQLResolveInfo, args: DeleteManyCarArgs): Promise<AffectedRowsOutput>;
+    deleteOneCar(ctx: any, info: GraphQLResolveInfo, args: DeleteOneCarArgs): Promise<Car | null>;
+    findFirstCar(ctx: any, info: GraphQLResolveInfo, args: FindFirstCarArgs): Promise<Car | null>;
+    findFirstCarOrThrow(ctx: any, info: GraphQLResolveInfo, args: FindFirstCarOrThrowArgs): Promise<Car | null>;
+    cars(ctx: any, info: GraphQLResolveInfo, args: FindManyCarArgs): Promise<Car[]>;
+    car(ctx: any, info: GraphQLResolveInfo, args: FindUniqueCarArgs): Promise<Car | null>;
+    getCar(ctx: any, info: GraphQLResolveInfo, args: FindUniqueCarOrThrowArgs): Promise<Car | null>;
+    groupByCar(ctx: any, info: GraphQLResolveInfo, args: GroupByCarArgs): Promise<CarGroupBy[]>;
+    updateManyCar(ctx: any, info: GraphQLResolveInfo, args: UpdateManyCarArgs): Promise<AffectedRowsOutput>;
+    updateOneCar(ctx: any, info: GraphQLResolveInfo, args: UpdateOneCarArgs): Promise<Car | null>;
+    upsertOneCar(ctx: any, info: GraphQLResolveInfo, args: UpsertOneCarArgs): Promise<Car>;
+}

@@ -1,0 +1,35 @@
+import type { GraphQLResolveInfo } from "graphql";
+import { AggregateRideArgs } from "./args/AggregateRideArgs";
+import { CreateManyRideArgs } from "./args/CreateManyRideArgs";
+import { CreateOneRideArgs } from "./args/CreateOneRideArgs";
+import { DeleteManyRideArgs } from "./args/DeleteManyRideArgs";
+import { DeleteOneRideArgs } from "./args/DeleteOneRideArgs";
+import { FindFirstRideArgs } from "./args/FindFirstRideArgs";
+import { FindFirstRideOrThrowArgs } from "./args/FindFirstRideOrThrowArgs";
+import { FindManyRideArgs } from "./args/FindManyRideArgs";
+import { FindUniqueRideArgs } from "./args/FindUniqueRideArgs";
+import { FindUniqueRideOrThrowArgs } from "./args/FindUniqueRideOrThrowArgs";
+import { GroupByRideArgs } from "./args/GroupByRideArgs";
+import { UpdateManyRideArgs } from "./args/UpdateManyRideArgs";
+import { UpdateOneRideArgs } from "./args/UpdateOneRideArgs";
+import { UpsertOneRideArgs } from "./args/UpsertOneRideArgs";
+import { Ride } from "../../../models/Ride";
+import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
+import { AggregateRide } from "../../outputs/AggregateRide";
+import { RideGroupBy } from "../../outputs/RideGroupBy";
+export declare class RideCrudResolver {
+    aggregateRide(ctx: any, info: GraphQLResolveInfo, args: AggregateRideArgs): Promise<AggregateRide>;
+    createManyRide(ctx: any, info: GraphQLResolveInfo, args: CreateManyRideArgs): Promise<AffectedRowsOutput>;
+    createOneRide(ctx: any, info: GraphQLResolveInfo, args: CreateOneRideArgs): Promise<Ride>;
+    deleteManyRide(ctx: any, info: GraphQLResolveInfo, args: DeleteManyRideArgs): Promise<AffectedRowsOutput>;
+    deleteOneRide(ctx: any, info: GraphQLResolveInfo, args: DeleteOneRideArgs): Promise<Ride | null>;
+    findFirstRide(ctx: any, info: GraphQLResolveInfo, args: FindFirstRideArgs): Promise<Ride | null>;
+    findFirstRideOrThrow(ctx: any, info: GraphQLResolveInfo, args: FindFirstRideOrThrowArgs): Promise<Ride | null>;
+    rides(ctx: any, info: GraphQLResolveInfo, args: FindManyRideArgs): Promise<Ride[]>;
+    ride(ctx: any, info: GraphQLResolveInfo, args: FindUniqueRideArgs): Promise<Ride | null>;
+    getRide(ctx: any, info: GraphQLResolveInfo, args: FindUniqueRideOrThrowArgs): Promise<Ride | null>;
+    groupByRide(ctx: any, info: GraphQLResolveInfo, args: GroupByRideArgs): Promise<RideGroupBy[]>;
+    updateManyRide(ctx: any, info: GraphQLResolveInfo, args: UpdateManyRideArgs): Promise<AffectedRowsOutput>;
+    updateOneRide(ctx: any, info: GraphQLResolveInfo, args: UpdateOneRideArgs): Promise<Ride | null>;
+    upsertOneRide(ctx: any, info: GraphQLResolveInfo, args: UpsertOneRideArgs): Promise<Ride>;
+}

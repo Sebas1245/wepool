@@ -1,0 +1,30 @@
+import { CarRelationFilter } from "../inputs/CarRelationFilter";
+import { DateTimeFilter } from "../inputs/DateTimeFilter";
+import { FloatFilter } from "../inputs/FloatFilter";
+import { IntFilter } from "../inputs/IntFilter";
+import { IntNullableFilter } from "../inputs/IntNullableFilter";
+import { RideListRelationFilter } from "../inputs/RideListRelationFilter";
+import { RidePassengersListRelationFilter } from "../inputs/RidePassengersListRelationFilter";
+import { StringFilter } from "../inputs/StringFilter";
+import { StringNullableFilter } from "../inputs/StringNullableFilter";
+export declare class UserWhereInput {
+    AND?: UserWhereInput[] | undefined;
+    OR?: UserWhereInput[] | undefined;
+    NOT?: UserWhereInput[] | undefined;
+    id?: IntFilter | undefined;
+    createdAt?: DateTimeFilter | undefined;
+    updatedAt?: DateTimeFilter | undefined;
+    fname?: StringFilter | undefined;
+    lname?: StringFilter | undefined;
+    latitude?: FloatFilter | undefined;
+    longitude?: FloatFilter | undefined;
+    street?: StringNullableFilter | undefined;
+    number?: IntNullableFilter | undefined;
+    zipCode?: IntNullableFilter | undefined;
+    city?: StringNullableFilter | undefined;
+    state?: StringNullableFilter | undefined;
+    country?: StringNullableFilter | undefined;
+    car?: CarRelationFilter | undefined;
+    driverRides?: RideListRelationFilter | undefined;
+    passengerRides?: RidePassengersListRelationFilter | undefined;
+}

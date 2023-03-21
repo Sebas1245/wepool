@@ -1,17 +1,22 @@
-import { ApolloServer } from "@apollo/server";
+import { ApolloServer, BaseContext } from "@apollo/server";
 import {
   startServerAndCreateLambdaHandler,
   handlers,
 } from "@as-integrations/aws-lambda";
-import { resolvers } from "./resolvers";
-import typeDefs from './types/schema.graphql';
+import "reflect-metadata";
+import { PrismaClient } from "@prisma/client";
+import { buildSchemaSync } from "type-graphql";
+import { resolvers } from "../../prisma/generated/type-graphql"
 
-// TOOD - Add custom context for our GraphQL API
-type WePoolContext = {};
+interface WePoolContext extends BaseContext {}
+const schema = buildSchemaSync({ resolvers, validate: true });
 
-console.log(process.env);
+const context = async () => {
+  const prisma = new PrismaClient();
+  return { prisma };
+};
 
-const apolloServer = new ApolloServer<WePoolContext>({ typeDefs, resolvers });
+const apolloServer = new ApolloServer<WePoolContext>({ schema });
 
 export const graphqlServer = startServerAndCreateLambdaHandler(
   apolloServer,

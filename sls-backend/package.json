@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "sls offline start",
-    "generate": "graphql-codegen --config codegen.ts"
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:generate": "npx prisma generate",
+    "prisma:seed": "npx prisma db seed"
   },
   "keywords": [],
   "author": "",
@@ -13,17 +15,23 @@
   "dependencies": {
     "@apollo/server": "^4.5.0",
     "@as-integrations/aws-lambda": "^2.0.1",
-    "graphql": "^16.6.0"
+    "@prisma/client": "^4.11.0",
+    "@types/graphql-fields": "^1.3.5",
+    "class-validator": "^0.14.0",
+    "graphql-fields": "^2.0.3",
+    "graphql-scalars": "^1.20.4",
+    "graphql-tag": "^2.12.6",
+    "reflect-metadata": "^0.1.13",
+    "tslib": "^2.5.0",
+    "type-graphql": "^2.0.0-beta.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "3.2.2",
-    "@graphql-codegen/typescript": "3.0.2",
-    "@graphql-codegen/typescript-document-nodes": "3.0.2",
-    "@graphql-codegen/typescript-resolvers": "3.1.1",
     "@types/aws-lambda": "^8.10.111",
+    "prisma": "^4.11.0",
     "serverless-offline": "^12.0.4",
     "serverless-webpack": "^5.11.0",
     "ts-loader": "^9.4.2",
+    "typegraphql-prisma": "^0.24.3",
     "typescript": "^4.9.5",
     "webpack": "^5.76.0",
     "webpack-node-externals": "^3.0.0"
