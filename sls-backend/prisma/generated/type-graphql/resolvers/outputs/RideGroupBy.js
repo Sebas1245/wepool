@@ -9,6 +9,7 @@ const RideMaxAggregate_1 = require("../outputs/RideMaxAggregate");
 const RideMinAggregate_1 = require("../outputs/RideMinAggregate");
 const RideSumAggregate_1 = require("../outputs/RideSumAggregate");
 const RideStatus_1 = require("../../enums/RideStatus");
+const StartingPoint_1 = require("../../enums/StartingPoint");
 let RideGroupBy = class RideGroupBy {
 };
 tslib_1.__decorate([
@@ -35,6 +36,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], RideGroupBy.prototype, "status", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StartingPoint_1.StartingPoint, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", String)
+], RideGroupBy.prototype, "startsAt", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Int, {
         nullable: false

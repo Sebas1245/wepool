@@ -3,5 +3,6 @@ export declare class RideMinAggregate {
     kmToGoalLocation: number | null;
     availableSeats: number | null;
     status: "OPEN" | "CLOSED" | null;
+    startsAt: "DRIVER" | "COMPANY" | null;
     driverId: number | null;
 }

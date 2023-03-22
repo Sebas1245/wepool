@@ -6,6 +6,7 @@ export declare class Ride {
     kmToGoalLocation: number;
     availableSeats: number;
     status: "OPEN" | "CLOSED";
+    startsAt: "DRIVER" | "COMPANY";
     driver?: User;
     driverId: number;
     passengers?: RidePassengers[];

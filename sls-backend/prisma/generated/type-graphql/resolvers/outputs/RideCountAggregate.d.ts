@@ -3,6 +3,7 @@ export declare class RideCountAggregate {
     kmToGoalLocation: number;
     availableSeats: number;
     status: number;
+    startsAt: number;
     driverId: number;
     _all: number;
 }

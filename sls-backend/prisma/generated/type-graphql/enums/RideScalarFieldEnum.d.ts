@@ -3,5 +3,6 @@ export declare enum RideScalarFieldEnum {
     kmToGoalLocation = "kmToGoalLocation",
     availableSeats = "availableSeats",
     status = "status",
+    startsAt = "startsAt",
     driverId = "driverId"
 }

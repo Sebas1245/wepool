@@ -1,4 +1,5 @@
 import { EnumRideStatusWithAggregatesFilter } from "../inputs/EnumRideStatusWithAggregatesFilter";
+import { EnumStartingPointWithAggregatesFilter } from "../inputs/EnumStartingPointWithAggregatesFilter";
 import { FloatWithAggregatesFilter } from "../inputs/FloatWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 export declare class RideScalarWhereWithAggregatesInput {
@@ -9,5 +10,6 @@ export declare class RideScalarWhereWithAggregatesInput {
     kmToGoalLocation?: FloatWithAggregatesFilter | undefined;
     availableSeats?: IntWithAggregatesFilter | undefined;
     status?: EnumRideStatusWithAggregatesFilter | undefined;
+    startsAt?: EnumStartingPointWithAggregatesFilter | undefined;
     driverId?: IntWithAggregatesFilter | undefined;
 }

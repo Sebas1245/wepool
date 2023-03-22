@@ -5,6 +5,7 @@ const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const UserCreateNestedOneWithoutDriverRidesInput_1 = require("../inputs/UserCreateNestedOneWithoutDriverRidesInput");
 const RideStatus_1 = require("../../enums/RideStatus");
+const StartingPoint_1 = require("../../enums/StartingPoint");
 let RideCreateWithoutPassengersInput = class RideCreateWithoutPassengersInput {
 };
 tslib_1.__decorate([
@@ -25,6 +26,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], RideCreateWithoutPassengersInput.prototype, "status", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StartingPoint_1.StartingPoint, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", String)
+], RideCreateWithoutPassengersInput.prototype, "startsAt", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => UserCreateNestedOneWithoutDriverRidesInput_1.UserCreateNestedOneWithoutDriverRidesInput, {
         nullable: false

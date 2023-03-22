@@ -73,6 +73,7 @@ model Ride {
   kmToGoalLocation Float
   availableSeats Int
   status RideStatus
+  startsAt StartingPoint
   // association
   driver User @relation(fields: [driverId], references: [id])
   driverId Int
@@ -82,6 +83,12 @@ model Ride {
 enum RideStatus {
   OPEN
   CLOSED
+}
+
+// Specifies whether a Ride starts from the driver's address or the company' address
+enum StartingPoint {
+  DRIVER
+  COMPANY
 }
 
 model RidePassengers {

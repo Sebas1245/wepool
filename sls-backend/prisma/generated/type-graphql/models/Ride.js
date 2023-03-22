@@ -4,6 +4,7 @@ exports.Ride = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const RideStatus_1 = require("../enums/RideStatus");
+const StartingPoint_1 = require("../enums/StartingPoint");
 const RideCount_1 = require("../resolvers/outputs/RideCount");
 let Ride = class Ride {
 };
@@ -31,6 +32,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], Ride.prototype, "status", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StartingPoint_1.StartingPoint, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", String)
+], Ride.prototype, "startsAt", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Int, {
         nullable: false

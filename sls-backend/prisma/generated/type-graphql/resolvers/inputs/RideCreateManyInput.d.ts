@@ -3,5 +3,6 @@ export declare class RideCreateManyInput {
     kmToGoalLocation: number;
     availableSeats: number;
     status: "OPEN" | "CLOSED";
+    startsAt: "DRIVER" | "COMPANY";
     driverId: number;
 }

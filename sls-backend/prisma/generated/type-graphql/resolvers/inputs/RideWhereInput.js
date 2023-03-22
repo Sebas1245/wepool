@@ -5,6 +5,7 @@ exports.RideWhereInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const EnumRideStatusFilter_1 = require("../inputs/EnumRideStatusFilter");
+const EnumStartingPointFilter_1 = require("../inputs/EnumStartingPointFilter");
 const FloatFilter_1 = require("../inputs/FloatFilter");
 const IntFilter_1 = require("../inputs/IntFilter");
 const RidePassengersListRelationFilter_1 = require("../inputs/RidePassengersListRelationFilter");
@@ -53,6 +54,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", EnumRideStatusFilter_1.EnumRideStatusFilter)
 ], RideWhereInput.prototype, "status", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => EnumStartingPointFilter_1.EnumStartingPointFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", EnumStartingPointFilter_1.EnumStartingPointFilter)
+], RideWhereInput.prototype, "startsAt", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => IntFilter_1.IntFilter, {
         nullable: true

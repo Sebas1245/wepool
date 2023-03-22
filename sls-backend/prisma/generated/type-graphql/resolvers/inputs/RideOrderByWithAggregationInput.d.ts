@@ -8,6 +8,7 @@ export declare class RideOrderByWithAggregationInput {
     kmToGoalLocation?: "asc" | "desc" | undefined;
     availableSeats?: "asc" | "desc" | undefined;
     status?: "asc" | "desc" | undefined;
+    startsAt?: "asc" | "desc" | undefined;
     driverId?: "asc" | "desc" | undefined;
     _count?: RideCountOrderByAggregateInput | undefined;
     _avg?: RideAvgOrderByAggregateInput | undefined;
