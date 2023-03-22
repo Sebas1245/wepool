@@ -7,5 +7,5 @@ export declare class FindFirstRideOrThrowArgs {
     cursor?: RideWhereUniqueInput | undefined;
     take?: number | undefined;
     skip?: number | undefined;
-    distinct?: Array<"id" | "kmToGoalLocation" | "availableSeats" | "status" | "driverId"> | undefined;
+    distinct?: Array<"id" | "kmToGoalLocation" | "availableSeats" | "status" | "startsAt" | "driverId"> | undefined;
 }

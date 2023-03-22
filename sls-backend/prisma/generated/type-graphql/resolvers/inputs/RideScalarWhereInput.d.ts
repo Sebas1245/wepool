@@ -1,4 +1,5 @@
 import { EnumRideStatusFilter } from "../inputs/EnumRideStatusFilter";
+import { EnumStartingPointFilter } from "../inputs/EnumStartingPointFilter";
 import { FloatFilter } from "../inputs/FloatFilter";
 import { IntFilter } from "../inputs/IntFilter";
 export declare class RideScalarWhereInput {
@@ -9,5 +10,6 @@ export declare class RideScalarWhereInput {
     kmToGoalLocation?: FloatFilter | undefined;
     availableSeats?: IntFilter | undefined;
     status?: EnumRideStatusFilter | undefined;
+    startsAt?: EnumStartingPointFilter | undefined;
     driverId?: IntFilter | undefined;
 }

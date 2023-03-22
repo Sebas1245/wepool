@@ -4,5 +4,6 @@ export { RidePassengersScalarFieldEnum } from "./RidePassengersScalarFieldEnum";
 export { RideScalarFieldEnum } from "./RideScalarFieldEnum";
 export { RideStatus } from "./RideStatus";
 export { SortOrder } from "./SortOrder";
+export { StartingPoint } from "./StartingPoint";
 export { TransactionIsolationLevel } from "./TransactionIsolationLevel";
 export { UserScalarFieldEnum } from "./UserScalarFieldEnum";
