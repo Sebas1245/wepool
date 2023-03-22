@@ -1,8 +1,8 @@
 export declare class CompanyCreateManyInput {
     id?: number | undefined;
     name: string;
-    latitude: number;
-    longitude: number;
+    latitude?: number | undefined;
+    longitude?: number | undefined;
     street: string;
     number: number;
     zipCode: number;

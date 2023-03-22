@@ -4,4 +4,6 @@ export declare class UserAvgAggregate {
     longitude: number | null;
     number: number | null;
     zipCode: number | null;
+    carId: number | null;
+    companyId: number | null;
 }

@@ -35,6 +35,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserAvgAggregate.prototype, "zipCode", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserAvgAggregate.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Float, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserAvgAggregate.prototype, "companyId", void 0);
 UserAvgAggregate = tslib_1.__decorate([
     TypeGraphQL.ObjectType("UserAvgAggregate", {
         isAbstract: true

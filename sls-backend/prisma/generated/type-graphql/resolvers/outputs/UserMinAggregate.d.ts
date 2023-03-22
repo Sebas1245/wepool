@@ -12,4 +12,6 @@ export declare class UserMinAggregate {
     city: string | null;
     state: string | null;
     country: string | null;
+    carId: number | null;
+    companyId: number | null;
 }

@@ -1,3 +1,4 @@
+import { UserOrderByRelationAggregateInput } from "../inputs/UserOrderByRelationAggregateInput";
 export declare class CompanyOrderByWithRelationInput {
     id?: "asc" | "desc" | undefined;
     name?: "asc" | "desc" | undefined;
@@ -9,4 +10,5 @@ export declare class CompanyOrderByWithRelationInput {
     city?: "asc" | "desc" | undefined;
     state?: "asc" | "desc" | undefined;
     country?: "asc" | "desc" | undefined;
+    users?: UserOrderByRelationAggregateInput | undefined;
 }

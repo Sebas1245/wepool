@@ -11,6 +11,7 @@ var CarScalarFieldEnum;
     CarScalarFieldEnum["year"] = "year";
     CarScalarFieldEnum["plateNumber"] = "plateNumber";
     CarScalarFieldEnum["capacity"] = "capacity";
+    CarScalarFieldEnum["color"] = "color";
     CarScalarFieldEnum["driverId"] = "driverId";
 })(CarScalarFieldEnum = exports.CarScalarFieldEnum || (exports.CarScalarFieldEnum = {}));
 TypeGraphQL.registerEnumType(CarScalarFieldEnum, {

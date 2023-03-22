@@ -17,6 +17,8 @@ export declare class UserOrderByWithAggregationInput {
     city?: "asc" | "desc" | undefined;
     state?: "asc" | "desc" | undefined;
     country?: "asc" | "desc" | undefined;
+    carId?: "asc" | "desc" | undefined;
+    companyId?: "asc" | "desc" | undefined;
     _count?: UserCountOrderByAggregateInput | undefined;
     _avg?: UserAvgOrderByAggregateInput | undefined;
     _max?: UserMaxOrderByAggregateInput | undefined;

@@ -12,5 +12,7 @@ export declare class UserCountAggregate {
     city: number;
     state: number;
     country: number;
+    carId: number;
+    companyId: number;
     _all: number;
 }

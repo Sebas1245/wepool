@@ -11,12 +11,6 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Number)
 ], RideWhereUniqueInput.prototype, "id", void 0);
-tslib_1.__decorate([
-    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
-        nullable: true
-    }),
-    tslib_1.__metadata("design:type", Number)
-], RideWhereUniqueInput.prototype, "driverId", void 0);
 RideWhereUniqueInput = tslib_1.__decorate([
     TypeGraphQL.InputType("RideWhereUniqueInput", {
         isAbstract: true

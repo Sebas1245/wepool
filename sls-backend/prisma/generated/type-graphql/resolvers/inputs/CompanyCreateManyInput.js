@@ -19,13 +19,13 @@ tslib_1.__decorate([
 ], CompanyCreateManyInput.prototype, "name", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], CompanyCreateManyInput.prototype, "latitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], CompanyCreateManyInput.prototype, "longitude", void 0);

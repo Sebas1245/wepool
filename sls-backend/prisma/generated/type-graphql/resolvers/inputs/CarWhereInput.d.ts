@@ -11,6 +11,7 @@ export declare class CarWhereInput {
     year?: IntFilter | undefined;
     plateNumber?: StringFilter | undefined;
     capacity?: IntFilter | undefined;
+    color?: StringFilter | undefined;
     driverId?: IntFilter | undefined;
     driver?: UserRelationFilter | undefined;
 }

@@ -83,6 +83,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], UserMinAggregate.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserMinAggregate.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserMinAggregate.prototype, "companyId", void 0);
 UserMinAggregate = tslib_1.__decorate([
     TypeGraphQL.ObjectType("UserMinAggregate", {
         isAbstract: true

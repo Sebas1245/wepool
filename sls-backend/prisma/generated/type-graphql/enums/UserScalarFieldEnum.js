@@ -18,6 +18,8 @@ var UserScalarFieldEnum;
     UserScalarFieldEnum["city"] = "city";
     UserScalarFieldEnum["state"] = "state";
     UserScalarFieldEnum["country"] = "country";
+    UserScalarFieldEnum["carId"] = "carId";
+    UserScalarFieldEnum["companyId"] = "companyId";
 })(UserScalarFieldEnum = exports.UserScalarFieldEnum || (exports.UserScalarFieldEnum = {}));
 TypeGraphQL.registerEnumType(UserScalarFieldEnum, {
     name: "UserScalarFieldEnum",

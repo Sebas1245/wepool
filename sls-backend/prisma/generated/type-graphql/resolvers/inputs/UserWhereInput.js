@@ -5,8 +5,9 @@ exports.UserWhereInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const CarRelationFilter_1 = require("../inputs/CarRelationFilter");
+const CompanyRelationFilter_1 = require("../inputs/CompanyRelationFilter");
 const DateTimeFilter_1 = require("../inputs/DateTimeFilter");
-const FloatFilter_1 = require("../inputs/FloatFilter");
+const FloatNullableFilter_1 = require("../inputs/FloatNullableFilter");
 const IntFilter_1 = require("../inputs/IntFilter");
 const IntNullableFilter_1 = require("../inputs/IntNullableFilter");
 const RideListRelationFilter_1 = require("../inputs/RideListRelationFilter");
@@ -64,16 +65,16 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", StringFilter_1.StringFilter)
 ], UserWhereInput.prototype, "lname", void 0);
 tslib_1.__decorate([
-    TypeGraphQL.Field(_type => FloatFilter_1.FloatFilter, {
+    TypeGraphQL.Field(_type => FloatNullableFilter_1.FloatNullableFilter, {
         nullable: true
     }),
-    tslib_1.__metadata("design:type", FloatFilter_1.FloatFilter)
+    tslib_1.__metadata("design:type", FloatNullableFilter_1.FloatNullableFilter)
 ], UserWhereInput.prototype, "latitude", void 0);
 tslib_1.__decorate([
-    TypeGraphQL.Field(_type => FloatFilter_1.FloatFilter, {
+    TypeGraphQL.Field(_type => FloatNullableFilter_1.FloatNullableFilter, {
         nullable: true
     }),
-    tslib_1.__metadata("design:type", FloatFilter_1.FloatFilter)
+    tslib_1.__metadata("design:type", FloatNullableFilter_1.FloatNullableFilter)
 ], UserWhereInput.prototype, "longitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => StringNullableFilter_1.StringNullableFilter, {
@@ -112,6 +113,18 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", StringNullableFilter_1.StringNullableFilter)
 ], UserWhereInput.prototype, "country", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => IntNullableFilter_1.IntNullableFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", IntNullableFilter_1.IntNullableFilter)
+], UserWhereInput.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => IntFilter_1.IntFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", IntFilter_1.IntFilter)
+], UserWhereInput.prototype, "companyId", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => CarRelationFilter_1.CarRelationFilter, {
         nullable: true
     }),
@@ -129,6 +142,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", RidePassengersListRelationFilter_1.RidePassengersListRelationFilter)
 ], UserWhereInput.prototype, "passengerRides", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => CompanyRelationFilter_1.CompanyRelationFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", CompanyRelationFilter_1.CompanyRelationFilter)
+], UserWhereInput.prototype, "company", void 0);
 UserWhereInput = UserWhereInput_1 = tslib_1.__decorate([
     TypeGraphQL.InputType("UserWhereInput", {
         isAbstract: true

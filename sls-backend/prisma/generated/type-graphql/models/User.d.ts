@@ -1,4 +1,5 @@
 import { Car } from "../models/Car";
+import { Company } from "../models/Company";
 import { Ride } from "../models/Ride";
 import { RidePassengers } from "../models/RidePassengers";
 import { UserCount } from "../resolvers/outputs/UserCount";
@@ -8,8 +9,8 @@ export declare class User {
     updatedAt: Date;
     fname: string;
     lname: string;
-    latitude: number;
-    longitude: number;
+    latitude?: number | null;
+    longitude?: number | null;
     street?: string | null;
     number?: number | null;
     zipCode?: number | null;
@@ -17,7 +18,10 @@ export declare class User {
     state?: string | null;
     country?: string | null;
     car?: Car | null;
+    carId?: number | null;
     driverRides?: Ride[];
     passengerRides?: RidePassengers[];
+    company?: Company;
+    companyId: number;
     _count?: UserCount | null;
 }

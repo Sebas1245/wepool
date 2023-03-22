@@ -35,6 +35,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserSumAggregate.prototype, "zipCode", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserSumAggregate.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserSumAggregate.prototype, "companyId", void 0);
 UserSumAggregate = tslib_1.__decorate([
     TypeGraphQL.ObjectType("UserSumAggregate", {
         isAbstract: true

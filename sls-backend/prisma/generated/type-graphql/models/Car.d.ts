@@ -6,6 +6,7 @@ export declare class Car {
     year: number;
     plateNumber: string;
     capacity: number;
+    color: string;
     driver?: User;
     driverId: number;
 }

@@ -5,6 +5,7 @@ export declare class CarCountAggregate {
     year: number;
     plateNumber: number;
     capacity: number;
+    color: number;
     driverId: number;
     _all: number;
 }

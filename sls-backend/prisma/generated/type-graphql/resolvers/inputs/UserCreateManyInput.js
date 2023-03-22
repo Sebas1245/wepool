@@ -37,13 +37,13 @@ tslib_1.__decorate([
 ], UserCreateManyInput.prototype, "lname", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserCreateManyInput.prototype, "latitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserCreateManyInput.prototype, "longitude", void 0);
@@ -83,6 +83,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], UserCreateManyInput.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserCreateManyInput.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserCreateManyInput.prototype, "companyId", void 0);
 UserCreateManyInput = tslib_1.__decorate([
     TypeGraphQL.InputType("UserCreateManyInput", {
         isAbstract: true

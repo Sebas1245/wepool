@@ -7,5 +7,6 @@ export declare class CarUpdateInput {
     year?: IntFieldUpdateOperationsInput | undefined;
     plateNumber?: StringFieldUpdateOperationsInput | undefined;
     capacity?: IntFieldUpdateOperationsInput | undefined;
+    color?: StringFieldUpdateOperationsInput | undefined;
     driver?: UserUpdateOneRequiredWithoutCarNestedInput | undefined;
 }

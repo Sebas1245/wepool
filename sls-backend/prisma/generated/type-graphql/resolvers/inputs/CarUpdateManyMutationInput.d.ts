@@ -6,4 +6,5 @@ export declare class CarUpdateManyMutationInput {
     year?: IntFieldUpdateOperationsInput | undefined;
     plateNumber?: StringFieldUpdateOperationsInput | undefined;
     capacity?: IntFieldUpdateOperationsInput | undefined;
+    color?: StringFieldUpdateOperationsInput | undefined;
 }

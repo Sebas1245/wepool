@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyOrderByWithRelationInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
+const UserOrderByRelationAggregateInput_1 = require("../inputs/UserOrderByRelationAggregateInput");
 const SortOrder_1 = require("../../enums/SortOrder");
 let CompanyOrderByWithRelationInput = class CompanyOrderByWithRelationInput {
 };
@@ -66,6 +67,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], CompanyOrderByWithRelationInput.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => UserOrderByRelationAggregateInput_1.UserOrderByRelationAggregateInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", UserOrderByRelationAggregateInput_1.UserOrderByRelationAggregateInput)
+], CompanyOrderByWithRelationInput.prototype, "users", void 0);
 CompanyOrderByWithRelationInput = tslib_1.__decorate([
     TypeGraphQL.InputType("CompanyOrderByWithRelationInput", {
         isAbstract: true

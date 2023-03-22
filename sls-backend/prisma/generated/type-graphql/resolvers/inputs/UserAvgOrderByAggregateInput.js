@@ -36,6 +36,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], UserAvgOrderByAggregateInput.prototype, "zipCode", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => SortOrder_1.SortOrder, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", String)
+], UserAvgOrderByAggregateInput.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => SortOrder_1.SortOrder, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", String)
+], UserAvgOrderByAggregateInput.prototype, "companyId", void 0);
 UserAvgOrderByAggregateInput = tslib_1.__decorate([
     TypeGraphQL.InputType("UserAvgOrderByAggregateInput", {
         isAbstract: true

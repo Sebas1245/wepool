@@ -5,5 +5,6 @@ export declare enum CarScalarFieldEnum {
     year = "year",
     plateNumber = "plateNumber",
     capacity = "capacity",
+    color = "color",
     driverId = "driverId"
 }

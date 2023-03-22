@@ -37,6 +37,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", IntFieldUpdateOperationsInput_1.IntFieldUpdateOperationsInput)
 ], CarUpdateManyMutationInput.prototype, "capacity", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput)
+], CarUpdateManyMutationInput.prototype, "color", void 0);
 CarUpdateManyMutationInput = tslib_1.__decorate([
     TypeGraphQL.InputType("CarUpdateManyMutationInput", {
         isAbstract: true

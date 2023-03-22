@@ -11,6 +11,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserWhereUniqueInput.prototype, "id", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserWhereUniqueInput.prototype, "carId", void 0);
 UserWhereUniqueInput = tslib_1.__decorate([
     TypeGraphQL.InputType("UserWhereUniqueInput", {
         isAbstract: true

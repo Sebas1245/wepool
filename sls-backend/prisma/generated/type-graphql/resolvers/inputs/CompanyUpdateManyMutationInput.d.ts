@@ -1,10 +1,10 @@
-import { FloatFieldUpdateOperationsInput } from "../inputs/FloatFieldUpdateOperationsInput";
 import { IntFieldUpdateOperationsInput } from "../inputs/IntFieldUpdateOperationsInput";
+import { NullableFloatFieldUpdateOperationsInput } from "../inputs/NullableFloatFieldUpdateOperationsInput";
 import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 export declare class CompanyUpdateManyMutationInput {
     name?: StringFieldUpdateOperationsInput | undefined;
-    latitude?: FloatFieldUpdateOperationsInput | undefined;
-    longitude?: FloatFieldUpdateOperationsInput | undefined;
+    latitude?: NullableFloatFieldUpdateOperationsInput | undefined;
+    longitude?: NullableFloatFieldUpdateOperationsInput | undefined;
     street?: StringFieldUpdateOperationsInput | undefined;
     number?: IntFieldUpdateOperationsInput | undefined;
     zipCode?: IntFieldUpdateOperationsInput | undefined;

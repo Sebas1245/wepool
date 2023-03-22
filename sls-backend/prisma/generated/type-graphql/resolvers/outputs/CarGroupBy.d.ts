@@ -10,6 +10,7 @@ export declare class CarGroupBy {
     year: number;
     plateNumber: string;
     capacity: number;
+    color: string;
     driverId: number;
     _count: CarCountAggregate | null;
     _avg: CarAvgAggregate | null;
