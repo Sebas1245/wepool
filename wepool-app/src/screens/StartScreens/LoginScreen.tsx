@@ -58,21 +58,24 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         label="Email"
         placeholder='User email'
         props={{
-          'value': user ? user.email : null          
+          'value': user ? user.email : null,
+          'onChangeText': (text: string) => setUser( prev => {return { ...prev, email: text}}),
+          'returnKeyType': "next",
+          'autoCapitalize': "none",
+          'autoCompleteType': "email",
+          'textContentType': "emailAddress",
         }}
         // onChangeText={(text) => setEmail({ value: text, error: '' })}
-        // returnKeyType="next"
         // error={!!email.error}
         // errorText={email.error}
-        // autoCapitalize="none"
-        // autoCompleteType="email"
-        // textContentType="emailAddress"
         // keyboardType="email-address"
       />
       <LoginTextInput
         label="Password"
-        // isPassword = {true}
-        props={{'secureTextEntry': true}}
+        props={{
+          'secureTextEntry': true, 
+          'value': user ? user.email : null,
+        }}
         // returnKeyType="done"
         // value={password.value}
         // onChangeText={(text) => setPassword({ value: text, error: '' })}
