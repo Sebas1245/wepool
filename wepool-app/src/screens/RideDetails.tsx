@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import HeaderBar from "../components/HeaderBar";
-import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView, Image } from 'react-native'
+import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView, Image, TextInput } from 'react-native'
 import Text from '../components/Text'
 import Logo from '../components/Logo'
 import Button from '../components/Button'
@@ -12,6 +13,14 @@ const screen = Dimensions.get('window')
 
 export default function RideDetails({navigation}: RootStackScreenProps<'RideDetails'>) {
 
+    const [user, setUser] = useState<User>({
+        _id: 1,
+        name: 'Bernardo',
+        lastname: 'Garcia', 
+        email: 'bernardo@gmail.com', 
+        password: '1234', 
+        phoneNumber: '1234'
+      });
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
@@ -19,6 +28,34 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
             </View>
             <View style = {styles.contentContainer}>
                 <Header text="Ride Details"/>
+                <View style = {styles.infoCard}>
+                    <View style = {styles.row}>
+                        <TextInput style = {styles.textInput} placeholder='Date'/>
+                        <TextInput style = {styles.textInput} placeholder='Time'/>
+                    </View>
+                    <View style = {styles.row}>
+                        <Image
+                            style={styles.icon}
+                            source={require('../assets/icons/icon_Rider.png')}
+                            />
+                        <View>
+                            <View style = {styles.row}>
+                                <TextInput style = {styles.textInput} placeholder='From'/>
+                            </View>
+                            <View style = {styles.row}>
+                                <TextInput style = {styles.textInput} placeholder='To'/>
+                            </View>
+                        </View>
+                    </View>
+                    <View style = {styles.row}>
+                        <TextInput style = {styles.textInput} placeholder='Cost'/>
+                        <TextInput style = {styles.textInput} placeholder='Seats'/>
+                    </View>
+                    <View style = {styles.row}>
+                        <TextInput style = {styles.textInput} placeholder='Model'/>
+                        <TextInput style = {styles.textInput} placeholder='Color'/>
+                    </View>
+                </View>
             </View>
         </View>
     )
@@ -27,7 +64,6 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
   const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // height: screen.height
     },
     headerContainer: {
         flex: 1,
@@ -61,6 +97,24 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
     icon: {
         width: 35, 
         height: 35,
+    }, 
+    infoCard: {
+        flex: 1,
+        marginHorizontal: '10%',
+        marginBottom: '20%',
+        backgroundColor: Colors.light.tint, 
+        borderRadius: 15,
+    }, 
+    row: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    textInput: {
+        flex: 1, 
+        // backgroundColor: 'white',
+        // borderColor: 'black',
+        // borderWidth: 0.2,
+        // borderRadius: 15,
     }
 
 

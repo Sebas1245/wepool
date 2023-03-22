@@ -4,7 +4,7 @@ import Text from '../../components/Text'
 import Logo from '../../components/Logo'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
-import TextInput from '../../components/TextInput'
+import LoginTextInput from '../../components/LoginTextInput'
 import BackButton from '../../components/BackButton'
 import Theme from '../../core/Colors'
 import { RootStackScreenProps } from '../../navigation/types';
@@ -45,15 +45,15 @@ export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpS
         <Logo style={logoStyle} />
       </View>
       <Header text='Create your profile'/>
-      <TextInput
+      <LoginTextInput
         label="Email"
         placeholder='Enter your email'
       />
-      <TextInput
+      <LoginTextInput
         label="Password"
         props={{'secureTextEntry': true}}
       />
-      <TextInput
+      <LoginTextInput
         label="Confirm Password"
         props={{'secureTextEntry': true}}
       />

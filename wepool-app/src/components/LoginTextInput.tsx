@@ -12,8 +12,8 @@ type Props = {
     props?: any
 }
 
-export default function TextInput({label,placeholder, errorText, description, props}: Props) {
-    const [text, onChangeText] = React.useState('');
+export default function LoginTextInput({label,placeholder, errorText, description, props}: Props) {
+    // const [text, onChangeText] = React.useState('');
   return (
     <SafeAreaView style={styles.container}>
         {label ? (
@@ -21,8 +21,8 @@ export default function TextInput({label,placeholder, errorText, description, pr
             ) : null}
         <Input       
             style={styles.input}
-            value= {text}
-            onChangeText= {onChangeText}
+            // value= {text}
+            // onChangeText= {onChangeText}
             placeholder= {placeholder}
             selectionColor={Theme.light.colors.secondary}
             {...props}

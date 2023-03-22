@@ -4,7 +4,7 @@ import Text from '../../components/Text'
 import Logo from '../../components/Logo'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
-import TextInput from '../../components/TextInput'
+import LoginTextInput from '../../components/LoginTextInput'
 import BackButton from '../../components/BackButton'
 import Theme from '../../core/Colors'
 import { RootStackScreenProps } from '../../navigation/types';
@@ -21,7 +21,16 @@ const logoStyle = {
 }
 
 export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScreen'>) {
-//   const [email, setEmail] = useState({ value: '', error: '' })
+  const [user, setUser] = useState<User>({
+    _id: 1,
+    name: 'Bernardo',
+    lastname: 'Garcia', 
+    email: 'bernardo@gmail.com', 
+    password: '1234', 
+    phoneNumber: '1234'
+  });
+
+  //   const [email, setEmail] = useState({ value: '', error: '' })
 //   const [password, setPassword] = useState({ value: '', error: '' })
 
 //   const onLoginPressed = () => {
@@ -45,12 +54,14 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         <Logo style={logoStyle} />
       </View>
       <Header text='Welcome back.'/>
-      <TextInput
+      <LoginTextInput
         label="Email"
         placeholder='User email'
-        // returnKeyType="next"
-        // value={email.value}
+        props={{
+          'value': user ? user.email : null          
+        }}
         // onChangeText={(text) => setEmail({ value: text, error: '' })}
+        // returnKeyType="next"
         // error={!!email.error}
         // errorText={email.error}
         // autoCapitalize="none"
@@ -58,7 +69,7 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         // textContentType="emailAddress"
         // keyboardType="email-address"
       />
-      <TextInput
+      <LoginTextInput
         label="Password"
         // isPassword = {true}
         props={{'secureTextEntry': true}}
