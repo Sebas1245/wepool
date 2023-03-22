@@ -11,6 +11,7 @@ export { CarMaxAggregate } from "./CarMaxAggregate";
 export { CarMinAggregate } from "./CarMinAggregate";
 export { CarSumAggregate } from "./CarSumAggregate";
 export { CompanyAvgAggregate } from "./CompanyAvgAggregate";
+export { CompanyCount } from "./CompanyCount";
 export { CompanyCountAggregate } from "./CompanyCountAggregate";
 export { CompanyGroupBy } from "./CompanyGroupBy";
 export { CompanyMaxAggregate } from "./CompanyMaxAggregate";

@@ -5,5 +5,6 @@ export declare class CarCreateManyInput {
     year: number;
     plateNumber: string;
     capacity: number;
+    color: string;
     driverId: number;
 }

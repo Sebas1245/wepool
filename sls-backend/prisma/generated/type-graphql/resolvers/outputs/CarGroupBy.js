@@ -47,6 +47,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Number)
 ], CarGroupBy.prototype, "capacity", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => String, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", String)
+], CarGroupBy.prototype, "color", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Int, {
         nullable: false
     }),

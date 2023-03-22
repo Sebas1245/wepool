@@ -1,6 +1,7 @@
 import { CarRelationFilter } from "../inputs/CarRelationFilter";
+import { CompanyRelationFilter } from "../inputs/CompanyRelationFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
-import { FloatFilter } from "../inputs/FloatFilter";
+import { FloatNullableFilter } from "../inputs/FloatNullableFilter";
 import { IntFilter } from "../inputs/IntFilter";
 import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { RideListRelationFilter } from "../inputs/RideListRelationFilter";
@@ -16,15 +17,18 @@ export declare class UserWhereInput {
     updatedAt?: DateTimeFilter | undefined;
     fname?: StringFilter | undefined;
     lname?: StringFilter | undefined;
-    latitude?: FloatFilter | undefined;
-    longitude?: FloatFilter | undefined;
+    latitude?: FloatNullableFilter | undefined;
+    longitude?: FloatNullableFilter | undefined;
     street?: StringNullableFilter | undefined;
     number?: IntNullableFilter | undefined;
     zipCode?: IntNullableFilter | undefined;
     city?: StringNullableFilter | undefined;
     state?: StringNullableFilter | undefined;
     country?: StringNullableFilter | undefined;
+    carId?: IntNullableFilter | undefined;
+    companyId?: IntFilter | undefined;
     car?: CarRelationFilter | undefined;
     driverRides?: RideListRelationFilter | undefined;
     passengerRides?: RidePassengersListRelationFilter | undefined;
+    company?: CompanyRelationFilter | undefined;
 }

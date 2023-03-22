@@ -4,4 +4,6 @@ export declare class UserAvgOrderByAggregateInput {
     longitude?: "asc" | "desc" | undefined;
     number?: "asc" | "desc" | undefined;
     zipCode?: "asc" | "desc" | undefined;
+    carId?: "asc" | "desc" | undefined;
+    companyId?: "asc" | "desc" | undefined;
 }

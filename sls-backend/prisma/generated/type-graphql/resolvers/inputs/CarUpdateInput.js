@@ -39,6 +39,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", IntFieldUpdateOperationsInput_1.IntFieldUpdateOperationsInput)
 ], CarUpdateInput.prototype, "capacity", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput)
+], CarUpdateInput.prototype, "color", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => UserUpdateOneRequiredWithoutCarNestedInput_1.UserUpdateOneRequiredWithoutCarNestedInput, {
         nullable: true
     }),

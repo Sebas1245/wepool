@@ -1,5 +1,5 @@
 import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
-import { FloatWithAggregatesFilter } from "../inputs/FloatWithAggregatesFilter";
+import { FloatNullableWithAggregatesFilter } from "../inputs/FloatNullableWithAggregatesFilter";
 import { IntNullableWithAggregatesFilter } from "../inputs/IntNullableWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringNullableWithAggregatesFilter } from "../inputs/StringNullableWithAggregatesFilter";
@@ -13,12 +13,14 @@ export declare class UserScalarWhereWithAggregatesInput {
     updatedAt?: DateTimeWithAggregatesFilter | undefined;
     fname?: StringWithAggregatesFilter | undefined;
     lname?: StringWithAggregatesFilter | undefined;
-    latitude?: FloatWithAggregatesFilter | undefined;
-    longitude?: FloatWithAggregatesFilter | undefined;
+    latitude?: FloatNullableWithAggregatesFilter | undefined;
+    longitude?: FloatNullableWithAggregatesFilter | undefined;
     street?: StringNullableWithAggregatesFilter | undefined;
     number?: IntNullableWithAggregatesFilter | undefined;
     zipCode?: IntNullableWithAggregatesFilter | undefined;
     city?: StringNullableWithAggregatesFilter | undefined;
     state?: StringNullableWithAggregatesFilter | undefined;
     country?: StringNullableWithAggregatesFilter | undefined;
+    carId?: IntNullableWithAggregatesFilter | undefined;
+    companyId?: IntWithAggregatesFilter | undefined;
 }

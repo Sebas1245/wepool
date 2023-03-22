@@ -4,6 +4,7 @@ exports.UserCreateWithoutPassengerRidesInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const CarCreateNestedOneWithoutDriverInput_1 = require("../inputs/CarCreateNestedOneWithoutDriverInput");
+const CompanyCreateNestedOneWithoutUsersInput_1 = require("../inputs/CompanyCreateNestedOneWithoutUsersInput");
 const RideCreateNestedManyWithoutDriverInput_1 = require("../inputs/RideCreateNestedManyWithoutDriverInput");
 let UserCreateWithoutPassengerRidesInput = class UserCreateWithoutPassengerRidesInput {
 };
@@ -33,13 +34,13 @@ tslib_1.__decorate([
 ], UserCreateWithoutPassengerRidesInput.prototype, "lname", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserCreateWithoutPassengerRidesInput.prototype, "latitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], UserCreateWithoutPassengerRidesInput.prototype, "longitude", void 0);
@@ -80,6 +81,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], UserCreateWithoutPassengerRidesInput.prototype, "country", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserCreateWithoutPassengerRidesInput.prototype, "carId", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => CarCreateNestedOneWithoutDriverInput_1.CarCreateNestedOneWithoutDriverInput, {
         nullable: true
     }),
@@ -91,6 +98,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", RideCreateNestedManyWithoutDriverInput_1.RideCreateNestedManyWithoutDriverInput)
 ], UserCreateWithoutPassengerRidesInput.prototype, "driverRides", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => CompanyCreateNestedOneWithoutUsersInput_1.CompanyCreateNestedOneWithoutUsersInput, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", CompanyCreateNestedOneWithoutUsersInput_1.CompanyCreateNestedOneWithoutUsersInput)
+], UserCreateWithoutPassengerRidesInput.prototype, "company", void 0);
 UserCreateWithoutPassengerRidesInput = tslib_1.__decorate([
     TypeGraphQL.InputType("UserCreateWithoutPassengerRidesInput", {
         isAbstract: true

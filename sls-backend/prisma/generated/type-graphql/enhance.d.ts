@@ -35,6 +35,7 @@ export declare function applyArgsTypesEnhanceMap(argsTypesEnhanceMap: ArgsTypesE
 declare const relationResolversMap: {
     User: typeof relationResolvers.UserRelationsResolver;
     Car: typeof relationResolvers.CarRelationsResolver;
+    Company: typeof relationResolvers.CompanyRelationsResolver;
     Ride: typeof relationResolvers.RideRelationsResolver;
     RidePassengers: typeof relationResolvers.RidePassengersRelationsResolver;
 };

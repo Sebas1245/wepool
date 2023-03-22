@@ -83,6 +83,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], UserMaxAggregate.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserMaxAggregate.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], UserMaxAggregate.prototype, "companyId", void 0);
 UserMaxAggregate = tslib_1.__decorate([
     TypeGraphQL.ObjectType("UserMaxAggregate", {
         isAbstract: true

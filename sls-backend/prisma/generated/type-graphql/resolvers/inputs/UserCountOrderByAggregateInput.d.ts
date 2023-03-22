@@ -12,4 +12,6 @@ export declare class UserCountOrderByAggregateInput {
     city?: "asc" | "desc" | undefined;
     state?: "asc" | "desc" | undefined;
     country?: "asc" | "desc" | undefined;
+    carId?: "asc" | "desc" | undefined;
+    companyId?: "asc" | "desc" | undefined;
 }

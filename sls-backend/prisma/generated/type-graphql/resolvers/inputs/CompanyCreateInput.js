@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CompanyCreateInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
+const UserCreateNestedManyWithoutCompanyInput_1 = require("../inputs/UserCreateNestedManyWithoutCompanyInput");
 let CompanyCreateInput = class CompanyCreateInput {
 };
 tslib_1.__decorate([
@@ -13,13 +14,13 @@ tslib_1.__decorate([
 ], CompanyCreateInput.prototype, "name", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], CompanyCreateInput.prototype, "latitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], CompanyCreateInput.prototype, "longitude", void 0);
@@ -59,6 +60,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], CompanyCreateInput.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => UserCreateNestedManyWithoutCompanyInput_1.UserCreateNestedManyWithoutCompanyInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", UserCreateNestedManyWithoutCompanyInput_1.UserCreateNestedManyWithoutCompanyInput)
+], CompanyCreateInput.prototype, "users", void 0);
 CompanyCreateInput = tslib_1.__decorate([
     TypeGraphQL.InputType("CompanyCreateInput", {
         isAbstract: true

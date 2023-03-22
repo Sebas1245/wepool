@@ -37,6 +37,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", Number)
 ], CarCreateInput.prototype, "capacity", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => String, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", String)
+], CarCreateInput.prototype, "color", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => UserCreateNestedOneWithoutCarInput_1.UserCreateNestedOneWithoutCarInput, {
         nullable: false
     }),

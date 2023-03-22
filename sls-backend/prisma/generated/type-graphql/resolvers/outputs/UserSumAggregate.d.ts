@@ -4,4 +4,6 @@ export declare class UserSumAggregate {
     longitude: number | null;
     number: number | null;
     zipCode: number | null;
+    carId: number | null;
+    companyId: number | null;
 }

@@ -4,4 +4,5 @@ export declare class CarCreateWithoutDriverInput {
     year: number;
     plateNumber: string;
     capacity: number;
+    color: string;
 }

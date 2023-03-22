@@ -1,4 +1,4 @@
-import { FloatWithAggregatesFilter } from "../inputs/FloatWithAggregatesFilter";
+import { FloatNullableWithAggregatesFilter } from "../inputs/FloatNullableWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 export declare class CompanyScalarWhereWithAggregatesInput {
@@ -7,8 +7,8 @@ export declare class CompanyScalarWhereWithAggregatesInput {
     NOT?: CompanyScalarWhereWithAggregatesInput[] | undefined;
     id?: IntWithAggregatesFilter | undefined;
     name?: StringWithAggregatesFilter | undefined;
-    latitude?: FloatWithAggregatesFilter | undefined;
-    longitude?: FloatWithAggregatesFilter | undefined;
+    latitude?: FloatNullableWithAggregatesFilter | undefined;
+    longitude?: FloatNullableWithAggregatesFilter | undefined;
     street?: StringWithAggregatesFilter | undefined;
     number?: IntWithAggregatesFilter | undefined;
     zipCode?: IntWithAggregatesFilter | undefined;

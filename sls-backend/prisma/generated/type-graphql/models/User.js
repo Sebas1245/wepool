@@ -38,13 +38,13 @@ tslib_1.__decorate([
 ], User.prototype, "lname", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], User.prototype, "latitude", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
-        nullable: false
+        nullable: true
     }),
     tslib_1.__metadata("design:type", Number)
 ], User.prototype, "longitude", void 0);
@@ -84,6 +84,18 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", String)
 ], User.prototype, "country", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Number)
+], User.prototype, "carId", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => TypeGraphQL.Int, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", Number)
+], User.prototype, "companyId", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => UserCount_1.UserCount, {
         nullable: true

@@ -5,15 +5,18 @@ CREATE TABLE `User` (
     `updatedAt` DATETIME(3) NOT NULL,
     `fname` VARCHAR(191) NOT NULL,
     `lname` VARCHAR(191) NOT NULL,
-    `latitude` DOUBLE NOT NULL,
-    `longitude` DOUBLE NOT NULL,
+    `latitude` DOUBLE NULL,
+    `longitude` DOUBLE NULL,
     `street` VARCHAR(191) NULL,
     `number` INTEGER NULL,
     `zipCode` INTEGER NULL,
     `city` VARCHAR(191) NULL,
     `state` VARCHAR(191) NULL,
     `country` VARCHAR(191) NULL,
+    `carId` INTEGER NULL,
+    `companyId` INTEGER NOT NULL,
 
+    UNIQUE INDEX `User_carId_key`(`carId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -25,6 +28,7 @@ CREATE TABLE `Car` (
     `year` INTEGER NOT NULL,
     `plateNumber` VARCHAR(191) NOT NULL,
     `capacity` INTEGER NOT NULL,
+    `color` VARCHAR(191) NOT NULL,
     `driverId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Car_driverId_key`(`driverId`),
@@ -35,8 +39,8 @@ CREATE TABLE `Car` (
 CREATE TABLE `Company` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
-    `latitude` DOUBLE NOT NULL,
-    `longitude` DOUBLE NOT NULL,
+    `latitude` DOUBLE NULL,
+    `longitude` DOUBLE NULL,
     `street` VARCHAR(191) NOT NULL,
     `number` INTEGER NOT NULL,
     `zipCode` INTEGER NOT NULL,
@@ -55,7 +59,6 @@ CREATE TABLE `Ride` (
     `status` ENUM('OPEN', 'CLOSED') NOT NULL,
     `driverId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `Ride_driverId_key`(`driverId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -66,10 +69,11 @@ CREATE TABLE `RidePassengers` (
     `passengerId` INTEGER NOT NULL,
     `rideId` INTEGER NOT NULL,
 
-    UNIQUE INDEX `RidePassengers_passengerId_key`(`passengerId`),
-    UNIQUE INDEX `RidePassengers_rideId_key`(`rideId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `User` ADD CONSTRAINT `User_companyId_fkey` FOREIGN KEY (`companyId`) REFERENCES `Company`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Car` ADD CONSTRAINT `Car_driverId_fkey` FOREIGN KEY (`driverId`) REFERENCES `User`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

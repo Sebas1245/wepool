@@ -6,6 +6,7 @@ export declare class CarOrderByWithRelationInput {
     year?: "asc" | "desc" | undefined;
     plateNumber?: "asc" | "desc" | undefined;
     capacity?: "asc" | "desc" | undefined;
+    color?: "asc" | "desc" | undefined;
     driverId?: "asc" | "desc" | undefined;
     driver?: UserOrderByWithRelationInput | undefined;
 }

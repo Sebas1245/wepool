@@ -10,5 +10,6 @@ export declare class CarScalarWhereWithAggregatesInput {
     year?: IntWithAggregatesFilter | undefined;
     plateNumber?: StringWithAggregatesFilter | undefined;
     capacity?: IntWithAggregatesFilter | undefined;
+    color?: StringWithAggregatesFilter | undefined;
     driverId?: IntWithAggregatesFilter | undefined;
 }

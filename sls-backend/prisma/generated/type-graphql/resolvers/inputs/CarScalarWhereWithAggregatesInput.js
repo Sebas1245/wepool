@@ -63,6 +63,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", IntWithAggregatesFilter_1.IntWithAggregatesFilter)
 ], CarScalarWhereWithAggregatesInput.prototype, "capacity", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StringWithAggregatesFilter_1.StringWithAggregatesFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", StringWithAggregatesFilter_1.StringWithAggregatesFilter)
+], CarScalarWhereWithAggregatesInput.prototype, "color", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => IntWithAggregatesFilter_1.IntWithAggregatesFilter, {
         nullable: true
     }),

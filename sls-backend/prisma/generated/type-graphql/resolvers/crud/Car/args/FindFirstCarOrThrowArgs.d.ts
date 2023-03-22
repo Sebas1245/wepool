@@ -7,5 +7,5 @@ export declare class FindFirstCarOrThrowArgs {
     cursor?: CarWhereUniqueInput | undefined;
     take?: number | undefined;
     skip?: number | undefined;
-    distinct?: Array<"id" | "brand" | "model" | "year" | "plateNumber" | "capacity" | "driverId"> | undefined;
+    distinct?: Array<"id" | "brand" | "model" | "year" | "plateNumber" | "capacity" | "color" | "driverId"> | undefined;
 }

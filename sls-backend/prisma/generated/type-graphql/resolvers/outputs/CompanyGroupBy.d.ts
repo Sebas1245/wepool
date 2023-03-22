@@ -6,8 +6,8 @@ import { CompanySumAggregate } from "../outputs/CompanySumAggregate";
 export declare class CompanyGroupBy {
     id: number;
     name: string;
-    latitude: number;
-    longitude: number;
+    latitude: number | null;
+    longitude: number | null;
     street: string;
     number: number;
     zipCode: number;

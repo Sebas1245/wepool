@@ -1,4 +1,5 @@
 import { CarOrderByWithRelationInput } from "../inputs/CarOrderByWithRelationInput";
+import { CompanyOrderByWithRelationInput } from "../inputs/CompanyOrderByWithRelationInput";
 import { RideOrderByRelationAggregateInput } from "../inputs/RideOrderByRelationAggregateInput";
 import { RidePassengersOrderByRelationAggregateInput } from "../inputs/RidePassengersOrderByRelationAggregateInput";
 export declare class UserOrderByWithRelationInput {
@@ -15,7 +16,10 @@ export declare class UserOrderByWithRelationInput {
     city?: "asc" | "desc" | undefined;
     state?: "asc" | "desc" | undefined;
     country?: "asc" | "desc" | undefined;
+    carId?: "asc" | "desc" | undefined;
+    companyId?: "asc" | "desc" | undefined;
     car?: CarOrderByWithRelationInput | undefined;
     driverRides?: RideOrderByRelationAggregateInput | undefined;
     passengerRides?: RidePassengersOrderByRelationAggregateInput | undefined;
+    company?: CompanyOrderByWithRelationInput | undefined;
 }

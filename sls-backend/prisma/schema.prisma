@@ -22,8 +22,8 @@ model User {
   updatedAt DateTime @updatedAt
   fname String
   lname String
-  latitude Float
-  longitude Float
+  latitude Float?
+  longitude Float?
   // address fields
   street String?
   number Int?
@@ -32,9 +32,12 @@ model User {
   state String?
   country String?
   // associations
-  car Car?
+  car Car? @relation()
+  carId Int? @unique
   driverRides Ride[]
   passengerRides RidePassengers[]
+  company Company @relation(fields: [companyId], references: [id])
+  companyId Int
 }
 
 model Car {
@@ -44,6 +47,7 @@ model Car {
   year Int
   plateNumber String
   capacity Int
+  color String
   // associations
   driver User @relation(fields: [driverId], references: [id])
   driverId Int @unique
@@ -52,8 +56,8 @@ model Car {
 model Company {
   id Int @id @default(autoincrement())
   name String
-  latitude Float
-  longitude Float
+  latitude Float?
+  longitude Float?
   // address
   street String
   number Int
@@ -61,6 +65,7 @@ model Company {
   city String
   state String
   country String
+  users User[]
 }
 
 model Ride {
@@ -70,7 +75,7 @@ model Ride {
   status RideStatus
   // association
   driver User @relation(fields: [driverId], references: [id])
-  driverId Int @unique
+  driverId Int
   passengers RidePassengers[]
 }
 
@@ -84,7 +89,7 @@ model RidePassengers {
   createdAt DateTime @default(now())
   // association
   passenger User @relation(fields: [passengerId], references: [id])
-  passengerId Int @unique
+  passengerId Int
   ride Ride @relation(fields: [rideId], references: [id])
-  rideId Int @unique
+  rideId Int
 }

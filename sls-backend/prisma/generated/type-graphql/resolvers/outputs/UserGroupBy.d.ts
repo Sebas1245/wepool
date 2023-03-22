@@ -9,14 +9,16 @@ export declare class UserGroupBy {
     updatedAt: Date;
     fname: string;
     lname: string;
-    latitude: number;
-    longitude: number;
+    latitude: number | null;
+    longitude: number | null;
     street: string | null;
     number: number | null;
     zipCode: number | null;
     city: string | null;
     state: string | null;
     country: string | null;
+    carId: number | null;
+    companyId: number;
     _count: UserCountAggregate | null;
     _avg: UserAvgAggregate | null;
     _sum: UserSumAggregate | null;
