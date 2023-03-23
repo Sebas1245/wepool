@@ -8,8 +8,6 @@ import Header from "../components/Header";
 import SearchBar from '../components/SearchBar'
 import RideCard from '../components/RideCard';
 
-const screen = Dimensions.get('window')
-
 export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisplay'>) {
 
     const [user, setUser] = useState<User>({
@@ -32,8 +30,11 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
                 <SearchBar/>
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>
-                    <View style = {{width: '100%', height: '25%'}}>
+                    <View style = {styles.card}>
                         <RideCard date='20 Apr' time='08:00' start_loc='Tec' final_loc='Mi casa' status={true}/>
+                    </View>
+                    <View style = {styles.card}>
+                        <RideCard date='20 Apr' time='18:00' start_loc='Mi casa' final_loc='Tec' status={true}/>
                     </View>
                 </View>
             </View>
@@ -62,51 +63,12 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
     cardsContainer: {
         flex: 7,
     },
-    btnContainer: {
-        // flex: 1,
-        flexDirection: 'row',
-        marginTop: '10%',
-    },
-    iconColumnDriver: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'center',
-        backgroundColor: Colors.light.colors.primary,
-        width: screen.width * 0.5,
-        height: screen.width * 0.5,
-
-    },
-    iconColumnRider: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'center',
-        backgroundColor: Colors.light.colors.secondary,
-        width: screen.width * 0.5,
-        height: screen.width * 0.5,
-
-    },
-    icon: {
-        width: 35, 
-        height: 35,
-    }, 
-    infoCard: {
-        flex: 1,
-        marginHorizontal: '10%',
-        marginBottom: '20%',
-        backgroundColor: Colors.light.tint, 
-        borderRadius: 15,
-    }, 
-    row: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    textInput: {
-        flex: 1, 
-        // backgroundColor: 'white',
-        // borderColor: 'black',
-        // borderWidth: 0.2,
-        // borderRadius: 15,
+    card: {
+        width: '100%', 
+        height: '25%', 
+        marginVertical: 10,
     }
+
 
 
 })
