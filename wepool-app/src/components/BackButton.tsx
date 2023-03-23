@@ -21,14 +21,9 @@ export default function BackButton({size, onPress, props}: btnProps) {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 10,
-    left: 4,
+    flex: 1,
   },
   image: {
-    // flex: 1, 
-    // alignContent: 'flex-start',
-    // justifyContent: 'flex-start',
     width: 35,
     height: 35,
   },

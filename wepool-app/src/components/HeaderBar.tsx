@@ -1,6 +1,7 @@
 import Logo from "./Logo"
-import Text from "./Text"
-import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView, Image } from 'react-native'
+// import Text from "./Text"
+import { Dimensions, StyleSheet, View, Image, Text } from 'react-native'
+import Colors from "../core/Colors"
 
 type Props = {
     user: string, 
@@ -31,7 +32,7 @@ export default function HeaderBar({user, userType = 'Rider'}: Props) {
                                 style={styles.icon}
                                 source={iconPath}
                                 />
-                <Text text={userType}/>
+                <Text>{userType}</Text>
             </View>
             <View style = {styles.logoContainer}>
                 <Logo style={styles.logo}/>
@@ -72,7 +73,12 @@ export default function HeaderBar({user, userType = 'Rider'}: Props) {
         borderLeftColor: 'black', 
         borderLeftWidth: 2,
         marginTop: '10%',
-    }
+    }, 
+    text: {
+        fontSize: 22,
+        color: Colors.light.colors.text,
+        paddingVertical: 12,
+    },
 
 
 })

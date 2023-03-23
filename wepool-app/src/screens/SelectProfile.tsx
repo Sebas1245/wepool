@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView, Image } from 'react-native'
-import Text from '../components/Text'
+import { Dimensions, TouchableOpacity, StyleSheet, View, Text, Image } from 'react-native'
 import Logo from '../components/Logo'
 import Button from '../components/Button'
 import BackButton from '../components/BackButton'
@@ -10,24 +9,20 @@ import Colors from '../core/Colors'
 const screen = Dimensions.get('window')
 const logoWidth = (screen.width * 0.9)
 
-const logoStyle = {
-      resizeMode: 'contain',
-      width: logoWidth - 15,
-      height: (logoWidth / 2.5),
-}
-
 export default function SelectProfile({navigation}: RootStackScreenProps<'SelectProfile'>) {
 
   return (
     <View style = {styles.container}>
         <View style = {styles.topContainer}>
-            <BackButton onPress={() => navigation.goBack()} />
+            <View style = {styles.backButton}>
+                <BackButton onPress={() => navigation.goBack()} />
+            </View>
             <View style = {{marginTop:50}}>
-                <Logo style={logoStyle} />
+                <Logo style={styles.logoStyle} />
             </View>
         </View>
         <View style = {styles.bottomContainer}>
-            <Text text='Select profile'/>
+            <Text style={styles.text}>Select profile</Text>
             <View style = {styles.btnContainer}>
                 <TouchableOpacity style = {styles.iconColumnDriver} onPress={() => navigation.navigate('SignUpScreen')}>
                     <Image
@@ -35,7 +30,7 @@ export default function SelectProfile({navigation}: RootStackScreenProps<'Select
                         source={require('../assets/icons/icon_Driver.png')}
                         />
                 </TouchableOpacity>
-                <TouchableOpacity style = {styles.iconColumnRider} onPress={() => navigation.navigate('RideDetails')}>
+                <TouchableOpacity style = {styles.iconColumnRider} onPress={() => navigation.navigate('RideDisplay')}>
                     <Image
                         style={styles.icon}
                         source={require('../assets/icons/icon_Rider.png')}
@@ -52,6 +47,16 @@ const styles = StyleSheet.create({
         flex: 1,
         // height: screen.height
     },
+    backButton: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'flex-start',
+      },
+    logoStyle: {
+        resizeMode: 'contain',
+        width: logoWidth - 15,
+        height: (logoWidth / 2.5),
+      },
     topContainer: {
         flex: 1,
         alignItems: 'center',
@@ -91,9 +96,14 @@ const styles = StyleSheet.create({
 
     },
     icon: {
-        width: 35, 
-        height: 35,
-    }
+        width: '25%', 
+        height: '25%',
+    }, 
+    text: {
+        fontSize: 25,
+        color: Colors.light.colors.text,
+        paddingVertical: 12,
+    },
 
 
 })

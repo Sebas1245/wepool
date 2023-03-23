@@ -10,6 +10,7 @@ export type RootStackParamList = {
     LoginScreen: undefined;
     SignUpScreen: undefined;
     SelectProfile: undefined;
+    RideDisplay: undefined;
     RideDetails: undefined;
   };
   

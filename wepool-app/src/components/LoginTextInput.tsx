@@ -1,8 +1,6 @@
 import React, {useState} from 'react'
-import { View, SafeAreaView, StyleSheet, TextInput as Input } from 'react-native'
-import Text from './Text'
-import { Colors } from 'react-native/Libraries/NewAppScreen'
-import Theme from '../core/Colors'
+import { View, SafeAreaView, StyleSheet, Text, TextInput as Input } from 'react-native'
+import Colors from '../core/Colors'
 
 type Props = {
     label? : string,
@@ -17,14 +15,14 @@ export default function LoginTextInput({label,placeholder, errorText, descriptio
   return (
     <SafeAreaView style={styles.container}>
         {label ? (
-            <Text text= {label}/>
+            <Text style= {styles.text}>{label}</Text>
             ) : null}
         <Input       
             style={styles.input}
             // value= {text}
             // onChangeText= {onChangeText}
             placeholder= {placeholder}
-            selectionColor={Theme.light.colors.secondary}
+            selectionColor={Colors.light.colors.secondary}
             {...props}
             
         />
@@ -44,18 +42,23 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
       paddingHorizontal: 10,
       paddingVertical: 5,
-      borderColor: Colors.black,
+      borderColor: 'black',
       borderWidth: 2,
       borderRadius: 15,
   },
   description: {
     fontSize: 13,
-    color: Theme.light.colors.secondary,
+    color: Colors.light.colors.secondary,
     paddingTop: 8,
   },
   error: {
     fontSize: 13,
-    color: Theme.light.colors.error,
+    color: Colors.light.colors.error,
     paddingTop: 8,
+  },
+  text: {
+    fontSize: 22,
+    color: Colors.light.colors.text,
+    paddingVertical: 12,
   },
 })

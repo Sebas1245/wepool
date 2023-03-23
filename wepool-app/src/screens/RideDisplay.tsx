@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import HeaderBar from "../components/HeaderBar";
 import { Dimensions, StyleSheet, View,  Image, TextInput } from 'react-native'
+import Logo from '../components/Logo'
+import Button from '../components/Button'
+import BackButton from '../components/BackButton'
 import { RootStackScreenProps } from '../navigation/types';
 import Colors from '../core/Colors'
 import Header from "../components/Header";
+import SearchBar from '../components/SearchBar'
 
 const screen = Dimensions.get('window')
 
-export default function RideDetails({navigation}: RootStackScreenProps<'RideDetails'>) {
+export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisplay'>) {
 
     const [user, setUser] = useState<User>({
         _id: 1,
@@ -23,34 +27,13 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
                 <HeaderBar user="Berns" userType="Rider"/>
             </View>
             <View style = {styles.contentContainer}>
-                <Header text="Ride Details"/>
-                <View style = {styles.infoCard}>
-                    <View style = {styles.row}>
-                        <TextInput style = {styles.textInput} placeholder='Date'/>
-                        <TextInput style = {styles.textInput} placeholder='Time'/>
-                    </View>
-                    <View style = {styles.row}>
-                        <Image
-                            style={styles.icon}
-                            source={require('../assets/icons/icon_Rider.png')}
-                            />
-                        <View>
-                            <View style = {styles.row}>
-                                <TextInput style = {styles.textInput} placeholder='From'/>
-                            </View>
-                            <View style = {styles.row}>
-                                <TextInput style = {styles.textInput} placeholder='To'/>
-                            </View>
-                        </View>
-                    </View>
-                    <View style = {styles.row}>
-                        <TextInput style = {styles.textInput} placeholder='Cost'/>
-                        <TextInput style = {styles.textInput} placeholder='Seats'/>
-                    </View>
-                    <View style = {styles.row}>
-                        <TextInput style = {styles.textInput} placeholder='Model'/>
-                        <TextInput style = {styles.textInput} placeholder='Color'/>
-                    </View>
+                <View style = {styles.backButton}>
+                    <BackButton onPress={() => navigation.goBack()} />
+                </View>
+                <SearchBar/>
+                <Header text="Open Rides"/>
+                <View style = {styles.cardsContainer}>
+
                 </View>
             </View>
         </View>
@@ -61,11 +44,21 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
     container: {
         flex: 1,
     },
+    backButton: {
+        flex: 1,
+        width: '100%',
+        alignItems: 'flex-start',
+        marginTop: 25,
+        marginHorizontal: 25,
+    },
     headerContainer: {
         flex: 1,
     },
     contentContainer: {
         flex: 5,
+    },
+    cardsContainer: {
+        flex: 7
     },
     btnContainer: {
         // flex: 1,

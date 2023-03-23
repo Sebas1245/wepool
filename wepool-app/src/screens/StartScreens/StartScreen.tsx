@@ -2,8 +2,7 @@ import React from 'react'
 import Logo from '../../components/Logo'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
-import { SafeAreaView, View, StyleSheet } from 'react-native'
-import Text from '../../components/Text'
+import { View, StyleSheet, Text } from 'react-native'
 import { RootStackScreenProps } from '../../navigation/types';
 
 
@@ -12,7 +11,7 @@ export default function StartScreen({navigation}: RootStackScreenProps<'StartScr
     <View style = {styles.container}>
         <Logo />
         <Header text='Welcome!'></Header>
-        <Text text='Sign or log in'/>
+        <Text>Sign or log in</Text>
         <Button
             text="Login"
             onPress={() => navigation.navigate('LoginScreen')}

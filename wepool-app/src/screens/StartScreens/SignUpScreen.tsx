@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView } from 'react-native'
-import Text from '../../components/Text'
 import Logo from '../../components/Logo'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
@@ -13,12 +12,6 @@ import { RootStackScreenProps } from '../../navigation/types';
 
 const screen = Dimensions.get('window')
 const logoWidth = (screen.width * 0.9)
-
-const logoStyle = {
-      resizeMode: 'contain',
-      width: logoWidth,
-      height: (logoWidth / 2.5),
-}
 
 export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpScreen'>) {
 //   const [email, setEmail] = useState({ value: '', error: '' })
@@ -40,9 +33,11 @@ export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpS
 
   return (
     <View style = {styles.container}>
-      <BackButton onPress={() => navigation.goBack()} />
+      <View style = {styles.backButton}>
+        <BackButton onPress={() => navigation.goBack()} />
+      </View>
       <View style = {{marginTop:50}}>
-        <Logo style={logoStyle} />
+        <Logo style={styles.logoStyle} />
       </View>
       <Header text='Create your profile'/>
       <LoginTextInput
@@ -69,6 +64,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 35,
     marginTop: 35
+  },
+  backButton: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'flex-start',
+  },
+  logoStyle: {
+    resizeMode: 'contain',
+    width: logoWidth,
+    height: (logoWidth / 2.5),
   },
   row: {
     flexDirection: 'row',

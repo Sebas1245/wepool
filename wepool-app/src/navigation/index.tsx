@@ -18,6 +18,7 @@ import StartScreen from '../screens/StartScreens/StartScreen';
 import LoginScreen from '../screens/StartScreens/LoginScreen';
 import SignUpScreen from '../screens/StartScreens/SignUpScreen';
 import SelectProfile from '../screens/SelectProfile';
+import RideDisplay from '../screens/RideDisplay';
 import RideDetails from '../screens/RideDetails';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -43,6 +44,7 @@ function RootNavigator() {
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SelectProfile" component={SelectProfile} options={{headerShown: false}}/>
+      <Stack.Screen name="RideDisplay" component={RideDisplay} options={{headerShown: false}}/>
       <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/>
     </Stack.Navigator>
   );
