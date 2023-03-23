@@ -3,18 +3,17 @@ import Theme from '../core/Colors'
 
 type btnProps = {
   text: string,
-  theme?: string,
-  size?: string,
-  onPress?: (params?: any) => any;
+  onPress?: (params?: any) => any,
+  style?: any,
+  textStyle?: any,
+  props?: any
 }
 
-export default ({ onPress, text, size, theme }: btnProps) => {
-  const buttonStyles = [styles.button];
-  const textStyles = [styles.text];
+export default ({ onPress, text, style, textStyle, props}: btnProps) => {
 
   return (
-    <TouchableOpacity onPress={onPress} style={buttonStyles}>
-      <Text style={textStyles}>{text}</Text>
+    <TouchableOpacity onPress={onPress} style={style ? style: styles.button}>
+      <Text style={textStyle ? textStyle : styles.text}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -31,26 +30,11 @@ const styles = StyleSheet.create({
     height: Math.floor(buttonWidth * 0.2 ),
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: Math.floor(buttonWidth),
+    borderRadius: 15,
     margin: 5,
   },
   text: {
     color: "#fff",
     fontSize: 24,
-  },
-  textSecondary: {
-    color: "#060606",
-  },
-  buttonDouble: {
-    width: screen.width / 2 - 10,
-    flex: 0,
-    alignItems: "flex-start",
-    paddingLeft: 40,
-  },
-  buttonSecondary: {
-    backgroundColor: "#a6a6a6",
-  },
-  buttonAccent: {
-    backgroundColor: "#ffc107",
   },
 });

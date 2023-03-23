@@ -1,13 +1,12 @@
 import { useState } from 'react'
 import HeaderBar from "../components/HeaderBar";
-import { Dimensions, StyleSheet, View,  Image, TextInput } from 'react-native'
-import Logo from '../components/Logo'
-import Button from '../components/Button'
+import { Dimensions, StyleSheet, View } from 'react-native'
 import BackButton from '../components/BackButton'
 import { RootStackScreenProps } from '../navigation/types';
 import Colors from '../core/Colors'
 import Header from "../components/Header";
 import SearchBar from '../components/SearchBar'
+import RideCard from '../components/RideCard';
 
 const screen = Dimensions.get('window')
 
@@ -33,7 +32,9 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
                 <SearchBar/>
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>
-
+                    <View style = {{width: '100%', height: '25%'}}>
+                        <RideCard date='20 Apr' time='08:00' start_loc='Tec' final_loc='Mi casa' status={true}/>
+                    </View>
                 </View>
             </View>
         </View>
@@ -52,13 +53,14 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
         marginHorizontal: 25,
     },
     headerContainer: {
-        flex: 1,
+        flex: 1,      
     },
     contentContainer: {
         flex: 5,
+        marginHorizontal: 10,
     },
     cardsContainer: {
-        flex: 7
+        flex: 7,
     },
     btnContainer: {
         // flex: 1,

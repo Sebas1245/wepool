@@ -45,8 +45,6 @@ export default function HeaderBar({user, userType = 'Rider'}: Props) {
     container: {
         flex: 1,
         flexDirection: 'row',
-        borderColor: 'black', 
-        borderWidth: 2,
         borderBottomColor: 'black',
         borderBottomWidth: 2,
     },
