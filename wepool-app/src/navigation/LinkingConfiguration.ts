@@ -17,8 +17,21 @@ const linking: LinkingOptions<RootStackParamList> = {
       LoginScreen: 'LoginScreen',
       SignUpScreen: 'SignUpScreen',
       SelectProfile: 'SelectProfile',
-      RideDisplay: 'RideDisplay',
-      RideDetails: 'RideDetails',
+      // RideDisplay: 'RideDisplay',
+      Root: {
+        screens: {
+          Home: {
+            screens: {
+              Home: 'RideDetails',
+            },
+          },
+          RideDisplay: {
+            screens: {
+              RideDisplay: 'RideDisplay',
+            },
+          },
+        },
+      },
     },
   },
 };

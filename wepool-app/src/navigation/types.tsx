@@ -11,31 +11,25 @@ export type RootStackParamList = {
     SignUpScreen: undefined;
     SelectProfile: undefined;
     RideDisplay: undefined;
+    Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  };
+  
+  export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, ScreenName>;
+  
+  
+  export type RootTabParamList = {
+    Home: undefined;
     RideDetails: undefined;
-  };
-  
-export type RootStackScreenProps<ScreenName extends keyof RootStackParamList> =
-    NativeStackScreenProps<RootStackParamList, ScreenName>;
-  
-// export type StartScreenParamList = {
-//     StartScreen: undefined;
-//     Latest: undefined;
-//     };
-// export type StartScreenProps<T extends keyof StartScreenParamList> =
-//     CompositeScreenProps<
-//       BottomTabScreenProps<StartScreenParamList, T>,
-//       RootStackScreenProps<keyof RootStackParamList>
-//     >;
-export type HomeTabParamList = {
-    Popular: undefined;
-    Latest: undefined;
-  };
-  
-export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
-    CompositeScreenProps<
-      BottomTabScreenProps<HomeTabParamList, T>,
-      RootStackScreenProps<keyof RootStackParamList>
-    >;
+    RideDisplay: undefined;
+    MyRides: undefined;
+    Profile: undefined;
+};
+
+export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
+  BottomTabScreenProps<RootTabParamList, Screen>,
+  NativeStackScreenProps<RootStackParamList>
+>;
   
 declare global {
     namespace ReactNavigation {

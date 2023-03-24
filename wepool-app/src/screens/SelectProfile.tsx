@@ -30,7 +30,7 @@ export default function SelectProfile({navigation}: RootStackScreenProps<'Select
                         source={require('../assets/icons/icon_Driver.png')}
                         />
                 </TouchableOpacity>
-                <TouchableOpacity style = {styles.iconColumnRider} onPress={() => navigation.navigate('RideDisplay')}>
+                <TouchableOpacity style = {styles.iconColumnRider} onPress={() => navigation.navigate('Root')}>
                     <Image
                         style={styles.icon}
                         source={require('../assets/icons/icon_Rider.png')}
