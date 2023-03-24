@@ -22,9 +22,9 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
                 <HeaderBar user="Berns" userType="Rider"/>
             </View>
             <View style = {styles.contentContainer}>
-                <View style = {styles.backButton}>
+                {/* <View style = {styles.backButton}>
                     <BackButton onPress={() => navigation.goBack()} />
-                </View>
+                </View> */}
                 <SearchBar/>
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>

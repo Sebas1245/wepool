@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     // paddingHorizontal: 10,
     // paddingVertical: 5,
     marginHorizontal: 15,
+    marginVertical: 15,
   },
   iconContainer: {
     flex: 1,
