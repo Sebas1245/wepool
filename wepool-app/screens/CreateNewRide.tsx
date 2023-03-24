@@ -21,14 +21,14 @@ export default function CreateNewRide() {
   const today = new Date();
   const startDate = getFormatedDate(
     today.setDate(today.getDate() + 1),
-    "YYYY/MM/DD"
+    "YYYY/DD/MM"
   );
 
   const [openDate, setOpenDate] = useState(false); //open and close date modal
-  const [date, setDate] = useState(""); //date
+  const [date, setDate] = useState("DATE"); //date
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
-  const [time, setTime] = useState(""); //date
+  const [time, setTime] = useState("TIME"); //date
 
   function handleOnPressDate() {
     setOpenDate(!openDate);
@@ -46,13 +46,16 @@ export default function CreateNewRide() {
     setTime(propTime);
   }
 
+  // const onPressRide = () =>
+
   // Ride Form Variables
 
   const [from, setFrom] = useState<string | undefined>();
   const [to, setTo] = useState<string | undefined>();
-  const [money, setMoney] = useState<number | undefined>();
-  const [seats, setSeats] = useState<number | undefined>();
+  const [money, setMoney] = useState<string | undefined>();
+  const [seats, setSeats] = useState<string | undefined>();
   const [model, setModel] = useState<string | undefined>();
+  const [color, setColor] = useState<string | undefined>();
   const [licensePlate, setLicensePlate] = useState<string | undefined>();
   const [extraNotes, setExtraNotes] = useState<string | undefined>();
 
@@ -86,7 +89,7 @@ export default function CreateNewRide() {
               }}
             >
               <TouchableOpacity onPress={handleOnPressDate}>
-                <Text style={styles.text}>DATE</Text>
+                <Text style={styles.text}>{date}</Text>
               </TouchableOpacity>
               <Modal
                 animationType="slide"
@@ -135,7 +138,7 @@ export default function CreateNewRide() {
               }}
             >
               <TouchableOpacity onPress={handleOnPressTime}>
-                <Text style={styles.text}>TIME</Text>
+                <Text style={styles.text}>{time}</Text>
               </TouchableOpacity>
               <Modal
                 animationType="slide"
@@ -186,6 +189,7 @@ export default function CreateNewRide() {
                 style={styles.text}
                 placeholder="FROM"
                 returnKeyType="done"
+                onChangeText={(fromText) => setFrom(fromText)}
               />
             </View>
             <Divider></Divider>
@@ -201,6 +205,7 @@ export default function CreateNewRide() {
                 style={styles.text}
                 placeholder="TO"
                 returnKeyType="done"
+                onChangeText={(toText) => setTo(toText)}
               />
             </View>
           </View>
@@ -231,6 +236,7 @@ export default function CreateNewRide() {
                 placeholder="MONEY"
                 returnKeyType="done"
                 keyboardType="number-pad"
+                onChangeText={(moneyText) => setMoney(moneyText)}
               />
             </View>
           </View>
@@ -261,6 +267,7 @@ export default function CreateNewRide() {
                 placeholder="SEATS"
                 returnKeyType="done"
                 keyboardType="number-pad"
+                onChangeText={(seatsText) => setSeats(seatsText)}
               />
             </View>
           </View>
@@ -290,6 +297,7 @@ export default function CreateNewRide() {
                 style={styles.text}
                 placeholder="MODEL"
                 returnKeyType="done"
+                onChangeText={(modelText) => setModel(modelText)}
               />
             </View>
           </View>
@@ -315,6 +323,7 @@ export default function CreateNewRide() {
                 style={styles.text}
                 placeholder="COLOR"
                 returnKeyType="done"
+                onChangeText={(colorText) => setColor(colorText)}
               />
             </View>
           </View>
@@ -341,6 +350,9 @@ export default function CreateNewRide() {
               style={styles.text}
               placeholder="LICENSE PLATE"
               returnKeyType="done"
+              onChangeText={(licensePlateText) =>
+                setLicensePlate(licensePlateText)
+              }
             />
           </View>
         </View>
@@ -364,6 +376,7 @@ export default function CreateNewRide() {
                 style={styles.text}
                 returnKeyType="done"
                 placeholder="EXTRA NOTES"
+                onChangeText={(notesText) => setExtraNotes(notesText)}
               />
             </View>
           </View>
@@ -371,6 +384,7 @@ export default function CreateNewRide() {
       </View>
       <View style={{ width: "80%" }}>
         <TouchableOpacity style={styles.submit}>
+          {/* onPress={onPressRide}> */}
           <Text style={{ fontSize: 20, alignItems: "center", color: "white" }}>
             POST RIDE
           </Text>
