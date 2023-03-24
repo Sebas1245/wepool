@@ -1,23 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import HeaderBar from "../components/HeaderBar";
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, View, ScrollView } from 'react-native'
 import BackButton from '../components/BackButton'
 import { RootStackScreenProps } from '../navigation/types';
 import Colors from '../core/Colors'
 import Header from "../components/Header";
 import SearchBar from '../components/SearchBar'
 import RideCard from '../components/RideCard';
+import _testUsers from '../TestDummyUsers.json';;
 
 export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisplay'>) {
 
-    const [user, setUser] = useState<User>({
-        _id: 1,
-        name: 'Bernardo',
-        lastname: 'Garcia', 
-        email: 'bernardo@gmail.com', 
-        password: '1234', 
-        phoneNumber: '1234'
-      });
+    const [user, setUser] = useState<User[]>();
+    // const users = _testUsers as Array<User>;
+    useEffect(() => {
+        setUser(_testUsers)
+      }, []);
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
@@ -30,12 +28,15 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
                 <SearchBar/>
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>
-                    <View style = {styles.card}>
-                        <RideCard date='20 Apr' time='08:00' start_loc='Tec' final_loc='Mi casa' status={true}/>
-                    </View>
-                    <View style = {styles.card}>
-                        <RideCard date='20 Apr' time='18:00' start_loc='Mi casa' final_loc='Tec' status={true}/>
-                    </View>
+                    <ScrollView>
+                    {_testUsers.map((user) => {
+                        return (
+                            <View key={user.id} style = {styles.card}>
+                                <RideCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true}/>
+                            </View>
+                        );
+                    })}
+                    </ScrollView>
                 </View>
             </View>
         </View>
@@ -65,7 +66,7 @@ export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisp
     },
     card: {
         width: '100%', 
-        height: '25%', 
+        height: 150, 
         marginVertical: 10,
     }
 

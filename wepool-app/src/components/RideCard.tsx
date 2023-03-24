@@ -8,12 +8,13 @@ type Props = {
     time: string, 
     start_loc: string, 
     final_loc: string,
+    driverName: string,
     status: boolean,
     userType?: "Rider" | "Driver",
 }
 const screen = Dimensions.get('window')
 
-export default function RideCard({date, time, start_loc, final_loc, status, userType = 'Rider'}: Props) {
+export default function RideCard({date, time, start_loc, final_loc, driverName, status, userType = 'Rider'}: Props) {
     return (
         <View style = {styles.container}>
             <View style = {styles.dateTimeContainer}>
@@ -21,8 +22,9 @@ export default function RideCard({date, time, start_loc, final_loc, status, user
                 <Text style = {{fontSize: 20}}>{time}</Text>
             </View>
             <View style = {styles.dataContainer}>
-                <Text style = {{fontSize: 15}}>Desde: {start_loc}</Text>
-                <Text style = {{fontSize: 15}}>Hacia: {final_loc}</Text>
+                <Text style = {{fontSize: 15}}>Driver: {driverName}</Text>
+                <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
+                <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                 <View style = {styles.buttonsContainer}>
                     <Button text="Close" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
                     <Button text="Riders" style={[styles.button, {backgroundColor: 'blue'}]} textStyle ={styles.buttonText}/>
@@ -52,6 +54,7 @@ export default function RideCard({date, time, start_loc, final_loc, status, user
     },
     dataContainer: {
         flex: 4,
+        justifyContent: 'center',
         marginLeft: 5,
     },
     buttonsContainer: {

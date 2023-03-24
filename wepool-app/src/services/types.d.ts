@@ -2,8 +2,8 @@ declare global{
     
     type User = {
         id: number;
-        createdAt: Date;
-        updatedAt: Date;
+        createdAt?: Date;
+        updatedAt?: Date;
         fname: string;
         lname: string;
         latitude?: number | null;
@@ -16,9 +16,9 @@ declare global{
         country?: string | null;
         car?: Car | null;
         carId?: number | null;
-        driverRides?: Ride[];
-        passengerRides?: RidePassengers[];
-        company?: Company;
+        driverRides?: Ride[] | null;
+        passengerRides?: RidePassengers[] | null;
+        company?: Company | null;
         companyId: number;
         _count?: UserCount | null;
     }
