@@ -5,63 +5,368 @@ import {
   View,
   Text,
   TouchableOpacity,
+  Image,
+  Modal,
 } from "react-native";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { Divider } from "@rneui/themed";
+import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import DatePicker from "react-native-modern-datepicker";
+import { getToday, getFormatedDate } from "react-native-modern-datepicker";
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 
 export default function CreateNewRide() {
-  const [date, setDate] = useState(new Date());
+  const today = new Date();
+  const startDate = getFormatedDate(
+    today.setDate(today.getDate() + 1),
+    "YYYY/MM/DD"
+  );
+
+  const [openDate, setOpenDate] = useState(false); //open and close date modal
+  const [date, setDate] = useState(""); //date
+
+  const [openTime, setOpenTime] = useState(false); //open and close time modal
+  const [time, setTime] = useState(""); //date
+
+  function handleOnPressDate() {
+    setOpenDate(!openDate);
+  }
+
+  function handleOnPressTime() {
+    setOpenTime(!openTime);
+  }
+
+  function handleChangeDate(propDate: string): void {
+    setDate(propDate);
+  }
+
+  function handleChangeTime(propTime: string): void {
+    setTime(propTime);
+  }
+
+  // Ride Form Variables
+
+  const [from, setFrom] = useState<string | undefined>();
+  const [to, setTo] = useState<string | undefined>();
+  const [money, setMoney] = useState<number | undefined>();
+  const [seats, setSeats] = useState<number | undefined>();
+  const [model, setModel] = useState<string | undefined>();
+  const [licensePlate, setLicensePlate] = useState<string | undefined>();
+  const [extraNotes, setExtraNotes] = useState<string | undefined>();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>CREATE NEW RIDE</Text>
       <View style={styles.background}>
         <View style={styles.doubleInput}>
-          <View style={{ flex: 1 }}>
-            <Text>Date</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesome name="calendar-o" size={40} color="black" />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TouchableOpacity onPress={handleOnPressDate}>
+                <Text style={styles.text}>DATE</Text>
+              </TouchableOpacity>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={openDate}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <DatePicker
+                      mode="calendar"
+                      minimumDate={startDate}
+                      selected="date"
+                      onDateChange={handleChangeDate}
+                    />
+                    <TouchableOpacity onPress={handleOnPressDate}>
+                      <Text>CLOSE</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+            </View>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text>Time</Text>
+          <Divider orientation="vertical" />
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <FontAwesome name="clock-o" size={40} color="black" />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TouchableOpacity onPress={handleOnPressTime}>
+                <Text style={styles.text}>TIME</Text>
+              </TouchableOpacity>
+              <Modal
+                animationType="slide"
+                transparent={true}
+                visible={openTime}
+              >
+                <View style={styles.centeredView}>
+                  <View style={styles.modalView}>
+                    <DatePicker
+                      mode="time"
+                      selected="time"
+                      onTimeChange={handleChangeTime}
+                    />
+                    <TouchableOpacity onPress={handleOnPressTime}>
+                      <Text>CLOSE</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+            </View>
           </View>
         </View>
+
+        <Divider></Divider>
 
         <View style={{ flex: 2, flexDirection: "row" }}>
-          <View style={{ flex: 1, alignSelf: "center" }}>
-            <Text>Logo</Text>
+          <View
+            style={{
+              flex: 1,
+              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Ionicons name="location-outline" size={80} color="black" />
           </View>
+          <Divider orientation="vertical" />
           <View style={{ flex: 2 }}>
-            <View style={{ flex: 1 }}>
-              <Text>From</Text>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="FROM"
+                returnKeyType="done"
+              />
             </View>
-            <View style={{ flex: 1 }}>
-              <Text>To</Text>
+            <Divider></Divider>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "flex-start",
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="TO"
+                returnKeyType="done"
+              />
             </View>
           </View>
         </View>
+
+        <Divider></Divider>
 
         <View style={styles.doubleInput}>
-          <View style={{ flex: 1 }}>
-            <Text>Money</Text>
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialIcons name="attach-money" size={40} color="black" />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="MONEY"
+                returnKeyType="done"
+                keyboardType="number-pad"
+              />
+            </View>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text>Seats</Text>
+          <Divider orientation="vertical" />
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <MaterialCommunityIcons
+                name="seat-passenger"
+                size={40}
+                color="black"
+              />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                justifyContent: "center",
+                marginLeft: 10,
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="SEATS"
+                returnKeyType="done"
+                keyboardType="number-pad"
+              />
+            </View>
           </View>
         </View>
+
+        <Divider></Divider>
 
         <View style={styles.doubleInput}>
-          <View style={{ flex: 1 }}>
-            <Text>Model</Text>
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons name="car" size={40} color="black" />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                marginLeft: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="MODEL"
+                returnKeyType="done"
+              />
+            </View>
           </View>
-          <View style={{ flex: 1 }}>
-            <Text>Color</Text>
+          <Divider orientation="vertical" />
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Ionicons name="color-palette-sharp" size={40} color="black" />
+            </View>
+            <View
+              style={{
+                flex: 3,
+                marginLeft: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                style={styles.text}
+                placeholder="COLOR"
+                returnKeyType="done"
+              />
+            </View>
           </View>
         </View>
 
-        <View style={{ flex: 1 }}>
-          <Text>License Plate</Text>
+        <Divider></Divider>
+
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <View style={{ flex: 1, justifyContent: "center" }}>
+            <Image
+              style={{ width: 45, height: 45 }}
+              source={require("../assets/license_plate.png")}
+            />
+          </View>
+          <View style={{ flex: 4 }}>
+            <TextInput
+              style={styles.text}
+              placeholder="LICENSE PLATE"
+              returnKeyType="done"
+            />
+          </View>
         </View>
+
+        <Divider></Divider>
 
         <View style={{ flex: 2 }}>
-          <Text>Extra Notes</Text>
+          <View style={{ flexDirection: "row", flex: 1 }}>
+            <View
+              style={{
+                flex: 1,
+                alignItems: "center",
+              }}
+            >
+              <MaterialIcons name="notes" size={40} color="black" />
+            </View>
+            <View style={{ flex: 4 }}>
+              <TextInput
+                numberOfLines={4}
+                maxLength={100}
+                style={styles.text}
+                returnKeyType="done"
+                placeholder="EXTRA NOTES"
+              />
+            </View>
+          </View>
         </View>
       </View>
       <View style={{ width: "80%" }}>
@@ -86,12 +391,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     margin: 15,
   },
+  text: {
+    fontSize: 25,
+  },
   background: {
     height: "55%",
     width: "80%",
     backgroundColor: "lightgray",
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
     padding: 10,
   },
   doubleInput: {
@@ -99,11 +407,36 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    width: "90%",
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   submit: {
     padding: 20,
     backgroundColor: "green",
     alignItems: "center",
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  separator: {
+    width: "80%",
   },
 });
