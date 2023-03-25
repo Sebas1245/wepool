@@ -1,0 +1,42 @@
+service: wepool-apollo-server
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  httpApi:
+    cors: true
+  environment:
+    NODE_ENV: dev # change this when doing deploys
+
+functions:
+  graphql:
+    handler: src/graphql-api/apollo-server.graphqlServer
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
+  auth:
+    handler: src/api/auth/auth.authHandler
+    events:
+      - http:
+          path: auth
+          method: post
+          cors: true
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    includeModules: true
+    packager: npm
+    webpackConfig: webpack.config.js
