@@ -42,9 +42,6 @@ Move into the Serverless Apollo Server project directory and install all depende
 ```
 cd sls-backend && npm install
 ```
-
-
-
 ##### Running MySQL on MacOS
 For MacOS, we recommend instaling MySQL through [Homebrew](https://brew.sh/). First run
 ```

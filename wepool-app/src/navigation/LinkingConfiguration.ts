@@ -25,6 +25,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               Home: 'RideDetails',
             },
           },
+          CreateRide: {
+            screens: {
+              CreateRide: 'CreateNewRide',
+            },
+          },
           RideDisplay: {
             screens: {
               RideDisplay: 'RideDisplay',

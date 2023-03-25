@@ -20,6 +20,7 @@ import SignUpScreen from '../screens/StartScreens/SignUpScreen';
 import SelectProfile from '../screens/SelectProfile';
 import RideDisplay from '../screens/RideDisplay';
 import RideDetails from '../screens/RideDetails';
+import CreateNewRide from '../screens/CreateNewRide';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -85,11 +86,28 @@ function BottomTabNavigator() {
         }
       />
       <BottomTab.Screen
+        name="CreateRide"
+        component={CreateNewRide}
+        options={({ navigation }: RootTabScreenProps<'CreateRide'>) => ({
+          title: 'Add Ride',
+          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('CreateRide')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+              >
+            </Pressable>
+          ),
+        })}
+      />
+      <BottomTab.Screen
         name="RideDetails"
         component={RideDetails}
         options={({ navigation }: RootTabScreenProps<'RideDetails'>) => ({
           title: 'My Rides',
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name="circle" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('RideDetails')}

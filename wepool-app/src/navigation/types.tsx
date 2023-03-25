@@ -22,6 +22,7 @@ export type RootStackParamList = {
     Home: undefined;
     RideDetails: undefined;
     RideDisplay: undefined;
+    CreateRide: undefined;
     MyRides: undefined;
     Profile: undefined;
 };
