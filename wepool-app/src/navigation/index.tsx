@@ -58,12 +58,13 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
       initialRouteName="RideDisplay"
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
+        tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}>
       <BottomTab.Screen
@@ -80,6 +81,12 @@ function BottomTabNavigator() {
                     opacity: pressed ? 0.5 : 1,
                   })}
                   >
+                    <FontAwesome
+                name="info-circle"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
                 </Pressable>
               ),
             })

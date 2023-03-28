@@ -4,11 +4,11 @@ const tintColorDark = '#fff';
 export default {
   light: {
     colors: {
-      text: '#020300',
       primary: '#3e92cc',
       secondary: '#50C673',
       error: '#f13a59',
     },
+    text: '#020300',
     background: '#fff',
     tint: tintColorLight,
     tabIconDefault: '#ccc',
@@ -16,12 +16,11 @@ export default {
   },
   dark: {
     colors: {
-      text: '#020300',
       primary: '#3e92cc',
       secondary: '#001b2e',
       error: '#f13a59',
     },
-    text: '#fff',
+    text: '#020300',
     background: '#000',
     tint: tintColorDark,
     tabIconDefault: '#ccc',
