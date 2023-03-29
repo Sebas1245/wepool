@@ -1,22 +1,20 @@
 import { useState } from 'react'
-import HeaderBar from "../components/HeaderBar";
+import {HeaderBar} from "../components/HeaderBar";
 import { Dimensions, StyleSheet, View,  Image, TextInput } from 'react-native'
-import { RootStackScreenProps } from '../navigation/types';
+import { RootTabScreenProps } from '../navigation/types';
 import Colors from '../core/Colors'
-import Header from "../components/Header";
+import {Header} from "../components/Header";
+import { useThemeColors } from "../hooks/useThemeColors";
 
 const screen = Dimensions.get('window')
 
-export default function RideDetails({navigation}: RootStackScreenProps<'RideDetails'>) {
+export default function RideDetails({navigation}: RootTabScreenProps<'RideDetails'>) {
+    const { colors } = useThemeColors();
 
-    const [user, setUser] = useState<User>({
-        _id: 1,
-        name: 'Bernardo',
-        lastname: 'Garcia', 
-        email: 'bernardo@gmail.com', 
-        password: '1234', 
-        phoneNumber: '1234'
-      });
+    const tintColor = colors.tint
+    const primaryColor = colors.colors.primary
+    const secondaryColor = colors.colors.secondary
+
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
@@ -24,7 +22,7 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
             </View>
             <View style = {styles.contentContainer}>
                 <Header text="Ride Details"/>
-                <View style = {styles.infoCard}>
+                <View style = {[styles.infoCard, {backgroundColor: tintColor}]}>
                     <View style = {styles.row}>
                         <TextInput style = {styles.textInput} placeholder='Date'/>
                         <TextInput style = {styles.textInput} placeholder='Time'/>
@@ -72,24 +70,6 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
         flexDirection: 'row',
         marginTop: '10%',
     },
-    iconColumnDriver: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'center',
-        backgroundColor: Colors.light.colors.primary,
-        width: screen.width * 0.5,
-        height: screen.width * 0.5,
-
-    },
-    iconColumnRider: {
-        flex: 1,
-        justifyContent: 'center', 
-        alignItems: 'center',
-        backgroundColor: Colors.light.colors.secondary,
-        width: screen.width * 0.5,
-        height: screen.width * 0.5,
-
-    },
     icon: {
         width: 35, 
         height: 35,
@@ -98,7 +78,6 @@ export default function RideDetails({navigation}: RootStackScreenProps<'RideDeta
         flex: 1,
         marginHorizontal: '10%',
         marginBottom: '20%',
-        backgroundColor: Colors.light.tint, 
         borderRadius: 15,
     }, 
     row: {

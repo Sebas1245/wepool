@@ -10,10 +10,9 @@ type Props = {
     props?: any
 }
 
-export default function LoginTextInput({label,placeholder, errorText, description, props}: Props) {
-    // const [text, onChangeText] = React.useState('');
+export const LoginTextInput = ({label,placeholder, errorText, description, props}: Props) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
         {label ? (
             <Text style= {styles.text}>{label}</Text>
             ) : null}
@@ -30,7 +29,7 @@ export default function LoginTextInput({label,placeholder, errorText, descriptio
         <Text style={styles.description}>{description}</Text>
       ) : null}
       {errorText ? <Text style={styles.error}>{errorText}</Text> : null} */}
-    </SafeAreaView>
+    </View>
   )
 }
 
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
-    color: Colors.light.colors.text,
+    color: Colors.light.text,
     paddingVertical: 12,
   },
 })

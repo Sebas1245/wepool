@@ -1,5 +1,5 @@
 import { Dimensions, StyleSheet, Text, TouchableOpacity } from "react-native";
-import Theme from '../core/Colors'
+import { useThemeColors } from "../hooks/useThemeColors";
 
 type btnProps = {
   text: string,
@@ -9,11 +9,15 @@ type btnProps = {
   props?: any
 }
 
-export default ({ onPress, text, style, textStyle, props}: btnProps) => {
+export const Button =  ({ onPress, text, style, textStyle, props}: btnProps) => {
+  const { colors } = useThemeColors();
+
+  const buttonColor = colors.colors.primary
+  const textColor = colors.buttonText
 
   return (
-    <TouchableOpacity onPress={onPress} style={style ? style: styles.button}>
-      <Text style={textStyle ? textStyle : styles.text}>{text}</Text>
+    <TouchableOpacity onPress={onPress} style={style ? style: [styles.button, {backgroundColor: buttonColor}]}>
+      <Text style={textStyle ? textStyle : [styles.text, {color: textColor}]}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -24,7 +28,6 @@ const buttonWidth = screen.width / 2;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: Theme.light.colors.primary,
     // flex: 1, 
     width: buttonWidth,
     height: Math.floor(buttonWidth * 0.2 ),
@@ -34,7 +37,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   text: {
-    color: "#fff",
     fontSize: 24,
   },
 });

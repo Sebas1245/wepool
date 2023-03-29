@@ -1,19 +1,19 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
-import Theme from '../core/Colors'
+import { useThemeColors } from "../hooks/useThemeColors";
 
 type Props = {
   text: string;
 }
 
-export default function Header({text}: Props) {
-  return <Text style = {styles.header}> {text} </Text>
+export const  Header = ({text}: Props)  => {
+  const { colors } = useThemeColors();
+  return <Text style = {[styles.header, {color: colors.colors.primary}]}> {text} </Text>
 }
 
 const styles = StyleSheet.create({
   header: {
     fontSize: 35,
-    color: Theme.light.colors.primary,
     fontWeight: 'bold',
     paddingVertical: 12,
   },

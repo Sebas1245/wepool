@@ -1,30 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dimensions, TouchableOpacity, StyleSheet, View, Text} from 'react-native'
-import Logo from '../../components/Logo'
-import Header from '../../components/Header'
-import Button from '../../components/Button'
-import LoginTextInput from '../../components/LoginTextInput'
-import BackButton from '../../components/BackButton'
-import Theme from '../../core/Colors'
+import {Logo} from '../../components/Logo'
+import {Header} from '../../components/Header'
+import {Button} from '../../components/Button'
+import {LoginTextInput} from '../../components/LoginTextInput'
+import {BackButton} from '../../components/BackButton'
 import { RootStackScreenProps } from '../../navigation/types';
 import Colors from '../../core/Colors'
+
 // import { emailValidator } from '../helpers/emailValidator'
 // import { passwordValidator } from '../helpers/passwordValidator'
+import _testUsers from '../../TestDummyUsers.json';
 
 const screen = Dimensions.get('window')
 const logoWidth = (screen.width * 0.9)
 
-export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScreen'>) {
-  const [user, setUser] = useState<User>({
-    _id: 1,
-    name: 'Bernardo',
-    lastname: 'Garcia', 
-    email: 'bernardo@gmail.com', 
-    password: '1234', 
-    phoneNumber: '1234'
-  });
+export const LoginScreen = ({navigation}: RootStackScreenProps<'LoginScreen'>) => {
+    /**
+     * Getting dummy users info for testing purposes. 
+     * TODO: 
+     *  - Integrate with backend
+     *  - Functionality and  implementation
+     *  - A variable 'email' is missing
+     *  - Create a function to update user array
+     *  - Erase template comments
+     * 
+     */
+    const [allUsers, setAllUsers] = useState<User[]>([]);
+    const [user, setUser] = useState<User>();
+    useEffect(() => {
+      setAllUsers(_testUsers)
+    }, []);
 
-  //   const [email, setEmail] = useState({ value: '', error: '' })
+    useEffect(() => {
+      setUser(allUsers[0])
+    });    
+
+//   const [email, setEmail] = useState({ value: '', error: '' })
 //   const [password, setPassword] = useState({ value: '', error: '' })
 
 //   const onLoginPressed = () => {
@@ -54,8 +66,8 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         label="Email"
         placeholder='User email'
         props={{
-          'value': user ? user.email : null,
-          'onChangeText': (text: string) => setUser( prev => {return { ...prev, email: text}}),
+          'value': user ? user.fname : null,
+          // 'onChangeText': user ? (text: string) => setUser( prevUser => {return { ...prevUser, fname: text}}) : null,
           'returnKeyType': "next",
           'autoCapitalize': "none",
           'autoCompleteType': "email",
@@ -70,7 +82,7 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         label="Password"
         props={{
           'secureTextEntry': true, 
-          'value': user ? user.email : null,
+          'value': user ? user.fname : null,
         }}
         // returnKeyType="done"
         // value={password.value}
@@ -83,12 +95,12 @@ export default function LoginScreen({navigation}: RootStackScreenProps<'LoginScr
         <TouchableOpacity
         //   onPress={() => navigation.navigate('ResetPasswordScreen')}
         >
-        <Text style = {styles.text}>'Forgot your password</Text>
+        <Text style = {styles.text}>Forgot your password?</Text>
       </TouchableOpacity>
       </View>
       <Button text='Login' onPress={() => navigation.navigate('SelectProfile')}/>
       <View style={styles.row}>
-        <Text style={styles.text}>Don’t have an account?</Text>
+        <Text style={styles.text}>Don’t have an account? </Text>
         <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
           <Text style={styles.text}>Sign up</Text>
         </TouchableOpacity>
@@ -125,17 +137,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 4,
   },
-  forgot: {
-    fontSize: 13,
-    color: Theme.light.colors.secondary,
-  },
-  link: {
-    fontWeight: 'bold',
-    color: Theme.light.colors.primary,
-  },
   text: {
     fontSize: 22,
-    color: Colors.light.colors.text,
+    color: Colors.light.text,
     paddingVertical: 12,
   },
 })

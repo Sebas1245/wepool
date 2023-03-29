@@ -11,14 +11,14 @@ import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../core/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import {useColorScheme} from '../hooks/useColorScheme';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from './types';
 import LinkingConfiguration from './LinkingConfiguration';
-import StartScreen from '../screens/StartScreens/StartScreen';
-import LoginScreen from '../screens/StartScreens/LoginScreen';
-import SignUpScreen from '../screens/StartScreens/SignUpScreen';
-import SelectProfile from '../screens/SelectProfile';
-import RideDisplay from '../screens/RideDisplay';
+import { StartScreen } from '../screens/StartScreens/StartScreen';
+import { LoginScreen } from '../screens/StartScreens/LoginScreen';
+import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
+import { SelectProfile } from '../screens/SelectProfile';
+import { RideDisplay } from '../screens/RideDisplay';
 import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
 
@@ -81,12 +81,6 @@ function BottomTabNavigator() {
                     opacity: pressed ? 0.5 : 1,
                   })}
                   >
-                    <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
                 </Pressable>
               ),
             })

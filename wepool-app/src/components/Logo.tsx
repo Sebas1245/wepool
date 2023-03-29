@@ -1,12 +1,11 @@
 import React from 'react'
 import { Dimensions, Image, StyleSheet } from 'react-native'
-import Theme from '../core/Colors'
 
 type Props = {
   style?: any
 }
 
-export default function Logo({style} : Props) {
+export const Logo = ({style} : Props) => {
   return <Image source={require('../assets/img/logo.png')} style={ style ? style : styles.image} />
 }
 

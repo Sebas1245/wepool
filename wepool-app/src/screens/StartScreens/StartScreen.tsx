@@ -1,12 +1,12 @@
 import React from 'react'
-import Logo from '../../components/Logo'
-import Header from '../../components/Header'
-import Button from '../../components/Button'
+import {Logo} from '../../components/Logo'
+import {Header} from '../../components/Header'
+import {Button} from '../../components/Button'
 import { View, StyleSheet, Text } from 'react-native'
 import { RootStackScreenProps } from '../../navigation/types';
 
 
-export default function StartScreen({navigation}: RootStackScreenProps<'StartScreen'>) {
+export const StartScreen = ({navigation}: RootStackScreenProps<'StartScreen'>) => {
   return (
     <View style = {styles.container}>
         <Logo />

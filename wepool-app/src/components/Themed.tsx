@@ -3,27 +3,26 @@
  * https://docs.expo.io/guides/color-schemes/
  */
 
-/**
- * This component will override react-native Text and View to use the style depending 
- * on the theme mode gotten from useColorScheme. 
- */
-
 import { Text as DefaultText, View as DefaultView } from 'react-native';
 
 import Colors from '../core/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import {useColorScheme} from '../hooks/useColorScheme';
 
-export function useThemeColor(
+/**
+ * Own made react hook to get the Theme color. Similar to hooks/useThemeColors
+ */
+function useThemeColor(
   props: { light?: string; dark?: string },
   colorName: keyof typeof Colors.light & keyof typeof Colors.dark
 ) {
   const theme = useColorScheme();
   const colorFromProps = props[theme];
 
-  if (colorFromProps) {
-    return colorFromProps;
-  } else {
+  if (colorName != 'colors'){
     return Colors[theme][colorName];
+  }
+  else{
+    return colorFromProps;
   }
 }
 
@@ -34,6 +33,11 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
+
+/**
+ * This component will override react-native Text and View to use the style depending 
+ * on the theme mode gotten from useColorScheme. 
+ */
 
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;

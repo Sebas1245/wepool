@@ -1,30 +1,35 @@
 import { useState, useEffect } from 'react'
-import HeaderBar from "../components/HeaderBar";
-import { Dimensions, StyleSheet, View, ScrollView } from 'react-native'
-import BackButton from '../components/BackButton'
+import {HeaderBar} from "../components/HeaderBar";
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { RootStackScreenProps } from '../navigation/types';
-import Colors from '../core/Colors'
-import Header from "../components/Header";
-import SearchBar from '../components/SearchBar'
-import RideCard from '../components/RideCard';
-import _testUsers from '../TestDummyUsers.json';;
+import {BackButton} from '../components/BackButton'
+import {Header} from "../components/Header";
+import {SearchBar} from '../components/SearchBar'
+import {RideCard} from '../components/RideCard';
+import _testUsers from '../TestDummyUsers.json';
 
-export default function RideDisplay({navigation}: RootStackScreenProps<'RideDisplay'>) {
+export const RideDisplay = ({navigation}: RootStackScreenProps<'RideDisplay'>) => {
 
-    const [user, setUser] = useState<User[]>();
-    // const users = _testUsers as Array<User>;
+    /**
+     * Getting dummy users info for testing purposes. 
+     * TODO: 
+     *  - Integrate with backend
+     *  - A varible to know user type will be needed
+     */
+
+    const [allUsers, setUser] = useState<User[]>();
     useEffect(() => {
         setUser(_testUsers)
       }, []);
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
-                <HeaderBar user="Berns" userType="Rider"/>
+                <HeaderBar user={allUsers ? allUsers[0].fname : 'Test'} userType="Rider"/>
             </View>
             <View style = {styles.contentContainer}>
-                {/* <View style = {styles.backButton}>
+                <View style = {styles.backButton}>
                     <BackButton onPress={() => navigation.goBack()} />
-                </View> */}
+                </View>
                 <SearchBar/>
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>

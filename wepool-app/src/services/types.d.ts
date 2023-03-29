@@ -1,7 +1,7 @@
 declare global{
     
     type User = {
-        id: number;
+        id?: number;
         createdAt?: Date;
         updatedAt?: Date;
         fname: string;
@@ -23,12 +23,28 @@ declare global{
         _count?: UserCount | null;
     }
 
+    /**
+     * Typescript enums autom starts at 0:
+     * Open = 0, 
+     * Closed = 1,
+    */
+   enum RideStatus {
+       Open, 
+       Closed,
+   }
+
+   enum RideStartsAt {
+        Driver, 
+        Company,
+   }
+    
+
     type Ride = {
         id: number;
         kmToGoalLocation: number;
         availableSeats: number;
-        status: "OPEN" | "CLOSED";
-        startsAt: "DRIVER" | "COMPANY";
+        status: RideStatus;
+        startsAt: RideStartsAt;
         driver?: User;
         driverId: number;
         passengers?: RidePassengers[];

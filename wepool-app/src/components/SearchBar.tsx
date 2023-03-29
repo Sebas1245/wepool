@@ -2,11 +2,9 @@ import React, {useState} from 'react'
 import { View, SafeAreaView, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native'
 import Colors from '../core/Colors'
 
-type Props = {
-}
 
-export default function SearchBar() {
-    // const [text, onChangeText] = React.useState('');
+export const SearchBar = () => {
+    
   return (
     <View style={styles.container}>
         <TouchableOpacity style = {styles.iconContainer}>
@@ -53,7 +51,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 22,
-    color: Colors.light.colors.text,
+    color: Colors.light.text,
     paddingVertical: 12,
   },
 })
