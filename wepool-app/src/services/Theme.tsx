@@ -1,5 +1,7 @@
 /**
- * Theme context util to define a theme in case the user has a prefered theme or app has a setting mode for it
+ * Theme context util to define a theme in case the user has a prefered theme or app has 
+ * a setting mode for it. This util is still not used in any function. 
+ * 'ThemeProvider' should be implemented in App.tsx
  * Reference: https://github.com/ReactNativeSchool/expo-clock-app
  */
 
