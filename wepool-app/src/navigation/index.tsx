@@ -19,6 +19,7 @@ import { LoginScreen } from '../screens/StartScreens/LoginScreen';
 import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
 import { SelectProfile } from '../screens/SelectProfile';
 import { RideDisplay } from '../screens/RideDisplay';
+import { SearchRide } from '../screens/SearchRide';
 import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
 
@@ -85,6 +86,23 @@ function BottomTabNavigator() {
               ),
             })
         }
+      />
+      <BottomTab.Screen
+        name="SearchRide"
+        component={SearchRide}
+        options={({ navigation }: RootTabScreenProps<'SearchRide'>) => ({
+          title: 'Search',
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('SearchRide')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+              >
+            </Pressable>
+          ),
+        })}
       />
       <BottomTab.Screen
         name="CreateRide"

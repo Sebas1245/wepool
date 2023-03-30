@@ -20,7 +20,7 @@ import { setStatusBarBackgroundColor } from "expo-status-bar";
 export default function CreateNewRide() {
   const today = new Date();
   const startDate = getFormatedDate(
-    today.setDate(today.getDate()+1),
+    new Date(today.setDate(today.getDate()+1)),
     "YYYY/DD/MM"
   );
 

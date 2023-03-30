@@ -1,3 +1,6 @@
+/**
+ * !!! This Screen is not yet ready !!!
+ */
 import { useState } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
 import { Dimensions, StyleSheet, View,  Image, TextInput } from 'react-native'
