@@ -38,6 +38,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           SearchRide: {
             screens: {
               SearchRide: 'SearchRide',
+              MatchedDrivers: ' MatchedDrivers',
             },
           },
         },

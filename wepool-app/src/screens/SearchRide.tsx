@@ -14,8 +14,9 @@ import { Ionicons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
 import { HeaderBar } from "../components/HeaderBar";
+import { RootTabScreenProps } from "../navigation/types";
 
-export const SearchRide = () => {
+export const SearchRide = ({navigation}: RootTabScreenProps<'SearchRide'>) => {
   const today = new Date();
   const startDate = getFormatedDate(
     new Date(today.setDate(today.getDate()+1)),
@@ -209,7 +210,9 @@ export const SearchRide = () => {
 
             </View>
             <View style={{ width: "80%" }}>
-                <TouchableOpacity style={styles.search}>
+                <TouchableOpacity 
+                style={styles.search}
+                onPress={() => navigation.navigate('MatchedDrivers')}>
                     {/* onPress={onPressRide}> */}
                     <Text style={{ fontSize: 20, alignItems: "center", color: "white" }}>
                         SEARCH RIDE

@@ -10,6 +10,7 @@ export type RootStackParamList = {
     LoginScreen: undefined;
     SignUpScreen: undefined;
     SelectProfile: undefined;
+    MatchedDrivers: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };
   
