@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
 import { StyleSheet, View, ScrollView } from 'react-native'
-import { RootStackScreenProps } from '../navigation/types';
+import { RootTabScreenProps } from '../navigation/types';
 import {BackButton} from '../components/BackButton'
 import {Header} from "../components/Header";
 import {SearchBar} from '../components/SearchBar'
 import {RideCard} from '../components/RideCard';
 import _testUsers from '../TestDummyUsers.json';
 
-export const RideDisplay = ({navigation}: RootStackScreenProps<'RideDisplay'>) => {
+export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => {
 
     /**
      * Getting dummy users info for testing purposes. 
