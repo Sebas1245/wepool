@@ -11,16 +11,18 @@ import * as React from 'react';
 import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../core/Colors';
-import useColorScheme from '../hooks/useColorScheme';
+import {useColorScheme} from '../hooks/useColorScheme';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from './types';
 import LinkingConfiguration from './LinkingConfiguration';
-import StartScreen from '../screens/StartScreens/StartScreen';
-import LoginScreen from '../screens/StartScreens/LoginScreen';
-import SignUpScreen from '../screens/StartScreens/SignUpScreen';
-import SelectProfile from '../screens/SelectProfile';
-import RideDisplay from '../screens/RideDisplay';
+import { StartScreen } from '../screens/StartScreens/StartScreen';
+import { LoginScreen } from '../screens/StartScreens/LoginScreen';
+import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
+import { SelectProfile } from '../screens/SelectProfile';
+import { RideDisplay } from '../screens/RideDisplay';
+import { SearchRide } from '../screens/SearchRide';
 import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
+import { MatchedDrivers } from '../screens/MatchedDrivers';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -40,12 +42,13 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName='StartScreen'>
       <Stack.Screen name="StartScreen" component={StartScreen} options={{headerShown: false}} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SignUpScreen" component={SignUpScreen} options={{headerShown: false}}/>
       <Stack.Screen name="SelectProfile" component={SelectProfile} options={{headerShown: false}}/>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
+      <Stack.Screen name="MatchedDrivers" component={MatchedDrivers} options={{headerShown: false, animationTypeForReplace: 'pop'}}/>
       {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );
@@ -58,12 +61,13 @@ function RootNavigator() {
 const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
 
   return (
     <BottomTab.Navigator
       initialRouteName="RideDisplay"
       screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
+        tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}>
       <BottomTab.Screen
@@ -84,6 +88,23 @@ function BottomTabNavigator() {
               ),
             })
         }
+      />
+      <BottomTab.Screen
+        name="SearchRide"
+        component={SearchRide}
+        options={({ navigation }: RootTabScreenProps<'SearchRide'>) => ({
+          title: 'Search',
+          tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate('SearchRide')}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+              >
+            </Pressable>
+          ),
+        })}
       />
       <BottomTab.Screen
         name="CreateRide"

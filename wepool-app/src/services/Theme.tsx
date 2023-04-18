@@ -1,0 +1,73 @@
+/**
+ * Theme context util to define a theme in case the user has a prefered theme or app has 
+ * a setting mode for it. This util is still not used in any function. 
+ * 'ThemeProvider' should be implemented in App.tsx
+ * Reference: https://github.com/ReactNativeSchool/expo-clock-app
+ */
+
+import React, { createContext, useContext, useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import { useColorScheme } from "../hooks/useColorScheme";
+
+export const Themes: ITheme[] = ["light", "dark"];
+export type ITheme = "light" | "dark" ;
+
+type IThemeContext = {
+  theme: ITheme;
+  setTheme: (theme: ITheme) => void;
+  loading: boolean;
+};
+
+const ThemeContext = createContext<IThemeContext>({
+  theme: "light",
+  setTheme: () => {},
+  loading: true,
+});
+
+type ThemeProviderProps = {
+  children: React.ReactNode;
+};
+
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
+  const systemTheme = useColorScheme();
+  const [theme, setTheme] = useState<ITheme>(systemTheme);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    AsyncStorage.getItem("@user_preferred_theme")
+      .then((storedTheme) => {
+        if (storedTheme) {
+          setTheme(storedTheme as ITheme);
+        }
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  useEffect(() => {
+    AsyncStorage.setItem("@user_preferred_theme", theme);
+  }, [theme]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, loading }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+export const useCustomTheme = () => {
+  const context = useContext(ThemeContext);
+
+  let isDark = false;
+
+  if (context.theme && ["dark"].includes(context.theme)) {
+    isDark = true;
+  }
+
+  return {
+    isDark,
+    theme: context.theme,
+    setTheme: context.setTheme,
+    loading: context.loading,
+  };
+};

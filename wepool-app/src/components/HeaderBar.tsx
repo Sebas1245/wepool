@@ -1,15 +1,12 @@
-import Logo from "./Logo"
+import {Logo} from "./Logo"
 // import Text from "./Text"
-import { Dimensions, StyleSheet, View, Image, Text } from 'react-native'
+import { StyleSheet, View, Image, Text } from 'react-native'
 import Colors from "../core/Colors"
 
 type Props = {
-    user: string, 
+    user?: string, 
     userType: "Rider" | "Driver",
 }
-
-const screen = Dimensions.get('window')
-const logoWidth = (screen.width * 0.9)
 
 const icons = {
     driver : {
@@ -20,7 +17,7 @@ const icons = {
     }
 }
 
-export default function HeaderBar({user, userType = 'Rider'}: Props) {
+export const HeaderBar = ({user, userType = 'Rider'}: Props) => {
     let iconPath = icons.rider.uri
     if (userType === 'Driver') {
         iconPath = icons.driver.uri
@@ -29,9 +26,9 @@ export default function HeaderBar({user, userType = 'Rider'}: Props) {
         <View style = {styles.container}>
             <View style = {styles.iconContainer}>
                 <Image
-                                style={styles.icon}
-                                source={iconPath}
-                                />
+                    style={styles.icon}
+                    source={iconPath}
+                    />
                 <Text>{userType}</Text>
             </View>
             <View style = {styles.logoContainer}>
@@ -74,7 +71,7 @@ export default function HeaderBar({user, userType = 'Rider'}: Props) {
     }, 
     text: {
         fontSize: 22,
-        color: Colors.light.colors.text,
+        color: Colors.light.text,
         paddingVertical: 12,
     },
 

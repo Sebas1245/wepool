@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import { Dimensions, TouchableOpacity, StyleSheet, View, Text, Image } from 'react-native'
-import Logo from '../components/Logo'
-import Button from '../components/Button'
-import BackButton from '../components/BackButton'
+import {Logo} from '../components/Logo'
+import {BackButton} from '../components/BackButton'
 import { RootStackScreenProps } from '../navigation/types';
 import Colors from '../core/Colors'
 
 const screen = Dimensions.get('window')
 const logoWidth = (screen.width * 0.9)
 
-export default function SelectProfile({navigation}: RootStackScreenProps<'SelectProfile'>) {
+export const SelectProfile = ({navigation}: RootStackScreenProps<'SelectProfile'>) => {
 
   return (
     <View style = {styles.container}>
@@ -101,7 +100,7 @@ const styles = StyleSheet.create({
     }, 
     text: {
         fontSize: 25,
-        color: Colors.light.colors.text,
+        color: Colors.light.text,
         paddingVertical: 12,
     },
 

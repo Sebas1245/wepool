@@ -1,35 +1,16 @@
 import React, { useState } from 'react'
-import { Dimensions, TouchableOpacity, StyleSheet, View, SafeAreaView } from 'react-native'
-import Logo from '../../components/Logo'
-import Header from '../../components/Header'
-import Button from '../../components/Button'
-import LoginTextInput from '../../components/LoginTextInput'
-import BackButton from '../../components/BackButton'
-import Theme from '../../core/Colors'
+import { Dimensions, StyleSheet, View } from 'react-native'
+import {Logo} from '../../components/Logo'
+import {Header} from '../../components/Header'
+import {Button} from '../../components/Button'
+import {LoginTextInput} from '../../components/LoginTextInput'
+import {BackButton} from '../../components/BackButton'
 import { RootStackScreenProps } from '../../navigation/types';
-// import { emailValidator } from '../helpers/emailValidator'
-// import { passwordValidator } from '../helpers/passwordValidator'
 
 const screen = Dimensions.get('window')
 const logoWidth = (screen.width * 0.9)
 
-export default function SignUpScreen({navigation}: RootStackScreenProps<'SignUpScreen'>) {
-//   const [email, setEmail] = useState({ value: '', error: '' })
-//   const [password, setPassword] = useState({ value: '', error: '' })
-
-//   const onLoginPressed = () => {
-//     const emailError = emailValidator(email.value)
-//     const passwordError = passwordValidator(password.value)
-//     if (emailError || passwordError) {
-//       setEmail({ ...email, error: emailError })
-//       setPassword({ ...password, error: passwordError })
-//       return
-//     }
-//     navigation.reset({
-//       index: 0,
-//       routes: [{ name: 'Dashboard' }],
-//     })
-//   }
+export const SignUpScreen = ({navigation}: RootStackScreenProps<'SignUpScreen'>) => {
 
   return (
     <View style = {styles.container}>
@@ -78,11 +59,6 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     marginTop: 4,
-  },
-  forgotPassword: {
-    width: '100%',
-    alignItems: 'flex-end',
-    marginBottom: 24,
   },
 }
 )

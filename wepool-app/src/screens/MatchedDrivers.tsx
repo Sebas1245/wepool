@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView } from 'react-native'
-import { RootTabScreenProps } from '../navigation/types';
+import { StyleSheet, View, ScrollView, Modal, TouchableOpacity, Text } from 'react-native'
+import { RootTabScreenProps, RootStackScreenProps } from '../navigation/types';
+import DatePicker from "react-native-modern-datepicker";
 import {BackButton} from '../components/BackButton'
 import {Header} from "../components/Header";
-import {SearchBar} from '../components/SearchBar'
-import {RideCard} from '../components/RideCard';
+import { DriverCard } from '../components/DriverCard';
+import { RideDetailsModal } from '../components/RideDetailsModal';
 import _testUsers from '../TestDummyUsers.json';
 
-export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => {
+export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDrivers'>) => {
 
     /**
      * Getting dummy users info for testing purposes. 
@@ -20,7 +21,13 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
     const [allUsers, setUser] = useState<User[]>();
     useEffect(() => {
         setUser(_testUsers)
-      }, []);
+    }, []);
+        
+    const [openDetails, setOpenDetails] = useState(false); //open and close ride detail modal
+    function handleOnPressDetails(){
+        setOpenDetails(!openDetails)
+    }
+
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
@@ -30,18 +37,18 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
                 <View style = {styles.backButton}>
                     <BackButton onPress={() => navigation.goBack()} />
                 </View>
-                <SearchBar/>
-                <Header text="Open Rides"/>
+                <Header text="Matched Drivers"/>
                 <View style = {styles.cardsContainer}>
                     <ScrollView>
                     {_testUsers.map((user) => {
                         return (
                             <View key={user.id} style = {styles.card}>
-                                <RideCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true}/>
+                                <DriverCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true} handleOnPressDetails = {handleOnPressDetails}/>
                             </View>
                         );
                     })}
                     </ScrollView>
+                    <RideDetailsModal openDetails = {openDetails} handleOnPressDetails = {handleOnPressDetails}/>
                 </View>
             </View>
         </View>
@@ -73,7 +80,30 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
         width: '100%', 
         height: 150, 
         marginVertical: 10,
-    }
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        width: "90%",
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
+
 
 
 

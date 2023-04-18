@@ -1,7 +1,6 @@
-import Logo from "./Logo"
 import { Dimensions, StyleSheet, View, Image, Text } from 'react-native'
-import Colors from "../core/Colors"
-import Button from "./Button"
+import {Button} from "./Button"
+import { useThemeColors } from "../hooks/useThemeColors";
 
 type Props = {
     date: string, 
@@ -12,11 +11,14 @@ type Props = {
     status: boolean,
     userType?: "Rider" | "Driver",
 }
-const screen = Dimensions.get('window')
 
-export default function RideCard({date, time, start_loc, final_loc, driverName, status, userType = 'Rider'}: Props) {
+export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider'}: Props) => {
+    
+    const { colors } = useThemeColors();
+    const backgroundColor = colors.tint
+
     return (
-        <View style = {styles.container}>
+        <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
             <View style = {styles.dateTimeContainer}>
                 <Text style = {{fontSize: 30}}>{date}</Text>
                 <Text style = {{fontSize: 20}}>{time}</Text>
@@ -27,7 +29,7 @@ export default function RideCard({date, time, start_loc, final_loc, driverName, 
                 <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                 <View style = {styles.buttonsContainer}>
                     <Button text="Close" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
-                    <Button text="Riders" style={[styles.button, {backgroundColor: 'blue'}]} textStyle ={styles.buttonText}/>
+                    <Button text="Riders" style={[styles.button, {backgroundColor: colors.colors.primary}]} textStyle ={styles.buttonText}/>
                     <Button text="Start" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
                 </View>
             </View>
@@ -42,7 +44,6 @@ export default function RideCard({date, time, start_loc, final_loc, driverName, 
         borderColor: 'black', 
         borderWidth: 2,
         borderRadius: 15,
-        backgroundColor: Colors.light.tint,
     },
     dateTimeContainer: {
         flex: 1, 
@@ -72,11 +73,6 @@ export default function RideCard({date, time, start_loc, final_loc, driverName, 
     buttonText: {
         color: 'white', 
         fontSize: 12,
-    },
-    text: {
-        fontSize: 22,
-        color: Colors.light.colors.text,
-        paddingVertical: 12,
     },
 
 
