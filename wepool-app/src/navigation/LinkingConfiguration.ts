@@ -20,9 +20,9 @@ const linking: LinkingOptions<RootStackParamList> = {
       // RideDisplay: 'RideDisplay',
       Root: {
         screens: {
-          Home: {
+          Profile: {
             screens: {
-              Home: 'RideDetails',
+              Profile: 'Profile',
             },
           },
           CreateRide: {
