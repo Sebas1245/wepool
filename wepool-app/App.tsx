@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import useCachedResources from './src/hooks/useCachedResources';
 import { useColorScheme } from './src/hooks/useColorScheme';
 import Navigation from './src/navigation'
+import { AppRegistry } from 'react-native';
+import { ApolloClient, ApolloProvider } from '@apollo/client';
 
 const Stack = createNativeStackNavigator();
 
