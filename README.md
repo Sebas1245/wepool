@@ -59,7 +59,7 @@ mysql -u root -p
 ##### Prisma Usage
 Create a `.env` file in `sls-backend/` directory, and add the following variable to enable Prisma client to connect to your local database
 ```.env
-DATABASE_URL="mysql://root:Mac.2022@localhost:3306/wepool"
+DATABASE_URL="mysql://<username>:<password>@localhost:<port_where_mysql_runs>/wepool"
 ```
 Verify [Prisma CLI](https://www.prisma.io/docs/concepts/components/prisma-cli/installation) was installed correctly by running
 ```
@@ -67,7 +67,7 @@ npx prisma
 ```
 You should see a help output from Prisma CLI. Next, generate the database from the seed data with
 ```
-npm run prisma:generate
+npm run prisma:migrate && npm run prisma:generate
 ```
 
 If you modify the [Prisma schema](sls-backend/prisma/schema.prisma) you must rerun the generate command to autogenerate the Prisma client and the GraphQL types.
