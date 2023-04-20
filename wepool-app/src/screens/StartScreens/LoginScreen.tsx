@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   Text,
-  Image,
 } from "react-native";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
@@ -91,12 +90,10 @@ export const LoginScreen = ({
         <Logo style={styles.logoStyle} />
       </View>
       <Text>Welcome</Text>
-      <TouchableOpacity
-        disabled={!request}
-        onPress={() => promptAsync()}
-      >
-        <Image source={require("../../assets/img/signin-google-btn.png")} style={styles.loginButton} />
-      </TouchableOpacity>
+      <Button
+        text="Login"
+        onPress={() => navigation.navigate("SelectProfile")}
+      />
     </View>
   );
 };
@@ -134,8 +131,4 @@ const styles = StyleSheet.create({
     color: Colors.light.text,
     paddingVertical: 12,
   },
-  loginButton: {
-    width: 300,
-    height: 40,
-  }
 });
