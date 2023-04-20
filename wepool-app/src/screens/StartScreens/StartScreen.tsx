@@ -22,6 +22,7 @@ export const StartScreen = ({
     if (response?.type === "success") {
       setAccessToken(response?.authentication?.accessToken ?? "");
       accessToken && fetchUserInformation();
+      navigation.navigate('SelectProfile');
     }
   }, [response, accessToken]);
   const fetchUserInformation = async () => {
@@ -31,6 +32,7 @@ export const StartScreen = ({
       },
     });
     const userInfo = await response.json();
+    // TODO: Add this user info to context
     setUser(userInfo);
   };
   const buttonImage = () => (
