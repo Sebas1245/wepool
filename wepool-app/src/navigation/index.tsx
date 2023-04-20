@@ -23,6 +23,7 @@ import { SearchRide } from '../screens/SearchRide';
 import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
+import { Profile } from '../screens/Profile';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -124,14 +125,14 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="RideDetails"
-        component={RideDetails}
-        options={({ navigation }: RootTabScreenProps<'RideDetails'>) => ({
-          title: 'My Rides',
-          tabBarIcon: ({ color }) => <TabBarIcon name="circle" color={color} />,
+        name="Profile"
+        component={Profile}
+        options={({ navigation }: RootTabScreenProps<'Profile'>) => ({
+          title: 'Profile',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user-circle" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate('RideDetails')}
+              onPress={() => navigation.navigate('Profile')}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
