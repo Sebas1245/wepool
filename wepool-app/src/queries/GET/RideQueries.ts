@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export default gql`query GetOpenRides {
-    ride(where: {id: 1}) {
+    rides {
         id
         availableSeats
         driver {
@@ -9,6 +9,10 @@ export default gql`query GetOpenRides {
           fname
           lname
           phoneNumber
+          street
+          zipCode
+          number
+          city
           car {
             id
             brand
@@ -17,10 +21,14 @@ export default gql`query GetOpenRides {
             year
             color
           }
-          street
-          zipCode
-          number
-          city
+          company {
+            id
+            street
+            number
+            zipCode
+            city
+            state
+          }
         }
         startsAt
         status

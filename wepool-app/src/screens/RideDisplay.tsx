@@ -29,8 +29,8 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
     
     const [openRides, setOpenRides] = useState<Ride[]>();
     useEffect(() => {
-        if( data && data.ride)
-        setOpenRides(data.ride)
+        if( data && data.rides)
+        setOpenRides(data.rides)
     }, [])
 
     
@@ -66,12 +66,12 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
                         ((openRides.length > 1) ? openRides.map((ride) => {
                             return (
                                 <View key={ride.id} style = {styles.card}>
-                                    <RideCard date='20 Apr' time='08:00' start_loc={ride.driver?.street} final_loc={ride.driver?.city} driverName = {ride.driver?.fname} status={ride.status}/>
+                                    <RideCard date='20 Apr' time='08:00' start_loc={ride.driver?.street} final_loc={ride.driver?.company?.street} driverName = {ride.driver?.fname} status={ride.status}/>
                                 </View>
                             );
                         }) : (
                             <View key={openRides[0].id} style = {styles.card}>
-                                <RideCard date='20 Apr' time='08:00' start_loc={openRides[0].driver?.street} final_loc={openRides[0].driver?.city} driverName = {openRides[0].driver?.fname} status={openRides[0].status}/>
+                                <RideCard date='20 Apr' time='08:00' start_loc={openRides[0].driver?.street} final_loc={openRides[0].driver?.company?.street} driverName = {openRides[0].driver?.fname} status={openRides[0].status}/>
                             </View>
                         )
                      ) : null}
