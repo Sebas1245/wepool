@@ -25,7 +25,7 @@ export const Profile = () => {
    const { loading, error, data, networkStatus } = useQuery(ExampleQuery);
    
    if (loading) return ( console.log('Loading...'));
-   if (error) return ( console.log([JSON.stringify({data}), error, error.networkError]))
+   if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))
    
     /** You can also get the network status code:  supposedly '8' means failed connection, '7' means a correct connection.*/
 //    if (networkStatus) return (console.log(networkStatus))
@@ -72,7 +72,7 @@ export const Profile = () => {
                             <View style = {{flex: 1}}>                                
                                 <View style = {{flex: 1, flexDirection: 'row'}}>
                                     <FontAwesome name="phone" size={40} color="black" />
-                                    <Text style={styles.text}> {data ? data.getUser.number: 'USER NAME'} </Text>                                
+                                    <Text style={styles.text}> {data ? data.getUser.number: 'USER PHONE'} </Text>                                
                                 </View>
                             </View>
                             <View style = {{flex: 1}}>
