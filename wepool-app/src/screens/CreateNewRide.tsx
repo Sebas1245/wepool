@@ -21,7 +21,7 @@ export default function CreateNewRide() {
   const today = new Date();
   const startDate = getFormatedDate(
     new Date(today.setDate(today.getDate() + 1)),
-    "YYYY/DD/MM"
+    "YYYY/MM/DD"
   );
 
   const [openDate, setOpenDate] = useState(false); //open and close date modal
