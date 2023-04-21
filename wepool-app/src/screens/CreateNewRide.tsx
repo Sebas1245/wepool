@@ -59,6 +59,7 @@ export default function CreateNewRide() {
 
   function handleChangeTime(propTime: string): void {
     setTime(propTime);
+    setOpenTime(!openTime);
   }
 
   // const onPressRide = () =>

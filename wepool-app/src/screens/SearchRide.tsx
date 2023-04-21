@@ -60,6 +60,7 @@ export const SearchRide = ({
 
   function handleChangeTime(propTime: string): void {
     setTime(propTime);
+    setOpenTime(!openTime);
   }
 
   // Ride Form Variables
