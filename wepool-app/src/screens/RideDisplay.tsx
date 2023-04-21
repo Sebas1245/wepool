@@ -18,8 +18,6 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
      * TODO: 
      *  - Query cant access to 'status' variable.
      *  - Fix queries to not need a 'where' variable.
-     *  - Fetching openRides  only until you get back and reload the page.
-     *  - openRides returns a 1 element list since query issue
      *  - A varible to know user type will be needed
      *  - Ride variable for date and start ride hour
      */
@@ -31,22 +29,24 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
     useEffect(() => {
         if( data && data.rides)
         setOpenRides(data.rides)
-    }, [])
+    }, [loading])
 
     
-    if (loading) {
+    
+    if (loading || !openRides) {
         ( console.log('Loading...'))
         return (
             <View><Text>Loading...</Text></View>
-        ) ;
+            ) ;
     }
-    else ( console.log('Not any more...'))
-
-    /** Fetching openRides  only until you get back and reload the page. */
-    if (!openRides) console.log('Not openRides')
-    else console.log(['yes open rides', openRides])
     
     if (error) return ( console.log([JSON.stringify({data}), error, error.networkError]))
+    // else ( console.log('Not any more...'))
+
+    /** Fetching openRides  only until you get back and reload the page. */
+    // if (!openRides) console.log('Not openRides')
+    // else console.log(['yes open rides', openRides])
+    
     
     return (
         <View style = {styles.container}>
