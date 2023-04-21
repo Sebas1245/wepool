@@ -17,6 +17,7 @@ export declare class User {
     city?: string | null;
     state?: string | null;
     country?: string | null;
+    phoneNumber?: string | null;
     car?: Car | null;
     carId?: number | null;
     driverRides?: Ride[];

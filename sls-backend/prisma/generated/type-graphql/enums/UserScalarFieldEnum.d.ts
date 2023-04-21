@@ -12,6 +12,7 @@ export declare enum UserScalarFieldEnum {
     city = "city",
     state = "state",
     country = "country",
+    phoneNumber = "phoneNumber",
     carId = "carId",
     companyId = "companyId"
 }

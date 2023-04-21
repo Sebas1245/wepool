@@ -109,6 +109,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", StringNullableFilter_1.StringNullableFilter)
 ], UserScalarWhereInput.prototype, "country", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StringNullableFilter_1.StringNullableFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", StringNullableFilter_1.StringNullableFilter)
+], UserScalarWhereInput.prototype, "phoneNumber", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => IntNullableFilter_1.IntNullableFilter, {
         nullable: true
     }),

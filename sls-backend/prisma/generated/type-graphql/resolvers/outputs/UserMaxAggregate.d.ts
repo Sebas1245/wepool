@@ -12,6 +12,7 @@ export declare class UserMaxAggregate {
     city: string | null;
     state: string | null;
     country: string | null;
+    phoneNumber: string | null;
     carId: number | null;
     companyId: number | null;
 }
