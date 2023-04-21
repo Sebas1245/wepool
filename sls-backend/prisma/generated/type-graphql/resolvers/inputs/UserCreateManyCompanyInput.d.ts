@@ -12,5 +12,6 @@ export declare class UserCreateManyCompanyInput {
     city?: string | undefined;
     state?: string | undefined;
     country?: string | undefined;
+    phoneNumber?: string | undefined;
     carId?: number | undefined;
 }

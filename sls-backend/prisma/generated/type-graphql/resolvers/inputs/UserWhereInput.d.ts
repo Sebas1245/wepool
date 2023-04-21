@@ -25,6 +25,7 @@ export declare class UserWhereInput {
     city?: StringNullableFilter | undefined;
     state?: StringNullableFilter | undefined;
     country?: StringNullableFilter | undefined;
+    phoneNumber?: StringNullableFilter | undefined;
     carId?: IntNullableFilter | undefined;
     companyId?: IntFilter | undefined;
     car?: CarRelationFilter | undefined;

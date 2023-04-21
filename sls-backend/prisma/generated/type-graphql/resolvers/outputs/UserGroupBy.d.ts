@@ -17,6 +17,7 @@ export declare class UserGroupBy {
     city: string | null;
     state: string | null;
     country: string | null;
+    phoneNumber: string | null;
     carId: number | null;
     companyId: number;
     _count: UserCountAggregate | null;

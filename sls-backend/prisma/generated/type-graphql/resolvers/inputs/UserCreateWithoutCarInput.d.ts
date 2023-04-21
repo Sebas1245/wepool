@@ -14,6 +14,7 @@ export declare class UserCreateWithoutCarInput {
     city?: string | undefined;
     state?: string | undefined;
     country?: string | undefined;
+    phoneNumber?: string | undefined;
     carId?: number | undefined;
     driverRides?: RideCreateNestedManyWithoutDriverInput | undefined;
     passengerRides?: RidePassengersCreateNestedManyWithoutPassengerInput | undefined;

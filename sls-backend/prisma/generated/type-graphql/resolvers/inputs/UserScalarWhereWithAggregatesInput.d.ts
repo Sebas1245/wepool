@@ -21,6 +21,7 @@ export declare class UserScalarWhereWithAggregatesInput {
     city?: StringNullableWithAggregatesFilter | undefined;
     state?: StringNullableWithAggregatesFilter | undefined;
     country?: StringNullableWithAggregatesFilter | undefined;
+    phoneNumber?: StringNullableWithAggregatesFilter | undefined;
     carId?: IntNullableWithAggregatesFilter | undefined;
     companyId?: IntWithAggregatesFilter | undefined;
 }
