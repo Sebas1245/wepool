@@ -8,7 +8,8 @@
     "prisma:migrate": "npx prisma migrate dev",
     "prisma:generate": "npx prisma generate",
     "prisma:seed": "npx prisma db seed",
-    "prisma:reset": "npx prisma migrate reset"
+    "prisma:reset": "npx prisma migrate reset",
+    "prisma:update-db": "npx prisma db push && npx prisma db seed"
   },
   "keywords": [],
   "author": "",
