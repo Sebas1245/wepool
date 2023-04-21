@@ -1,6 +1,6 @@
 import { gql } from 'apollo-boost';
 
-export default gql`query ExampleQuery {
+export default gql`query GetUser {
     getUser(where: {id: 2}) {
       id
       fname

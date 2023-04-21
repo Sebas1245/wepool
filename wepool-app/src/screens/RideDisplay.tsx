@@ -1,30 +1,57 @@
 import { useState, useEffect } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { RootTabScreenProps } from '../navigation/types';
 import {BackButton} from '../components/BackButton'
 import {Header} from "../components/Header";
 import {SearchBar} from '../components/SearchBar'
 import {RideCard} from '../components/RideCard';
 import _testUsers from '../TestDummyUsers.json';
+import { useQuery } from '@apollo/client';
+
+    // queries
+    import GetOpenRides from '../queries/GET/RideQueries'
 
 export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => {
 
     /**
-     * Getting dummy users info for testing purposes. 
      * TODO: 
-     *  - Integrate with backend
+     *  - Query cant access to 'status' variable.
+     *  - Fix queries to not need a 'where' variable.
+     *  - Fetching openRides  only until you get back and reload the page.
+     *  - openRides returns a 1 element list since query issue
      *  - A varible to know user type will be needed
+     *  - Ride variable for date and start ride hour
      */
 
-    const [allUsers, setUser] = useState<User[]>();
+    
+    const { loading, error, data } = useQuery(GetOpenRides);
+    
+    const [openRides, setOpenRides] = useState<Ride[]>();
     useEffect(() => {
-        setUser(_testUsers)
-      }, []);
+        if( data && data.ride)
+        setOpenRides(data.ride)
+    }, [])
+
+    
+    if (loading) {
+        ( console.log('Loading...'))
+        return (
+            <View><Text>Loading...</Text></View>
+        ) ;
+    }
+    else ( console.log('Not any more...'))
+
+    /** Fetching openRides  only until you get back and reload the page. */
+    if (!openRides) console.log('Not openRides')
+    else console.log(['yes open rides', openRides])
+    
+    if (error) return ( console.log([JSON.stringify({data}), error, error.networkError]))
+    
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
-                <HeaderBar user={allUsers ? allUsers[0].fname : 'Test'} userType="Rider"/>
+                <HeaderBar user={'Test'} userType="Rider"/>
             </View>
             <View style = {styles.contentContainer}>
                 <View style = {styles.backButton}>
@@ -34,13 +61,20 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
                 <Header text="Open Rides"/>
                 <View style = {styles.cardsContainer}>
                     <ScrollView>
-                    {_testUsers.map((user) => {
-                        return (
-                            <View key={user.id} style = {styles.card}>
-                                <RideCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true}/>
+                        {/* /**Cant access to all openrides because variables are unaccessible */ }
+                    { openRides ? 
+                        ((openRides.length > 1) ? openRides.map((ride) => {
+                            return (
+                                <View key={ride.id} style = {styles.card}>
+                                    <RideCard date='20 Apr' time='08:00' start_loc={ride.driver?.street} final_loc={ride.driver?.city} driverName = {ride.driver?.fname} status={ride.status}/>
+                                </View>
+                            );
+                        }) : (
+                            <View key={openRides[0].id} style = {styles.card}>
+                                <RideCard date='20 Apr' time='08:00' start_loc={openRides[0].driver?.street} final_loc={openRides[0].driver?.city} driverName = {openRides[0].driver?.fname} status={openRides[0].status}/>
                             </View>
-                        );
-                    })}
+                        )
+                     ) : null}
                     </ScrollView>
                 </View>
             </View>

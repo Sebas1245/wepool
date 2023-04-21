@@ -10,7 +10,7 @@ import { useQuery, gql } from '@apollo/client';
 import { Divider } from '@rneui/themed';            
 
 // queries
-import ExampleQuery from '../queries/GET/UserQueries'
+import GetUser from '../queries/GET/UserQueries'
 
 export const Profile = () => {
 
@@ -22,7 +22,7 @@ export const Profile = () => {
      * See more: https://www.apollographql.com/docs/react/data/queries/
     */
 
-   const { loading, error, data, networkStatus } = useQuery(ExampleQuery);
+   const { loading, error, data, networkStatus } = useQuery(GetUser);
    
    if (loading) return ( console.log('Loading...'));
    if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))
