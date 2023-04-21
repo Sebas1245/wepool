@@ -20,7 +20,7 @@ import { setStatusBarBackgroundColor } from "expo-status-bar";
 export default function CreateNewRide() {
   const today = new Date();
   const startDate = getFormatedDate(
-    new Date(today.setDate(today.getDate()+1)),
+    new Date(today.setDate(today.getDate() + 1)),
     "YYYY/DD/MM"
   );
 
@@ -39,7 +39,22 @@ export default function CreateNewRide() {
   }
 
   function handleChangeDate(propDate: string): void {
-    setDate(propDate);
+    const correctedDate: Date = convertToDate(propDate);
+    const date: Date = new Date(correctedDate);
+    const formattedDate: string = date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "short",
+    });
+    setDate(formattedDate);
+  }
+
+  function convertToDate(dateString: string): Date {
+    const dateParts: string[] = dateString.split("/");
+    const year: number = parseInt(dateParts[0], 10);
+    const month: number = parseInt(dateParts[1], 10) - 1; // Month is zero-indexed
+    const day: number = parseInt(dateParts[2], 10);
+    const date: Date = new Date(year, month, day);
+    return date;
   }
 
   function handleChangeTime(propTime: string): void {
