@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { Logo } from "../../components/Logo";
 import { Header } from "../../components/Header";
 import { Button, ImageButton } from "../../components/Button";
-import { View, StyleSheet, Text, Image } from "react-native";
+import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { RootStackScreenProps } from "../../navigation/types";
 import { webClientId, iosClientId, androidClientId } from "../../../clientIds";
 
@@ -36,17 +36,20 @@ export const StartScreen = ({
     setUser(userInfo);
   };
   const buttonImage = () => (
-    <Image source={require("../../assets/img/google_logo.png")} />
+    <Image source={require("../../assets/img/google_logo.png")} style={styles.image} />
   );
   return (
     <View style={styles.container}>
       <Logo />
       <Header text="Welcome!"></Header>
-      <Button text="Sign in with Google" onPress={() => promptAsync()} />
-      {/* <ImageButton
-            Image={buttonImage}
-            onPress={() => promptAsync()}
-        /> */}
+      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => promptAsync()}>
+          <Image
+            source={require("../../assets/img/google_logo.png")}
+            style={styles.buttonImageIconStyle}
+          />
+          <View style={styles.buttonIconSeparatorStyle} />
+          <Text style={styles.buttonTextStyle}>Login Using Google</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -57,5 +60,37 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 10,
+  },
+  image: {
+    height: 50,
+    width: 50,
+  },
+  buttonGPlusStyle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#4285F4',
+    borderWidth: 0.5,
+    borderColor: '#fff',
+    height: 40,
+    borderRadius: 5,
+    margin: 5,
+    paddingRight: 10,
+  },
+  buttonImageIconStyle: {
+    padding: 1,
+    margin: 5,
+    height: 35,
+    width: 35,
+    resizeMode: 'stretch',
+  },
+  buttonTextStyle: {
+    color: '#fff',
+    marginBottom: 4,
+    marginLeft: 10,
+  },
+  buttonIconSeparatorStyle: {
+    backgroundColor: '#fff',
+    width: 1,
+    height: 40,
   },
 });
