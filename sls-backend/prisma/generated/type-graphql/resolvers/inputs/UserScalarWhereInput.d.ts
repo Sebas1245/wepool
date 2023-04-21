@@ -21,6 +21,7 @@ export declare class UserScalarWhereInput {
     city?: StringNullableFilter | undefined;
     state?: StringNullableFilter | undefined;
     country?: StringNullableFilter | undefined;
+    phoneNumber?: StringNullableFilter | undefined;
     carId?: IntNullableFilter | undefined;
     companyId?: IntFilter | undefined;
 }

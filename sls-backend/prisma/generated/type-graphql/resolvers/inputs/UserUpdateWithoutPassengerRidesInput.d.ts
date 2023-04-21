@@ -19,6 +19,7 @@ export declare class UserUpdateWithoutPassengerRidesInput {
     city?: NullableStringFieldUpdateOperationsInput | undefined;
     state?: NullableStringFieldUpdateOperationsInput | undefined;
     country?: NullableStringFieldUpdateOperationsInput | undefined;
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | undefined;
     carId?: NullableIntFieldUpdateOperationsInput | undefined;
     car?: CarUpdateOneWithoutDriverNestedInput | undefined;
     driverRides?: RideUpdateManyWithoutDriverNestedInput | undefined;

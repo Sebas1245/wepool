@@ -16,5 +16,6 @@ export declare class UserUpdateManyMutationInput {
     city?: NullableStringFieldUpdateOperationsInput | undefined;
     state?: NullableStringFieldUpdateOperationsInput | undefined;
     country?: NullableStringFieldUpdateOperationsInput | undefined;
+    phoneNumber?: NullableStringFieldUpdateOperationsInput | undefined;
     carId?: NullableIntFieldUpdateOperationsInput | undefined;
 }

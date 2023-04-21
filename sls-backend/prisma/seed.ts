@@ -30,6 +30,7 @@ async function createUsers(): Promise<void> {
       number: 3049,
       zipCode: 64830,
       city: "Monterrey",
+      phoneNumber: "4775282906",
       latitude: 25.6498,
       longitude: -100.2848,
       companyId: 1,
@@ -49,6 +50,7 @@ async function createUsers(): Promise<void> {
       city: "Monterrey",
       latitude: 25.7484,
       longitude: -100.4084,
+      phoneNumber: "8110161527",
       car: {
         create: {
           brand: "Nissan",
