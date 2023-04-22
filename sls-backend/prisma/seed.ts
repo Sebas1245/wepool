@@ -119,9 +119,41 @@ async function createUsers(): Promise<void> {
   console.log(bernie, sebas);
 }
 
+async function createRides(): Promise<void> {
+  const ride1 = await prisma.ride.upsert({
+    where: {
+      id: 1,
+    },
+    create: {
+      kmToGoalLocation: 15,
+      availableSeats: 4,
+      status: "OPEN",
+      startsAt: "DRIVER",
+      driverId: 2,
+    },
+    update: {},
+  });
+
+  const ride2 = await prisma.ride.upsert({
+    where: {
+      id: 2,
+    },
+    create: {
+      kmToGoalLocation: 18,
+      availableSeats: 4,
+      status: "OPEN",
+      startsAt: "DRIVER",
+      driverId: 4,
+    },
+    update: {},
+  });
+  console.log(ride1, ride2);
+}
+
 async function main() {
   await createCompany();
   await createUsers();
+  await createRides();
 }
 
 main()
