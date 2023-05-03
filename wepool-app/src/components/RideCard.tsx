@@ -5,10 +5,10 @@ import { useThemeColors } from "../hooks/useThemeColors";
 type Props = {
     date: string, 
     time: string, 
-    start_loc: string, 
-    final_loc: string,
-    driverName: string,
-    status: boolean,
+    start_loc?: string, 
+    final_loc?: string,
+    driverName?: string,
+    status: RideStatus,
     userType?: "Rider" | "Driver",
 }
 

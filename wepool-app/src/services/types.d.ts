@@ -6,21 +6,22 @@ declare global{
         updatedAt?: Date;
         fname: string;
         lname: string;
-        latitude?: number | null;
-        longitude?: number | null;
-        street?: string | null;
-        number?: number | null;
-        zipCode?: number | null;
-        city?: string | null;
-        state?: string | null;
-        country?: string | null;
-        car?: Car | null;
-        carId?: number | null;
-        driverRides?: Ride[] | null;
-        passengerRides?: RidePassengers[] | null;
-        company?: Company | null;
+        latitude?: number;
+        longitude?: number;
+        street?: string;
+        number?: number;
+        zipCode?: number;
+        city?: string;
+        state?: string;
+        country?: string;
+        phoneNumber?: string;
+        car?: Car;
+        carId?: number;
+        driverRides?: Ride[];
+        passengerRides?: RidePassengers[];
+        company?: Company;
         companyId: number;
-        _count?: UserCount | null;
+        _count?: UserCount;
     }
 
     /**
