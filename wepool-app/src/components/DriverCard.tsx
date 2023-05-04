@@ -7,9 +7,9 @@ import { useState } from 'react';
 type Props = {
     date: string, 
     time: string, 
-    start_loc: string, 
-    final_loc: string,
-    driverName: string,
+    start_loc?: string, 
+    final_loc?: string,
+    driverName?: string,
     status: boolean,
     userType?: "Rider" | "Driver",
     handleOnPressDetails?: any

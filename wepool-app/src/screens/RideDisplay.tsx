@@ -7,7 +7,6 @@ import { Header } from "../components/Header";
 import { Oops } from "../components/Oops";
 import { SearchBar } from "../components/SearchBar";
 import { RideCard } from "../components/RideCard";
-import _testUsers from "../TestDummyUsers.json";
 import { useQuery } from "@apollo/client";
 
 // queries
@@ -18,8 +17,6 @@ export const RideDisplay = ({
 }: RootTabScreenProps<"RideDisplay">) => {
   /**
    * TODO:
-   *  - Query cant access to 'status' variable.
-   *  - Fix queries to not need a 'where' variable.
    *  - A varible to know user type will be needed
    *  - Ride variable for date and start ride hour
    */
@@ -56,7 +53,6 @@ export const RideDisplay = ({
         <View style={styles.cardsContainer}>
             {openRides ? (
             <ScrollView>
-                {/* /**Cant access to all openrides because variables are unaccessible */}
                 {openRides ? (
                 openRides.length > 1 ? (
                     openRides.map((ride) => {
