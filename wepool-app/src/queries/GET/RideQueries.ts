@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export default gql`query GetOpenRides {
-    rides {
+    rides(where: {status: {equals: OPEN}}) {
         id
         availableSeats
         driver {
