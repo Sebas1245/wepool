@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
+  Alert,
 } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
@@ -32,6 +33,25 @@ export default function EditRide() {
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
   const [time, setTime] = useState("TIME"); //date
+
+  const confirmDialog = () => {
+    return Alert.alert(
+      "Delete Ride?",
+      "Are you sure you want to delete the current ride?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            //TBD: Delete the ride
+          },
+        },
+
+        {
+          text: "No",
+        },
+      ]
+    );
+  };
 
   function handleOnPressDate() {
     setOpenDate(!openDate);
@@ -84,7 +104,7 @@ export default function EditRide() {
         {/* <BackButton onPress={() => navigation.goBack()} /> */}
         <Ionicons name="chevron-back" size={24} color="black" />
         <Text style={styles.title}>EDIT RIDE</Text>
-        <TouchableOpacity style={styles.delete}>
+        <TouchableOpacity style={styles.delete} onPress={() => confirmDialog()}>
           <MaterialIcons name="delete-outline" size={24} color="black" />
         </TouchableOpacity>
       </View>
@@ -429,11 +449,11 @@ const styles = StyleSheet.create({
   },
   topElements: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
     flexDirection: "row",
   },
   delete: {
-    backgroundColor: "pink",
+    backgroundColor: "#fa9195",
     borderTopEndRadius: 10,
     borderTopStartRadius: 10,
     padding: 10,
