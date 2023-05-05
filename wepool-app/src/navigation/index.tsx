@@ -22,6 +22,7 @@ import { RideDisplay } from '../screens/RideDisplay';
 import { SearchRide } from '../screens/SearchRide';
 import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
+import EditRide from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
 import { Profile } from '../screens/Profile';
 
@@ -50,6 +51,7 @@ function RootNavigator() {
       <Stack.Screen name="SelectProfile" component={SelectProfile} options={{headerShown: false}}/>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{headerShown: false}}/>
       <Stack.Screen name="MatchedDrivers" component={MatchedDrivers} options={{headerShown: false, animationTypeForReplace: 'pop'}}/>
+      <Stack.Screen name="EditRide" component={EditRide} options={{headerShown: false}} />
       {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );

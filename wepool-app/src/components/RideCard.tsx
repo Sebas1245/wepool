@@ -11,9 +11,10 @@ type Props = {
     driverName: string,
     status: boolean,
     userType?: "Rider" | "Driver",
+    handleOnPressEdit?: any
 }
 
-export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider'}: Props) => {
+export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOnPressEdit}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -35,7 +36,7 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
                 </View>
             </View>
             <View style = {styles.edit}>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={handleOnPressEdit}>
                     <FontAwesome name="edit" size={24} color="black" />
                 </TouchableOpacity>
             </View>

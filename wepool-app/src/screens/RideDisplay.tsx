@@ -21,6 +21,13 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
     useEffect(() => {
         setUser(_testUsers)
       }, []);
+    
+    function handleOnPressEdit(){
+        //Navigate to edit ride screen of the selected ride
+        
+        navigation.navigate('EditRide');
+    }
+
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
@@ -37,7 +44,7 @@ export const RideDisplay = ({navigation}: RootTabScreenProps<'RideDisplay'>) => 
                     {_testUsers.map((user) => {
                         return (
                             <View key={user.id} style = {styles.card}>
-                                <RideCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true}/>
+                                <RideCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true} handleOnPressEdit={handleOnPressEdit}/>
                             </View>
                         );
                     })}
