@@ -1,19 +1,37 @@
 import { StyleSheet, View, Text, TouchableOpacity, Modal, TextInput } from 'react-native'
 import {Button} from "./Button"
 import { useThemeColors } from "../hooks/useThemeColors";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from '@rneui/themed';
 
 type Props = {
     openDetails: boolean,
-    handleOnPressDetails: any,
+    rides: Ride[],
+    handleOpenDetails: any,
+    rideId: number
 }
 
-export const RideDetailsModal = ({openDetails, handleOnPressDetails}: Props) => {
+export const RideDetailsModal = ({openDetails, handleOpenDetails, rides, rideId}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
+    
+    // const [selectedRide, setSelectedRide] = useState<Ride>();
+
+    // useEffect(() => {
+    //     setSelectedRide(rides.find(x => {
+    //         return x.id === rideId;
+    //     }));
+    //   });
+
+    const selectedRide = rides.find(x => {
+        return x.id === rideId 
+    })
+
+    if (!selectedRide) console.log(rides, rideId)
+    const fromLoc = selectedRide ? (selectedRide.startsAt.toString() === "DRIVER" ? selectedRide.driver.street : selectedRide.driver.company.street) : "FROM"
+    const toLoc = selectedRide ? (selectedRide.startsAt.toString() === "DRIVER" ? selectedRide.driver.company.street : selectedRide.driver.street) : "TO"
 
     return (
         <Modal
@@ -26,39 +44,39 @@ export const RideDetailsModal = ({openDetails, handleOnPressDetails}: Props) => 
                         <View style = {{flexDirection: 'row'}}>
                             <FontAwesome name="user" size={100} color="black" />
                             <View style = {{flex: 1, justifyContent: 'center', marginLeft: 10}}>
-                                <Text style = {{margin: 5}}>driverName</Text>
+                                <Text style = {{margin: 5}}>{selectedRide ? `${selectedRide.driver.fname} ${selectedRide.driver.lname}` : "DriverName"} </Text>
                                 <Text style = {{margin: 5}}>Num Stars</Text>
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start'}}>
                             <View style = {{flex: 1, margin: 20}}>
-                                <Text style={styles.text}> FROM </Text>
+                                <Text style={styles.text}> {fromLoc} </Text>
                                 <Divider></Divider>
-                                <Text style={styles.text}> TO </Text>
+                                <Text style={styles.text}> {toLoc} </Text>
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
                             <View style = {{flex: 1, flexDirection: 'row'}}>
                                 <FontAwesome name="phone" size={40} color="black" />
-                                <Text style={styles.text}> PhoneNum </Text>                                
+                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.phoneNumber}`: "PHONE"}  </Text>                                
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
                             <View style = {{flex: 1, flexDirection: 'row'}}>
                                 <FontAwesome name="money" size={40} color="black" />
-                                <Text style={styles.text}> money </Text>                                
+                                <Text style={styles.text}> {selectedRide ? `${selectedRide.kmToGoalLocation}`: "MONEY"} </Text>                                
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
                             <View style = {{flex: 1, flexDirection: 'row'}}>
                                 <FontAwesome name="id-card" size={40} color="black" />
-                                <Text style={styles.text}> Plates </Text>                                
+                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.plateNumber}`: "PLATES"} </Text>                                
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
                             <View style = {{flex: 1, flexDirection: 'row'}}>
                                 <FontAwesome name="car" size={40} color="black" />
-                                <Text style={styles.text}> CarModel </Text>                                
+                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.brand} ${selectedRide.driver.car?.model} ${selectedRide.driver.car?.color}`: "CAR MODEL"} </Text>                                
                             </View>
                         </View>
                         <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
@@ -67,7 +85,7 @@ export const RideDetailsModal = ({openDetails, handleOnPressDetails}: Props) => 
                                 <Text style={styles.text}> Notes </Text>                                
                             </View>
                         </View>
-                        <TouchableOpacity onPress={handleOnPressDetails}>
+                        <TouchableOpacity onPress={handleOpenDetails}>
                             <Text>CLOSE</Text>
                         </TouchableOpacity>
                     </View>

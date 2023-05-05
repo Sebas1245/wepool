@@ -24,9 +24,14 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
      */
     
     //open and close ride detail modal
-    const [openDetails, setOpenDetails] = useState(false); 
-    function handleOnPressDetails(){
+    const [openDetails, setOpenDetails] = useState(false);
+    const [cardId, setCardId] = useState(-1);
+    
+    function handleOpenDetails(){
         setOpenDetails(!openDetails)
+    }
+    function handleCardId(id: number){
+        setCardId(id)
     }
     const { loading, error, data } = useQuery(GetOpenRides);
 
@@ -64,20 +69,23 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                 openRides.map((ride) => {
                                     return (
                                         <View key={ride.id} style = {styles.card}>
-                                            <DriverCard date='20 Apr' time='08:00' start_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)} final_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street: ride.driver.street)} driverName = {ride.driver.fname} status={true} handleOnPressDetails = {handleOnPressDetails}/>
+                                            <DriverCard date='20 Apr' time='08:00' start_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)} final_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street: ride.driver.street)} driverName = {`${ride.driver.fname} ${ride.driver.lname}`} status={true} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
                                         </View>
                                     );
                                 })
                             ): (
                                 <View key={openRides[0].id} style = {styles.card}>
-                                    <DriverCard date='20 Apr' time='08:00' start_loc={( openRides[0].startsAt.toString() === "DRIVER" ? openRides[0].driver.street : openRides[0].driver.company.street)} final_loc={(openRides[0].startsAt.toString() === "DRIVER" ? openRides[0].driver.company.street: openRides[0].driver.street)} driverName = {openRides[0].driver.fname} status={true} handleOnPressDetails = {handleOnPressDetails}/>
+                                    <DriverCard date='20 Apr' time='08:00' start_loc={( openRides[0].startsAt.toString() === "DRIVER" ? openRides[0].driver.street : openRides[0].driver.company.street)} final_loc={(openRides[0].startsAt.toString() === "DRIVER" ? openRides[0].driver.company.street: openRides[0].driver.street)} driverName = {`${openRides[0].driver.fname} ${openRides[0].driver.lname}`} status={true} handleOpenDetails = {handleOpenDetails} cardId={openRides[0].id}/>
                                 </View>
                             )}
                         </ScrollView>
                     ) : 
-                        <Oops/>
+                    <Oops/> 
+                }
+                    {openRides ? (
+                        <RideDetailsModal openDetails = {openDetails} handleOpenDetails = {handleOpenDetails} rides={openRides} rideId={cardId}/>)
+                        : null
                     }
-                    <RideDetailsModal openDetails = {openDetails} handleOnPressDetails = {handleOnPressDetails}/>
                 </View>
             </View>
         </View>
