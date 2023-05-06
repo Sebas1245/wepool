@@ -10,11 +10,10 @@ type Props = {
     final_loc?: string,
     driverName?: string,
     status: RideStatus,
-    userType?: "Rider" | "Driver",
     handleOnPressEdit?: any
 }
 
-export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOnPressEdit}: Props) => {
+export const RideCard = ({date, time, start_loc, final_loc, driverName, status, handleOnPressEdit}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint

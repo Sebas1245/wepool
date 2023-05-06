@@ -22,7 +22,6 @@ const linking: LinkingOptions<RootStackParamList> = {
           Home: {
             screens: {
               RideDisplay: 'RideDisplay',
-              EditRide: 'EditRide',
             },
           },
           SearchRide: {
@@ -34,6 +33,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           MyRides: {
             screens: {
               MyRides: 'MyRides',
+              EditRide: 'EditRide',
               CreateNewRide: 'CreateNewRide',
             },
           },

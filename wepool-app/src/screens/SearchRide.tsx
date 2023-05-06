@@ -71,7 +71,7 @@ export const SearchRide = ({
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
-        <HeaderBar userType="Rider" />
+        <HeaderBar/>
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>LOOK FOR A RIDE</Text>

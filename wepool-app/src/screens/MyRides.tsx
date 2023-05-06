@@ -46,48 +46,29 @@ export const MyRides = ({
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <HeaderBar user={"Test"} userType="Rider" />
+        <HeaderBar/>
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.backButton}>
-          <BackButton onPress={() => navigation.goBack()} />
-        </View>
-        <SearchBar />
         <Header text="My Rides" />
         <View style={styles.cardsContainer}>
-            {openRides ? (
-            <ScrollView>
-                {openRides ? (
-                openRides.length > 1 ? (
-                    openRides.map((ride) => {
+        {openRides ? (
+              <ScrollView>
+                  {openRides.map((ride) => {
                     return (
-                        <View key={ride.id} style={styles.card}>
-                        <RideCard
-                            date="20 Apr"
-                            time="08:00"
-                            start_loc={ride.driver?.street}
-                            final_loc={ride.driver?.company?.street}
-                            driverName={ride.driver?.fname}
-                            status={ride.status}
-                        />
-                        </View>
+                      <View key={ride.id} style={styles.card}>
+                      <RideCard
+                          date="20 Apr"
+                          time="08:00"
+                          start_loc={ride.driver?.street}
+                          final_loc={ride.driver?.company?.street}
+                          driverName={ride.driver?.fname}
+                          status={ride.status}
+                          handleOnPressEdit={handleOnPressEdit}
+                      />
+                      </View>
                     );
-                    })
-                ) : (
-                    <View key={openRides[0].id} style={styles.card}>
-                    <RideCard
-                        date="20 Apr"
-                        time="08:00"
-                        start_loc={openRides[0].driver?.street}
-                        final_loc={openRides[0].driver?.company?.street}
-                        driverName={openRides[0].driver?.fname}
-                        status={openRides[0].status}
-                        handleOnPressEdit={handleOnPressEdit}
-                    />
-                    </View>
-                )
-                ) : null}
-            </ScrollView>
+                  })}
+              </ScrollView>
             ) : 
             <Oops/>
             }
