@@ -1,30 +1,41 @@
 import { useState, useEffect } from 'react'
-import { StyleSheet, View, Modal, TouchableOpacity, Text } from 'react-native'
-import {Header} from "../components/Header";
-import _testUsers from '../TestDummyUsers.json';
-import { Divider } from '@rneui/themed';
+import { StyleSheet, View, Modal, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { useThemeColors } from "../hooks/useThemeColors";
+import { useQuery, gql } from '@apollo/client';
+
+/**
+ * This is one of the mthfckr packages that gets in trouble with apollo. 'Divider' is not used here, but is used in CreateRide and other components:
+ */
+import { Divider } from '@rneui/themed';            
+
+// queries
+import GetUser from '../queries/GET/UserQueries'
 
 export const Profile = () => {
 
-    /**
-     * Getting dummy users info for testing purposes. 
-     * TODO: 
-     *  - Integrate with backend
-     *  - A varible to know user type will be needed
-     */
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
-        
-    const [openDetails, setOpenDetails] = useState(true); //open and close ride detail modal
-    function handleOnPressDetails(){
-        setOpenDetails(!openDetails)
-    }
 
-    /** borderWidth: 0, when changed to 1 is used to see graphical structure */
+    /** 
+     * When using useQuery hook you can get loading status, error info, and data
+     * See more: https://www.apollographql.com/docs/react/data/queries/
+    */
+
+   const { loading, error, data, networkStatus } = useQuery(GetUser);
+   
+   if (loading) return ( console.log('Loading...'));
+   if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))
+   
+    /** You can also get the network status code:  supposedly '8' means failed connection, '7' means a correct connection.*/
+//    if (networkStatus) return (console.log(networkStatus))
+    /**
+    * The errors I got were: no connection to server [msg 'Network request failed'], 
+    * or getting no response from service with query [msg 'Server response was missing for query <queryName>']
+     */
 
     return (
+        /** borderWidth: 0, when changed to 1 is used to see graphical structure */
         <View style = {[{backgroundColor: backgroundColor}, styles.container]}>
             <View style = {{flex : 1, borderWidth: 0}}>
                 <View style = {{flex: 1}}></View>
@@ -36,7 +47,7 @@ export const Profile = () => {
                     <View style = {[{flex: 1, justifyContent: 'flex-end', borderWidth: 0}]}>
                             <View style = {{flex:1, borderWidth: 0}}></View>
                             <View style = {{flex: 1, backgroundColor: 'white'}}></View>
-                            <View style = {{position: 'absolute'}}>
+                            <View style = {[{borderWidth: 0}, styles.absoluteCentered]}>
                                 <FontAwesome style = {styles.profilePic} name="user-circle-o" size={100} color="black" />
                             </View>
                     </View>
@@ -48,11 +59,11 @@ export const Profile = () => {
                 </View>
             </View>
             <View style = {{flex : 2}}>
-                <View style = {[{flex: 1}, styles.contentContainer]}>
+                <View style = {[{flex: 1}]}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
                             <View style = {{flex: 1, marginTop: 10}}>
-                                <Text style={styles.text}> RIDER NAME </Text>
+                                <Text style={styles.text}> {data ? ` ${data.getUser.fname} ${data.getUser.lname}`: 'USER NAME'} </Text>
                             </View>
                             <View style = {{flex: 1}}>
                                 {/* //Rating stars box */}
@@ -61,13 +72,13 @@ export const Profile = () => {
                             <View style = {{flex: 1}}>                                
                                 <View style = {{flex: 1, flexDirection: 'row'}}>
                                     <FontAwesome name="phone" size={40} color="black" />
-                                    <Text style={styles.text}> PhoneNum </Text>                                
+                                    <Text style={styles.text}> {data ? data.getUser.number: 'USER PHONE'} </Text>                                
                                 </View>
                             </View>
                             <View style = {{flex: 1}}>
                                 <View style = {{flex: 1, flexDirection: 'row'}}>
                                     <FontAwesome name="car" size={40} color="black" />
-                                    <Text style={styles.text}> CarModel </Text>                                
+                                    <Text style={styles.text}> {data ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`:'CAR'} </Text>                                
                                 </View>                                
                             </View>
                             <View style = {{flex: 1}}>
@@ -94,24 +105,20 @@ export const Profile = () => {
         borderTopRightRadius: 50,
         borderWidth: 1,
     },
-    contentContainer: {
-        // flex: 5,
-        // marginHorizontal: 10,
+    absoluteCentered: {
+        position: 'absolute',
+        left: '50%',
     },
     profilePic: {
         borderRadius: 100,
         padding: 10,
         backgroundColor: 'white',
         position: 'relative',
-        // marginLeft: 33,
-        // justifyContent: 'center', 
-        // alignContent: 'center',
-        // alignItems: 'center',
+        left: '-50%'
     },
     centeredView: {
         flex: 1,
         justifyContent: "center",
-        // alignItems: "center",
     },
     modalView: {
         backgroundColor: "white",
@@ -122,5 +129,5 @@ export const Profile = () => {
     },
     text: {
         fontSize: 25,
-    }
+    }, 
 })

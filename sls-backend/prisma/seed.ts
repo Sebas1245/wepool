@@ -69,12 +69,91 @@ async function createUsers(): Promise<void> {
     },
     update: {},
   });
+  const diego = await prisma.user.upsert({
+    create: {
+      fname: "Diego",
+      lname: "Guerreo",
+      street: "Quimicos",
+      number: 110,
+      zipCode: 64700,
+      city: "Monterrey",
+      phoneNumber: "4777702121",
+      latitude: 25.6876,
+      longitude: -100.1824,
+      companyId: 1,
+    },
+    where: {
+      id: 3,
+    },
+    update: {},
+  });
+  const javi = await prisma.user.upsert({
+    create: {
+      fname: "Javier",
+      lname: "Martinez",
+      street: "Rio Nazas",
+      number: 331,
+      zipCode: 64700,
+      city: "Monterrey",
+      latitude: 25.1234,
+      longitude: -100.1234,
+      phoneNumber: "4777175757",
+      car: {
+        create: {
+          brand: "Audi",
+          model: "A3",
+          year: 2017,
+          plateNumber: "GTO-70-75",
+          capacity: 5,
+          color: "White",
+        },
+      },
+      carId: 2,
+      companyId: 1,
+    },
+    where: {
+      id: 4,
+    },
+    update: {},
+  });
   console.log(bernie, sebas);
+}
+
+async function createRides(): Promise<void> {
+  const ride1 = await prisma.ride.upsert({
+    where: {
+      id: 1,
+    },
+    create: {
+      kmToGoalLocation: 15,
+      availableSeats: 4,
+      status: "OPEN",
+      startsAt: "DRIVER",
+      driverId: 2,
+    },
+    update: {},
+  });
+
+  const ride2 = await prisma.ride.upsert({
+    where: {
+      id: 2,
+    },
+    create: {
+      kmToGoalLocation: 18,
+      availableSeats: 4,
+      status: "OPEN",
+      startsAt: "DRIVER",
+      driverId: 4,
+    },
+    update: {},
+  });
+  console.log(ride1, ride2);
 }
 
 async function main() {
   await createCompany();
   await createUsers();
+  await createRides();
 }
 
 main()
