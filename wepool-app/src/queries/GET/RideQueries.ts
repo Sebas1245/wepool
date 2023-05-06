@@ -32,5 +32,6 @@ export default gql`query GetOpenRides {
         }
         startsAt
         status
+        date
       }
   }`;
