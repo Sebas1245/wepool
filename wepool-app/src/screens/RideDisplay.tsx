@@ -14,7 +14,7 @@ import GetOpenRides from "../queries/GET/RideQueries";
 
 export const RideDisplay = ({
   navigation,
-}: RootTabScreenProps<"RideDisplay">) => {
+}: RootTabScreenProps<"Home">) => {
   /**
    * TODO:
    *  - A varible to know user type will be needed
@@ -23,7 +23,6 @@ export const RideDisplay = ({
 
   function handleOnPressEdit(){
       //Navigate to edit ride screen of the selected ride
-
       navigation.navigate('EditRide');
   }
   const { loading, error, data } = useQuery(GetOpenRides);

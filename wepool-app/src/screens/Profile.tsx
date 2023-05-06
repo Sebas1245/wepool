@@ -22,17 +22,17 @@ export const Profile = () => {
      * See more: https://www.apollographql.com/docs/react/data/queries/
     */
 
-   const { loading, error, data, networkStatus } = useQuery(GetUser);
+   const { loading, error, data } = useQuery(GetUser);
    
-   if (loading) return ( console.log('Loading...'));
    if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))
-   
-    /** You can also get the network status code:  supposedly '8' means failed connection, '7' means a correct connection.*/
-//    if (networkStatus) return (console.log(networkStatus))
-    /**
-    * The errors I got were: no connection to server [msg 'Network request failed'], 
-    * or getting no response from service with query [msg 'Server response was missing for query <queryName>']
-     */
+   else if (loading) { 
+    console.log('Loading...')
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+    };
 
     return (
         /** borderWidth: 0, when changed to 1 is used to see graphical structure */

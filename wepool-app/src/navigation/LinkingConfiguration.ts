@@ -19,17 +19,7 @@ const linking: LinkingOptions<RootStackParamList> = {
       SelectProfile: 'SelectProfile',
       Root: {
         screens: {
-          Profile: {
-            screens: {
-              Profile: 'Profile',
-            },
-          },
-          CreateRide: {
-            screens: {
-              CreateRide: 'CreateNewRide',
-            },
-          },
-          RideDisplay: {
+          Home: {
             screens: {
               RideDisplay: 'RideDisplay',
               EditRide: 'EditRide',
@@ -39,6 +29,16 @@ const linking: LinkingOptions<RootStackParamList> = {
             screens: {
               SearchRide: 'SearchRide',
               MatchedDrivers: ' MatchedDrivers',
+            },
+          },
+          CreateRide: {
+            screens: {
+              CreateRide: 'CreateNewRide',
+            },
+          },
+          Profile: {
+            screens: {
+              Profile: 'Profile',
             },
           },
         },

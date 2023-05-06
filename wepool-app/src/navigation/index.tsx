@@ -110,21 +110,21 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="RideDisplay"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="RideDisplay"
+        name="Home"
         component={RideDisplay}
-        options={({ navigation }: RootTabScreenProps<"RideDisplay">) => ({
+        options={({ navigation }: RootTabScreenProps<"Home">) => ({
           title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("RideDisplay")}
+              onPress={() => navigation.navigate("Home")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
