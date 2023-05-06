@@ -7,20 +7,20 @@ import { useState } from 'react';
 type Props = {
     date: string, 
     time: string, 
-    start_loc?: string, 
-    final_loc?: string,
-    driverName?: string,
-    status: boolean,
-    userType?: "Rider" | "Driver",
+    ride: Ride,
     handleOpenDetails?: any,
     handleCardId?: any,
     cardId : number
 }
 
-export const DriverCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOpenDetails, handleCardId, cardId}: Props) => {
+export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId}: Props) => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
+
+    const driver = ride.driver;
+    const start_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)
+    const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
 
     function handleOnPressRideDetails(){
         console.log(cardId)
@@ -32,7 +32,7 @@ export const DriverCard = ({date, time, start_loc, final_loc, driverName, status
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
             <View style = {styles.driverImageContainer}>
                 <FontAwesome name="user" size={40} color="black" />
-                <Text>{driverName}</Text>
+                <Text>{`${driver.fname} ${driver.lname}`}</Text>
                 <Text>Num Stars</Text>
             </View>
             <View style = {{flex: 3}}>

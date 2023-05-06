@@ -51,7 +51,7 @@ export const RideDisplay = ({
       <View style={styles.contentContainer}>
         <Header text="Current Rides" />
         <View style={styles.cardsContainer}>
-            {openRides ? (
+            {/* {openRides ? (
               <ScrollView>
                   {openRides.map((ride) => {
                     return (
@@ -71,7 +71,7 @@ export const RideDisplay = ({
               </ScrollView>
             ) : 
             <Oops/>
-            }
+            } */}
         </View>
       </View>
     </View>

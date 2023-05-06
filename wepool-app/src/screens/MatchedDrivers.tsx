@@ -52,7 +52,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
-                <HeaderBar user={'Test'} userType="Rider"/>
+                <HeaderBar/>
             </View>
             <View style = {styles.contentContainer}>
                 <View style = {styles.backButton}>
@@ -65,7 +65,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                 {openRides.map((ride) => 
                                     (
                                         <View key={ride.id} style = {styles.card}>
-                                            <DriverCard date='20 Apr' time='08:00' start_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)} final_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street: ride.driver.street)} driverName = {`${ride.driver.fname} ${ride.driver.lname}`} status={true} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
+                                            <DriverCard date='20 Apr' time='08:00' ride={ride} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
                                         </View>
                                     )
                                 )}

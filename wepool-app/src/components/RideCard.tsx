@@ -5,15 +5,12 @@ import { FontAwesome } from '@expo/vector-icons';
 
 type Props = {
     date: string, 
-    time: string, 
-    start_loc?: string, 
-    final_loc?: string,
-    driverName?: string,
-    status: RideStatus,
+    time: string,
+    ride: Ride,
     handleOnPressEdit?: any
 }
 
-export const RideCard = ({date, time, start_loc, final_loc, driverName, status, handleOnPressEdit}: Props) => {
+export const RideCard = ({date, time, ride, handleOnPressEdit}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -25,9 +22,9 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
                 <Text style = {{fontSize: 20}}>{time}</Text>
             </View>
             <View style = {styles.dataContainer}>
-                <Text style = {{fontSize: 15}}>Driver: {driverName}</Text>
-                <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
-                <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
+                <Text style = {{fontSize: 15}}>Driver: {`${ride.driver.fname} ${ride.driver.lname}`}</Text>
+                <Text style = {{fontSize: 15}}>From: {(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)}</Text>
+                <Text style = {{fontSize: 15}}>To: {(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)}</Text>
                 <View style = {styles.buttonsContainer}>
                     <Button text="Close" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
                     <Button text="Riders" style={[styles.button, {backgroundColor: colors.colors.primary}]} textStyle ={styles.buttonText}/>

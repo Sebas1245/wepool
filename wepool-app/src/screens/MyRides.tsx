@@ -2,10 +2,8 @@ import { useState, useEffect } from "react";
 import { HeaderBar } from "../components/HeaderBar";
 import { StyleSheet, View, ScrollView, Text } from "react-native";
 import { RootTabScreenProps } from "../navigation/types";
-import { BackButton } from "../components/BackButton";
 import { Header } from "../components/Header";
 import { Oops } from "../components/Oops";
-import { SearchBar } from "../components/SearchBar";
 import { RideCard } from "../components/RideCard";
 import { useQuery } from "@apollo/client";
 
@@ -59,10 +57,7 @@ export const MyRides = ({
                       <RideCard
                           date="20 Apr"
                           time="08:00"
-                          start_loc={ride.driver?.street}
-                          final_loc={ride.driver?.company?.street}
-                          driverName={ride.driver?.fname}
-                          status={ride.status}
+                          ride={ride}
                           handleOnPressEdit={handleOnPressEdit}
                       />
                       </View>
