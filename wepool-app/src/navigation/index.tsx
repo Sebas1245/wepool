@@ -26,7 +26,6 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { StartScreen } from '../screens/StartScreens/StartScreen';
 import { LoginScreen } from '../screens/StartScreens/LoginScreen';
 import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
-import { SelectProfile } from '../screens/SelectProfile';
 import { RideDisplay } from '../screens/RideDisplay';
 import { SearchRide } from '../screens/SearchRide';
 import CreateNewRide from '../screens/CreateNewRide';
@@ -73,11 +72,6 @@ function RootNavigator() {
       <Stack.Screen
         name="SignUpScreen"
         component={SignUpScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SelectProfile"
-        component={SelectProfile}
         options={{ headerShown: false }}
       />
       {/* MAIN TAB NAVIGATOR SCREEN */}

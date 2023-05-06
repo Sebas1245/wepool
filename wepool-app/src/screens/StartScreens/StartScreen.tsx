@@ -22,7 +22,7 @@ export const StartScreen = ({
     if (response?.type === "success") {
       setAccessToken(response?.authentication?.accessToken ?? "");
       accessToken && fetchUserInformation();
-      navigation.navigate('SelectProfile');
+      navigation.navigate('Root');
     }
   }, [response, accessToken]);
   const fetchUserInformation = async () => {
@@ -44,7 +44,7 @@ export const StartScreen = ({
       <Header text="Welcome!"></Header>
       {/* Comment the following line to deactivate login */}
       {/* <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => promptAsync()}> */}
-      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('SelectProfile')}>
+      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('Root')}>
           <Image
             source={require("../../assets/img/google_logo.png")}
             style={styles.buttonImageIconStyle}

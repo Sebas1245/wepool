@@ -9,7 +9,6 @@ export type RootStackParamList = {
     StartScreen: undefined;
     LoginScreen: undefined;
     SignUpScreen: undefined;
-    SelectProfile: undefined;
     MatchedDrivers: undefined;
     EditRide: undefined;
     CreateNewRide: undefined;
