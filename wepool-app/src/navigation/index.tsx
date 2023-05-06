@@ -33,6 +33,7 @@ import CreateNewRide from '../screens/CreateNewRide';
 import EditRide from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
 import { Profile } from '../screens/Profile';
+import { MyRides } from "../screens/MyRides";
 
 export default function Navigation({
   colorScheme,
@@ -94,7 +95,13 @@ function RootNavigator() {
       <Stack.Screen 
         name="EditRide" 
         component={EditRide} 
-        options={{headerShown: false}} />
+        options={{headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="CreateNewRide" 
+        component={CreateNewRide} 
+        options={{headerShown: false}} 
+      />
     </Stack.Navigator>
   );
 }
@@ -149,14 +156,14 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="CreateRide"
-        component={CreateNewRide}
-        options={({ navigation }: RootTabScreenProps<"CreateRide">) => ({
-          title: "Add Ride",
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
+        name="MyRides"
+        component={MyRides}
+        options={({ navigation }: RootTabScreenProps<"MyRides">) => ({
+          title: "My Rides",
+          tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("CreateRide")}
+              onPress={() => navigation.navigate("MyRides")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

@@ -12,6 +12,7 @@ export type RootStackParamList = {
     SelectProfile: undefined;
     MatchedDrivers: undefined;
     EditRide: undefined;
+    CreateNewRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };
   
@@ -21,7 +22,7 @@ export type RootStackParamList = {
   
   export type RootTabParamList = {
     Home: undefined;
-    CreateRide: undefined;
+    MyRides: undefined;
     SearchRide: undefined;
     Profile: undefined;
 };

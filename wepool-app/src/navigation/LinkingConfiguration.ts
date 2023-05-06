@@ -31,9 +31,10 @@ const linking: LinkingOptions<RootStackParamList> = {
               MatchedDrivers: ' MatchedDrivers',
             },
           },
-          CreateRide: {
+          MyRides: {
             screens: {
-              CreateRide: 'CreateNewRide',
+              MyRides: 'MyRides',
+              CreateNewRide: 'CreateNewRide',
             },
           },
           Profile: {
