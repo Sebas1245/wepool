@@ -28,7 +28,7 @@ import { LoginScreen } from '../screens/StartScreens/LoginScreen';
 import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
 import { RideDisplay } from '../screens/RideDisplay';
 import { SearchRide } from '../screens/SearchRide';
-import {CreateNewRide} from '../screens/CreateNewRide';
+import {CreateNewRide} from '../screens/Root/MyRides/CreateNewRide';
 import { EditRide } from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
 import { Profile } from '../screens/Profile';

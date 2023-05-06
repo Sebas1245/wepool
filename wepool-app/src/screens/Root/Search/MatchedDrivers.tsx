@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import {HeaderBar} from "../components/HeaderBar";
+import { HeaderBar } from '../../../components/HeaderBar';
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
-import { RootTabScreenProps, RootStackScreenProps } from '../navigation/types';
-import {BackButton} from '../components/BackButton'
-import {Header} from "../components/Header";
-import { DriverCard } from '../components/DriverCard';
-import { RideDetailsModal } from '../components/RideDetailsModal';
+import { RootTabScreenProps, RootStackScreenProps } from '../../../navigation/types';
+import {BackButton} from '../../../components/BackButton'
+import {Header} from "../../../components/Header";
+import { DriverCard } from '../../../components/DriverCard';
+import { RideDetailsModal } from '../../../components/RideDetailsModal';
 import { useQuery } from "@apollo/client";
-import { Oops } from '../components/Oops';
+import { Oops } from '../../../components/Oops';
 
 // queries
-import GetOpenRides from "../queries/GET/RideQueries";
+import GetOpenRides from "../../../queries/GET/RideQueries";
 
 export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDrivers'>) => {
 

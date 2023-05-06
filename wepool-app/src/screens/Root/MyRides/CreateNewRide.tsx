@@ -16,8 +16,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
-import { BackButton } from "../components/BackButton";
-import { RootStackScreenProps } from "../navigation/types";
+import { BackButton } from "../../../components/BackButton";
+import { RootStackScreenProps } from "../../../navigation/types";
 
 export const CreateNewRide = ({
   navigation,

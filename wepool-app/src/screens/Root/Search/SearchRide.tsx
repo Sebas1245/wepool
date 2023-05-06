@@ -13,8 +13,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
-import { HeaderBar } from "../components/HeaderBar";
-import { RootTabScreenProps } from "../navigation/types";
+import { HeaderBar } from "../../../components/HeaderBar";
+import { RootTabScreenProps } from "../../../navigation/types";
 
 export const SearchRide = ({
   navigation,

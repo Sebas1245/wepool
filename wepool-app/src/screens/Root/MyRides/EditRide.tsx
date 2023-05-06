@@ -14,11 +14,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { BackButton } from "../components/BackButton";
+import { BackButton } from "../../../components/BackButton";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
-import { RootTabScreenProps } from "../navigation/types";
+import { RootTabScreenProps } from "../../../navigation/types";
 
 // export const EditRide = ({ navigation }: RootTabScreenProps<"EditRide">) => {
 export const EditRide = () => {

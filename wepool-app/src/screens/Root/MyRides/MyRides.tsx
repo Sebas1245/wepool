@@ -1,20 +1,19 @@
 import { useState, useEffect } from "react";
-import { HeaderBar } from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView, Text } from "react-native";
-import { RootTabScreenProps } from "../navigation/types";
-import { BackButton } from "../components/BackButton";
-import { Header } from "../components/Header";
-import { Oops } from "../components/Oops";
-import { SearchBar } from "../components/SearchBar";
-import { RideCard } from "../components/RideCard";
+import { HeaderBar } from "../../../components/HeaderBar";
+import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
+import { RootTabScreenProps } from "../../../navigation/types";
+import { Header } from "../../../components/Header";
+import { Oops } from "../../../components/Oops";
+import { RideCard } from "../../../components/RideCard";
 import { useQuery } from "@apollo/client";
+import { Button } from "../../../components/Button";
 
 // queries
-import GetOpenRides from "../queries/GET/RideQueries";
+import GetOpenRides from "../../../queries/GET/RideQueries";
 
-export const RideDisplay = ({
+export const MyRides = ({
   navigation,
-}: RootTabScreenProps<"Home">) => {
+}: RootTabScreenProps<"MyRides">) => {
   /**
    * TODO:
    *  - A varible to know user type will be needed
@@ -49,9 +48,17 @@ export const RideDisplay = ({
         <HeaderBar/>
       </View>
       <View style={styles.contentContainer}>
-        <Header text="Current Rides" />
+        <View style={{flex: 1, flexDirection: "row", alignItems: 'center'}}>
+            <Header text="My Rides" />
+            <View style= {{flex: 2}}></View>
+            <Button 
+                text="+ Create Ride" 
+                style={[styles.button, {backgroundColor: 'green'}]} 
+                textStyle ={styles.buttonText}
+                onPress={() => navigation.navigate("CreateNewRide")}/>
+        </View>
         <View style={styles.cardsContainer}>
-            {/* {openRides ? (
+        {openRides ? (
               <ScrollView>
                   {openRides.map((ride) => {
                     return (
@@ -59,10 +66,7 @@ export const RideDisplay = ({
                       <RideCard
                           date="20 Apr"
                           time="08:00"
-                          start_loc={ride.driver?.street}
-                          final_loc={ride.driver?.company?.street}
-                          driverName={ride.driver?.fname}
-                          status={ride.status}
+                          ride={ride}
                           handleOnPressEdit={handleOnPressEdit}
                       />
                       </View>
@@ -71,7 +75,7 @@ export const RideDisplay = ({
               </ScrollView>
             ) : 
             <Oops/>
-            } */}
+            }
         </View>
       </View>
     </View>
@@ -104,4 +108,17 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 10,
   },
+  button: {
+    flex: 1,
+    // width: 45,
+    height: '50%',
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    margin: 5,
+    },
+  buttonText: {
+        color: 'white', 
+        fontSize: 18,
+    },
 });
