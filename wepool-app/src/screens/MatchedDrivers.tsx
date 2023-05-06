@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView, Modal, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { RootTabScreenProps, RootStackScreenProps } from '../navigation/types';
-import DatePicker from "react-native-modern-datepicker";
 import {BackButton} from '../components/BackButton'
 import {Header} from "../components/Header";
 import { DriverCard } from '../components/DriverCard';
@@ -16,11 +15,10 @@ import GetOpenRides from "../queries/GET/RideQueries";
 export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDrivers'>) => {
 
     /**
-     * TODO: 
-     *  - Integrate with backend
+     * TODO:
      *  - A varible to know user type will be needed
-     *  - Solve HeaderBar general usage
-     *  - Is HeaderBar 'name' needed?
+     *  - Apply 'Star' ratings
+     *  - Variables missing: date, time, money, notes
      */
     
     //open and close ride detail modal
@@ -50,8 +48,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
         </View>
       );
     }
-        
-    // console.log(JSON.stringify({data}))
+
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>

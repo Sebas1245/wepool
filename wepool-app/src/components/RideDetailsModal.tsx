@@ -48,41 +48,43 @@ export const RideDetailsModal = ({openDetails, handleOpenDetails, rides, rideId}
                                 <Text style = {{margin: 5}}>Num Stars</Text>
                             </View>
                         </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start'}}>
-                            <View style = {{flex: 1, margin: 20}}>
-                                <Text style={styles.text}> {fromLoc} </Text>
-                                <Divider></Divider>
-                                <Text style={styles.text}> {toLoc} </Text>
+                        <View style = {{alignItems: 'flex-start'}}>
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start'}}>
+                                <View style = {{flex: 1, margin: 20}}>
+                                    <Text style={styles.text}> {fromLoc} </Text>
+                                    <Divider></Divider>
+                                    <Text style={styles.text}> {toLoc} </Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
-                            <View style = {{flex: 1, flexDirection: 'row'}}>
-                                <FontAwesome name="phone" size={40} color="black" />
-                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.phoneNumber}`: "PHONE"}  </Text>                                
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="phone" size={40} color="black" />
+                                    <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.phoneNumber}`: "PHONE"}  </Text>                                
+                                </View>
                             </View>
-                        </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
-                            <View style = {{flex: 1, flexDirection: 'row'}}>
-                                <FontAwesome name="money" size={40} color="black" />
-                                <Text style={styles.text}> {selectedRide ? `${selectedRide.kmToGoalLocation}`: "MONEY"} </Text>                                
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="money" size={40} color="black" />
+                                    <Text style={styles.text}> {selectedRide ? `${selectedRide.kmToGoalLocation}`: "MONEY"} </Text>                                
+                                </View>
                             </View>
-                        </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
-                            <View style = {{flex: 1, flexDirection: 'row'}}>
-                                <FontAwesome name="id-card" size={40} color="black" />
-                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.plateNumber}`: "PLATES"} </Text>                                
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="id-card" size={40} color="black" />
+                                    <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.plateNumber}`: "PLATES"} </Text>                                
+                                </View>
                             </View>
-                        </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
-                            <View style = {{flex: 1, flexDirection: 'row'}}>
-                                <FontAwesome name="car" size={40} color="black" />
-                                <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.brand} ${selectedRide.driver.car?.model} ${selectedRide.driver.car?.color}`: "CAR MODEL"} </Text>                                
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="car" size={40} color="black" />
+                                    <Text style={styles.text}> {selectedRide ? `${selectedRide.driver.car?.brand} ${selectedRide.driver.car?.model} ${selectedRide.driver.car?.color}`: "CAR MODEL"} </Text>                                
+                                </View>
                             </View>
-                        </View>
-                        <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
-                            <View style = {{flex: 1, flexDirection: 'row'}}>
-                                <FontAwesome name="sticky-note-o" size={40} color="black" />
-                                <Text style={styles.text}> Notes </Text>                                
+                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="sticky-note-o" size={40} color="black" />
+                                    <Text style={styles.text}> Notes </Text>                                
+                                </View>
                             </View>
                         </View>
                         <TouchableOpacity onPress={handleOpenDetails}>
