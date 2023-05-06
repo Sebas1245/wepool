@@ -25,7 +25,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache, ApolloLink } from '@apollo
  */
 
 /** Some blogs recommended use of these technologies to solve the connection errors */
-import {createHttpLink} from 'apollo-link-http';
+// import {createHttpLink} from 'apollo-link-http';
 import { NetworkInfo } from 'react-native-network-info';
 
 /** Some blogs recommended using the Expo device IP Address, which didn't make sense */

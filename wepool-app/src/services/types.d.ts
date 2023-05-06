@@ -8,18 +8,18 @@ declare global{
         lname: string;
         latitude?: number;
         longitude?: number;
-        street?: string;
-        number?: number;
-        zipCode?: number;
-        city?: string;
-        state?: string;
-        country?: string;
-        phoneNumber?: string;
+        street: string;
+        number: number;
+        zipCode: number;
+        city: string;
+        state: string;
+        country: string;
+        phoneNumber: string;
         car?: Car;
         carId?: number;
         driverRides?: Ride[];
         passengerRides?: RidePassengers[];
-        company?: Company;
+        company: Company;
         companyId: number;
         _count?: UserCount;
     }
@@ -34,9 +34,9 @@ declare global{
        Closed,
    }
 
-   enum RideStartsAt {
-        Driver, 
-        Company,
+   enum StartingPoint {
+        DRIVER, 
+        COMPANY,
    }
     
 
@@ -45,8 +45,8 @@ declare global{
         kmToGoalLocation: number;
         availableSeats: number;
         status: RideStatus;
-        startsAt: RideStartsAt;
-        driver?: User;
+        startsAt: StartingPoint;
+        driver: User;
         driverId: number;
         passengers?: RidePassengers[];
         _count?: RideCount | null;
@@ -60,7 +60,7 @@ declare global{
         plateNumber: string;
         capacity: number;
         color: string;
-        driver?: User;
+        driver: User;
         driverId: number;
     }
 
@@ -84,7 +84,7 @@ declare global{
         createdAt: Date;
         passenger?: User;
         passengerId: number;
-        ride?: Ride;
+        ride: Ride;
         rideId: number;
     }
 }

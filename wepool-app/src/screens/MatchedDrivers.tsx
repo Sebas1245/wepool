@@ -1,37 +1,58 @@
 import { useState, useEffect } from 'react'
 import {HeaderBar} from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView, Modal, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, View, ScrollView, Text } from 'react-native'
 import { RootTabScreenProps, RootStackScreenProps } from '../navigation/types';
-import DatePicker from "react-native-modern-datepicker";
 import {BackButton} from '../components/BackButton'
 import {Header} from "../components/Header";
 import { DriverCard } from '../components/DriverCard';
 import { RideDetailsModal } from '../components/RideDetailsModal';
-import _testUsers from '../TestDummyUsers.json';
+import { useQuery } from "@apollo/client";
+import { Oops } from '../components/Oops';
+
+// queries
+import GetOpenRides from "../queries/GET/RideQueries";
 
 export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDrivers'>) => {
 
     /**
-     * Getting dummy users info for testing purposes. 
-     * TODO: 
-     *  - Integrate with backend
+     * TODO:
      *  - A varible to know user type will be needed
+     *  - Apply 'Star' ratings
+     *  - Variables missing: date, time, money, notes
      */
-
-    const [allUsers, setUser] = useState<User[]>();
-    useEffect(() => {
-        setUser(_testUsers)
-    }, []);
-        
-    const [openDetails, setOpenDetails] = useState(false); //open and close ride detail modal
-    function handleOnPressDetails(){
+    
+    //open and close ride detail modal
+    const [openDetails, setOpenDetails] = useState(false);
+    const [cardId, setCardId] = useState(-1);
+    
+    function handleOpenDetails(){
         setOpenDetails(!openDetails)
+    }
+    function handleCardId(id: number){
+        setCardId(id)
+    }
+    const { loading, error, data } = useQuery(GetOpenRides);
+
+    const [openRides, setOpenRides] = useState<Ride[] | null>(null);
+    useEffect(() => {
+      if (data && data.rides) setOpenRides(data.rides);
+    }, [loading]);
+  
+    if (error)
+      console.log([JSON.stringify({ data }), error, error.networkError]);
+    else if (loading || !openRides) {
+      console.log("Loading...");
+      return (
+        <View>
+          <Text>Loading...</Text>
+        </View>
+      );
     }
 
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
-                <HeaderBar user={allUsers ? allUsers[0].fname : 'Test'} userType="Rider"/>
+                <HeaderBar user={'Test'} userType="Rider"/>
             </View>
             <View style = {styles.contentContainer}>
                 <View style = {styles.backButton}>
@@ -39,16 +60,23 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                 </View>
                 <Header text="Matched Drivers"/>
                 <View style = {styles.cardsContainer}>
-                    <ScrollView>
-                    {_testUsers.map((user) => {
-                        return (
-                            <View key={user.id} style = {styles.card}>
-                                <DriverCard date='20 Apr' time='08:00' start_loc={user.street} final_loc={user.city} driverName = {user.fname} status={true} handleOnPressDetails = {handleOnPressDetails}/>
-                            </View>
-                        );
-                    })}
-                    </ScrollView>
-                    <RideDetailsModal openDetails = {openDetails} handleOnPressDetails = {handleOnPressDetails}/>
+                    {openRides ? (
+                        <ScrollView>
+                                {openRides.map((ride) => 
+                                    (
+                                        <View key={ride.id} style = {styles.card}>
+                                            <DriverCard date='20 Apr' time='08:00' start_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)} final_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street: ride.driver.street)} driverName = {`${ride.driver.fname} ${ride.driver.lname}`} status={true} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
+                                        </View>
+                                    )
+                                )}
+                        </ScrollView>
+                    ) : 
+                    <Oops/> 
+                }
+                    {openRides ? (
+                        <RideDetailsModal openDetails = {openDetails} handleOpenDetails = {handleOpenDetails} rides={openRides} rideId={cardId}/>)
+                        : null
+                    }
                 </View>
             </View>
         </View>

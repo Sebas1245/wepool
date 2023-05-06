@@ -7,18 +7,26 @@ import { useState } from 'react';
 type Props = {
     date: string, 
     time: string, 
-    start_loc: string, 
-    final_loc: string,
-    driverName: string,
+    start_loc?: string, 
+    final_loc?: string,
+    driverName?: string,
     status: boolean,
     userType?: "Rider" | "Driver",
-    handleOnPressDetails?: any
+    handleOpenDetails?: any,
+    handleCardId?: any,
+    cardId : number
 }
 
-export const DriverCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOnPressDetails}: Props) => {
-    
+export const DriverCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOpenDetails, handleCardId, cardId}: Props) => {
+
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
+
+    function handleOnPressRideDetails(){
+        console.log(cardId)
+        handleCardId(cardId)
+        handleOpenDetails()
+    }
 
     return (
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
@@ -36,7 +44,7 @@ export const DriverCard = ({date, time, start_loc, final_loc, driverName, status
                     <Text style = {{fontSize: 30, marginRight: 5}}>{time}</Text>
                 </View>
                 <View style = {styles.buttonContainer}>
-                    <Button text="Ride Details" style={[styles.button, {backgroundColor: 'orange'}]} textStyle ={styles.buttonText} onPress={handleOnPressDetails}/>
+                    <Button text="Ride Details" style={[styles.button, {backgroundColor: 'orange'}]} textStyle ={styles.buttonText} onPress={handleOnPressRideDetails}/>
                     <Button text="Join Ride" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
                 </View>
             </View>

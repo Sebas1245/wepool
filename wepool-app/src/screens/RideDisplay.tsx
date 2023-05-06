@@ -4,9 +4,9 @@ import { StyleSheet, View, ScrollView, Text } from "react-native";
 import { RootTabScreenProps } from "../navigation/types";
 import { BackButton } from "../components/BackButton";
 import { Header } from "../components/Header";
+import { Oops } from "../components/Oops";
 import { SearchBar } from "../components/SearchBar";
 import { RideCard } from "../components/RideCard";
-import _testUsers from "../TestDummyUsers.json";
 import { useQuery } from "@apollo/client";
 
 // queries
@@ -17,8 +17,6 @@ export const RideDisplay = ({
 }: RootTabScreenProps<"RideDisplay">) => {
   /**
    * TODO:
-   *  - Query cant access to 'status' variable.
-   *  - Fix queries to not need a 'where' variable.
    *  - A varible to know user type will be needed
    *  - Ride variable for date and start ride hour
    */
@@ -35,7 +33,9 @@ export const RideDisplay = ({
     if (data && data.rides) setOpenRides(data.rides);
   }, [loading]);
 
-  if (loading || !openRides) {
+  if (error)
+    console.log([JSON.stringify({ data }), error, error.networkError]);
+  else if (loading || !openRides) {
     console.log("Loading...");
     return (
       <View>
@@ -43,14 +43,6 @@ export const RideDisplay = ({
       </View>
     );
   }
-
-  if (error)
-    return console.log([JSON.stringify({ data }), error, error.networkError]);
-  // else ( console.log('Not any more...'))
-
-  /** Fetching openRides  only until you get back and reload the page. */
-  // if (!openRides) console.log('Not openRides')
-  // else console.log(['yes open rides', openRides])
 
   return (
     <View style={styles.container}>
@@ -64,40 +56,42 @@ export const RideDisplay = ({
         <SearchBar />
         <Header text="Open Rides" />
         <View style={styles.cardsContainer}>
-          <ScrollView>
-            {/* /**Cant access to all openrides because variables are unaccessible */}
             {openRides ? (
-              openRides.length > 1 ? (
-                openRides.map((ride) => {
-                  return (
-                    <View key={ride.id} style={styles.card}>
-                      <RideCard
+            <ScrollView>
+                {openRides ? (
+                openRides.length > 1 ? (
+                    openRides.map((ride) => {
+                    return (
+                        <View key={ride.id} style={styles.card}>
+                        <RideCard
+                            date="20 Apr"
+                            time="08:00"
+                            start_loc={ride.driver?.street}
+                            final_loc={ride.driver?.company?.street}
+                            driverName={ride.driver?.fname}
+                            status={ride.status}
+                        />
+                        </View>
+                    );
+                    })
+                ) : (
+                    <View key={openRides[0].id} style={styles.card}>
+                    <RideCard
                         date="20 Apr"
                         time="08:00"
-                        start_loc={ride.driver?.street}
-                        final_loc={ride.driver?.company?.street}
-                        driverName={ride.driver?.fname}
-                        status={ride.status}
+                        start_loc={openRides[0].driver?.street}
+                        final_loc={openRides[0].driver?.company?.street}
+                        driverName={openRides[0].driver?.fname}
+                        status={openRides[0].status}
                         handleOnPressEdit={handleOnPressEdit}
-                      />
+                    />
                     </View>
-                  );
-                })
-              ) : (
-                <View key={openRides[0].id} style={styles.card}>
-                  <RideCard
-                    date="20 Apr"
-                    time="08:00"
-                    start_loc={openRides[0].driver?.street}
-                    final_loc={openRides[0].driver?.company?.street}
-                    driverName={openRides[0].driver?.fname}
-                    status={openRides[0].status}
-                    handleOnPressEdit={handleOnPressEdit}
-                  />
-                </View>
-              )
-            ) : null}
-          </ScrollView>
+                )
+                ) : null}
+            </ScrollView>
+            ) : 
+            <Oops/>
+            }
         </View>
       </View>
     </View>
