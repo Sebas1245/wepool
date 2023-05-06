@@ -14,24 +14,26 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
 
-import Colors from "../core/Colors";
-import { useColorScheme } from "../hooks/useColorScheme";
+
+import Colors from '../core/Colors';
+import {useColorScheme} from '../hooks/useColorScheme';
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "./types";
-import LinkingConfiguration from "./LinkingConfiguration";
-import { StartScreen } from "../screens/StartScreens/StartScreen";
-import { LoginScreen } from "../screens/StartScreens/LoginScreen";
-import { SignUpScreen } from "../screens/StartScreens/SignUpScreen";
-import { SelectProfile } from "../screens/SelectProfile";
-import { RideDisplay } from "../screens/RideDisplay";
-import { SearchRide } from "../screens/SearchRide";
-import RideDetails from "../screens/RideDetails";
-import CreateNewRide from "../screens/CreateNewRide";
-import { MatchedDrivers } from "../screens/MatchedDrivers";
-import { Profile } from "../screens/Profile";
+import LinkingConfiguration from './LinkingConfiguration';
+import { StartScreen } from '../screens/StartScreens/StartScreen';
+import { LoginScreen } from '../screens/StartScreens/LoginScreen';
+import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
+import { SelectProfile } from '../screens/SelectProfile';
+import { RideDisplay } from '../screens/RideDisplay';
+import { SearchRide } from '../screens/SearchRide';
+import RideDetails from '../screens/RideDetails';
+import CreateNewRide from '../screens/CreateNewRide';
+import EditRide from '../screens/EditRide';
+import { MatchedDrivers } from '../screens/MatchedDrivers';
+import { Profile } from '../screens/Profile';
 
 export default function Navigation({
   colorScheme,
@@ -87,6 +89,10 @@ function RootNavigator() {
         component={MatchedDrivers}
         options={{ headerShown: false, animationTypeForReplace: "pop" }}
       />
+      <Stack.Screen 
+        name="EditRide" 
+        component={EditRide} 
+        options={{headerShown: false}} />
       {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );

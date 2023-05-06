@@ -1,6 +1,7 @@
-import { Dimensions, StyleSheet, View, Image, Text } from 'react-native'
+import { Dimensions, StyleSheet, View, Image, Text, TouchableOpacity } from 'react-native'
 import {Button} from "./Button"
 import { useThemeColors } from "../hooks/useThemeColors";
+import { FontAwesome } from '@expo/vector-icons';
 
 type Props = {
     date: string, 
@@ -10,9 +11,10 @@ type Props = {
     driverName?: string,
     status: RideStatus,
     userType?: "Rider" | "Driver",
+    handleOnPressEdit?: any
 }
 
-export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider'}: Props) => {
+export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOnPressEdit}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -32,6 +34,11 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
                     <Button text="Riders" style={[styles.button, {backgroundColor: colors.colors.primary}]} textStyle ={styles.buttonText}/>
                     <Button text="Start" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
                 </View>
+            </View>
+            <View style = {styles.edit}>
+                <TouchableOpacity onPress={handleOnPressEdit}>
+                    <FontAwesome name="edit" size={24} color="black" />
+                </TouchableOpacity>
             </View>
         </View>
     )
@@ -74,6 +81,9 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
         color: 'white', 
         fontSize: 12,
     },
-
+    edit: {
+        paddingRight: 5,
+        paddingTop: 5
+    }
 
 })
