@@ -21,7 +21,7 @@ import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { RootTabScreenProps } from "../navigation/types";
 
 // export const EditRide = ({ navigation }: RootTabScreenProps<"EditRide">) => {
-export default function EditRide() {
+export const EditRide = () => {
   const today = new Date();
   const startDate = getFormatedDate(
     new Date(today.setDate(today.getDate() + 1)),

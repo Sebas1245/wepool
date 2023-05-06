@@ -91,8 +91,8 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
         flex: 1,
         width: '100%',
         alignItems: 'flex-start',
-        marginTop: 25,
-        marginHorizontal: 25,
+        paddingTop: 25,
+        paddingHorizontal: 25,
     },
     headerContainer: {
         flex: 1,      

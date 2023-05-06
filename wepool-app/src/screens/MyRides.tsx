@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { HeaderBar } from "../components/HeaderBar";
-import { StyleSheet, View, ScrollView, Text } from "react-native";
+import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
 import { RootTabScreenProps } from "../navigation/types";
 import { Header } from "../components/Header";
 import { Oops } from "../components/Oops";
 import { RideCard } from "../components/RideCard";
 import { useQuery } from "@apollo/client";
+import { Button } from "../components/Button";
 
 // queries
 import GetOpenRides from "../queries/GET/RideQueries";
@@ -47,7 +48,15 @@ export const MyRides = ({
         <HeaderBar/>
       </View>
       <View style={styles.contentContainer}>
-        <Header text="My Rides" />
+        <View style={{flex: 1, flexDirection: "row", alignItems: 'center'}}>
+            <Header text="My Rides" />
+            <View style= {{flex: 2}}></View>
+            <Button 
+                text="+ Create Ride" 
+                style={[styles.button, {backgroundColor: 'green'}]} 
+                textStyle ={styles.buttonText}
+                onPress={() => navigation.navigate("CreateNewRide")}/>
+        </View>
         <View style={styles.cardsContainer}>
         {openRides ? (
               <ScrollView>
@@ -99,4 +108,17 @@ const styles = StyleSheet.create({
     height: 150,
     marginVertical: 10,
   },
+  button: {
+    flex: 1,
+    // width: 45,
+    height: '50%',
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 15,
+    margin: 5,
+    },
+  buttonText: {
+        color: 'white', 
+        fontSize: 18,
+    },
 });
