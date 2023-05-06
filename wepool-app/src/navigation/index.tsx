@@ -29,7 +29,6 @@ import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
 import { SelectProfile } from '../screens/SelectProfile';
 import { RideDisplay } from '../screens/RideDisplay';
 import { SearchRide } from '../screens/SearchRide';
-import RideDetails from '../screens/RideDetails';
 import CreateNewRide from '../screens/CreateNewRide';
 import EditRide from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
@@ -59,6 +58,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator initialRouteName="StartScreen">
+      {/* START SCREENS */}
       <Stack.Screen
         name="StartScreen"
         component={StartScreen}
@@ -79,11 +79,13 @@ function RootNavigator() {
         component={SelectProfile}
         options={{ headerShown: false }}
       />
+      {/* MAIN TAB NAVIGATOR SCREEN */}
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      {/* SECONDARY SCREENS INSIDE TAB FUNCTIONALITIES */}
       <Stack.Screen
         name="MatchedDrivers"
         component={MatchedDrivers}
@@ -93,7 +95,6 @@ function RootNavigator() {
         name="EditRide" 
         component={EditRide} 
         options={{headerShown: false}} />
-      {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
     </Stack.Navigator>
   );
 }

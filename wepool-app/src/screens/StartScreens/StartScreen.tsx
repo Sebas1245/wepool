@@ -43,8 +43,8 @@ export const StartScreen = ({
       <Logo />
       <Header text="Welcome!"></Header>
       {/* Comment the following line to deactivate login */}
-      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => promptAsync()}>
-      {/* <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('SelectProfile')}> */}
+      {/* <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => promptAsync()}> */}
+      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('SelectProfile')}>
           <Image
             source={require("../../assets/img/google_logo.png")}
             style={styles.buttonImageIconStyle}

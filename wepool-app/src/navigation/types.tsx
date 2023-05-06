@@ -20,12 +20,9 @@ export type RootStackParamList = {
   
   
   export type RootTabParamList = {
-    Home: undefined;
-    RideDetails: undefined;
     RideDisplay: undefined;
     CreateRide: undefined;
     SearchRide: undefined;
-    MyRides: undefined;
     Profile: undefined;
 };
 
