@@ -11,6 +11,7 @@ export type RootStackParamList = {
     SignUpScreen: undefined;
     SelectProfile: undefined;
     MatchedDrivers: undefined;
+    EditRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };
   

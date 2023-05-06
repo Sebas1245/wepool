@@ -33,6 +33,7 @@ const linking: LinkingOptions<RootStackParamList> = {
           RideDisplay: {
             screens: {
               RideDisplay: 'RideDisplay',
+              EditRide: 'EditRide',
             },
           },
           SearchRide: {
