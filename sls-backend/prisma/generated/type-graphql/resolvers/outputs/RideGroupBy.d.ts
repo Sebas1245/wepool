@@ -9,6 +9,7 @@ export declare class RideGroupBy {
     availableSeats: number;
     status: "OPEN" | "CLOSED";
     startsAt: "DRIVER" | "COMPANY";
+    date: Date;
     driverId: number;
     _count: RideCountAggregate | null;
     _avg: RideAvgAggregate | null;

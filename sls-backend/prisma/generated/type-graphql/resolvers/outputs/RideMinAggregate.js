@@ -38,6 +38,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], RideMinAggregate.prototype, "startsAt", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => Date, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", Date)
+], RideMinAggregate.prototype, "date", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Int, {
         nullable: true
     }),

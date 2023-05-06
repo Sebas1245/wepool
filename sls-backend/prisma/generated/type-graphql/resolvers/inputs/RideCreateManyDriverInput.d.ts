@@ -4,4 +4,5 @@ export declare class RideCreateManyDriverInput {
     availableSeats: number;
     status: "OPEN" | "CLOSED";
     startsAt: "DRIVER" | "COMPANY";
+    date: Date;
 }

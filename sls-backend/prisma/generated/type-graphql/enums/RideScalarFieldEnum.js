@@ -10,6 +10,7 @@ var RideScalarFieldEnum;
     RideScalarFieldEnum["availableSeats"] = "availableSeats";
     RideScalarFieldEnum["status"] = "status";
     RideScalarFieldEnum["startsAt"] = "startsAt";
+    RideScalarFieldEnum["date"] = "date";
     RideScalarFieldEnum["driverId"] = "driverId";
 })(RideScalarFieldEnum = exports.RideScalarFieldEnum || (exports.RideScalarFieldEnum = {}));
 TypeGraphQL.registerEnumType(RideScalarFieldEnum, {

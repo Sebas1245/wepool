@@ -33,6 +33,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], RideCreateWithoutDriverInput.prototype, "startsAt", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => Date, {
+        nullable: false
+    }),
+    tslib_1.__metadata("design:type", Date)
+], RideCreateWithoutDriverInput.prototype, "date", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => RidePassengersCreateNestedManyWithoutRideInput_1.RidePassengersCreateNestedManyWithoutRideInput, {
         nullable: true
     }),

@@ -75,6 +75,7 @@ model Ride {
   availableSeats Int
   status RideStatus
   startsAt StartingPoint
+  date DateTime
   // association
   driver User @relation(fields: [driverId], references: [id])
   driverId Int

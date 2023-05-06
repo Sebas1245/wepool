@@ -1,3 +1,4 @@
+import { DateTimeWithAggregatesFilter } from "../inputs/DateTimeWithAggregatesFilter";
 import { EnumRideStatusWithAggregatesFilter } from "../inputs/EnumRideStatusWithAggregatesFilter";
 import { EnumStartingPointWithAggregatesFilter } from "../inputs/EnumStartingPointWithAggregatesFilter";
 import { FloatWithAggregatesFilter } from "../inputs/FloatWithAggregatesFilter";
@@ -11,5 +12,6 @@ export declare class RideScalarWhereWithAggregatesInput {
     availableSeats?: IntWithAggregatesFilter | undefined;
     status?: EnumRideStatusWithAggregatesFilter | undefined;
     startsAt?: EnumStartingPointWithAggregatesFilter | undefined;
+    date?: DateTimeWithAggregatesFilter | undefined;
     driverId?: IntWithAggregatesFilter | undefined;
 }

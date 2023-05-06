@@ -5,6 +5,7 @@ export declare class RideCreateInput {
     availableSeats: number;
     status: "OPEN" | "CLOSED";
     startsAt: "DRIVER" | "COMPANY";
+    date: Date;
     driver: UserCreateNestedOneWithoutDriverRidesInput;
     passengers?: RidePassengersCreateNestedManyWithoutRideInput | undefined;
 }

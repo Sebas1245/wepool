@@ -4,6 +4,7 @@ export declare class RideCountAggregate {
     availableSeats: number;
     status: number;
     startsAt: number;
+    date: number;
     driverId: number;
     _all: number;
 }

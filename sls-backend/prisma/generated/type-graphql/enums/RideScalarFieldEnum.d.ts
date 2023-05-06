@@ -4,5 +4,6 @@ export declare enum RideScalarFieldEnum {
     availableSeats = "availableSeats",
     status = "status",
     startsAt = "startsAt",
+    date = "date",
     driverId = "driverId"
 }

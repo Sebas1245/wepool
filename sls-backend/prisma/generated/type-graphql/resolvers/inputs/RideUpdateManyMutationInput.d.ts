@@ -1,3 +1,4 @@
+import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
 import { EnumRideStatusFieldUpdateOperationsInput } from "../inputs/EnumRideStatusFieldUpdateOperationsInput";
 import { EnumStartingPointFieldUpdateOperationsInput } from "../inputs/EnumStartingPointFieldUpdateOperationsInput";
 import { FloatFieldUpdateOperationsInput } from "../inputs/FloatFieldUpdateOperationsInput";
@@ -7,4 +8,5 @@ export declare class RideUpdateManyMutationInput {
     availableSeats?: IntFieldUpdateOperationsInput | undefined;
     status?: EnumRideStatusFieldUpdateOperationsInput | undefined;
     startsAt?: EnumStartingPointFieldUpdateOperationsInput | undefined;
+    date?: DateTimeFieldUpdateOperationsInput | undefined;
 }

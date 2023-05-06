@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RideScalarWhereWithAggregatesInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
+const DateTimeWithAggregatesFilter_1 = require("../inputs/DateTimeWithAggregatesFilter");
 const EnumRideStatusWithAggregatesFilter_1 = require("../inputs/EnumRideStatusWithAggregatesFilter");
 const EnumStartingPointWithAggregatesFilter_1 = require("../inputs/EnumStartingPointWithAggregatesFilter");
 const FloatWithAggregatesFilter_1 = require("../inputs/FloatWithAggregatesFilter");
@@ -58,6 +59,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", EnumStartingPointWithAggregatesFilter_1.EnumStartingPointWithAggregatesFilter)
 ], RideScalarWhereWithAggregatesInput.prototype, "startsAt", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => DateTimeWithAggregatesFilter_1.DateTimeWithAggregatesFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", DateTimeWithAggregatesFilter_1.DateTimeWithAggregatesFilter)
+], RideScalarWhereWithAggregatesInput.prototype, "date", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => IntWithAggregatesFilter_1.IntWithAggregatesFilter, {
         nullable: true
