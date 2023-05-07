@@ -2,7 +2,8 @@ import { createContext, useState } from "react";
 
 export type AuthenticatedUser = {
   id: string;
-  name: string;
+  fname: string;
+  lname: string;
   email: string;
   accessToken: string | null;
 };
