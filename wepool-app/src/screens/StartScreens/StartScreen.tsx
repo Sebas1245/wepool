@@ -7,13 +7,18 @@ import { Button, ImageButton } from "../../components/Button";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { RootStackScreenProps } from "../../navigation/types";
 import { webClientId, iosClientId, androidClientId } from "../../../clientIds";
-import { User } from "../../AuthContext";
+import { AuthContext, AuthenticatedUser } from "../../AuthContext";
 
 export const StartScreen = ({
   navigation,
-}: RootStackScreenProps<"StartScreen">) => {
+  setAuthenticatedUser,
+}: RootStackScreenProps<"StartScreen"> & {
+  setAuthenticatedUser: React.Dispatch<
+    React.SetStateAction<AuthenticatedUser | null>
+  >;
+}) => {
+  const context = useContext(AuthContext);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [user, setUser] = useState<User | null>(null);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: webClientId,
     iosClientId,
@@ -22,8 +27,10 @@ export const StartScreen = ({
   useEffect(() => {
     if (response?.type === "success") {
       setAccessToken(response?.authentication?.accessToken ?? "");
-      accessToken && fetchUserInformation();
-      navigation.navigate('SelectProfile');
+      accessToken &&
+        fetchUserInformation()
+          .then(() => navigation.navigate("SelectProfile"))
+          .catch((err: any) => console.log(err));
     }
   }, [response, accessToken]);
   const fetchUserInformation = async () => {
@@ -34,25 +41,38 @@ export const StartScreen = ({
     });
     const userInfo = await response.json();
     // TODO: Add this user info to context
-    const authenticatedUser: User = { name: userInfo.name, email: userInfo.email };
-    setUser(authenticatedUser);
+    const authenticatedUser: AuthenticatedUser = {
+      id: userInfo.id,
+      name: userInfo.name,
+      email: userInfo.email,
+      accessToken
+    };
+    console.log(authenticatedUser);
+    context?.setAuthenticatedUser(authenticatedUser)
   };
   const buttonImage = () => (
-    <Image source={require("../../assets/img/google_logo.png")} style={styles.image} />
+    <Image
+      source={require("../../assets/img/google_logo.png")}
+      style={styles.image}
+    />
   );
   return (
     <View style={styles.container}>
       <Logo />
       <Header text="Welcome!"></Header>
       {/* Comment the following line to deactivate login */}
-      <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => promptAsync()}>
-      {/* <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('SelectProfile')}> */}
-          <Image
-            source={require("../../assets/img/google_logo.png")}
-            style={styles.buttonImageIconStyle}
-          />
-          <View style={styles.buttonIconSeparatorStyle} />
-          <Text style={styles.buttonTextStyle}>Login Using Google</Text>
+      <TouchableOpacity
+        style={styles.buttonGPlusStyle}
+        activeOpacity={0.5}
+        onPress={() => promptAsync()}
+      >
+        {/* <TouchableOpacity style={styles.buttonGPlusStyle} activeOpacity={0.5} onPress={() => navigation.navigate('SelectProfile')}> */}
+        <Image
+          source={require("../../assets/img/google_logo.png")}
+          style={styles.buttonImageIconStyle}
+        />
+        <View style={styles.buttonIconSeparatorStyle} />
+        <Text style={styles.buttonTextStyle}>Login Using Google</Text>
       </TouchableOpacity>
     </View>
   );
@@ -70,11 +90,11 @@ const styles = StyleSheet.create({
     width: 50,
   },
   buttonGPlusStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#4285F4',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#4285F4",
     borderWidth: 0.5,
-    borderColor: '#fff',
+    borderColor: "#fff",
     height: 40,
     borderRadius: 5,
     margin: 5,
@@ -85,15 +105,15 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 35,
     width: 35,
-    resizeMode: 'stretch',
+    resizeMode: "stretch",
   },
   buttonTextStyle: {
-    color: '#fff',
+    color: "#fff",
     marginBottom: 4,
     marginLeft: 10,
   },
   buttonIconSeparatorStyle: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     width: 1,
     height: 40,
   },

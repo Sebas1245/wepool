@@ -1,14 +1,17 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 
-export type User = {
+export type AuthenticatedUser = {
+  id: string;
   name: string;
   email: string;
+  accessToken: string | null;
 };
 
 type AuthContextType = {
-  user: User | null;
+  authenticatedUser: AuthenticatedUser | null;
+  setAuthenticatedUser: React.Dispatch<
+    React.SetStateAction<AuthenticatedUser | null>
+  >;
 };
 
-export const AuthContext = createContext<AuthContextType>({
-  user: null,
-});
+export const AuthContext = createContext<AuthContextType | null>(null);

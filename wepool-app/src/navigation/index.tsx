@@ -34,7 +34,7 @@ import CreateNewRide from '../screens/CreateNewRide';
 import EditRide from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
 import { Profile } from '../screens/Profile';
-import { AuthContext } from "../AuthContext";
+import { AuthContext, AuthenticatedUser } from "../AuthContext";
 
 export default function Navigation({
   colorScheme,
@@ -58,9 +58,9 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
-  const [user, setUser] = React.useState(null);
+  const [authenticatedUser, setAuthenticatedUser] = React.useState<AuthenticatedUser | null>(null);
   return (
-    <AuthContext.Provider value={{ user }}>
+    <AuthContext.Provider value={{ authenticatedUser, setAuthenticatedUser }}>
       <Stack.Navigator initialRouteName="StartScreen">
         <Stack.Screen
           name="StartScreen"
