@@ -9,6 +9,7 @@ export declare class UserGroupBy {
     updatedAt: Date;
     fname: string;
     lname: string;
+    email: string;
     latitude: number | null;
     longitude: number | null;
     street: string | null;

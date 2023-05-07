@@ -36,6 +36,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", String)
 ], UserMinAggregate.prototype, "lname", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => String, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", String)
+], UserMinAggregate.prototype, "email", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => TypeGraphQL.Float, {
         nullable: true
     }),

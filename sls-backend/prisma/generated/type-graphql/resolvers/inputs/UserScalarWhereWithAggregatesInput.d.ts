@@ -13,6 +13,7 @@ export declare class UserScalarWhereWithAggregatesInput {
     updatedAt?: DateTimeWithAggregatesFilter | undefined;
     fname?: StringWithAggregatesFilter | undefined;
     lname?: StringWithAggregatesFilter | undefined;
+    email?: StringWithAggregatesFilter | undefined;
     latitude?: FloatNullableWithAggregatesFilter | undefined;
     longitude?: FloatNullableWithAggregatesFilter | undefined;
     street?: StringNullableWithAggregatesFilter | undefined;

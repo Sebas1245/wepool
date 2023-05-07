@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { StyleSheet, View, Modal, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 import { useThemeColors } from "../hooks/useThemeColors";
@@ -11,9 +11,11 @@ import { Divider } from '@rneui/themed';
 
 // queries
 import GetUser from '../queries/GET/UserQueries'
+import { AuthContext } from '../AuthContext';
 
 export const Profile = () => {
-
+    const authContext = useContext(AuthContext);
+    console.log('authContext -> ', authContext)
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
 

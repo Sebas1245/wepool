@@ -9,6 +9,7 @@ export declare class User {
     updatedAt: Date;
     fname: string;
     lname: string;
+    email: string;
     latitude?: number | null;
     longitude?: number | null;
     street?: string | null;
