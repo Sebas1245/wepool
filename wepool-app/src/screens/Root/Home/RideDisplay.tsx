@@ -1,13 +1,16 @@
+// Packages
 import { useState, useEffect } from "react";
-import { HeaderBar } from "../../../components/HeaderBar";
+import { useQuery } from "@apollo/client";
 import { StyleSheet, View, ScrollView, Text } from "react-native";
+// Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
+// Components
+import { HeaderBar } from "../../../components/HeaderBar";
 import { Header } from "../../../components/Header";
 import { Oops } from "../../../components/Oops";
-import { RideCard } from "../../../components/RideCard";
-import { useQuery } from "@apollo/client";
-
-// queries
+import { DriverCard } from "../../../components/DriverCard";
+import { RideDetailsModal } from "../../../components/RideDetailsModal";
+// Queries
 import GetOpenRides from "../../../queries/GET/RideQueries";
 
 export const RideDisplay = ({
@@ -16,9 +19,23 @@ export const RideDisplay = ({
   /**
    * TODO:
    *  - A varible to know user type will be needed
-   *  - Ride variable for date and start ride hour
+   *  - Apply 'Star' ratings
+   *  - Variables missing: date, time, money, notes
+   *  - This page is set to get the rides of context User using the app
    */
 
+  // Open and close ride detail modal
+  const [openDetails, setOpenDetails] = useState(false);
+  const [cardId, setCardId] = useState(-1);
+  
+  function handleOpenDetails(){
+      setOpenDetails(!openDetails)
+  }
+  function handleCardId(id: number){
+      setCardId(id)
+  }
+
+  // Getting query data
   const { loading, error, data } = useQuery(GetOpenRides);
 
   const [openRides, setOpenRides] = useState<Ride[]>();
@@ -44,28 +61,32 @@ export const RideDisplay = ({
       </View>
       <View style={styles.contentContainer}>
         <Header text="Current Rides" />
-        <View style={styles.cardsContainer}>
-            {/* {openRides ? (
-              <ScrollView>
-                  {openRides.map((ride) => {
-                    return (
-                      <View key={ride.id} style={styles.card}>
-                      <RideCard
-                          date="20 Apr"
-                          time="08:00"
-                          start_loc={ride.driver?.street}
-                          final_loc={ride.driver?.company?.street}
-                          driverName={ride.driver?.fname}
-                          status={ride.status}
-                          handleOnPressEdit={handleOnPressEdit}
-                      />
-                      </View>
-                    );
-                  })}
-              </ScrollView>
+        <View style = {styles.cardsContainer}>
+            {openRides ? (
+                <ScrollView>
+                    {openRides.map((ride) => 
+                        (
+                          <View key={ride.id} style = {styles.card}>
+                            <DriverCard 
+                                date='20 Apr' 
+                                time='08:00' 
+                                ride={ride} 
+                                handleOpenDetails = {handleOpenDetails} 
+                                handleCardId={handleCardId} 
+                                cardId={ride.id}
+                                joined = {true}
+                                />
+                          </View>
+                        )
+                    )}
+                </ScrollView>
             ) : 
-            <Oops/>
-            } */}
+            <Oops/> 
+            }
+            {openRides ? (
+                <RideDetailsModal openDetails = {openDetails} handleOpenDetails = {handleOpenDetails} rides={openRides} rideId={cardId}/>)
+                : null
+            }
         </View>
       </View>
     </View>

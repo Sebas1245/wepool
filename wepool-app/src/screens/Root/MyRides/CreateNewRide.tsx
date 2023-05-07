@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Modal,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -16,8 +8,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
-import { BackButton } from "../../../components/BackButton";
+// Navigation
 import { RootStackScreenProps } from "../../../navigation/types";
+// Components
+import { BackButton } from "../../../components/BackButton";
 
 export const CreateNewRide = ({
   navigation,
@@ -66,10 +60,7 @@ export const CreateNewRide = ({
     setOpenTime(!openTime);
   }
 
-  // const onPressRide = () =>
-
   // Ride Form Variables
-
   const [from, setFrom] = useState<string | undefined>();
   const [to, setTo] = useState<string | undefined>();
   const [money, setMoney] = useState<string | undefined>();

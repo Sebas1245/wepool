@@ -1,9 +1,9 @@
+// Packages
 import { StyleSheet, View, Text, TouchableOpacity, Modal, TextInput } from 'react-native'
-import {Button} from "./Button"
-import { useThemeColors } from "../hooks/useThemeColors";
-import { useState, useEffect } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { Divider } from '@rneui/themed';
+// Components
+import { useThemeColors } from "../hooks/useThemeColors";
 
 type Props = {
     openDetails: boolean,
@@ -16,17 +16,10 @@ export const RideDetailsModal = ({openDetails, handleOpenDetails, rides, rideId}
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
-    
-    // const [selectedRide, setSelectedRide] = useState<Ride>();
 
-    // useEffect(() => {
-    //     setSelectedRide(rides.find(x => {
-    //         return x.id === rideId;
-    //     }));
-    //   });
-
-    const selectedRide = rides.find(x => {
-        return x.id === rideId 
+    // Find the selected ride acording to the ride id
+    const selectedRide = rides.find(ride => {
+        return ride.id === rideId 
     })
 
     if (!selectedRide) console.log(rides, rideId)

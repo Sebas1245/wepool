@@ -1,32 +1,22 @@
+// Packages
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Alert,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, Image, Modal, Alert } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { BackButton } from "../../../components/BackButton";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
+// Navigation
 import { RootStackScreenProps } from "../../../navigation/types";
+// Components
 import { Oops } from "../../../components/Oops";
+import { BackButton } from "../../../components/BackButton";
 
-type Props = {
-  rides: Ride[],
-  cardId : number
-}
 export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> ) => {
-  const {rides, cardId} = route.params
+  const {rides, cardId} = route.params  // Getting the props
 
   const today = new Date();
   const startDate = getFormatedDate(
@@ -38,7 +28,7 @@ export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> 
   const [date, setDate] = useState("DATE"); //date
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
-  const [time, setTime] = useState("TIME"); //date
+  const [time, setTime] = useState("TIME"); //time
 
   const confirmDialog = () => {
     return Alert.alert(
@@ -91,10 +81,7 @@ export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> 
     setOpenTime(!openTime);
   }
 
-  // const onPressRide = () =>
-
   // Ride Form Variables
-
   const [from, setFrom] = useState<string | undefined>();
   const [to, setTo] = useState<string | undefined>();
   const [money, setMoney] = useState<string | undefined>();
@@ -104,6 +91,8 @@ export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> 
   const [licensePlate, setLicensePlate] = useState<string | undefined>();
   const [extraNotes, setExtraNotes] = useState<string | undefined>();
 
+  // Find the selected ride acording to the ride id. 
+  // Selected ride is Ride[] or undefined because openRides from MyRides doesnt have initial value
   const selectedRide = rides ? rides.find(ride => {
     return ride.id === cardId 
   }) : undefined
@@ -114,16 +103,290 @@ export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> 
     const final_loc = (selectedRide.startsAt.toString() === "DRIVER" ? driver.company.street : driver.street)
     return (
       <View style={styles.container}>
-        <View style={styles.topElements}>
+        <View style = {styles.backButton}>
           <BackButton onPress={() => navigation.goBack()} />
-          {/* <Ionicons name="chevron-back" size={24} color="black" /> */}
-          <Text style={styles.title}>EDIT RIDE</Text>
-          <TouchableOpacity style={styles.delete} onPress={() => confirmDialog()}>
-            <MaterialIcons name="delete-outline" size={24} color="black" />
-          </TouchableOpacity>
         </View>
-        <View style={styles.background}>
-          <View style={styles.doubleInput}>
+        <View style = {styles.contentContainer}>
+          <View style={styles.topElements}>
+            <Text style={styles.title}>EDIT RIDE</Text>
+            <TouchableOpacity style={styles.delete} onPress={() => confirmDialog()}>
+              <MaterialIcons name="delete-outline" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.background}>
+            <View style={styles.doubleInput}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FontAwesome name="calendar-o" size={40} color="black" />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TouchableOpacity onPress={handleOnPressDate}>
+                    <Text style={styles.text}>{date}</Text>
+                  </TouchableOpacity>
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={openDate}
+                  >
+                    <View style={styles.centeredView}>
+                      <View style={styles.modalView}>
+                        <DatePicker
+                          mode="calendar"
+                          minimumDate={startDate}
+                          selected="date"
+                          onDateChange={handleChangeDate}
+                        />
+                        <TouchableOpacity onPress={handleOnPressDate}>
+                          <Text>CLOSE</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </Modal>
+                </View>
+              </View>
+              <Divider orientation="vertical" />
+              <View
+                style={{
+                  flexDirection: "row",
+                  flex: 1,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <FontAwesome name="clock-o" size={40} color="black" />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TouchableOpacity onPress={handleOnPressTime}>
+                    <Text style={styles.text}>{time}</Text>
+                  </TouchableOpacity>
+                  <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={openTime}
+                  >
+                    <View style={styles.centeredView}>
+                      <View style={styles.modalView}>
+                        <DatePicker
+                          mode="time"
+                          selected="time"
+                          onTimeChange={handleChangeTime}
+                        />
+                        <TouchableOpacity onPress={handleOnPressTime}>
+                          <Text>CLOSE</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </Modal>
+                </View>
+              </View>
+            </View>
+    
+            <Divider></Divider>
+    
+            <View style={{ flex: 2, flexDirection: "row" }}>
+              <View
+                style={{
+                  flex: 1,
+                  alignSelf: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Ionicons name="location-outline" size={80} color="black" />
+              </View>
+              <Divider orientation="vertical" />
+              <View style={{ flex: 2 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "flex-start",
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    value={start_loc}
+                    placeholder="FROM"
+                    returnKeyType="done"
+                    onChangeText={(fromText) => setFrom(fromText)}
+                  />
+                </View>
+                <Divider></Divider>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "flex-start",
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    value={final_loc}
+                    placeholder="TO"
+                    returnKeyType="done"
+                    onChangeText={(toText) => setTo(toText)}
+                  />
+                </View>
+              </View>
+            </View>
+    
+            <Divider></Divider>
+    
+            <View style={styles.doubleInput}>
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MaterialIcons name="attach-money" size={40} color="black" />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    placeholder="MONEY"
+                    returnKeyType="done"
+                    keyboardType="number-pad"
+                    onChangeText={(moneyText) => setMoney(moneyText)}
+                  />
+                </View>
+              </View>
+              <Divider orientation="vertical" />
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="seat-passenger"
+                    size={40}
+                    color="black"
+                  />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    justifyContent: "center",
+                    marginLeft: 10,
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    placeholder="SEATS"
+                    value= {driver.car ? driver.car.capacity.toString() : undefined}
+                    returnKeyType="done"
+                    keyboardType="number-pad"
+                    onChangeText={(seatsText) => setSeats(seatsText)}
+                  />
+                </View>
+              </View>
+            </View>
+    
+            <Divider></Divider>
+    
+            <View style={styles.doubleInput}>
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Ionicons name="car" size={40} color="black" />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    marginLeft: 10,
+                    justifyContent: "center",
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    placeholder="MODEL"
+                    value={driver.car ? driver.car.model.toString() : undefined}
+                    returnKeyType="done"
+                    onChangeText={(modelText) => setModel(modelText)}
+                  />
+                </View>
+              </View>
+              <Divider orientation="vertical" />
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Ionicons name="color-palette-sharp" size={40} color="black" />
+                </View>
+                <View
+                  style={{
+                    flex: 3,
+                    marginLeft: 10,
+                    justifyContent: "center",
+                  }}
+                >
+                  <TextInput
+                    style={styles.text}
+                    placeholder="COLOR"
+                    value={driver.car ? driver.car.color.toString() : undefined}
+                    returnKeyType="done"
+                    onChangeText={(colorText) => setColor(colorText)}
+                  />
+                </View>
+              </View>
+            </View>
+    
+            <Divider></Divider>
+    
             <View
               style={{
                 flexDirection: "row",
@@ -132,329 +395,58 @@ export const EditRide = ({route, navigation }: RootStackScreenProps<"EditRide"> 
                 justifyContent: "center",
               }}
             >
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesome name="calendar-o" size={40} color="black" />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TouchableOpacity onPress={handleOnPressDate}>
-                  <Text style={styles.text}>{date}</Text>
-                </TouchableOpacity>
-                <Modal
-                  animationType="slide"
-                  transparent={true}
-                  visible={openDate}
-                >
-                  <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                      <DatePicker
-                        mode="calendar"
-                        minimumDate={startDate}
-                        selected="date"
-                        onDateChange={handleChangeDate}
-                      />
-                      <TouchableOpacity onPress={handleOnPressDate}>
-                        <Text>CLOSE</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </Modal>
-              </View>
-            </View>
-            <Divider orientation="vertical" />
-            <View
-              style={{
-                flexDirection: "row",
-                flex: 1,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesome name="clock-o" size={40} color="black" />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TouchableOpacity onPress={handleOnPressTime}>
-                  <Text style={styles.text}>{time}</Text>
-                </TouchableOpacity>
-                <Modal
-                  animationType="slide"
-                  transparent={true}
-                  visible={openTime}
-                >
-                  <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                      <DatePicker
-                        mode="time"
-                        selected="time"
-                        onTimeChange={handleChangeTime}
-                      />
-                      <TouchableOpacity onPress={handleOnPressTime}>
-                        <Text>CLOSE</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </Modal>
-              </View>
-            </View>
-          </View>
-  
-          <Divider></Divider>
-  
-          <View style={{ flex: 2, flexDirection: "row" }}>
-            <View
-              style={{
-                flex: 1,
-                alignSelf: "center",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Ionicons name="location-outline" size={80} color="black" />
-            </View>
-            <Divider orientation="vertical" />
-            <View style={{ flex: 2 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  value={start_loc}
-                  placeholder="FROM"
-                  returnKeyType="done"
-                  onChangeText={(fromText) => setFrom(fromText)}
+              <View style={{ flex: 1, justifyContent: "center" }}>
+                <Image
+                  style={{ width: 45, height: 45 }}
+                  source={require("../../../assets/img/license_plate.png")}
                 />
-              </View>
-              <Divider></Divider>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  value={final_loc}
-                  placeholder="TO"
-                  returnKeyType="done"
-                  onChangeText={(toText) => setTo(toText)}
-                />
-              </View>
-            </View>
-          </View>
-  
-          <Divider></Divider>
-  
-          <View style={styles.doubleInput}>
-            <View style={{ flexDirection: "row", flex: 1 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <MaterialIcons name="attach-money" size={40} color="black" />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  placeholder="MONEY"
-                  returnKeyType="done"
-                  keyboardType="number-pad"
-                  onChangeText={(moneyText) => setMoney(moneyText)}
-                />
-              </View>
-            </View>
-            <Divider orientation="vertical" />
-            <View style={{ flexDirection: "row", flex: 1 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="seat-passenger"
-                  size={40}
-                  color="black"
-                />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  placeholder="SEATS"
-                  value= {driver.car ? driver.car.capacity.toString() : undefined}
-                  returnKeyType="done"
-                  keyboardType="number-pad"
-                  onChangeText={(seatsText) => setSeats(seatsText)}
-                />
-              </View>
-            </View>
-          </View>
-  
-          <Divider></Divider>
-  
-          <View style={styles.doubleInput}>
-            <View style={{ flexDirection: "row", flex: 1 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Ionicons name="car" size={40} color="black" />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  marginLeft: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  placeholder="MODEL"
-                  value={driver.car ? driver.car.model.toString() : undefined}
-                  returnKeyType="done"
-                  onChangeText={(modelText) => setModel(modelText)}
-                />
-              </View>
-            </View>
-            <Divider orientation="vertical" />
-            <View style={{ flexDirection: "row", flex: 1 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Ionicons name="color-palette-sharp" size={40} color="black" />
-              </View>
-              <View
-                style={{
-                  flex: 3,
-                  marginLeft: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  placeholder="COLOR"
-                  value={driver.car ? driver.car.color.toString() : undefined}
-                  returnKeyType="done"
-                  onChangeText={(colorText) => setColor(colorText)}
-                />
-              </View>
-            </View>
-          </View>
-  
-          <Divider></Divider>
-  
-          <View
-            style={{
-              flexDirection: "row",
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <View style={{ flex: 1, justifyContent: "center" }}>
-              <Image
-                style={{ width: 45, height: 45 }}
-                source={require("../../../assets/img/license_plate.png")}
-              />
-            </View>
-            <View style={{ flex: 4 }}>
-              <TextInput
-                style={styles.text}
-                placeholder="LICENSE PLATE"
-                value={driver.car ? driver.car.plateNumber.toString() : undefined}
-                returnKeyType="done"
-                onChangeText={(licensePlateText) =>
-                  setLicensePlate(licensePlateText)
-                }
-              />
-            </View>
-          </View>
-  
-          <Divider></Divider>
-  
-          <View style={{ flex: 2 }}>
-            <View style={{ flexDirection: "row", flex: 1 }}>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "center",
-                }}
-              >
-                <MaterialIcons name="notes" size={40} color="black" />
               </View>
               <View style={{ flex: 4 }}>
                 <TextInput
-                  numberOfLines={4}
-                  maxLength={100}
                   style={styles.text}
+                  placeholder="LICENSE PLATE"
+                  value={driver.car ? driver.car.plateNumber.toString() : undefined}
                   returnKeyType="done"
-                  placeholder="EXTRA NOTES"
-                  onChangeText={(notesText) => setExtraNotes(notesText)}
+                  onChangeText={(licensePlateText) =>
+                    setLicensePlate(licensePlateText)
+                  }
                 />
               </View>
             </View>
+    
+            <Divider></Divider>
+    
+            <View style={{ flex: 2 }}>
+              <View style={{ flexDirection: "row", flex: 1 }}>
+                <View
+                  style={{
+                    flex: 1,
+                    alignItems: "center",
+                  }}
+                >
+                  <MaterialIcons name="notes" size={40} color="black" />
+                </View>
+                <View style={{ flex: 4 }}>
+                  <TextInput
+                    numberOfLines={4}
+                    maxLength={100}
+                    style={styles.text}
+                    returnKeyType="done"
+                    placeholder="EXTRA NOTES"
+                    onChangeText={(notesText) => setExtraNotes(notesText)}
+                  />
+                </View>
+              </View>
+            </View>
           </View>
-        </View>
-        <View style={{ width: "80%" }}>
-          <TouchableOpacity style={styles.submit}>
-            {/* onPress={onPressRide}> */}
-            <Text style={{ fontSize: 20, alignItems: "center", color: "white" }}>
-              SAVE CHANGES
-            </Text>
-          </TouchableOpacity>
+          <View style={{ width: "80%" }}>
+            <TouchableOpacity style={styles.submit}>
+              {/* onPress={onPressRide}> */}
+              <Text style={{ fontSize: 20, alignItems: "center", color: "white" }}>
+                SAVE CHANGES
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     );
@@ -473,6 +465,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+  },
+  backButton: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'flex-start',
+    paddingTop: 25,
+    paddingHorizontal: 25,
+  },
+  contentContainer:{
+    flex: 7
   },
   topElements: {
     alignItems: "center",

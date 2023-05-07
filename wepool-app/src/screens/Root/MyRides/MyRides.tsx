@@ -1,14 +1,16 @@
+// Packages
 import { useState, useEffect } from "react";
-import { HeaderBar } from "../../../components/HeaderBar";
 import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
+// Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
+// Components
+import { HeaderBar } from "../../../components/HeaderBar";
 import { Header } from "../../../components/Header";
 import { Oops } from "../../../components/Oops";
 import { RideCard } from "../../../components/RideCard";
-import { useQuery } from "@apollo/client";
 import { Button } from "../../../components/Button";
-
-// queries
+// Queries
+import { useQuery } from "@apollo/client";
 import GetOpenRides from "../../../queries/GET/RideQueries";
 
 export const MyRides = ({
@@ -21,7 +23,8 @@ export const MyRides = ({
    *  - Ride variable for money and notes
    */
   function handleOnPressEdit(id: number){
-      //Navigate to edit ride screen of the selected ride
+      // Navigate to edit ride screen of the selected ride
+      // Edit ride receives params (props) to get the data from the cards
       navigation.navigate('EditRide',
       {
         rides: openRides, 
@@ -29,6 +32,7 @@ export const MyRides = ({
       });
   }
 
+  // Getting query data
   const { loading, error, data } = useQuery(GetOpenRides);
 
   const [openRides, setOpenRides] = useState<Ride[]>();

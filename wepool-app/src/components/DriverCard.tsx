@@ -10,10 +10,11 @@ type Props = {
     ride: Ride,
     handleOpenDetails?: any,
     handleCardId?: any,
-    cardId : number
+    cardId : number,
+    joined: boolean
 }
 
-export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId}: Props) => {
+export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -44,7 +45,11 @@ export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, c
                 </View>
                 <View style = {styles.buttonContainer}>
                     <Button text="Ride Details" style={[styles.button, {backgroundColor: 'orange'}]} textStyle ={styles.buttonText} onPress={handleOnPressRideDetails}/>
-                    <Button text="Join Ride" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
+                    {joined ? (
+                        <Button text="Cancel" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
+                    ):(
+                        <Button text="Join Ride" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
+                    )}
                 </View>
             </View>
         </View>

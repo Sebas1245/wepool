@@ -1,27 +1,26 @@
+// Packages
 import { useState, useEffect } from 'react'
 import { StyleSheet, View, Modal, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+// Hooks
 import { useThemeColors } from "../../../hooks/useThemeColors";
+// Queries
 import { useQuery, gql } from '@apollo/client';
-
-/**
- * This is one of the mthfckr packages that gets in trouble with apollo. 'Divider' is not used here, but is used in CreateRide and other components:
- */
-import { Divider } from '@rneui/themed';            
-
-// queries
 import GetUser from '../../../queries/GET/UserQueries'
 
 export const Profile = () => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
-
+    /**
+     * TODO:
+     * - Update GetUser query to get the context User info
+     */
     /** 
      * When using useQuery hook you can get loading status, error info, and data
      * See more: https://www.apollographql.com/docs/react/data/queries/
     */
-
+    // Getting query data
    const { loading, error, data } = useQuery(GetUser);
    
    if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))

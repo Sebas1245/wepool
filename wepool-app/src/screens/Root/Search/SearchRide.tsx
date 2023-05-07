@@ -1,20 +1,14 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  TextInput,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  Modal,
-} from "react-native";
+import { StyleSheet, TextInput, View, Text, TouchableOpacity, Image, Modal } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getFormatedDate } from "react-native-modern-datepicker";
-import { HeaderBar } from "../../../components/HeaderBar";
+// Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
+//Components
+import { HeaderBar } from "../../../components/HeaderBar";
 
 export const SearchRide = ({
   navigation,
@@ -29,7 +23,7 @@ export const SearchRide = ({
   const [date, setDate] = useState("DATE"); //date
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
-  const [time, setTime] = useState("TIME"); //date
+  const [time, setTime] = useState("TIME"); //time
 
   function handleOnPressDate() {
     setOpenDate(!openDate);

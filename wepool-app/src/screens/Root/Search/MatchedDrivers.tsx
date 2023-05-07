@@ -21,7 +21,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
      *  - Variables missing: date, time, money, notes
      */
     
-    //open and close ride detail modal
+    // Open and close ride detail modal
     const [openDetails, setOpenDetails] = useState(false);
     const [cardId, setCardId] = useState(-1);
     
@@ -31,6 +31,8 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
     function handleCardId(id: number){
         setCardId(id)
     }
+
+    // Getting query data
     const { loading, error, data } = useQuery(GetOpenRides);
 
     const [openRides, setOpenRides] = useState<Ride[] | null>(null);
@@ -72,14 +74,16 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                                 ride={ride} 
                                                 handleOpenDetails = {handleOpenDetails} 
                                                 handleCardId={handleCardId} 
-                                                cardId={ride.id}/>
+                                                cardId={ride.id}
+                                                joined = {false}
+                                                />
                                         </View>
                                     )
                                 )}
                         </ScrollView>
                     ) : 
                     <Oops/> 
-                }
+                    }
                     {openRides ? (
                         <RideDetailsModal openDetails = {openDetails} handleOpenDetails = {handleOpenDetails} rides={openRides} rideId={cardId}/>)
                         : null
