@@ -10,7 +10,10 @@ export type RootStackParamList = {
     LoginScreen: undefined;
     SignUpScreen: undefined;
     MatchedDrivers: undefined;
-    EditRide: undefined;
+    EditRide: {
+      rides?: Ride[], 
+      cardId: number
+    };
     CreateNewRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };

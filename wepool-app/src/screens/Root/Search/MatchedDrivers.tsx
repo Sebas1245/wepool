@@ -34,6 +34,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
     const { loading, error, data } = useQuery(GetOpenRides);
 
     const [openRides, setOpenRides] = useState<Ride[] | null>(null);
+
     useEffect(() => {
       if (data && data.rides) setOpenRides(data.rides);
     }, [loading]);
@@ -65,7 +66,13 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                 {openRides.map((ride) => 
                                     (
                                         <View key={ride.id} style = {styles.card}>
-                                            <DriverCard date='20 Apr' time='08:00' ride={ride} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
+                                            <DriverCard 
+                                                date='20 Apr' 
+                                                time='08:00' 
+                                                ride={ride} 
+                                                handleOpenDetails = {handleOpenDetails} 
+                                                handleCardId={handleCardId} 
+                                                cardId={ride.id}/>
                                         </View>
                                     )
                                 )}

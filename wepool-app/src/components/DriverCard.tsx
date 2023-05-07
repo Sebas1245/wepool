@@ -23,7 +23,6 @@ export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, c
     const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
 
     function handleOnPressRideDetails(){
-        console.log(cardId)
         handleCardId(cardId)
         handleOpenDetails()
     }

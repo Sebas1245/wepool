@@ -366,7 +366,7 @@ export const CreateNewRide = ({
             <View style={{ flex: 1, justifyContent: "center" }}>
               <Image
                 style={{ width: 45, height: 45 }}
-                source={require("../assets/img/license_plate.png")}
+                source={require("../../../assets/img/license_plate.png")}
               />
             </View>
             <View style={{ flex: 4 }}>

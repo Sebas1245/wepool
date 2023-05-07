@@ -26,13 +26,13 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { StartScreen } from '../screens/StartScreens/StartScreen';
 import { LoginScreen } from '../screens/StartScreens/LoginScreen';
 import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
-import { RideDisplay } from '../screens/RideDisplay';
-import { SearchRide } from '../screens/SearchRide';
+import { RideDisplay } from "../screens/Root/Home/RideDisplay";
+import { SearchRide } from '../screens/Root/Search/SearchRide';
+import { MatchedDrivers } from '../screens/Root/Search/MatchedDrivers';
 import {CreateNewRide} from '../screens/Root/MyRides/CreateNewRide';
-import { EditRide } from '../screens/EditRide';
-import { MatchedDrivers } from '../screens/MatchedDrivers';
-import { Profile } from '../screens/Profile';
-import { MyRides } from "../screens/MyRides";
+import { EditRide } from '../screens/Root/MyRides/EditRide';
+import { MyRides } from "../screens/Root/MyRides/MyRides";
+import { Profile } from '../screens/Root/Profile/Profile';
 
 export default function Navigation({
   colorScheme,
@@ -88,12 +88,12 @@ function RootNavigator() {
       />
       <Stack.Screen 
         name="EditRide" 
-        component={EditRide} 
+        component={EditRide}
         options={{headerShown: false}} 
       />
       <Stack.Screen 
         name="CreateNewRide" 
-        component={CreateNewRide} 
+        component={CreateNewRide}
         options={{headerShown: false}} 
       />
     </Stack.Navigator>

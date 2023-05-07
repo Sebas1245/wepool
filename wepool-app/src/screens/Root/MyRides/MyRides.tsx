@@ -18,12 +18,17 @@ export const MyRides = ({
    * TODO:
    *  - A varible to know user type will be needed
    *  - Ride variable for date and start ride hour
+   *  - Ride variable for money and notes
    */
-
-  function handleOnPressEdit(){
+  function handleOnPressEdit(id: number){
       //Navigate to edit ride screen of the selected ride
-      navigation.navigate('EditRide');
+      navigation.navigate('EditRide',
+      {
+        rides: openRides, 
+        cardId: id,
+      });
   }
+
   const { loading, error, data } = useQuery(GetOpenRides);
 
   const [openRides, setOpenRides] = useState<Ride[]>();
@@ -67,6 +72,7 @@ export const MyRides = ({
                           date="20 Apr"
                           time="08:00"
                           ride={ride}
+                          cardId={ride.id}
                           handleOnPressEdit={handleOnPressEdit}
                       />
                       </View>

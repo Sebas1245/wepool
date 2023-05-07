@@ -7,13 +7,21 @@ type Props = {
     date: string, 
     time: string,
     ride: Ride,
-    handleOnPressEdit?: any
+    handleOnPressEdit?: any,
+    cardId: number
 }
 
-export const RideCard = ({date, time, ride, handleOnPressEdit}: Props) => {
+export const RideCard = ({date, time, ride, handleOnPressEdit, cardId}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
+
+    function handleLocalOnPressEdit(){
+        handleOnPressEdit(cardId)
+    }
+
+    const start_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)
+    const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
 
     return (
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
@@ -23,8 +31,8 @@ export const RideCard = ({date, time, ride, handleOnPressEdit}: Props) => {
             </View>
             <View style = {styles.dataContainer}>
                 <Text style = {{fontSize: 15}}>Driver: {`${ride.driver.fname} ${ride.driver.lname}`}</Text>
-                <Text style = {{fontSize: 15}}>From: {(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)}</Text>
-                <Text style = {{fontSize: 15}}>To: {(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)}</Text>
+                <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
+                <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                 <View style = {styles.buttonsContainer}>
                     <Button text="Close" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
                     <Button text="Riders" style={[styles.button, {backgroundColor: colors.colors.primary}]} textStyle ={styles.buttonText}/>
@@ -32,7 +40,7 @@ export const RideCard = ({date, time, ride, handleOnPressEdit}: Props) => {
                 </View>
             </View>
             <View style = {styles.edit}>
-                <TouchableOpacity onPress={handleOnPressEdit}>
+                <TouchableOpacity onPress={handleLocalOnPressEdit}>
                     <FontAwesome name="edit" size={24} color="black" />
                 </TouchableOpacity>
             </View>

@@ -19,10 +19,6 @@ export const RideDisplay = ({
    *  - Ride variable for date and start ride hour
    */
 
-  function handleOnPressEdit(){
-      //Navigate to edit ride screen of the selected ride
-      navigation.navigate('EditRide');
-  }
   const { loading, error, data } = useQuery(GetOpenRides);
 
   const [openRides, setOpenRides] = useState<Ride[]>();
