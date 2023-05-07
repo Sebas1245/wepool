@@ -34,6 +34,7 @@ import CreateNewRide from '../screens/CreateNewRide';
 import EditRide from '../screens/EditRide';
 import { MatchedDrivers } from '../screens/MatchedDrivers';
 import { Profile } from '../screens/Profile';
+import { AuthContext } from "../AuthContext";
 
 export default function Navigation({
   colorScheme,
@@ -57,44 +58,47 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const [user, setUser] = React.useState(null);
   return (
-    <Stack.Navigator initialRouteName="StartScreen">
-      <Stack.Screen
-        name="StartScreen"
-        component={StartScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="LoginScreen"
-        component={LoginScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SignUpScreen"
-        component={SignUpScreen}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="SelectProfile"
-        component={SelectProfile}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="MatchedDrivers"
-        component={MatchedDrivers}
-        options={{ headerShown: false, animationTypeForReplace: "pop" }}
-      />
-      <Stack.Screen 
-        name="EditRide" 
-        component={EditRide} 
-        options={{headerShown: false}} />
-      {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
-    </Stack.Navigator>
+    <AuthContext.Provider value={{ user }}>
+      <Stack.Navigator initialRouteName="StartScreen">
+        <Stack.Screen
+          name="StartScreen"
+          component={StartScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SignUpScreen"
+          component={SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="SelectProfile"
+          component={SelectProfile}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Root"
+          component={BottomTabNavigator}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="MatchedDrivers"
+          component={MatchedDrivers}
+          options={{ headerShown: false, animationTypeForReplace: "pop" }}
+        />
+        <Stack.Screen 
+          name="EditRide" 
+          component={EditRide} 
+          options={{headerShown: false}} />
+        {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
+      </Stack.Navigator>
+    </AuthContext.Provider>
   );
 }
 

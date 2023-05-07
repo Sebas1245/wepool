@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { Logo } from "../../components/Logo";
@@ -7,12 +7,13 @@ import { Button, ImageButton } from "../../components/Button";
 import { View, StyleSheet, Text, Image, TouchableOpacity } from "react-native";
 import { RootStackScreenProps } from "../../navigation/types";
 import { webClientId, iosClientId, androidClientId } from "../../../clientIds";
+import { User } from "../../AuthContext";
 
 export const StartScreen = ({
   navigation,
 }: RootStackScreenProps<"StartScreen">) => {
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [user, setUser] = useState<unknown>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     clientId: webClientId,
     iosClientId,
@@ -33,7 +34,8 @@ export const StartScreen = ({
     });
     const userInfo = await response.json();
     // TODO: Add this user info to context
-    setUser(userInfo);
+    const authenticatedUser: User = { name: userInfo.name, email: userInfo.email };
+    setUser(authenticatedUser);
   };
   const buttonImage = () => (
     <Image source={require("../../assets/img/google_logo.png")} style={styles.image} />
