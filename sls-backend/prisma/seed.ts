@@ -134,7 +134,7 @@ async function createRides(): Promise<void> {
       status: "OPEN",
       startsAt: "DRIVER",
       driverId: 2,
-      date: new Date("2023-05-06T18:14:24Z"),
+      date: new Date().toISOString(),
     },
     update: {},
   });
@@ -149,7 +149,7 @@ async function createRides(): Promise<void> {
       status: "OPEN",
       startsAt: "DRIVER",
       driverId: 4,
-      date: new Date("2023-05-06T18:14:24Z"),
+      date: new Date().toISOString(),
     },
     update: {},
   });
