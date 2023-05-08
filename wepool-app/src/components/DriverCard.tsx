@@ -19,6 +19,8 @@ type Props = {
   handleCardId?: any;
   cardId: number;
   joined: boolean;
+  handleAddPassenger: (rideId: number) => Promise<void>
+  handleRemovePassenger: (rideId: number) => Promise<void>
 };
 
 export const DriverCard = ({
@@ -28,10 +30,9 @@ export const DriverCard = ({
   handleCardId,
   cardId,
   joined,
+  handleAddPassenger,
+  handleRemovePassenger
 }: Props) => {
-  const context = useContext(AuthContext);
-  const [updateRideMutation, { data, loading, error }] =
-    useMutation(UPDATE_ONE_RIDE);
   const { colors } = useThemeColors();
   const backgroundColor = colors.tint;
 
@@ -49,20 +50,6 @@ export const DriverCard = ({
     handleCardId(cardId);
     handleOpenDetails();
   }
-
-  const handleAddPassengerToRide = async () => {
-    if (context && context.authenticatedUser) {
-      const mutationResult = await updateRideMutation(
-        buildUpdateRideAddPassengerVariables(
-          ride.id,
-          context?.authenticatedUser.id
-        )
-      );
-      if (mutationResult.data && mutationResult.data.updateOneRide) {
-        console.log("Added passenger to ride");
-      }
-    }
-  };
 
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }]}>
@@ -91,13 +78,14 @@ export const DriverCard = ({
               text="Cancel"
               style={[styles.button, { backgroundColor: "red" }]}
               textStyle={styles.buttonText}
+              onPress={() => handleRemovePassenger(ride.id)}
             />
           ) : (
             <Button
               text="Join Ride"
               style={[styles.button, { backgroundColor: "green" }]}
               textStyle={styles.buttonText}
-              onPress={handleAddPassengerToRide}
+              onPress={() => handleAddPassenger(ride.id)}
             />
           )}
         </View>
