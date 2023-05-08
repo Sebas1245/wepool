@@ -98,7 +98,8 @@ export const MatchedDrivers = ({
       );
       if (mutationResult.data && mutationResult.data.updateOneRide) {
         console.log("Removed passenger from ride with id " + rideId);
-        const joinedRidesAfterRemoval = joinedRidesIds.filter(joinedRideId => joinedRideId === mutationResult.data.updateOneRide.id);
+        const joinedRidesAfterRemoval = joinedRidesIds.filter(joinedRideId => joinedRideId !== mutationResult.data.updateOneRide.id);
+        console.log(joinedRidesAfterRemoval);
         setJoinedRidesIds(joinedRidesAfterRemoval)
       }
     }
