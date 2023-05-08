@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  Alert,
 } from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { BackButton } from "../components/BackButton";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
-import { RootTabScreenProps } from "../navigation/types";
+import { BackButton } from "../../../components/BackButton";
+import { RootStackScreenProps } from "../../../navigation/types";
 
-// export const EditRide = ({ navigation }: RootTabScreenProps<"EditRide">) => {
-export default function EditRide() {
+export const CreateNewRide = ({
+  navigation,
+}: RootStackScreenProps<"CreateNewRide">) => {
   const today = new Date();
   const startDate = getFormatedDate(
     new Date(today.setDate(today.getDate() + 1)),
@@ -33,25 +33,6 @@ export default function EditRide() {
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
   const [time, setTime] = useState("TIME"); //date
-
-  const confirmDialog = () => {
-    return Alert.alert(
-      "Delete Ride?",
-      "Are you sure you want to delete the current ride?",
-      [
-        {
-          text: "Yes",
-          onPress: () => {
-            //TBD: Delete the ride
-          },
-        },
-
-        {
-          text: "No",
-        },
-      ]
-    );
-  };
 
   function handleOnPressDate() {
     setOpenDate(!openDate);
@@ -85,8 +66,6 @@ export default function EditRide() {
     setOpenTime(!openTime);
   }
 
-  // const onPressRide = () =>
-
   // Ride Form Variables
 
   const [from, setFrom] = useState<string | undefined>();
@@ -100,13 +79,11 @@ export default function EditRide() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.backButton}>
+        <BackButton onPress={() => navigation.goBack()} />
+      </View>
       <View style={styles.topElements}>
-        {/* <BackButton onPress={() => navigation.goBack()} /> */}
-        <Ionicons name="chevron-back" size={24} color="black" />
-        <Text style={styles.title}>EDIT RIDE</Text>
-        <TouchableOpacity style={styles.delete} onPress={() => confirmDialog()}>
-          <MaterialIcons name="delete-outline" size={24} color="black" />
-        </TouchableOpacity>
+        <Text style={styles.title}>CREATE RIDE</Text>
       </View>
       <View style={styles.background}>
         <View style={styles.doubleInput}>
@@ -388,7 +365,7 @@ export default function EditRide() {
           <View style={{ flex: 1, justifyContent: "center" }}>
             <Image
               style={{ width: 45, height: 45 }}
-              source={require("../assets/img/license_plate.png")}
+              source={require("../../../assets/img/license_plate.png")}
             />
           </View>
           <View style={{ flex: 4 }}>
@@ -431,7 +408,9 @@ export default function EditRide() {
       <View style={{ width: "80%" }}>
         <TouchableOpacity style={styles.submit}>
           {/* onPress={onPressRide}> */}
-          <Text style={{ fontSize: 20, alignItems: "center", color: "white" }}>
+          <Text
+            style={{ fontSize: 20, alignItems: "center", color: "white" }}
+          >
             SAVE CHANGES
           </Text>
         </TouchableOpacity>
@@ -446,6 +425,16 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
+  },
+  backButton: {
+    height: 100,
+    width: "100%",
+    alignItems: "flex-start",
+    paddingTop: 5,
+    paddingHorizontal: 25,
+  },
+  contentContainer: {
+    flex: 4,
   },
   topElements: {
     alignItems: "center",

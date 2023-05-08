@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
-import {HeaderBar} from "../components/HeaderBar";
+import { HeaderBar } from '../../../components/HeaderBar';
 import { StyleSheet, View, ScrollView, Text } from 'react-native'
-import { RootTabScreenProps, RootStackScreenProps } from '../navigation/types';
-import {BackButton} from '../components/BackButton'
-import {Header} from "../components/Header";
-import { DriverCard } from '../components/DriverCard';
-import { RideDetailsModal } from '../components/RideDetailsModal';
+import { RootTabScreenProps, RootStackScreenProps } from '../../../navigation/types';
+import {BackButton} from '../../../components/BackButton'
+import {Header} from "../../../components/Header";
+import { DriverCard } from '../../../components/DriverCard';
+import { RideDetailsModal } from '../../../components/RideDetailsModal';
 import { useQuery } from "@apollo/client";
-import { Oops } from '../components/Oops';
+import { Oops } from '../../../components/Oops';
 
 // queries
-import GetOpenRides from "../queries/GET/RideQueries";
+import GetOpenRides from "../../../queries/GET/RideQueries";
 
 export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDrivers'>) => {
 
@@ -21,7 +21,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
      *  - Variables missing: date, time, money, notes
      */
     
-    //open and close ride detail modal
+    // Open and close ride detail modal
     const [openDetails, setOpenDetails] = useState(false);
     const [cardId, setCardId] = useState(-1);
     
@@ -31,9 +31,12 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
     function handleCardId(id: number){
         setCardId(id)
     }
+
+    // Getting query data
     const { loading, error, data } = useQuery(GetOpenRides);
 
     const [openRides, setOpenRides] = useState<Ride[] | null>(null);
+
     useEffect(() => {
       if (data && data.rides) setOpenRides(data.rides);
     }, [loading]);
@@ -52,7 +55,7 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
     return (
         <View style = {styles.container}>
             <View style = {styles.headerContainer}>
-                <HeaderBar user={'Test'} userType="Rider"/>
+                <HeaderBar/>
             </View>
             <View style = {styles.contentContainer}>
                 <View style = {styles.backButton}>
@@ -65,14 +68,22 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                 {openRides.map((ride) => 
                                     (
                                         <View key={ride.id} style = {styles.card}>
-                                            <DriverCard date='20 Apr' time='08:00' start_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)} final_loc={(ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street: ride.driver.street)} driverName = {`${ride.driver.fname} ${ride.driver.lname}`} status={true} handleOpenDetails = {handleOpenDetails} handleCardId={handleCardId} cardId={ride.id}/>
+                                            <DriverCard 
+                                                date='20 Apr' 
+                                                time='08:00' 
+                                                ride={ride} 
+                                                handleOpenDetails = {handleOpenDetails} 
+                                                handleCardId={handleCardId} 
+                                                cardId={ride.id}
+                                                joined = {false}
+                                                />
                                         </View>
                                     )
                                 )}
                         </ScrollView>
                     ) : 
                     <Oops/> 
-                }
+                    }
                     {openRides ? (
                         <RideDetailsModal openDetails = {openDetails} handleOpenDetails = {handleOpenDetails} rides={openRides} rideId={cardId}/>)
                         : null
@@ -91,8 +102,8 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
         flex: 1,
         width: '100%',
         alignItems: 'flex-start',
-        marginTop: 25,
-        marginHorizontal: 25,
+        paddingTop: 25,
+        paddingHorizontal: 25,
     },
     headerContainer: {
         flex: 1,      

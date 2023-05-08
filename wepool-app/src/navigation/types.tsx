@@ -9,9 +9,12 @@ export type RootStackParamList = {
     StartScreen: undefined;
     LoginScreen: undefined;
     SignUpScreen: undefined;
-    SelectProfile: undefined;
     MatchedDrivers: undefined;
-    EditRide: undefined;
+    EditRide: {
+      rides?: Ride[], 
+      cardId: number
+    };
+    CreateNewRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };
   
@@ -21,11 +24,8 @@ export type RootStackParamList = {
   
   export type RootTabParamList = {
     Home: undefined;
-    RideDetails: undefined;
-    RideDisplay: undefined;
-    CreateRide: undefined;
-    SearchRide: undefined;
     MyRides: undefined;
+    SearchRide: undefined;
     Profile: undefined;
 };
 

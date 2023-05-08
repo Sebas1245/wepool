@@ -5,19 +5,23 @@ import { FontAwesome } from '@expo/vector-icons';
 
 type Props = {
     date: string, 
-    time: string, 
-    start_loc?: string, 
-    final_loc?: string,
-    driverName?: string,
-    status: RideStatus,
-    userType?: "Rider" | "Driver",
-    handleOnPressEdit?: any
+    time: string,
+    ride: Ride,
+    handleOnPressEdit?: any,
+    cardId: number
 }
 
-export const RideCard = ({date, time, start_loc, final_loc, driverName, status, userType = 'Rider', handleOnPressEdit}: Props) => {
+export const RideCard = ({date, time, ride, handleOnPressEdit, cardId}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
+
+    function handleLocalOnPressEdit(){
+        handleOnPressEdit(cardId)
+    }
+
+    const start_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)
+    const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
 
     return (
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
@@ -26,7 +30,7 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
                 <Text style = {{fontSize: 20}}>{time}</Text>
             </View>
             <View style = {styles.dataContainer}>
-                <Text style = {{fontSize: 15}}>Driver: {driverName}</Text>
+                <Text style = {{fontSize: 15}}>Driver: {`${ride.driver.fname} ${ride.driver.lname}`}</Text>
                 <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
                 <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                 <View style = {styles.buttonsContainer}>
@@ -36,7 +40,7 @@ export const RideCard = ({date, time, start_loc, final_loc, driverName, status, 
                 </View>
             </View>
             <View style = {styles.edit}>
-                <TouchableOpacity onPress={handleOnPressEdit}>
+                <TouchableOpacity onPress={handleLocalOnPressEdit}>
                     <FontAwesome name="edit" size={24} color="black" />
                 </TouchableOpacity>
             </View>

@@ -33,7 +33,7 @@ export const SignUpScreen = ({navigation}: RootStackScreenProps<'SignUpScreen'>)
         label="Confirm Password"
         props={{'secureTextEntry': true}}
       />
-      <Button text='Sign in' onPress={() => navigation.navigate('SelectProfile')}/>
+      <Button text='Sign in' onPress={() => navigation.navigate('Root')}/>
     </View>
   )
 }

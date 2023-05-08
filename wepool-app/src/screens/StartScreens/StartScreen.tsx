@@ -104,7 +104,7 @@ export const StartScreen = ({
             checkIfUserExists(user);
           })
           .catch((err: any) => console.log(err))
-          .finally(() => navigation.navigate("SelectProfile"));
+          .finally(() => navigation.navigate("Root"));
     }
   }, [response, accessToken]);
 
