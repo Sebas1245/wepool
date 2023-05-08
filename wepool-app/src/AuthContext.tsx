@@ -1,14 +1,14 @@
 import { createContext, useState } from "react";
 
 export type AuthenticatedUser = {
-  id: string;
+  id: number;
   fname: string;
   lname: string;
   email: string;
   accessToken: string | null;
 };
 
-type AuthContextType = {
+export type AuthContextType = {
   authenticatedUser: AuthenticatedUser | null;
   setAuthenticatedUser: React.Dispatch<
     React.SetStateAction<AuthenticatedUser | null>
