@@ -13,5 +13,7 @@ export default gql`query GetUser {
         color
         brand
       }
+      phoneNumber
+      email
     }
   }`;

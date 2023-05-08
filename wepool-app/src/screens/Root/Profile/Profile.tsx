@@ -1,17 +1,14 @@
 // Packages
 import { StyleSheet, View, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
+import { Button } from '../../../components/Button';
 // Hooks
 import { useThemeColors } from "../../../hooks/useThemeColors";
 // Queries
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import GetUser from '../../../queries/GET/UserQueries'
-import { useContext } from 'react';
-import { AuthContext } from '../../../AuthContext';
 
 export const Profile = () => {
-    const authContext = useContext(AuthContext);
-    console.log('Checking authContext...', authContext?.authenticatedUser);
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
     /**
@@ -34,7 +31,6 @@ export const Profile = () => {
       </View>
     );
     };
-
     return (
         /** borderWidth: 0, when changed to 1 is used to see graphical structure */
         <View style = {[{backgroundColor: backgroundColor}, styles.container]}>
@@ -59,33 +55,54 @@ export const Profile = () => {
 
                 </View>
             </View>
-            <View style = {{flex : 2}}>
+            <View style = {{flex : 3}}>
                 <View style = {[{flex: 1}]}>
                     <View style={styles.centeredView}>
                         <View style={styles.modalView}>
-                            <View style = {{flex: 1, marginTop: 10}}>
+                            <View style = {{flex: 1, marginTop: 10, alignSelf: 'center'}}>
                                 <Text style={styles.text}> {data ? ` ${data.getUser.fname} ${data.getUser.lname}`: 'USER NAME'} </Text>
-                            </View>
-                            <View style = {{flex: 1}}>
-                                {/* //Rating stars box */}
-                            </View>
-                            <View style = {{flex: 1}}></View>
-                            <View style = {{flex: 1}}>                                
-                                <View style = {{flex: 1, flexDirection: 'row'}}>
-                                    <FontAwesome name="phone" size={40} color="black" />
-                                    <Text style={styles.text}> {data ? data.getUser.number: 'USER PHONE'} </Text>                                
+                                <View style = {{flex: 0, alignSelf: 'center', flexDirection: 'row'}}>
+                                    <Text style={styles.text}> {data.getUser.rating ?? 'N/A'} </Text>
+                                    <FontAwesome name='star' size={30} color={'black'} />
                                 </View>
                             </View>
-                            <View style = {{flex: 1}}>
+                            <View style = {{flex: 0.5}}>                                
                                 <View style = {{flex: 1, flexDirection: 'row'}}>
-                                    <FontAwesome name="car" size={40} color="black" />
+                                    <FontAwesome name="phone" size={40} color="black" />
+                                    <Text style={styles.text}> {data.getUser.phoneNumber ??  'N/A'} </Text>                                
+                                </View>
+                            </View>
+                            <View style = {{flex: 0.5}}>                                
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="envelope" size={40} color="black" style={styles.iconStyle} />
+                                    <Text style={styles.text}> {data.getUser.email ??  'N/A'} </Text>                                
+                                </View>
+                            </View>
+                            <View style = {{flex: 0.5}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="car" size={40} color="black" style={styles.iconStyle} />
                                     <Text style={styles.text}> {data ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`:'CAR'} </Text>                                
                                 </View>                                
                             </View>
-                            <View style = {{flex: 1}}>
-                                {/* // Password box */}
+                            <View style = {{flex: 0.5}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="paint-brush" size={40} color="black" style={styles.iconStyle} />
+                                    <Text style={styles.text}> {data ? `${data.getUser.car.color}`:'N/A'} </Text>                                
+                                </View>                                
                             </View>
-                            <View style = {{flexDirection:'row', justifyContent: 'flex-start', marginBottom: 10}}>
+                            <View style = {{flex: 0.5}}>
+                                <View style = {{flex: 1, flexDirection: 'row'}}>
+                                    <FontAwesome name="drivers-license" size={40} color="black" style={styles.iconStyle} />
+                                    <Text style={styles.text}> {data ? `${data.getUser.car.plateNumber}`:'N/A'} </Text>                                
+                                </View>                                
+                            </View>
+                            <View style = {{flex: 1, flexGrow: 1, flexDirection:'row', marginBottom: 40, paddingVertical: 15}}>
+                                <Button
+                                text="Edit Profile"
+                                style={[styles.button, { backgroundColor }]}
+                                textStyle={styles.buttonText}
+                                onPress={() => console.log('EditInfo')}
+                                />
                             </View>
                         </View>
                     </View>
@@ -126,9 +143,24 @@ export const Profile = () => {
         width: "100%",
         height: '100%',
         paddingHorizontal: 35,
-        alignItems: "center",
+        alignItems: "flex-start",
     },
     text: {
         fontSize: 25,
-    }, 
+    },
+    iconStyle: {
+        marginRight: 5
+    },
+    button: {
+        flex: 1,
+        alignSelf: "center",
+        justifyContent: "center",
+        borderRadius: 15,
+        paddingVertical: 10
+      },
+    buttonText: {
+    color: "white",
+    fontSize: 18,
+    alignSelf: "center"
+    },
 })
