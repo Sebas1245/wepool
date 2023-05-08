@@ -68,8 +68,7 @@ export const RideDisplay = ({
                         (
                           <View key={ride.id} style = {styles.card}>
                             <DriverCard 
-                                date='20 Apr' 
-                                time='08:00' 
+                                date={ride.date ?? ''}
                                 ride={ride} 
                                 handleOpenDetails = {handleOpenDetails} 
                                 handleCardId={handleCardId} 
