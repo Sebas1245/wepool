@@ -7,6 +7,7 @@ export declare class UserCreateInput {
     updatedAt?: Date | undefined;
     fname: string;
     lname: string;
+    email: string;
     latitude?: number | undefined;
     longitude?: number | undefined;
     street?: string | undefined;

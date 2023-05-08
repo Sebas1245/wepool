@@ -11,6 +11,7 @@ export declare class UserUpdateWithoutCompanyInput {
     updatedAt?: DateTimeFieldUpdateOperationsInput | undefined;
     fname?: StringFieldUpdateOperationsInput | undefined;
     lname?: StringFieldUpdateOperationsInput | undefined;
+    email?: StringFieldUpdateOperationsInput | undefined;
     latitude?: NullableFloatFieldUpdateOperationsInput | undefined;
     longitude?: NullableFloatFieldUpdateOperationsInput | undefined;
     street?: NullableStringFieldUpdateOperationsInput | undefined;

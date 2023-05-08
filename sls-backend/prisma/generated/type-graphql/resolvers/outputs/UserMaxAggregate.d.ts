@@ -4,6 +4,7 @@ export declare class UserMaxAggregate {
     updatedAt: Date | null;
     fname: string | null;
     lname: string | null;
+    email: string | null;
     latitude: number | null;
     longitude: number | null;
     street: string | null;

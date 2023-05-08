@@ -13,6 +13,7 @@ export declare class UserScalarWhereInput {
     updatedAt?: DateTimeFilter | undefined;
     fname?: StringFilter | undefined;
     lname?: StringFilter | undefined;
+    email?: StringFilter | undefined;
     latitude?: FloatNullableFilter | undefined;
     longitude?: FloatNullableFilter | undefined;
     street?: StringNullableFilter | undefined;

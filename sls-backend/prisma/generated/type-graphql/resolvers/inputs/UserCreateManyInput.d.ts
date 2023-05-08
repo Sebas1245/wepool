@@ -4,6 +4,7 @@ export declare class UserCreateManyInput {
     updatedAt?: Date | undefined;
     fname: string;
     lname: string;
+    email: string;
     latitude?: number | undefined;
     longitude?: number | undefined;
     street?: string | undefined;

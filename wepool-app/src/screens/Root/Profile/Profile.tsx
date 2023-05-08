@@ -1,15 +1,17 @@
 // Packages
-import { useState, useEffect } from 'react'
-import { StyleSheet, View, Modal, Text } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 // Hooks
 import { useThemeColors } from "../../../hooks/useThemeColors";
 // Queries
 import { useQuery, gql } from '@apollo/client';
 import GetUser from '../../../queries/GET/UserQueries'
+import { useContext } from 'react';
+import { AuthContext } from '../../../AuthContext';
 
 export const Profile = () => {
-
+    const authContext = useContext(AuthContext);
+    console.log('Checking authContext...', authContext?.authenticatedUser);
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
     /**

@@ -9,6 +9,7 @@ export declare class UserOrderByWithAggregationInput {
     updatedAt?: "asc" | "desc" | undefined;
     fname?: "asc" | "desc" | undefined;
     lname?: "asc" | "desc" | undefined;
+    email?: "asc" | "desc" | undefined;
     latitude?: "asc" | "desc" | undefined;
     longitude?: "asc" | "desc" | undefined;
     street?: "asc" | "desc" | undefined;
