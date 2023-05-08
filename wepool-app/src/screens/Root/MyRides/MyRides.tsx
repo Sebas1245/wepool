@@ -13,23 +13,20 @@ import { Button } from "../../../components/Button";
 import { useQuery } from "@apollo/client";
 import GetOpenRides from "../../../queries/GET/RideQueries";
 
-export const MyRides = ({
-  navigation,
-}: RootTabScreenProps<"MyRides">) => {
+export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
   /**
    * TODO:
    *  - A varible to know user type will be needed
    *  - Ride variable for date and start ride hour
    *  - Ride variable for money and notes
    */
-  function handleOnPressEdit(id: number){
-      // Navigate to edit ride screen of the selected ride
-      // Edit ride receives params (props) to get the data from the cards
-      navigation.navigate('EditRide',
-      {
-        rides: openRides, 
-        cardId: id,
-      });
+  function handleOnPressEdit(id: number) {
+    // Navigate to edit ride screen of the selected ride
+    // Edit ride receives params (props) to get the data from the cards
+    navigation.navigate("EditRide", {
+      rides: openRides,
+      cardId: id,
+    });
   }
 
   // Getting query data
@@ -40,8 +37,7 @@ export const MyRides = ({
     if (data && data.rides) setOpenRides(data.rides);
   }, [loading]);
 
-  if (error)
-    console.log([JSON.stringify({ data }), error, error.networkError]);
+  if (error) console.log([JSON.stringify({ data }), error, error.networkError]);
   else if (loading || !openRides) {
     console.log("Loading...");
     return (
@@ -54,38 +50,42 @@ export const MyRides = ({
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <HeaderBar/>
+        <HeaderBar />
       </View>
       <View style={styles.contentContainer}>
-        <View style={{flex: 1, flexDirection: "row", alignItems: 'center'}}>
+        <View style={{ flex: 1, flexDirection: "row", alignItems: "center" }}>
+          <View style={{flex: 1}}>
             <Header text="My Rides" />
-            <View style= {{flex: 2}}></View>
-            <Button 
-                text="+ Create Ride" 
-                style={[styles.button, {backgroundColor: 'green'}]} 
-                textStyle ={styles.buttonText}
-                onPress={() => navigation.navigate("CreateNewRide")}/>
+          </View>
+          <View style={{flex: 2, paddingVertical: 15}}>
+            <Button
+              text="+ Create Ride"
+              style={[styles.button, { backgroundColor: "green" }]}
+              textStyle={styles.buttonText}
+              onPress={() => navigation.navigate("CreateNewRide")}
+            />
+          </View>
         </View>
         <View style={styles.cardsContainer}>
-        {openRides ? (
-              <ScrollView>
-                  {openRides.map((ride) => {
-                    return (
-                      <View key={ride.id} style={styles.card}>
-                      <RideCard
-                          date="20 Apr"
-                          time="08:00"
-                          ride={ride}
-                          cardId={ride.id}
-                          handleOnPressEdit={handleOnPressEdit}
-                      />
-                      </View>
-                    );
-                  })}
-              </ScrollView>
-            ) : 
-            <Oops/>
-            }
+          {openRides ? (
+            <ScrollView>
+              {openRides.map((ride) => {
+                return (
+                  <View key={ride.id} style={styles.card}>
+                    <RideCard
+                      date="20 Apr"
+                      time="08:00"
+                      ride={ride}
+                      cardId={ride.id}
+                      handleOnPressEdit={handleOnPressEdit}
+                    />
+                  </View>
+                );
+              })}
+            </ScrollView>
+          ) : (
+            <Oops />
+          )}
         </View>
       </View>
     </View>
@@ -120,15 +120,13 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    // width: 45,
-    height: '50%',
-    alignItems: "center",
+    alignSelf: "flex-end",
     justifyContent: "center",
     borderRadius: 15,
-    margin: 5,
-    },
+    paddingHorizontal: 10
+  },
   buttonText: {
-        color: 'white', 
-        fontSize: 18,
-    },
+    color: "white",
+    fontSize: 18,
+  },
 });
