@@ -4,5 +4,6 @@ export declare class RideMinAggregate {
     availableSeats: number | null;
     status: "OPEN" | "CLOSED" | null;
     startsAt: "DRIVER" | "COMPANY" | null;
+    date: Date | null;
     driverId: number | null;
 }

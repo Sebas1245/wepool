@@ -1,3 +1,4 @@
+import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { EnumRideStatusFilter } from "../inputs/EnumRideStatusFilter";
 import { EnumStartingPointFilter } from "../inputs/EnumStartingPointFilter";
 import { FloatFilter } from "../inputs/FloatFilter";
@@ -13,6 +14,7 @@ export declare class RideWhereInput {
     availableSeats?: IntFilter | undefined;
     status?: EnumRideStatusFilter | undefined;
     startsAt?: EnumStartingPointFilter | undefined;
+    date?: DateTimeFilter | undefined;
     driverId?: IntFilter | undefined;
     driver?: UserRelationFilter | undefined;
     passengers?: RidePassengersListRelationFilter | undefined;

@@ -38,5 +38,6 @@ export default gql`query GetOpenRides {
       availableSeats
       startsAt
       status
+      date
     }
   }`;

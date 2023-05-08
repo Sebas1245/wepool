@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RideUpdateWithoutDriverInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
+const DateTimeFieldUpdateOperationsInput_1 = require("../inputs/DateTimeFieldUpdateOperationsInput");
 const EnumRideStatusFieldUpdateOperationsInput_1 = require("../inputs/EnumRideStatusFieldUpdateOperationsInput");
 const EnumStartingPointFieldUpdateOperationsInput_1 = require("../inputs/EnumStartingPointFieldUpdateOperationsInput");
 const FloatFieldUpdateOperationsInput_1 = require("../inputs/FloatFieldUpdateOperationsInput");
@@ -34,6 +35,12 @@ tslib_1.__decorate([
     }),
     tslib_1.__metadata("design:type", EnumStartingPointFieldUpdateOperationsInput_1.EnumStartingPointFieldUpdateOperationsInput)
 ], RideUpdateWithoutDriverInput.prototype, "startsAt", void 0);
+tslib_1.__decorate([
+    TypeGraphQL.Field(_type => DateTimeFieldUpdateOperationsInput_1.DateTimeFieldUpdateOperationsInput, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", DateTimeFieldUpdateOperationsInput_1.DateTimeFieldUpdateOperationsInput)
+], RideUpdateWithoutDriverInput.prototype, "date", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => RidePassengersUpdateManyWithoutRideNestedInput_1.RidePassengersUpdateManyWithoutRideNestedInput, {
         nullable: true

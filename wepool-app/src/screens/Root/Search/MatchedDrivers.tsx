@@ -69,13 +69,12 @@ export const MatchedDrivers = ({navigation}: RootStackScreenProps<'MatchedDriver
                                     (
                                         <View key={ride.id} style = {styles.card}>
                                             <DriverCard 
-                                                date='20 Apr' 
-                                                time='08:00' 
+                                                date={ride.date ?? ''}
                                                 ride={ride} 
                                                 handleOpenDetails = {handleOpenDetails} 
                                                 handleCardId={handleCardId} 
                                                 cardId={ride.id}
-                                                joined = {false}
+                                                joined={false}
                                                 />
                                         </View>
                                     )

@@ -3,10 +3,10 @@ import {Button} from "./Button"
 import { useThemeColors } from "../hooks/useThemeColors";
 import { FontAwesome } from '@expo/vector-icons';
 import { useState } from 'react';
+import { Date, DateTime } from './Date';
 
 type Props = {
     date: string, 
-    time: string, 
     ride: Ride,
     handleOpenDetails?: any,
     handleCardId?: any,
@@ -14,7 +14,7 @@ type Props = {
     joined: boolean
 }
 
-export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
+export const DriverCard = ({date, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -41,7 +41,7 @@ export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, c
                         <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
                         <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                     </View>
-                    <Text style = {{fontSize: 30, marginRight: 5}}>{time}</Text>
+                    <DateTime date={date} />
                 </View>
                 <View style = {styles.buttonContainer}>
                     <Button text="Ride Details" style={[styles.button, {backgroundColor: 'orange'}]} textStyle ={styles.buttonText} onPress={handleOnPressRideDetails}/>
