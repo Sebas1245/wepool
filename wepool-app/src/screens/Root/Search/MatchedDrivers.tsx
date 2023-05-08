@@ -9,7 +9,7 @@ import { BackButton } from "../../../components/BackButton";
 import { Header } from "../../../components/Header";
 import { DriverCard } from "../../../components/DriverCard";
 import { RideDetailsModal } from "../../../components/RideDetailsModal";
-import { useMutation, useQuery } from "@apollo/client";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Oops } from "../../../components/Oops";
 
 // queries
@@ -20,12 +20,15 @@ import {
   buildUpdateRideAddPassengerVariables,
   buildUpdateRideRemovePassengerVariables,
 } from "../../../mutations/updateOneRide";
+import { PASSENGER_RIDES } from "../../../queries/GET/UserQueries";
+import { useIsFocused } from "@react-navigation/native";
 
 export const MatchedDrivers = ({
   navigation,
   route,
 }: RootStackScreenProps<"MatchedDrivers">) => {
   const context = useContext(AuthContext);
+  const isFocused = useIsFocused();
   /**
    * TODO:
    *  - A varible to know user type will be needed
@@ -50,17 +53,36 @@ export const MatchedDrivers = ({
 
   // Getting query data
   const { loading, error, data } = useQuery(GetOpenRides);
+  const [queryPassengerRides] = useLazyQuery(PASSENGER_RIDES, {
+    variables: { where: { id: context?.authenticatedUser?.id } },
+    fetchPolicy: "network-only",
+  });
 
   const [openRides, setOpenRides] = useState<Ride[] | null>(null);
   const [joinedRidesIds, setJoinedRidesIds] = useState<number[]>([]);
+  const checkCurrentPassengerRides = async () => {
+    const queryResult = await queryPassengerRides();
+    console.log("Query results ", queryResult.data.user.passengerRides);
+    if (queryResult.data.user) {
+      const passengerRidesIds = queryResult.data.user.passengerRides.map(
+        (passengerRide: { rideId: any }) => passengerRide.rideId
+      );
+      setJoinedRidesIds(passengerRidesIds);
+    }
+  };
 
   useEffect(() => {
-    if (data && data.rides) setOpenRides(data.rides);
-  }, [loading]);
+    if (isFocused) {
+      console.log("isFocused");
+      checkCurrentPassengerRides();
+    }
+    if (data && data.rides) {
+      setOpenRides(data.rides);
+    }
+  }, [loading, isFocused]);
 
   if (error) console.log([JSON.stringify({ data }), error, error.networkError]);
   else if (loading || !openRides) {
-    console.log("Loading...");
     return (
       <View>
         <Text>Loading...</Text>
@@ -82,12 +104,12 @@ export const MatchedDrivers = ({
           (ride) => ride.id === mutationResult.data.updateOneRide.id
         );
         if (addedRide) {
-            setJoinedRidesIds([...joinedRidesIds, addedRide.id])
+          setJoinedRidesIds([...joinedRidesIds, addedRide.id]);
         }
       }
     }
   };
-  
+
   const handleRemovePassengerFromRide = async (rideId: number) => {
     if (context && context.authenticatedUser) {
       const mutationResult = await updateRideMutation(
@@ -98,9 +120,12 @@ export const MatchedDrivers = ({
       );
       if (mutationResult.data && mutationResult.data.updateOneRide) {
         console.log("Removed passenger from ride with id " + rideId);
-        const joinedRidesAfterRemoval = joinedRidesIds.filter(joinedRideId => joinedRideId !== mutationResult.data.updateOneRide.id);
+        const joinedRidesAfterRemoval = joinedRidesIds.filter(
+          (joinedRideId) =>
+            joinedRideId !== mutationResult.data.updateOneRide.id
+        );
         console.log(joinedRidesAfterRemoval);
-        setJoinedRidesIds(joinedRidesAfterRemoval)
+        setJoinedRidesIds(joinedRidesAfterRemoval);
       }
     }
   };
