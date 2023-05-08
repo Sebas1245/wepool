@@ -7,7 +7,6 @@ import { Date, DateTime } from './Date';
 
 type Props = {
     date: string, 
-    time: string, 
     ride: Ride,
     handleOpenDetails?: any,
     handleCardId?: any,
@@ -15,7 +14,7 @@ type Props = {
     joined: boolean
 }
 
-export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
+export const DriverCard = ({date, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
