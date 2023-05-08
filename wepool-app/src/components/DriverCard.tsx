@@ -7,23 +7,24 @@ import { Date, DateTime } from './Date';
 
 type Props = {
     date: string, 
-    start_loc?: string, 
-    final_loc?: string,
-    driverName?: string,
-    status: boolean,
-    userType?: "Rider" | "Driver",
+    time: string, 
+    ride: Ride,
     handleOpenDetails?: any,
     handleCardId?: any,
-    cardId : number
+    cardId : number,
+    joined: boolean
 }
 
-export const DriverCard = ({date, start_loc, final_loc, driverName, status, userType = 'Rider', handleOpenDetails, handleCardId, cardId}: Props) => {
+export const DriverCard = ({date, time, ride, handleOpenDetails, handleCardId, cardId, joined}: Props) => {
 
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
 
+    const driver = ride.driver;
+    const start_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)
+    const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
+
     function handleOnPressRideDetails(){
-        console.log(cardId)
         handleCardId(cardId)
         handleOpenDetails()
     }
@@ -32,7 +33,7 @@ export const DriverCard = ({date, start_loc, final_loc, driverName, status, user
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
             <View style = {styles.driverImageContainer}>
                 <FontAwesome name="user" size={40} color="black" />
-                <Text>{driverName}</Text>
+                <Text>{`${driver.fname} ${driver.lname}`}</Text>
                 <Text>Num Stars</Text>
             </View>
             <View style = {{flex: 3}}>
@@ -45,7 +46,11 @@ export const DriverCard = ({date, start_loc, final_loc, driverName, status, user
                 </View>
                 <View style = {styles.buttonContainer}>
                     <Button text="Ride Details" style={[styles.button, {backgroundColor: 'orange'}]} textStyle ={styles.buttonText} onPress={handleOnPressRideDetails}/>
-                    <Button text="Join Ride" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
+                    {joined ? (
+                        <Button text="Cancel" style={[styles.button, {backgroundColor: 'red'}]} textStyle ={styles.buttonText}/>
+                    ):(
+                        <Button text="Join Ride" style={[styles.button, {backgroundColor: 'green'}]} textStyle ={styles.buttonText}/>
+                    )}
                 </View>
             </View>
         </View>

@@ -9,7 +9,6 @@ import {
 import * as Google from "expo-auth-session/providers/google";
 import * as WebBrowser from "expo-web-browser";
 import { Logo } from "../../components/Logo";
-import { Header } from "../../components/Header";
 import { Button } from "../../components/Button";
 import { LoginTextInput } from "../../components/LoginTextInput";
 import { BackButton } from "../../components/BackButton";
@@ -92,7 +91,7 @@ export const LoginScreen = ({
       <Text>Welcome</Text>
       <Button
         text="Login"
-        onPress={() => navigation.navigate("SelectProfile")}
+        onPress={() => navigation.navigate("Root")}
       />
     </View>
   );

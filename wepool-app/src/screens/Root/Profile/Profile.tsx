@@ -1,38 +1,39 @@
-import { useState, useEffect } from 'react'
-import { StyleSheet, View, Modal, Text } from 'react-native'
+// Packages
+import { StyleSheet, View, Text } from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
-import { useThemeColors } from "../hooks/useThemeColors";
+// Hooks
+import { useThemeColors } from "../../../hooks/useThemeColors";
+// Queries
 import { useQuery, gql } from '@apollo/client';
-
-/**
- * This is one of the mthfckr packages that gets in trouble with apollo. 'Divider' is not used here, but is used in CreateRide and other components:
- */
-import { Divider } from '@rneui/themed';            
-
-// queries
-import GetUser from '../queries/GET/UserQueries'
+import GetUser from '../../../queries/GET/UserQueries'
+import { useContext } from 'react';
+import { AuthContext } from '../../../AuthContext';
 
 export const Profile = () => {
-
+    const authContext = useContext(AuthContext);
+    console.log('Checking authContext...', authContext?.authenticatedUser);
     const { colors } = useThemeColors();
     const backgroundColor = colors.colors.primary
-
+    /**
+     * TODO:
+     * - Update GetUser query to get the context User info
+     */
     /** 
      * When using useQuery hook you can get loading status, error info, and data
      * See more: https://www.apollographql.com/docs/react/data/queries/
     */
-
-   const { loading, error, data, networkStatus } = useQuery(GetUser);
+    // Getting query data
+   const { loading, error, data } = useQuery(GetUser);
    
-   if (loading) return ( console.log('Loading...'));
    if (error) ( console.log([JSON.stringify({data}), error, error.networkError]))
-   
-    /** You can also get the network status code:  supposedly '8' means failed connection, '7' means a correct connection.*/
-//    if (networkStatus) return (console.log(networkStatus))
-    /**
-    * The errors I got were: no connection to server [msg 'Network request failed'], 
-    * or getting no response from service with query [msg 'Server response was missing for query <queryName>']
-     */
+   else if (loading) { 
+    console.log('Loading...')
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+    };
 
     return (
         /** borderWidth: 0, when changed to 1 is used to see graphical structure */

@@ -26,6 +26,7 @@ async function createUsers(): Promise<void> {
     create: {
       fname: "Bernardo",
       lname: "Garcia",
+      email: "a00570682@tec.mx",
       street: "Dover",
       number: 3049,
       zipCode: 64830,
@@ -44,6 +45,7 @@ async function createUsers(): Promise<void> {
     create: {
       fname: "Sebastian",
       lname: "Saldana",
+      email: "a01570274@tec.mx",
       street: "Paseo Milan",
       number: 375,
       zipCode: 64346,
@@ -73,6 +75,7 @@ async function createUsers(): Promise<void> {
     create: {
       fname: "Diego",
       lname: "Guerreo",
+      email: "a01625199@tec.mx",
       street: "Quimicos",
       number: 110,
       zipCode: 64700,
@@ -91,6 +94,7 @@ async function createUsers(): Promise<void> {
     create: {
       fname: "Javier",
       lname: "Martinez",
+      email: "a01401017@tec.mx",
       street: "Rio Nazas",
       number: 331,
       zipCode: 64700,

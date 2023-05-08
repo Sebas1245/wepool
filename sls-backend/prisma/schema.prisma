@@ -22,6 +22,7 @@ model User {
   updatedAt DateTime @updatedAt
   fname String
   lname String
+  email String
   latitude Float?
   longitude Float?
   // address fields

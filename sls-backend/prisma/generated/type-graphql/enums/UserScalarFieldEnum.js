@@ -10,6 +10,7 @@ var UserScalarFieldEnum;
     UserScalarFieldEnum["updatedAt"] = "updatedAt";
     UserScalarFieldEnum["fname"] = "fname";
     UserScalarFieldEnum["lname"] = "lname";
+    UserScalarFieldEnum["email"] = "email";
     UserScalarFieldEnum["latitude"] = "latitude";
     UserScalarFieldEnum["longitude"] = "longitude";
     UserScalarFieldEnum["street"] = "street";

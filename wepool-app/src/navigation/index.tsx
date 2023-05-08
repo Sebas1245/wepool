@@ -26,14 +26,14 @@ import LinkingConfiguration from './LinkingConfiguration';
 import { StartScreen } from '../screens/StartScreens/StartScreen';
 import { LoginScreen } from '../screens/StartScreens/LoginScreen';
 import { SignUpScreen } from '../screens/StartScreens/SignUpScreen';
-import { SelectProfile } from '../screens/SelectProfile';
-import { RideDisplay } from '../screens/RideDisplay';
-import { SearchRide } from '../screens/SearchRide';
-import RideDetails from '../screens/RideDetails';
-import CreateNewRide from '../screens/CreateNewRide';
-import EditRide from '../screens/EditRide';
-import { MatchedDrivers } from '../screens/MatchedDrivers';
-import { Profile } from '../screens/Profile';
+import { RideDisplay } from "../screens/Root/Home/RideDisplay";
+import { SearchRide } from '../screens/Root/Search/SearchRide';
+import { MatchedDrivers } from '../screens/Root/Search/MatchedDrivers';
+import {CreateNewRide} from '../screens/Root/MyRides/CreateNewRide';
+import { EditRide } from '../screens/Root/MyRides/EditRide';
+import { MyRides } from "../screens/Root/MyRides/MyRides";
+import { Profile } from '../screens/Root/Profile/Profile';
+import { AuthContext, AuthenticatedUser } from "../AuthContext";
 
 export default function Navigation({
   colorScheme,
@@ -57,8 +57,11 @@ export default function Navigation({
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
+  const [authenticatedUser, setAuthenticatedUser] = React.useState<AuthenticatedUser | null>(null);
   return (
+      <AuthContext.Provider value={{ authenticatedUser, setAuthenticatedUser}}>
     <Stack.Navigator initialRouteName="StartScreen">
+      {/* START SCREENS */}
       <Stack.Screen
         name="StartScreen"
         component={StartScreen}
@@ -74,16 +77,13 @@ function RootNavigator() {
         component={SignUpScreen}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="SelectProfile"
-        component={SelectProfile}
-        options={{ headerShown: false }}
-      />
+      {/* MAIN TAB NAVIGATOR SCREEN */}
       <Stack.Screen
         name="Root"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
+      {/* SECONDARY SCREENS INSIDE TAB FUNCTIONALITIES */}
       <Stack.Screen
         name="MatchedDrivers"
         component={MatchedDrivers}
@@ -91,10 +91,16 @@ function RootNavigator() {
       />
       <Stack.Screen 
         name="EditRide" 
-        component={EditRide} 
-        options={{headerShown: false}} />
-      {/* <Stack.Screen name="RideDetails" component={RideDetails} options={{headerShown: false}}/> */}
+        component={EditRide}
+        options={{headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="CreateNewRide" 
+        component={CreateNewRide}
+        options={{headerShown: false}} 
+      />
     </Stack.Navigator>
+    </AuthContext.Provider>
   );
 }
 
@@ -109,21 +115,21 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="RideDisplay"
+      initialRouteName="Home"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
       }}
     >
       <BottomTab.Screen
-        name="RideDisplay"
+        name="Home"
         component={RideDisplay}
-        options={({ navigation }: RootTabScreenProps<"RideDisplay">) => ({
+        options={({ navigation }: RootTabScreenProps<"Home">) => ({
           title: "Home",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("RideDisplay")}
+              onPress={() => navigation.navigate("Home")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -148,14 +154,14 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="CreateRide"
-        component={CreateNewRide}
-        options={({ navigation }: RootTabScreenProps<"CreateRide">) => ({
-          title: "Add Ride",
-          tabBarIcon: ({ color }) => <TabBarIcon name="plus" color={color} />,
+        name="MyRides"
+        component={MyRides}
+        options={({ navigation }: RootTabScreenProps<"MyRides">) => ({
+          title: "My Rides",
+          tabBarIcon: ({ color }) => <TabBarIcon name="car" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("CreateRide")}
+              onPress={() => navigation.navigate("MyRides")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

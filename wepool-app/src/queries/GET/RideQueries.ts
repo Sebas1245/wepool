@@ -2,36 +2,41 @@ import { gql } from '@apollo/client';
 
 export default gql`query GetOpenRides {
     rides(where: {status: {equals: OPEN}}) {
+      id
+      driver {
         id
-        availableSeats
-        driver {
+        fname
+        lname
+        phoneNumber
+        street
+        state
+        city
+        country
+        zipCode
+        number
+        carId
+        car {
           id
-          fname
-          lname
-          phoneNumber
+          brand
+          model
+          plateNumber
+          year
+          color
+          capacity
+        }
+        company {
+          id
           street
-          zipCode
           number
           city
-          car {
-            id
-            brand
-            model
-            plateNumber
-            year
-            color
-          }
-          company {
-            id
-            street
-            number
-            zipCode
-            city
-            state
-          }
+          state
+          country
+          zipCode
+          name
         }
-        startsAt
-        status
-        date
       }
+      availableSeats
+      startsAt
+      status
+    }
   }`;

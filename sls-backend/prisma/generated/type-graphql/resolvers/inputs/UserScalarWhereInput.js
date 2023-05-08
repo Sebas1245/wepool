@@ -61,6 +61,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", StringFilter_1.StringFilter)
 ], UserScalarWhereInput.prototype, "lname", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => StringFilter_1.StringFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", StringFilter_1.StringFilter)
+], UserScalarWhereInput.prototype, "email", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => FloatNullableFilter_1.FloatNullableFilter, {
         nullable: true
     }),
