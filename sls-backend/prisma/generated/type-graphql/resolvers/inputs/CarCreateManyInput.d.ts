@@ -4,7 +4,7 @@ export declare class CarCreateManyInput {
     model: string;
     year: number;
     plateNumber: string;
-    capacity: number;
+    capacity?: number | undefined;
     color: string;
     driverId: number;
 }

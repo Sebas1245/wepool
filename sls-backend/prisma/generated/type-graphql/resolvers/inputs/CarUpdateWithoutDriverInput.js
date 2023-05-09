@@ -4,6 +4,7 @@ exports.CarUpdateWithoutDriverInput = void 0;
 const tslib_1 = require("tslib");
 const TypeGraphQL = tslib_1.__importStar(require("type-graphql"));
 const IntFieldUpdateOperationsInput_1 = require("../inputs/IntFieldUpdateOperationsInput");
+const NullableIntFieldUpdateOperationsInput_1 = require("../inputs/NullableIntFieldUpdateOperationsInput");
 const StringFieldUpdateOperationsInput_1 = require("../inputs/StringFieldUpdateOperationsInput");
 let CarUpdateWithoutDriverInput = class CarUpdateWithoutDriverInput {
 };
@@ -32,10 +33,10 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput)
 ], CarUpdateWithoutDriverInput.prototype, "plateNumber", void 0);
 tslib_1.__decorate([
-    TypeGraphQL.Field(_type => IntFieldUpdateOperationsInput_1.IntFieldUpdateOperationsInput, {
+    TypeGraphQL.Field(_type => NullableIntFieldUpdateOperationsInput_1.NullableIntFieldUpdateOperationsInput, {
         nullable: true
     }),
-    tslib_1.__metadata("design:type", IntFieldUpdateOperationsInput_1.IntFieldUpdateOperationsInput)
+    tslib_1.__metadata("design:type", NullableIntFieldUpdateOperationsInput_1.NullableIntFieldUpdateOperationsInput)
 ], CarUpdateWithoutDriverInput.prototype, "capacity", void 0);
 tslib_1.__decorate([
     TypeGraphQL.Field(_type => StringFieldUpdateOperationsInput_1.StringFieldUpdateOperationsInput, {

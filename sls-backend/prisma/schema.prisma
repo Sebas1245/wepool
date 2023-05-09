@@ -48,7 +48,7 @@ model Car {
   model String
   year Int
   plateNumber String
-  capacity Int
+  capacity Int?
   color String
   // associations
   driver User @relation(fields: [driverId], references: [id])
