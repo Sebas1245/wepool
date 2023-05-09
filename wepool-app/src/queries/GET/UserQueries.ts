@@ -1,7 +1,8 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 //GetUser is getting only Sebas
-export default gql`query GetUser {
-    getUser(where: {id: 2}) {
+export default gql`
+  query GetUser($where: UserWhereUniqueInput!) {
+    getUser(where: $where) {
       id
       fname
       lname
@@ -15,5 +16,7 @@ export default gql`query GetUser {
       }
       phoneNumber
       email
+      street
     }
-  }`;
+  }
+`;
