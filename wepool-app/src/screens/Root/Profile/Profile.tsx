@@ -5,8 +5,11 @@ import { Button } from "../../../components/Button";
 // Hooks
 import { useThemeColors } from "../../../hooks/useThemeColors";
 // Queries
-import { useQuery } from "@apollo/client";
-import GetUser from "../../../queries/GET/UserQueries";
+import { useMutation, useQuery } from "@apollo/client";
+import GetUser, {
+  UPDATE_ONE_USER,
+  buildUpdateOneUserVariables,
+} from "../../../queries/GET/UserQueries";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../AuthContext";
 
@@ -28,19 +31,72 @@ export const Profile = () => {
       where: { id: context?.authenticatedUser?.id },
     },
   });
+  const [updateUserMutation, { loading: mutationLoading }] =
+    useMutation(UPDATE_ONE_USER);
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleSaveProfile = () => {
+  const verifyCarData = (): {
+    brand: string;
+    model: string;
+    year: number;
+    color: string;
+    plateNumber: string;
+  } | undefined => {
+    if (
+      editCarBrand !== "" &&
+      editCarModel !== "" &&
+      editCarYear === null &&
+      editCarColor !== "" &&
+      editCarPlateNumber !== ""
+    ) return undefined;
+    return {
+        brand: editCarBrand,
+        model: editCarModel,
+        year: editCarYear ?? 0,
+        color: editCarColor,
+        plateNumber: editCarPlateNumber
+    }
+  };
+
+  const handleSaveProfile = async () => {
     // trigger mutation to edit user profile
-    setIsEditing(false);
+    if (context && context.authenticatedUser) {
+      const mutationResult = await updateUserMutation({
+        variables: buildUpdateOneUserVariables(
+          !userHasCar,
+          context.authenticatedUser.id,
+          editPhoneNumber,
+          verifyCarData()
+        ),
+      });
+      if (mutationResult.errors) {
+        alert(mutationResult.errors);
+      }
+      if (mutationResult.data && mutationResult.data.updateOneUser) {
+        setIsEditing(false);
+      }
+    }
   };
   const [editPhoneNumber, setEditPhoneNumber] = useState<string>("");
   const [editCarBrand, setEditCarBrand] = useState<string>("");
   const [editCarModel, setEditCarModel] = useState<string>("");
-  const [editCarYear, setEditCarYear] = useState<string>("");
+  const [editCarYear, setEditCarYear] = useState<number | null>(null);
   const [editCarColor, setEditCarColor] = useState<string>("");
   const [editCarPlateNumber, setEditCarPlateNumber] = useState<string>("");
-  const [editCar, setEditCar] = useState<string>("");
+  const [userHasCar, setUserHasCar] = useState(false);
+  useEffect(() => {
+    if (data && data.getUser) {
+      setEditPhoneNumber(data.getUser.phoneNumber);
+      if (data.getUser.car) {
+        setUserHasCar(true);
+        setEditCarBrand(data.getUser.car.brand);
+        setEditCarModel(data.getUser.car.model);
+        setEditCarYear(data.getUser.car.year);
+        setEditCarColor(data.getUser.car.color);
+        setEditCarPlateNumber(data.getUser.car.plateNumber);
+      }
+    }
+  }, [data]);
   if (error) console.log([JSON.stringify({ data }), error, error.networkError]);
   if (loading || error) {
     console.log("Loading...");
@@ -50,19 +106,6 @@ export const Profile = () => {
       </View>
     );
   }
-  useEffect(() => {
-    if (data && data.getUser) {
-      setEditPhoneNumber(data.getUser.phoneNumber);
-      setEditCarBrand(data.getUser.car.brand);
-      setEditCarModel(data.getUser.car.model);
-      setEditCarYear(data.getUser.car.year);
-      setEditCarColor(data.getUser.car.color);
-      setEditCarPlateNumber(data.getUser.car.plateNumber);
-      setEditCar(
-        `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
-      );
-    }
-  }, [data]);
   return (
     /** borderWidth: 0, when changed to 1 is used to see graphical structure */
     <View style={[{ backgroundColor: backgroundColor }, styles.container]}>
@@ -195,18 +238,43 @@ export const Profile = () => {
                     style={styles.iconStyle}
                   />
                   {isEditing ? (
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder={`${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`}
-                      value={editCar}
-                      returnKeyType="done"
-                    />
+                    <>
+                      <TextInput
+                        style={styles.textInputSmaller}
+                        placeholder={data.getUser.car ? `${data.getUser.car.brand}` : 'BRAND'}
+                        value={editCarBrand}
+                        returnKeyType="done"
+                        onChangeText={(newCarInfo) =>
+                          setEditCarBrand(newCarInfo)
+                        }
+                      />
+                      <TextInput
+                        style={styles.textInputSmaller}
+                        placeholder={data.getUser.car ? `${data.getUser.car.model}` : "MODEL"}
+                        value={editCarModel}
+                        returnKeyType="done"
+                        onChangeText={(newCarInfo) =>
+                          setEditCarModel(newCarInfo)
+                        }
+                      />
+                      <TextInput
+                        keyboardType="number-pad"
+                        style={[styles.textInputSmaller, { width: 85 }]}
+                        placeholder={data.getUser.car ? `${data.getUser.car.year}` : new Date().getFullYear().toString()}
+                        value={editCarYear ? editCarYear.toString() : ""}
+                        returnKeyType="done"
+                        onChangeText={(newYear) =>
+                          setEditCarYear(parseInt(newYear))
+                        }
+                        maxLength={4}
+                      />
+                    </>
                   ) : (
                     <Text style={styles.text}>
                       {" "}
-                      {data
+                      {data && data.getUser.car
                         ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
-                        : "CAR"}{" "}
+                        : "N/A"}{" "}
                     </Text>
                   )}
                 </View>
@@ -222,7 +290,7 @@ export const Profile = () => {
                   {isEditing ? (
                     <TextInput
                       style={styles.textInput}
-                      placeholder={data ? `${data.getUser.car.color}` : "N/A"}
+                      placeholder={data.getUser.car ? `${data.getUser.car.color}` : "N/A"}
                       value={editCarColor}
                       onChangeText={(newColor) => setEditCarColor(newColor)}
                       returnKeyType="done"
@@ -230,7 +298,9 @@ export const Profile = () => {
                   ) : (
                     <Text style={styles.text}>
                       {" "}
-                      {data ? `${data.getUser.car.color}` : "N/A"}{" "}
+                      {data && data.getUser.car
+                        ? `${data.getUser.car.color}`
+                        : "N/A"}{" "}
                     </Text>
                   )}
                 </View>
@@ -247,7 +317,7 @@ export const Profile = () => {
                     <TextInput
                       style={styles.textInput}
                       placeholder={
-                        data ? `${data.getUser.car.plateNumber}` : "N/A"
+                        data.getUser.car ? `${data.getUser.car.plateNumber}` : "N/A"
                       }
                       value={editCarPlateNumber}
                       onChangeText={(newPlateNumber) =>
@@ -258,7 +328,9 @@ export const Profile = () => {
                   ) : (
                     <Text style={styles.text}>
                       {" "}
-                      {data ? `${data.getUser.car.plateNumber}` : "N/A"}{" "}
+                      {data && data.getUser.car
+                        ? `${data.getUser.car.plateNumber}`
+                        : "N/A"}{" "}
                     </Text>
                   )}
                 </View>
@@ -356,6 +428,17 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingLeft: 10,
     borderRadius: 100,
+  },
+  textInputSmaller: {
+    fontSize: 25,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "black",
+    width: 100,
+    paddingVertical: 5,
+    paddingLeft: 10,
+    borderRadius: 100,
+    marginHorizontal: 2,
   },
   fieldRowView: {
     flex: 1,
