@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View, Text, TouchableOpacity, Image, Modal } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  Modal,
+} from "react-native";
 import { Divider } from "@rneui/themed";
 import { FontAwesome } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
@@ -9,6 +17,8 @@ import { getFormatedDate } from "react-native-modern-datepicker";
 import { RootTabScreenProps } from "../../../navigation/types";
 //Components
 import { HeaderBar } from "../../../components/HeaderBar";
+import SelectDropdown from "react-native-select-dropdown";
+import { formattedDisplayStartDate } from "../../../core/dateUtils";
 
 export const SearchRide = ({
   navigation,
@@ -20,10 +30,10 @@ export const SearchRide = ({
   );
 
   const [openDate, setOpenDate] = useState(false); //open and close date modal
-  const [date, setDate] = useState("DATE"); //date
+  const [date, setDate] = useState<string | null>(null); //date
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
-  const [time, setTime] = useState("TIME"); //time
+  const [time, setTime] = useState<string | null>(null); //time
 
   function handleOnPressDate() {
     setOpenDate(!openDate);
@@ -34,6 +44,7 @@ export const SearchRide = ({
   }
 
   function handleChangeDate(propDate: string): void {
+    console.log(propDate);
     const correctedDate: Date = convertToDate(propDate);
     const date: Date = new Date(correctedDate);
     const formattedDate: string = date.toLocaleString("en-US", {
@@ -53,6 +64,7 @@ export const SearchRide = ({
   }
 
   function handleChangeTime(propTime: string): void {
+    console.log(propTime);
     setTime(propTime);
     setOpenTime(!openTime);
   }
@@ -60,12 +72,11 @@ export const SearchRide = ({
   // Ride Form Variables
 
   const [from, setFrom] = useState<string | undefined>();
-  const [to, setTo] = useState<string | undefined>();
 
   return (
     <View style={styles.container}>
       <View style={{ flex: 1 }}>
-        <HeaderBar/>
+        <HeaderBar />
       </View>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>LOOK FOR A RIDE</Text>
@@ -192,29 +203,32 @@ export const SearchRide = ({
                   marginLeft: 10,
                 }}
               >
-                <TextInput
-                  style={styles.text}
-                  placeholder="FROM"
-                  returnKeyType="done"
-                  onChangeText={(fromText) => setFrom(fromText)}
+                <SelectDropdown
+                  buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
+                  data={["ANY", "DRIVER'S HOME", "COMPANY"]}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                    if (index === 0) {
+                      setFrom(undefined);
+                    } else if (index === 1) {
+                      setFrom("DRIVER");
+                    } else if (index === 2) {
+                      setFrom("COMPANY");
+                    }
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item;
+                  }}
                 />
               </View>
               <Divider></Divider>
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: "flex-start",
-                  justifyContent: "center",
-                  marginLeft: 10,
-                }}
-              >
-                <TextInput
-                  style={styles.text}
-                  placeholder="TO"
-                  returnKeyType="done"
-                  onChangeText={(toText) => setTo(toText)}
-                />
-              </View>
             </View>
           </View>
 
