@@ -3,6 +3,6 @@ export declare class CarCreateWithoutDriverInput {
     model: string;
     year: number;
     plateNumber: string;
-    capacity: number;
+    capacity?: number | undefined;
     color: string;
 }

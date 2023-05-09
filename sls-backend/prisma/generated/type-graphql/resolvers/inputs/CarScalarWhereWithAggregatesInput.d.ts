@@ -1,3 +1,4 @@
+import { IntNullableWithAggregatesFilter } from "../inputs/IntNullableWithAggregatesFilter";
 import { IntWithAggregatesFilter } from "../inputs/IntWithAggregatesFilter";
 import { StringWithAggregatesFilter } from "../inputs/StringWithAggregatesFilter";
 export declare class CarScalarWhereWithAggregatesInput {
@@ -9,7 +10,7 @@ export declare class CarScalarWhereWithAggregatesInput {
     model?: StringWithAggregatesFilter | undefined;
     year?: IntWithAggregatesFilter | undefined;
     plateNumber?: StringWithAggregatesFilter | undefined;
-    capacity?: IntWithAggregatesFilter | undefined;
+    capacity?: IntNullableWithAggregatesFilter | undefined;
     color?: StringWithAggregatesFilter | undefined;
     driverId?: IntWithAggregatesFilter | undefined;
 }

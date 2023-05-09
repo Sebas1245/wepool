@@ -9,7 +9,7 @@ export declare class CarGroupBy {
     model: string;
     year: number;
     plateNumber: string;
-    capacity: number;
+    capacity: number | null;
     color: string;
     driverId: number;
     _count: CarCountAggregate | null;

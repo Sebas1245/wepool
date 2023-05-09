@@ -1,4 +1,5 @@
 import { IntFilter } from "../inputs/IntFilter";
+import { IntNullableFilter } from "../inputs/IntNullableFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { UserRelationFilter } from "../inputs/UserRelationFilter";
 export declare class CarWhereInput {
@@ -10,7 +11,7 @@ export declare class CarWhereInput {
     model?: StringFilter | undefined;
     year?: IntFilter | undefined;
     plateNumber?: StringFilter | undefined;
-    capacity?: IntFilter | undefined;
+    capacity?: IntNullableFilter | undefined;
     color?: StringFilter | undefined;
     driverId?: IntFilter | undefined;
     driver?: UserRelationFilter | undefined;

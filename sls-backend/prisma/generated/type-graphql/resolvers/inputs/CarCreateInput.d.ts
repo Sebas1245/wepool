@@ -4,7 +4,7 @@ export declare class CarCreateInput {
     model: string;
     year: number;
     plateNumber: string;
-    capacity: number;
+    capacity?: number | undefined;
     color: string;
     driver: UserCreateNestedOneWithoutCarInput;
 }
