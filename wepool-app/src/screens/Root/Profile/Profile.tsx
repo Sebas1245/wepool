@@ -73,6 +73,11 @@ export const Profile = () => {
         alert(mutationResult.errors);
       }
       if (mutationResult.data && mutationResult.data.updateOneUser) {
+        if (mutationResult.data.updateOneUser.car) {
+            setUserHasCar(true);
+        } else {
+            setUserHasCar(false);
+        }
         setIsEditing(false);
       }
     }

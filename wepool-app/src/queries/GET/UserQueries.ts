@@ -74,7 +74,7 @@ export const buildUpdateOneUserVariables = (
     return {
       data: {
         car: {
-          delete: true,
+          delete: !isCreatingCarForFirstTime,
         },
         phoneNumber: {
           set: userPhoneNumber,
