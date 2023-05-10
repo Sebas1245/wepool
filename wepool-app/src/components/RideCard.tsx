@@ -2,16 +2,15 @@ import { Dimensions, StyleSheet, View, Image, Text, TouchableOpacity } from 'rea
 import {Button} from "./Button"
 import { useThemeColors } from "../hooks/useThemeColors";
 import { FontAwesome } from '@expo/vector-icons';
+import { DateTime } from './Date';
 
 type Props = {
-    date: string, 
-    time: string,
     ride: Ride,
     handleOnPressEdit?: any,
     cardId: number
 }
 
-export const RideCard = ({date, time, ride, handleOnPressEdit, cardId}: Props) => {
+export const RideCard = ({ride, handleOnPressEdit, cardId}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -26,11 +25,9 @@ export const RideCard = ({date, time, ride, handleOnPressEdit, cardId}: Props) =
     return (
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>
             <View style = {styles.dateTimeContainer}>
-                <Text style = {{fontSize: 30}}>{date}</Text>
-                <Text style = {{fontSize: 20}}>{time}</Text>
+                <DateTime date={ride.date?? ''} />
             </View>
             <View style = {styles.dataContainer}>
-                <Text style = {{fontSize: 15}}>Driver: {`${ride.driver.fname} ${ride.driver.lname}`}</Text>
                 <Text style = {{fontSize: 15}}>From: {start_loc}</Text>
                 <Text style = {{fontSize: 15}}>To: {final_loc}</Text>
                 <View style = {styles.buttonsContainer}>
