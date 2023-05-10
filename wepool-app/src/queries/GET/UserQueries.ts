@@ -20,6 +20,14 @@ export default gql`
     }
   }
 `;
+export const GET_USERS_ORDERED_ID = gql`
+query getUsers($orderBy: [UserOrderByWithRelationInput!]) {
+  users(orderBy: {orderBy: {id: desc}}) {
+    id
+    fname
+  }
+}
+`;
 
 export const PASSENGER_RIDES = gql`
   query passengerRides($where: UserWhereUniqueInput!) {

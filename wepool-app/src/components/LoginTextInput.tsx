@@ -7,10 +7,11 @@ type Props = {
     placeholder?: string,
     errorText?: string, 
     description?: string,
+    onChangeText?: any,
     props?: any
 }
 
-export const LoginTextInput = ({label,placeholder, errorText, description, props}: Props) => {
+export const LoginTextInput = ({label,placeholder, onChangeText, description, props}: Props) => {
   return (
     <View style={styles.container}>
         {label ? (
@@ -19,7 +20,7 @@ export const LoginTextInput = ({label,placeholder, errorText, description, props
         <Input       
             style={styles.input}
             // value= {text}
-            // onChangeText= {onChangeText}
+            onChangeText= {onChangeText}
             placeholder= {placeholder}
             selectionColor={Colors.light.colors.secondary}
             {...props}

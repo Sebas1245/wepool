@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import * as Google from "expo-auth-session/providers/google";
 import { Logo } from "../../components/Logo";
 import { Header } from "../../components/Header";
+import { Button } from "../../components/Button";
 import {
   View,
   StyleSheet,
@@ -16,6 +17,7 @@ import { AuthContext, AuthenticatedUser } from "../../AuthContext";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { findFirstUserWithEmail } from "../../queries/findFirstUserWithEmail";
 import { createOneUser } from "../../mutations/createOneUser";
+import Colors from "../../core/Colors";
 
 export const StartScreen = ({
   navigation,
@@ -130,6 +132,13 @@ export const StartScreen = ({
           <Text style={styles.buttonTextStyle}>Login Using Google</Text>
         </TouchableOpacity>
       )}
+      <TouchableOpacity 
+        style = {{height: 40, backgroundColor: Colors.light.colors.primary}}
+        activeOpacity={0.5}
+        onPress={() => navigation.navigate('SignUpScreen')}
+        >
+        <Text>Sign up</Text>
+      </TouchableOpacity>
     </View>
   );
 };
