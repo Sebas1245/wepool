@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import * as Google from "expo-auth-session/providers/google";
+import * as WebBrowser from "expo-web-browser";
 import { Logo } from "../../components/Logo";
 import { Header } from "../../components/Header";
 import {
@@ -11,11 +12,18 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { RootStackScreenProps } from "../../navigation/types";
-import { webClientId, iosClientId, androidClientId } from "../../../clientIds";
+import {
+  webClientId,
+  iosClientId,
+  androidClientId,
+  localWebClientId,
+} from "../../../clientIds";
 import { AuthContext, AuthenticatedUser } from "../../AuthContext";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { findFirstUserWithEmail } from "../../queries/findFirstUserWithEmail";
 import { createOneUser } from "../../mutations/createOneUser";
+
+WebBrowser.maybeCompleteAuthSession();
 
 export const StartScreen = ({
   navigation,
@@ -23,10 +31,11 @@ export const StartScreen = ({
   const context = useContext(AuthContext);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [user, setUser] = useState<AuthenticatedUser | null>(null);
-  const [_, response, promptAsync] = Google.useIdTokenAuthRequest({
+  const [_, response, promptAsync] = Google.useAuthRequest({
     clientId: webClientId,
     iosClientId,
     androidClientId,
+    webClientId: localWebClientId,
   });
   const [findFirstUserWithEmailQuery, queryResult] = useLazyQuery(
     findFirstUserWithEmail
@@ -34,6 +43,7 @@ export const StartScreen = ({
   const [createOneUserMutation, mutationResult] = useMutation(createOneUser);
 
   const fetchUserInformation = async () => {
+    console.log("Fetching user information. Access token -> ", accessToken);
     const response = await fetch("https://www.googleapis.com/userinfo/v2/me", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -96,7 +106,7 @@ export const StartScreen = ({
 
   useEffect(() => {
     if (response?.type === "success") {
-      setAccessToken(response?.authentication?.accessToken ?? "");
+      setAccessToken(response.authentication?.accessToken ?? "");
       accessToken &&
         fetchUserInformation()
           .then((user) => {
