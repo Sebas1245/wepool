@@ -15,6 +15,7 @@ export declare class UserUpdateInput {
     email?: StringFieldUpdateOperationsInput | undefined;
     latitude?: NullableFloatFieldUpdateOperationsInput | undefined;
     longitude?: NullableFloatFieldUpdateOperationsInput | undefined;
+    rating?: NullableFloatFieldUpdateOperationsInput | undefined;
     street?: NullableStringFieldUpdateOperationsInput | undefined;
     number?: NullableIntFieldUpdateOperationsInput | undefined;
     zipCode?: NullableIntFieldUpdateOperationsInput | undefined;

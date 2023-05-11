@@ -12,6 +12,7 @@ export declare class UserGroupBy {
     email: string;
     latitude: number | null;
     longitude: number | null;
+    rating: number | null;
     street: string | null;
     number: number | null;
     zipCode: number | null;

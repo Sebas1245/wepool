@@ -7,6 +7,7 @@ export declare class UserCreateManyCompanyInput {
     email: string;
     latitude?: number | undefined;
     longitude?: number | undefined;
+    rating?: number | undefined;
     street?: string | undefined;
     number?: number | undefined;
     zipCode?: number | undefined;

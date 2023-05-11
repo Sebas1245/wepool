@@ -13,6 +13,7 @@ var UserScalarFieldEnum;
     UserScalarFieldEnum["email"] = "email";
     UserScalarFieldEnum["latitude"] = "latitude";
     UserScalarFieldEnum["longitude"] = "longitude";
+    UserScalarFieldEnum["rating"] = "rating";
     UserScalarFieldEnum["street"] = "street";
     UserScalarFieldEnum["number"] = "number";
     UserScalarFieldEnum["zipCode"] = "zipCode";

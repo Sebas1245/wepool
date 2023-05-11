@@ -7,6 +7,7 @@ export declare class UserCountAggregate {
     email: number;
     latitude: number;
     longitude: number;
+    rating: number;
     street: number;
     number: number;
     zipCode: number;

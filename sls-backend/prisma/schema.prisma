@@ -25,6 +25,7 @@ model User {
   email String
   latitude Float?
   longitude Float?
+  rating Float?
   // address fields
   street String?
   number Int?

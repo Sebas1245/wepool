@@ -16,6 +16,7 @@ export declare class UserScalarWhereWithAggregatesInput {
     email?: StringWithAggregatesFilter | undefined;
     latitude?: FloatNullableWithAggregatesFilter | undefined;
     longitude?: FloatNullableWithAggregatesFilter | undefined;
+    rating?: FloatNullableWithAggregatesFilter | undefined;
     street?: StringNullableWithAggregatesFilter | undefined;
     number?: IntNullableWithAggregatesFilter | undefined;
     zipCode?: IntNullableWithAggregatesFilter | undefined;
