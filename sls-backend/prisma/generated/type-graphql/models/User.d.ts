@@ -12,6 +12,7 @@ export declare class User {
     email: string;
     latitude?: number | null;
     longitude?: number | null;
+    rating?: number | null;
     street?: string | null;
     number?: number | null;
     zipCode?: number | null;

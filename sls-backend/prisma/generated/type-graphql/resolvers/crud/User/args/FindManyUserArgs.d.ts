@@ -7,5 +7,5 @@ export declare class FindManyUserArgs {
     cursor?: UserWhereUniqueInput | undefined;
     take?: number | undefined;
     skip?: number | undefined;
-    distinct?: Array<"id" | "createdAt" | "updatedAt" | "fname" | "lname" | "email" | "latitude" | "longitude" | "street" | "number" | "zipCode" | "city" | "state" | "country" | "phoneNumber" | "carId" | "companyId"> | undefined;
+    distinct?: Array<"id" | "createdAt" | "updatedAt" | "fname" | "lname" | "email" | "latitude" | "longitude" | "rating" | "street" | "number" | "zipCode" | "city" | "state" | "country" | "phoneNumber" | "carId" | "companyId"> | undefined;
 }

@@ -17,6 +17,7 @@ export default gql`
       phoneNumber
       email
       street
+      rating
     }
   }
 `;

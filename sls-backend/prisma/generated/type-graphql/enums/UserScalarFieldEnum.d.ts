@@ -7,6 +7,7 @@ export declare enum UserScalarFieldEnum {
     email = "email",
     latitude = "latitude",
     longitude = "longitude",
+    rating = "rating",
     street = "street",
     number = "number",
     zipCode = "zipCode",

@@ -83,6 +83,12 @@ tslib_1.__decorate([
     tslib_1.__metadata("design:type", FloatNullableFilter_1.FloatNullableFilter)
 ], UserWhereInput.prototype, "longitude", void 0);
 tslib_1.__decorate([
+    TypeGraphQL.Field(_type => FloatNullableFilter_1.FloatNullableFilter, {
+        nullable: true
+    }),
+    tslib_1.__metadata("design:type", FloatNullableFilter_1.FloatNullableFilter)
+], UserWhereInput.prototype, "rating", void 0);
+tslib_1.__decorate([
     TypeGraphQL.Field(_type => StringNullableFilter_1.StringNullableFilter, {
         nullable: true
     }),

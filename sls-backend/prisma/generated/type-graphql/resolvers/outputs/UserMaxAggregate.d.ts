@@ -7,6 +7,7 @@ export declare class UserMaxAggregate {
     email: string | null;
     latitude: number | null;
     longitude: number | null;
+    rating: number | null;
     street: string | null;
     number: number | null;
     zipCode: number | null;
