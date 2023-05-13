@@ -1,5 +1,5 @@
 // Packages
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
 // Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
@@ -11,15 +11,15 @@ import { RideCard } from "../../../components/RideCard";
 import { Button } from "../../../components/Button";
 // Queries
 import { useQuery } from "@apollo/client";
-import GetOpenRides from "../../../queries/GET/RideQueries";
+import { GET_MY_RIDES } from "../../../queries/GET/RideQueries";
+import { AuthContext } from "../../../AuthContext";
 
 export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
   /**
    * TODO:
-   *  - A varible to know user type will be needed
-   *  - Ride variable for date and start ride hour
    *  - Ride variable for money and notes
    */
+  const context = useContext(AuthContext)
   function handleOnPressEdit(id: number) {
     // Navigate to edit ride screen of the selected ride
     // Edit ride receives params (props) to get the data from the cards
@@ -30,9 +30,14 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
   }
 
   // Getting query data
-  const { loading, error, data } = useQuery(GetOpenRides);
+  const { loading, error, data } = useQuery(GET_MY_RIDES, {
+    variables: {
+      where: { driverId: { equals: context?.authenticatedUser?.id }},
+    },
+  });
 
   const [openRides, setOpenRides] = useState<Ride[]>();
+  
   useEffect(() => {
     if (data && data.rides) setOpenRides(data.rides);
   }, [loading]);
@@ -73,8 +78,6 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
                 return (
                   <View key={ride.id} style={styles.card}>
                     <RideCard
-                      date="20 Apr"
-                      time="08:00"
                       ride={ride}
                       cardId={ride.id}
                       handleOnPressEdit={handleOnPressEdit}
