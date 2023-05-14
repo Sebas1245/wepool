@@ -1,5 +1,5 @@
 // Packages
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -95,15 +95,17 @@ export const EditRide = ({
   }
 
   // Ride Form Variables
-  const [from, setFrom] = useState<string | undefined>();
-  const [to, setTo] = useState<string | undefined>();
-  const [money, setMoney] = useState<string | undefined>();
-  const [seats, setSeats] = useState<string | undefined>();
-  const [model, setModel] = useState<string | undefined>();
-  const [color, setColor] = useState<string | undefined>();
-  const [licensePlate, setLicensePlate] = useState<string | undefined>();
-  const [extraNotes, setExtraNotes] = useState<string | undefined>();
-
+  const [from, setFrom] = useState<string>();
+  const [to, setTo] = useState<string>();
+  const [money, setMoney] = useState<string>();
+  const [seats, setSeats] = useState<string>();
+  const [model, setModel] = useState<string>();
+  const [color, setColor] = useState<string>();
+  const [licensePlate, setLicensePlate] = useState<string>();
+  const [extraNotes, setExtraNotes] = useState<string>();
+  const [driver, setDriver] = useState<User>();
+  // const [start_loc, setStartLoc] = useState<string>();
+  // const [final_loc, setFinalLoc] = useState<string>();
   // Find the selected ride acording to the ride id.
   // Selected ride is Ride[] or undefined because openRides from MyRides doesnt have initial value
   const selectedRide = rides
@@ -111,17 +113,32 @@ export const EditRide = ({
         return ride.id === cardId;
       })
     : undefined;
+  
+  //Initialize selected ride data to fetch on form
+  useEffect(() => {
+    if (selectedRide && selectedRide.driver.car) {
+      const car = selectedRide.driver.car
+      setModel(car.model)
+      setColor(car.color)
+      setSeats(car.capacity.toString())
+      setLicensePlate(car.plateNumber)
+      // setMoney()
+      // setExtraNotes()
+      const start_loc =
+        selectedRide.startsAt.toString() === "DRIVER"
+        ? selectedRide.driver?.street
+        : selectedRide.driver?.company.street;
+      const final_loc =
+        selectedRide.startsAt.toString() === "DRIVER"
+        ? selectedRide.driver?.company.street
+        : selectedRide.driver?.street;
+      setFrom(start_loc)
+      setTo(final_loc)
+      console.log(driver, model, color, seats, licensePlate)
+    }
+  }, []);
 
   if (selectedRide) {
-    const driver = selectedRide.driver;
-    const start_loc =
-      selectedRide.startsAt.toString() === "DRIVER"
-        ? driver.street
-        : driver.company.street;
-    const final_loc =
-      selectedRide.startsAt.toString() === "DRIVER"
-        ? driver.company.street
-        : driver.street;
     return (
       <View style={styles.container}>
         <View style={styles.backButton}>
@@ -262,6 +279,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="FROM"
+                  value={from}
                   returnKeyType="done"
                   onChangeText={(fromText) => setFrom(fromText)}
                 />
@@ -278,6 +296,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="TO"
+                  value={to}
                   returnKeyType="done"
                   onChangeText={(toText) => setTo(toText)}
                 />
@@ -308,6 +327,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="MONEY"
+                  value={money}
                   returnKeyType="done"
                   keyboardType="number-pad"
                   onChangeText={(moneyText) => setMoney(moneyText)}
@@ -339,6 +359,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="SEATS"
+                  value={seats}
                   returnKeyType="done"
                   keyboardType="number-pad"
                   onChangeText={(seatsText) => setSeats(seatsText)}
@@ -370,6 +391,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="MODEL"
+                  value={model}
                   returnKeyType="done"
                   onChangeText={(modelText) => setModel(modelText)}
                 />
@@ -396,6 +418,7 @@ export const EditRide = ({
                 <TextInput
                   style={styles.text}
                   placeholder="COLOR"
+                  value={color}
                   returnKeyType="done"
                   onChangeText={(colorText) => setColor(colorText)}
                 />
@@ -423,6 +446,7 @@ export const EditRide = ({
               <TextInput
                 style={styles.text}
                 placeholder="LICENSE PLATE"
+                value={licensePlate}
                 returnKeyType="done"
                 onChangeText={(licensePlateText) =>
                   setLicensePlate(licensePlateText)
@@ -450,6 +474,7 @@ export const EditRide = ({
                   style={styles.text}
                   returnKeyType="done"
                   placeholder="EXTRA NOTES"
+                  value={extraNotes}
                   onChangeText={(notesText) => setExtraNotes(notesText)}
                 />
               </View>
