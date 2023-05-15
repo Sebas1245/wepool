@@ -23,13 +23,18 @@ import { RootStackScreenProps } from "../../../navigation/types";
 // Components
 import { Oops } from "../../../components/Oops";
 import { BackButton } from "../../../components/BackButton";
+import SelectDropdown from "react-native-select-dropdown";
+import { StartingPoint } from "../../../services/enums";
+
 
 export const EditRide = ({
   route,
   navigation,
 }: RootStackScreenProps<"EditRide">) => {
-  const { rides, cardId } = route.params; // Getting the props
+  /** Getting the props */
+  const { rides, cardId } = route.params;
 
+  /** Variables and functions*/
   const today = new Date();
   const startDate = getFormatedDate(
     new Date(today.setDate(today.getDate() + 1)),
@@ -94,7 +99,7 @@ export const EditRide = ({
     setOpenTime(!openTime);
   }
 
-  // Ride Form Variables
+    // Ride Form Variables
   const [from, setFrom] = useState<string>();
   const [to, setTo] = useState<string>();
   const [money, setMoney] = useState<string>();
@@ -103,20 +108,21 @@ export const EditRide = ({
   const [color, setColor] = useState<string>();
   const [licensePlate, setLicensePlate] = useState<string>();
   const [extraNotes, setExtraNotes] = useState<string>();
-  const [driver, setDriver] = useState<User>();
-  // const [start_loc, setStartLoc] = useState<string>();
-  // const [final_loc, setFinalLoc] = useState<string>();
-  // Find the selected ride acording to the ride id.
-  // Selected ride is Ride[] or undefined because openRides from MyRides doesnt have initial value
+  const [startsAt, setStartsAt] = useState<StartingPoint>(StartingPoint.DRIVER);
+
+  /** Initialize values */
+    // Find the selected ride acording to the ride id.
+    // Selected ride is Ride[] or undefined because openRides from MyRides doesnt have initial value
   const selectedRide = rides
     ? rides.find((ride) => {
         return ride.id === cardId;
       })
     : undefined;
   
-  //Initialize selected ride data to fetch on form
+    //Initialize selected ride data to fetch on form
   useEffect(() => {
     if (selectedRide && selectedRide.driver.car) {
+      setStartsAt(selectedRide.startsAt)
       const car = selectedRide.driver.car
       setModel(car.model)
       setColor(car.color)
@@ -125,19 +131,21 @@ export const EditRide = ({
       // setMoney()
       // setExtraNotes()
       const start_loc =
-        selectedRide.startsAt.toString() === "DRIVER"
+        selectedRide.startsAt === StartingPoint.DRIVER
         ? selectedRide.driver?.street
         : selectedRide.driver?.company.street;
       const final_loc =
-        selectedRide.startsAt.toString() === "DRIVER"
+        selectedRide.startsAt === StartingPoint.DRIVER
         ? selectedRide.driver?.company.street
         : selectedRide.driver?.street;
       setFrom(start_loc)
       setTo(final_loc)
-      console.log(driver, model, color, seats, licensePlate)
     }
   }, []);
 
+  /** Save changes Mutation */
+  
+  /** Screen UI */
   if (selectedRide) {
     return (
       <View style={styles.container}>
@@ -267,6 +275,49 @@ export const EditRide = ({
               <Ionicons name="location-outline" size={80} color="black" />
             </View>
             <Divider orientation="vertical" />
+            <View style={{
+                  flex: 1,
+                  alignItems: "flex-start",
+                  justifyContent: "center",
+                }}
+              >
+                <View style={{paddingLeft: 10}}>
+                  <Text>START FROM:</Text>
+                  
+                  <SelectDropdown
+                  buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
+                  data={["DRIVER'S HOME", "COMPANY", "OTHER"]}
+                  defaultValueByIndex={0}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                    // console.log(startsAt, startsAt.toString(), StartingPoint.DRIVER.toString(), startsAt === StartingPoint.DRIVER)
+                    if (index === 0 && startsAt === StartingPoint.COMPANY) {
+                      setStartsAt(StartingPoint.DRIVER);
+                      let change = to
+                      setTo(from);
+                      setFrom(change);
+
+                    } else if (index === 1 && startsAt === StartingPoint.DRIVER) {
+                      setStartsAt(StartingPoint.COMPANY);
+                      let change = to
+                      setTo(from);
+                      setFrom(change);
+                    }
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    // text represented after item is selected
+                    // if data array is an array of objects then return selectedItem.property to render after item is selected
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    // text represented for each item in dropdown
+                    // if data array is an array of objects then return item.property to represent item in dropdown
+                    return item;
+                  }}
+                />
+                </View>
+              </View>
+            <Divider orientation="vertical" />
             <View style={{ flex: 2 }}>
               <View
                 style={{
@@ -278,6 +329,7 @@ export const EditRide = ({
               >
                 <TextInput
                   style={styles.text}
+                  editable = {false}
                   placeholder="FROM"
                   value={from}
                   returnKeyType="done"
@@ -295,6 +347,7 @@ export const EditRide = ({
               >
                 <TextInput
                   style={styles.text}
+                  editable = {false}
                   placeholder="TO"
                   value={to}
                   returnKeyType="done"
