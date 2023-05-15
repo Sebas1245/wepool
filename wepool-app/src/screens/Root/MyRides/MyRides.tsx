@@ -14,10 +14,11 @@ import { useQuery } from "@apollo/client";
 import { GET_MY_RIDES } from "../../../queries/GET/RideQueries";
 import { AuthContext } from "../../../AuthContext";
 
-export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
+export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) => {
   /**
    * TODO:
    *  - Ride variable for money and notes
+   *  - After editing the ride, it doesnt refresh automatically
    */
   const context = useContext(AuthContext)
   function handleOnPressEdit(id: number) {
@@ -40,7 +41,8 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
   
   useEffect(() => {
     if (data && data.rides) setOpenRides(data.rides);
-  }, [loading]);
+    console.log(openRides)
+  }, [navigation, loading]);
 
   if (error) console.log([JSON.stringify({ data }), error, error.networkError]);
   else if (loading || !openRides) {

@@ -3,6 +3,7 @@ import {Button} from "./Button"
 import { useThemeColors } from "../hooks/useThemeColors";
 import { FontAwesome } from '@expo/vector-icons';
 import { DateTime } from './Date';
+import { StartingPoint } from '../services/enums';
 
 type Props = {
     ride: Ride,
@@ -19,8 +20,8 @@ export const RideCard = ({ride, handleOnPressEdit, cardId}: Props) => {
         handleOnPressEdit(cardId)
     }
 
-    const start_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.street : ride.driver.company.street)
-    const final_loc = (ride.startsAt.toString() === "DRIVER" ? ride.driver.company.street : ride.driver.street)
+    const start_loc = (ride.startsAt === StartingPoint.DRIVER ? ride.driver.street : ride.driver.company.street)
+    const final_loc = (ride.startsAt === StartingPoint.DRIVER ? ride.driver.company.street : ride.driver.street)
 
     return (
         <View style = {[styles.container, {backgroundColor: backgroundColor}]}>

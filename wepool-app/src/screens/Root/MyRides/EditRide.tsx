@@ -1,4 +1,4 @@
-// Packages
+// From Packages
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -18,14 +18,27 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DatePicker from "react-native-modern-datepicker";
 import { getToday, getFormatedDate } from "react-native-modern-datepicker";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
+import SelectDropdown from "react-native-select-dropdown";
 // Navigation
 import { RootStackScreenProps } from "../../../navigation/types";
 // Components
 import { Oops } from "../../../components/Oops";
 import { BackButton } from "../../../components/BackButton";
-import SelectDropdown from "react-native-select-dropdown";
 import { StartingPoint } from "../../../services/enums";
+// queries
+import {
+  UPDATE_ONE_RIDE,
+  buildUpdateRideVariables
+} from "../../../mutations/updateOneRide";
+import { useMutation } from "@apollo/client";
 
+/**
+ * TODO:
+ * - QUERY ONLY UPDATES startsAt VARIABLE
+ * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE
+ * - LETS UPDATE THE WAY CARS ARE MANAGED IN PROFILE AND CREATE RIDE
+ * - CONFIGURING DATE AND TIME
+ */
 
 export const EditRide = ({
   route,
@@ -144,7 +157,24 @@ export const EditRide = ({
   }, []);
 
   /** Save changes Mutation */
-  
+  const [
+    updateRideMutation,
+    { data: mutationData, loading: loadingMutation, error: mutationError },
+  ] = useMutation(UPDATE_ONE_RIDE);
+  const handleUpdateRide = async () => {
+    if(selectedRide)
+    {
+      const mutationResult = await updateRideMutation(
+        buildUpdateRideVariables(selectedRide.id, selectedRide, startsAt)
+      )
+      if (mutationResult.data && mutationResult.data.updateOneRide) {
+        console.log("Updated ride");
+        console.log(mutationResult.data.updateOneRide)
+        navigation.navigate("Root");
+      }
+    }
+  }
+
   /** Screen UI */
   if (selectedRide) {
     return (
@@ -535,8 +565,9 @@ export const EditRide = ({
           </View>
         </View>
         <View style={{ width: "80%" }}>
-          <TouchableOpacity style={styles.submit}>
-            {/* onPress={onPressRide}> */}
+          <TouchableOpacity 
+            style={styles.submit}
+            onPress={handleUpdateRide}>
             <Text
               style={{ fontSize: 20, alignItems: "center", color: "white" }}
             >
