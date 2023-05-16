@@ -35,7 +35,7 @@ declare global{
         driverId: number;
         passengers?: RidePassengers[];
         _count?: RideCount | null;
-        date?: string;
+        date: string;
     }
 
     type Car = {

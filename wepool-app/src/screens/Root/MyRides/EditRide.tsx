@@ -37,7 +37,7 @@ import { useMutation } from "@apollo/client";
  * - QUERY ONLY UPDATES startsAt VARIABLE
  * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE
  * - LETS UPDATE THE WAY CARS ARE MANAGED IN PROFILE AND CREATE RIDE
- * - CONFIGURING DATE AND TIME
+ * - WE SHOULD HAVE TIME AND DATE SEPARETED
  */
 
 export const EditRide = ({
@@ -53,12 +53,19 @@ export const EditRide = ({
     new Date(today.setDate(today.getDate() + 1)),
     "YYYY/MM/DD"
   );
-
+  
+  /** 
+   * DATE property is db saved as a single JS Date ISO String, 
+   * which contains Date (at 0 UTC offset (-6 hrs Mex)) and also Time
+   * At render, we get the date as Date && string, and time as string (00:00) for UI purposes
+   * When sent to db we join date and time, and convert it to ISO string again.
+   */
   const [openDate, setOpenDate] = useState(false); //open and close date modal
-  const [date, setDate] = useState("DATE"); //date
+  const [date, setDate] = useState<Date>(today); //date 
+  const [dateString, setDateString] = useState("DATE"); //date string
 
   const [openTime, setOpenTime] = useState(false); //open and close time modal
-  const [time, setTime] = useState("TIME"); //time
+  const [timeString, setTime] = useState("TIME"); //time
 
   const confirmDialog = () => {
     return Alert.alert(
@@ -91,11 +98,11 @@ export const EditRide = ({
   function handleChangeDate(propDate: string): void {
     const correctedDate: Date = convertToDate(propDate);
     const date: Date = new Date(correctedDate);
-    const formattedDate: string = date.toLocaleString("en-US", {
-      day: "2-digit",
-      month: "short",
-    });
-    setDate(formattedDate);
+    const formattedDate = formatDate(date)
+    // console.log(`${propDate} || ${correctedDate} || ${correctedDate.toISOString()} || ${date} || ${formattedDate}`)
+    console.log(`${selectedRide?.date} || ${correctedDate.toISOString()} || ${correctedDate} || ${formattedDate}}`)
+    setDate(correctedDate)
+    setDateString(formattedDate)
   }
 
   function convertToDate(dateString: string): Date {
@@ -107,7 +114,33 @@ export const EditRide = ({
     return date;
   }
 
+  function formatDate(date: Date): string {
+    return date.toLocaleString("en-US", {
+      day: "2-digit",
+      month: "short",
+    });
+  }
+
+  function formatTime(hours: number, min: number): string {
+    if (min === 0)
+      return `${hours}:00`;
+    else if (min / 10 < 1)
+      return `${hours}:0${min}`
+    return `${hours}:${min}`
+  }
+
+  function getISODateString(): string {
+    const time: string[] = timeString.split(":");
+    const hours = parseInt(time[0])
+    const min = parseInt(time[1])
+    // console.log(time, hours, min)
+    date.setMinutes(min)
+    date.setHours(hours)
+    return date.toISOString()
+  }
+
   function handleChangeTime(propTime: string): void {
+    console.log(propTime, typeof propTime)
     setTime(propTime);
     setOpenTime(!openTime);
   }
@@ -153,6 +186,13 @@ export const EditRide = ({
         : selectedRide.driver?.street;
       setFrom(start_loc)
       setTo(final_loc)
+      const getDate = new Date(selectedRide?.date) //selectedRide.date = ISO date string
+      const hours = getDate.getHours()
+      const min = getDate.getMinutes()
+      console.log(`${getDate} || ${formatDate(getDate)} || ${formatTime(hours, min)} ||`)
+      setDate(getDate)
+      setDateString(formatDate(getDate))
+      setTime(formatTime(hours, min))
     }
   }, []);
 
@@ -162,10 +202,11 @@ export const EditRide = ({
     { data: mutationData, loading: loadingMutation, error: mutationError },
   ] = useMutation(UPDATE_ONE_RIDE);
   const handleUpdateRide = async () => {
+    console.log(getISODateString())
     if(selectedRide)
     {
       const mutationResult = await updateRideMutation(
-        buildUpdateRideVariables(selectedRide.id, selectedRide, startsAt)
+        buildUpdateRideVariables(selectedRide.id, selectedRide, startsAt, getISODateString())
       )
       if (mutationResult.data && mutationResult.data.updateOneRide) {
         console.log("Updated ride");
@@ -218,7 +259,7 @@ export const EditRide = ({
                 }}
               >
                 <TouchableOpacity onPress={handleOnPressDate}>
-                  <Text style={styles.text}>{date}</Text>
+                  <Text style={styles.text}>{dateString}</Text>
                 </TouchableOpacity>
                 <Modal
                   animationType="slide"
@@ -267,7 +308,7 @@ export const EditRide = ({
                 }}
               >
                 <TouchableOpacity onPress={handleOnPressTime}>
-                  <Text style={styles.text}>{time}</Text>
+                  <Text style={styles.text}>{timeString}</Text>
                 </TouchableOpacity>
                 <Modal
                   animationType="slide"
