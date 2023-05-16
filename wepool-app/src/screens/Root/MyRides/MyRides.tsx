@@ -64,14 +64,16 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
           <View style={{flex: 1}}>
             <Header text="My Rides" />
           </View>
-          <View style={{flex: 2, paddingVertical: 15}}>
-            <Button
-              text="+ Create Ride"
-              style={[styles.button, { backgroundColor: "green" }]}
-              textStyle={styles.buttonText}
-              onPress={() => navigation.navigate("CreateNewRide")}
-            />
-          </View>
+          {openRides ? (
+            <View style={{flex: 2, paddingVertical: 15}}>
+              <Button
+                text="+ Create Ride"
+                style={[styles.button, { backgroundColor: "green" }]}
+                textStyle={styles.buttonText}
+                onPress={() => navigation.navigate("CreateNewRide")}
+              />
+            </View>
+          ): null}
         </View>
         <View style={styles.cardsContainer}>
           {openRides ? (
