@@ -34,8 +34,9 @@ import { useMutation } from "@apollo/client";
 
 /**
  * TODO:
- * - QUERY ONLY UPDATES startsAt VARIABLE
- * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE
+ * - QUERY ONLY UPDATES startsAt and date VARIABLES
+ * - DELETE RIDE
+ * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE.
  * - LETS UPDATE THE WAY CARS ARE MANAGED IN PROFILE AND CREATE RIDE
  * - WE SHOULD HAVE TIME AND DATE SEPARETED
  */
@@ -56,7 +57,7 @@ export const EditRide = ({
   
   /** 
    * DATE property is db saved as a single JS Date ISO String, 
-   * which contains Date (at 0 UTC offset (-6 hrs Mex)) and also Time
+   *  which contains Date (at 0 UTC offset (-6 hrs Mex)) and also Time
    * At render, we get the date as Date && string, and time as string (00:00) for UI purposes
    * When sent to db we join date and time, and convert it to ISO string again.
    */
@@ -97,9 +98,8 @@ export const EditRide = ({
 
   function handleChangeDate(propDate: string): void {
     const correctedDate: Date = convertToDate(propDate);
-    const date: Date = new Date(correctedDate);
+    const date: Date = new Date(correctedDate);   //This is unnecesary
     const formattedDate = formatDate(date)
-    // console.log(`${propDate} || ${correctedDate} || ${correctedDate.toISOString()} || ${date} || ${formattedDate}`)
     console.log(`${selectedRide?.date} || ${correctedDate.toISOString()} || ${correctedDate} || ${formattedDate}}`)
     setDate(correctedDate)
     setDateString(formattedDate)
@@ -140,7 +140,6 @@ export const EditRide = ({
   }
 
   function handleChangeTime(propTime: string): void {
-    console.log(propTime, typeof propTime)
     setTime(propTime);
     setOpenTime(!openTime);
   }
