@@ -1,5 +1,5 @@
 // From Packages
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -12,25 +12,32 @@ import { BackButton } from "../../../components/BackButton";
 import { RidesForm } from "../../../components/RidesForm";
 import { StartingPoint } from "../../../services/enums";
 // queries
-import {
-  UPDATE_ONE_RIDE,
-  buildUpdateRideVariables
-} from "../../../mutations/updateOneRide";
+import { createOneRide, buildCreateOneRideVariables } from "../../../mutations/createOneRide";
 import { useMutation } from "@apollo/client";
+import { AuthContext } from "../../../AuthContext";
 
 /**
  * TODO:
- * - CREATE RIDE MUTATION
+ * - WHEN NAVIGATING TO ROOT DOESNT UPDATE RIDES
  */
 
 export const CreateNewRide = ({
   navigation,
 }: RootStackScreenProps<"CreateNewRide">) => {
 
+  const context = useContext(AuthContext)
  
   /** Create ride Mutation */
-  const handleUpdateRide = async () => {
-    
+  const [createRideMutation, mutationResult] = useMutation(createOneRide)
+  const handleCreateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number | undefined) => {
+    const mutationResult = await createRideMutation(
+      buildCreateOneRideVariables(startsAt, getISODateString, availableSeats, context?.authenticatedUser?.id ?? 2 , 200)
+    )
+    if (mutationResult.data && mutationResult.data.createOneRide) {
+      console.log("Created ride");
+      console.log(mutationResult.data.createOneRide)
+      navigation.navigate("Root");
+    }    
   }
   /** Screen UI */
   return (
@@ -42,7 +49,7 @@ export const CreateNewRide = ({
         <Text style={styles.title}>CREATE RIDE</Text>
       </View>
       <View style ={styles.contentContainer}>
-          <RidesForm selectedRide={null} handleUpdateRide={handleUpdateRide}/>
+          <RidesForm selectedRide={null} handleUpdateRide={handleCreateRide}/>
       </View>      
     </View>
   );

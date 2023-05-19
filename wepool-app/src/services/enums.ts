@@ -13,8 +13,8 @@
  * Closed = 1,
 */
 export const enum RideStatus {
-    Open, 
-    Closed,
+    OPEN = "OPEN", 
+    CLOSED = "CLOSED",
 }
 
 export enum StartingPoint {

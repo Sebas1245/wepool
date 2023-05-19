@@ -25,7 +25,7 @@ import { StartingPoint } from "../services/enums";
 
 type Props = {
     selectedRide: Ride | null,
-    handleUpdateRide: (getISODateString: string, startsAt: StartingPoint) => Promise<void>,
+    handleUpdateRide: (getISODateString: string, startsAt: StartingPoint, availableSeats: number | undefined) => Promise<void>,
 }
 
 export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
@@ -525,7 +525,7 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
             <View style={{ flex: 1, }}>
                 <TouchableOpacity 
                     style={styles.submit}
-                    onPress={() => handleUpdateRide(getISODateString(), startsAt)}>
+                    onPress={() => handleUpdateRide(getISODateString(), startsAt, seats ? parseInt(seats) : undefined )}>
                     <Text
                     style={{ fontSize: 20, alignItems: "center", color: "white" }}
                     >
