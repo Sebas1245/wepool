@@ -366,7 +366,8 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         }}
                     >
                         <TextInput
-                        style={styles.text}
+                        style={[styles.text, styles.uneditable]}
+                        editable = {false}
                         placeholder="MONEY"
                         value={money}
                         returnKeyType="done"
@@ -430,7 +431,8 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         }}
                     >
                         <TextInput
-                        style={styles.text}
+                        style={[styles.text, styles.uneditable]}
+                        editable = {false}
                         placeholder="MODEL"
                         value={model}
                         returnKeyType="done"
@@ -457,7 +459,8 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         }}
                     >
                         <TextInput
-                        style={styles.text}
+                        style={[styles.text, styles.uneditable]}
+                        editable = {false}
                         placeholder="COLOR"
                         value={color}
                         returnKeyType="done"
@@ -485,7 +488,8 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                     </View>
                     <View style={{ flex: 4 }}>
                     <TextInput
-                        style={styles.text}
+                        style={[styles.text, styles.uneditable]}
+                        editable = {false}
                         placeholder="LICENSE PLATE"
                         value={licensePlate}
                         returnKeyType="done"
@@ -512,7 +516,8 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         <TextInput
                         numberOfLines={4}
                         maxLength={100}
-                        style={styles.text}
+                        style={[styles.text, styles.uneditable]}
+                        editable = {false}
                         returnKeyType="done"
                         placeholder="EXTRA NOTES"
                         value={extraNotes}
@@ -618,4 +623,8 @@ const styles = StyleSheet.create({
     separator: {
       width: "80%",
     },
+    uneditable:{
+        color: "gray",
+        // backgroundColor: 'white',
+    }
   });

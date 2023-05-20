@@ -18,10 +18,13 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
   /**
    * TODO:
    *  - Ride variable for money and notes
-   *  - After editing the ride, it doesnt refresh automatically
+   *  - After editing or creating the ride, it doesnt refresh automatically
+   *  - Manage better the use of cars
+   *  - Unable to test TimePicker and ConfirmDialog
    */
   const context = useContext(AuthContext)
-  function handleOnPressEdit(id: number) {
+  
+  const handleOnPressEdit = (id: number) => {
     // Navigate to edit ride screen of the selected ride
     // Edit ride receives params (props) to get the data from the cards
     navigation.navigate("EditRide", {
