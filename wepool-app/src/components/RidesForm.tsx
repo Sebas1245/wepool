@@ -25,7 +25,7 @@ import { StartingPoint } from "../services/enums";
 
 type Props = {
     selectedRide: Ride | null,
-    handleUpdateRide: (getISODateString: string, startsAt: StartingPoint, availableSeats: number | undefined) => Promise<void>,
+    handleUpdateRide: (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => Promise<void>,
 }
 
 export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
@@ -109,7 +109,7 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
     const [from, setFrom] = useState<string>();
     const [to, setTo] = useState<string>();
     const [money, setMoney] = useState<string>();
-    const [seats, setSeats] = useState<string>();
+    const [seats, setSeats] = useState<string>('');
     const [model, setModel] = useState<string>();
     const [color, setColor] = useState<string>();
     const [licensePlate, setLicensePlate] = useState<string>();
@@ -121,10 +121,10 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
     useEffect(() => {
     if (selectedRide && selectedRide.driver.car) {
         setStartsAt(selectedRide.startsAt)
+        setSeats(selectedRide.availableSeats.toString())
         const car = selectedRide.driver.car
         setModel(car.model)
         setColor(car.color)
-        setSeats(car.capacity.toString())
         setLicensePlate(car.plateNumber)
         // setMoney()
         // setExtraNotes()
@@ -274,22 +274,22 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         
                         <SelectDropdown
                         buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
-                        data={["DRIVER'S HOME", "COMPANY", "OTHER"]}
+                        data={["DRIVER'S HOME", "COMPANY"]}
                         defaultValueByIndex={0}
                         onSelect={(selectedItem, index) => {
                             console.log(selectedItem, index);
                             // console.log(startsAt, startsAt.toString(), StartingPoint.DRIVER.toString(), startsAt === StartingPoint.DRIVER)
                             if (index === 0 && startsAt === StartingPoint.COMPANY) {
-                            setStartsAt(StartingPoint.DRIVER);
-                            let change = to
-                            setTo(from);
-                            setFrom(change);
+                                setStartsAt(StartingPoint.DRIVER);
+                                let change = to
+                                setTo(from);
+                                setFrom(change);
 
                             } else if (index === 1 && startsAt === StartingPoint.DRIVER) {
-                            setStartsAt(StartingPoint.COMPANY);
-                            let change = to
-                            setTo(from);
-                            setFrom(change);
+                                setStartsAt(StartingPoint.COMPANY);
+                                let change = to
+                                setTo(from);
+                                setFrom(change);
                             }
                         }}
                         buttonTextAfterSelection={(selectedItem, index) => {
@@ -525,9 +525,9 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
             <View style={{ flex: 1, }}>
                 <TouchableOpacity 
                     style={styles.submit}
-                    onPress={() => handleUpdateRide(getISODateString(), startsAt, seats ? parseInt(seats) : undefined )}>
+                    onPress={() => handleUpdateRide(getISODateString(), startsAt, parseInt(seats))}>
                     <Text
-                    style={{ fontSize: 20, alignItems: "center", color: "white" }}
+                        style={{ fontSize: 20, alignItems: "center", color: "white" }}
                     >
                         SAVE CHANGES
                     </Text>

@@ -4,7 +4,7 @@ import { RideStatus, StartingPoint } from "../services/enums";
 export const buildCreateOneRideVariables = (
     startsAt: StartingPoint,
     date: string,
-    availableSeats: number | undefined,
+    availableSeats: number,
     driverId: number,
     kmToGoalLocation: number,
   ) => ({

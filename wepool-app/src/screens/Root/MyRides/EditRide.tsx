@@ -71,11 +71,11 @@ export const EditRide = ({
     updateRideMutation,
     { data: mutationData, loading: loadingMutation, error: mutationError },
   ] = useMutation(UPDATE_ONE_RIDE);
-  const handleUpdateRide = async (getISODateString: string, startsAt: StartingPoint) => {
+  const handleUpdateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => {
     if(selectedRide)
     {
       const mutationResult = await updateRideMutation(
-        buildUpdateRideVariables(selectedRide.id, selectedRide, startsAt, getISODateString)
+        buildUpdateRideVariables(selectedRide.id, selectedRide, startsAt, getISODateString, availableSeats)
       )
       if (mutationResult.data && mutationResult.data.updateOneRide) {
         console.log("Updated ride");

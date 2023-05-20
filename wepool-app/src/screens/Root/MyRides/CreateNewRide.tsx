@@ -29,7 +29,7 @@ export const CreateNewRide = ({
  
   /** Create ride Mutation */
   const [createRideMutation, mutationResult] = useMutation(createOneRide)
-  const handleCreateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number | undefined) => {
+  const handleCreateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => {
     const mutationResult = await createRideMutation(
       buildCreateOneRideVariables(startsAt, getISODateString, availableSeats, context?.authenticatedUser?.id ?? 2 , 200)
     )

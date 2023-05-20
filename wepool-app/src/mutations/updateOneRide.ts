@@ -62,7 +62,8 @@ export const buildUpdateRideVariables = (
   rideId: number,
   ride: Ride, 
   startsAt: StartingPoint,
-  date: string
+  date: string,
+  availableSeats: number,
 ) => ({
   variables: {
     data: {
@@ -71,7 +72,10 @@ export const buildUpdateRideVariables = (
       },
       date: {
         set: date
-      }
+      },
+      availableSeats: {
+        set: availableSeats
+      },
     },
     where: {
       id: rideId,
