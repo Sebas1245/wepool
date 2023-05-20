@@ -13,18 +13,18 @@ import { RootStackScreenProps } from "../../../navigation/types";
 import { Oops } from "../../../components/Oops";
 import { BackButton } from "../../../components/BackButton";
 import { StartingPoint } from "../../../services/enums";
+import { RidesForm } from "../../../components/RidesForm";
 // queries
 import {
   UPDATE_ONE_RIDE,
   buildUpdateRideVariables
 } from "../../../mutations/updateOneRide";
+import { deleteOneRide } from "../../../mutations/deleteOneRide";
 import { useMutation } from "@apollo/client";
-import { RidesForm } from "../../../components/RidesForm";
 
 /**
  * TODO:
- * - QUERY ONLY UPDATES startsAt and date VARIABLES
- * - DELETE RIDE
+ * - CONFIRM DIALOG IS NOT WORKING IN MY BROWSER, NEEDS TO BE TESTED IN MOBILES
  * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE.
  * - LETS UPDATE THE WAY CARS ARE MANAGED IN PROFILE AND CREATE RIDE
  * - WE SHOULD HAVE TIME AND DATE SEPARETED
@@ -44,10 +44,7 @@ export const EditRide = ({
       [
         {
           text: "Yes",
-          onPress: () => {
-            //TBD: Delete the ride
-            console.log("Attempting to delete the ride");
-          },
+          onPress: () => handleDeleteRide(),
         },
 
         {
@@ -67,10 +64,9 @@ export const EditRide = ({
     : undefined;
 
   /** Save changes Mutation */
-  const [
-    updateRideMutation,
-    { data: mutationData, loading: loadingMutation, error: mutationError },
-  ] = useMutation(UPDATE_ONE_RIDE);
+  const [ updateRideMutation, mutationResult ] = useMutation(UPDATE_ONE_RIDE);
+  const [ deleteRideMutation, deleteRideResult ] = useMutation(deleteOneRide);
+
   const handleUpdateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => {
     if(selectedRide)
     {
@@ -85,6 +81,24 @@ export const EditRide = ({
     }
   }
 
+  const handleDeleteRide = async () => {
+    if(selectedRide)
+    {
+      const mutationResult = await deleteRideMutation({
+        variables: {
+          where: {
+            id: selectedRide.id,
+          }
+        }
+      })
+
+      if (mutationResult.data && mutationResult.data.deleteOneRide) {
+        console.log("Deleted ride");
+        console.log(mutationResult.data.deleteOneRide)
+        navigation.navigate("Root");
+      }
+    }
+  }
   /** Screen UI */
   if (selectedRide) {
     return (
@@ -96,7 +110,8 @@ export const EditRide = ({
           <Text style={styles.title}>EDIT RIDE</Text>
           <TouchableOpacity
             style={styles.delete}
-            onPress={() => confirmDialog()}
+            // onPress={() => confirmDialog()}  //The Alert.alert is not working on my browser. Needs to be tested
+            onPress={handleDeleteRide}
           >
             <MaterialIcons name="delete-outline" size={24} color="black" />
           </TouchableOpacity>
