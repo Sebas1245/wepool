@@ -24,6 +24,9 @@ export const Profile = () => {
    * When using useQuery hook you can get loading status, error info, and data
    * See more: https://www.apollographql.com/docs/react/data/queries/
    */
+  const [myInfoExpanded, setMyInfoExpanded] = useState(true);
+  const [myAdressExpanded, setMyAdressExpanded] = useState(true);
+  const [myCarsExpanded, setMyCarsExpanded] = useState(true);
   // Getting query data
   const { loading, error, data } = useQuery(GetUser, {
     variables: {
@@ -182,12 +185,17 @@ export const Profile = () => {
                 </View>
               </View>
               <ScrollView style = {{flex: 3, width: "100%"}}>
-                <Collapse>
+                <Collapse 
+                  isExpanded = {myInfoExpanded}
+                  onToggle = {(isExpanded: boolean) => setMyInfoExpanded(isExpanded)}
+                  >
                     <CollapseHeader>
-                      <Header text="My Info"/>
+                      <View style = {styles.accordionHeader}>
+                        <FontAwesome name= {myInfoExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
+                        <Header text="My Info"/>
+                      </View>
                     </CollapseHeader>
                     <CollapseBody>
-                      {/* <Text>Ta daa!</Text> */}
                       <View style={{ flex: 0.5 }}>
                         <View style={styles.fieldRowView}>
                           <FontAwesome name="phone" size={40} color="black" />
@@ -225,12 +233,17 @@ export const Profile = () => {
                       </View>
                     </CollapseBody>
                 </Collapse>
-                <Collapse>
+                <Collapse
+                  isExpanded = {myAdressExpanded}
+                  onToggle = {(isExpanded: boolean) => setMyAdressExpanded(isExpanded)}
+                  >
                     <CollapseHeader>
-                      <Header text="My Addresses"/>
+                      <View style = {styles.accordionHeader}>
+                          <FontAwesome name= {myAdressExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
+                          <Header text="My Addresses"/>
+                      </View>
                     </CollapseHeader>
                     <CollapseBody>
-                      {/* <Text>Ta daa!</Text> */}
                       <View style={{ flex: 0.5 }}>
                         <View style={styles.fieldRowView}>
                           <FontAwesome
@@ -250,9 +263,15 @@ export const Profile = () => {
                       </View>
                     </CollapseBody>
                 </Collapse>
-                <Collapse>
+                <Collapse
+                  isExpanded = {myCarsExpanded}
+                  onToggle = {(isExpanded: boolean) => setMyCarsExpanded(isExpanded)}
+                  >
                     <CollapseHeader>
-                      <Header text="My Cars"/>
+                      <View style = {styles.accordionHeader}>
+                        <FontAwesome name= {myCarsExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
+                        <Header text="My Cars"/>
+                      </View>
                     </CollapseHeader>
                     <CollapseBody>
                       {/* <Text>Ta daa!</Text> */}
@@ -476,6 +495,11 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "flex-start",
-    justifyContent: "center",
+    justifyContent: "flex-start",
+  },
+  accordionHeader:{
+    flex: 1, 
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
