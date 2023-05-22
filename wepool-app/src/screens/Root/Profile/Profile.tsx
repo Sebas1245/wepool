@@ -1,5 +1,6 @@
 // Packages
-import { StyleSheet, View, Text, TextInput } from "react-native";
+import { StyleSheet, View, Text, TextInput, ScrollView } from "react-native";
+import { Collapse,CollapseHeader, CollapseBody, AccordionList } from "accordion-collapse-react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "../../../components/Button";
 // Hooks
@@ -12,15 +13,13 @@ import GetUser, {
 } from "../../../queries/GET/UserQueries";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../AuthContext";
+import { Header } from "../../../components/Header";
+
 
 export const Profile = () => {
   const { colors } = useThemeColors();
   const context = useContext(AuthContext);
   const backgroundColor = colors.colors.primary;
-  /**
-   * TODO:
-   * - Update GetUser query to get the context User info
-   */
   /**
    * When using useQuery hook you can get loading status, error info, and data
    * See more: https://www.apollographql.com/docs/react/data/queries/
@@ -182,189 +181,217 @@ export const Profile = () => {
                   <FontAwesome name="star" size={30} color={"black"} />
                 </View>
               </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome name="phone" size={40} color="black" />
-                  {isEditing ? (
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder={data.getUser.phoneNumber ?? "N/A"}
-                      value={editPhoneNumber}
-                      returnKeyType="done"
-                      onChangeText={(newPhoneNumber) =>
-                        setEditPhoneNumber(newPhoneNumber)
-                      }
-                    />
-                  ) : (
-                    <Text style={styles.text}>
-                      {" "}
-                      {data.getUser.phoneNumber ?? "N/A"}{" "}
-                    </Text>
-                  )}
-                </View>
-              </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome
-                    name="envelope"
-                    size={40}
-                    color="black"
-                    style={styles.iconStyle}
-                  />
-                  <Text style={styles.text}>
-                    {" "}
-                    {data.getUser.email ?? "N/A"}{" "}
-                  </Text>
-                </View>
-              </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome
-                    name="map-pin"
-                    size={40}
-                    color="black"
-                    style={styles.iconStyle}
-                  />
+              <ScrollView style = {{flex: 3, width: "100%"}}>
+                <Collapse>
+                    <CollapseHeader>
+                      <Header text="My Info"/>
+                    </CollapseHeader>
+                    <CollapseBody>
+                      {/* <Text>Ta daa!</Text> */}
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome name="phone" size={40} color="black" />
+                          {isEditing ? (
+                            <TextInput
+                              style={styles.textInput}
+                              placeholder={data.getUser.phoneNumber ?? "N/A"}
+                              value={editPhoneNumber}
+                              returnKeyType="done"
+                              onChangeText={(newPhoneNumber) =>
+                                setEditPhoneNumber(newPhoneNumber)
+                              }
+                            />
+                          ) : (
+                            <Text style={styles.text}>
+                              {" "}
+                              {data.getUser.phoneNumber ?? "N/A"}{" "}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome
+                            name="envelope"
+                            size={40}
+                            color="black"
+                            style={styles.iconStyle}
+                          />
+                          <Text style={styles.text}>
+                            {" "}
+                            {data.getUser.email ?? "N/A"}{" "}
+                          </Text>
+                        </View>
+                      </View>
+                    </CollapseBody>
+                </Collapse>
+                <Collapse>
+                    <CollapseHeader>
+                      <Header text="My Addresses"/>
+                    </CollapseHeader>
+                    <CollapseBody>
+                      {/* <Text>Ta daa!</Text> */}
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome
+                            name="map-pin"
+                            size={40}
+                            color="black"
+                            style={styles.iconStyle}
+                          />
 
-                  <Text style={styles.text}>
-                    {" "}
-                    {data.getUser.street
-                      ? data.getUser.street + " " + data.getUser.number
-                      : "N/A"}
-                  </Text>
-                </View>
-              </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome
-                    name="car"
-                    size={40}
-                    color="black"
-                    style={styles.iconStyle}
-                  />
+                          <Text style={styles.text}>
+                            {" "}
+                            {data.getUser.street
+                              ? data.getUser.street + " " + data.getUser.number
+                              : "N/A"}
+                          </Text>
+                        </View>
+                      </View>
+                    </CollapseBody>
+                </Collapse>
+                <Collapse>
+                    <CollapseHeader>
+                      <Header text="My Cars"/>
+                    </CollapseHeader>
+                    <CollapseBody>
+                      {/* <Text>Ta daa!</Text> */}
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome
+                            name="car"
+                            size={40}
+                            color="black"
+                            style={styles.iconStyle}
+                          />
+                          {isEditing ? (
+                            <>
+                              <TextInput
+                                style={styles.textInputSmaller}
+                                placeholder={data.getUser.car ? `${data.getUser.car.brand}` : 'BRAND'}
+                                value={editCarBrand}
+                                returnKeyType="done"
+                                onChangeText={(newCarInfo) =>
+                                  setEditCarBrand(newCarInfo)
+                                }
+                              />
+                              <TextInput
+                                style={styles.textInputSmaller}
+                                placeholder={data.getUser.car ? `${data.getUser.car.model}` : "MODEL"}
+                                value={editCarModel}
+                                returnKeyType="done"
+                                onChangeText={(newCarInfo) =>
+                                  setEditCarModel(newCarInfo)
+                                }
+                              />
+                              <TextInput
+                                keyboardType="number-pad"
+                                style={[styles.textInputSmaller, { width: 85 }]}
+                                placeholder={data.getUser.car ? `${data.getUser.car.year}` : new Date().getFullYear().toString()}
+                                value={editCarYear ? editCarYear.toString() : ""}
+                                returnKeyType="done"
+                                onChangeText={(newYear) =>
+                                  setEditCarYear(parseInt(newYear))
+                                }
+                                maxLength={4}
+                              />
+                            </>
+                          ) : (
+                            <Text style={styles.text}>
+                              {" "}
+                              {data && data.getUser.car
+                                ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
+                                : "N/A"}{" "}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome
+                            name="paint-brush"
+                            size={40}
+                            color="black"
+                            style={styles.iconStyle}
+                          />
+                          {isEditing ? (
+                            <TextInput
+                              style={styles.textInput}
+                              placeholder={data.getUser.car ? `${data.getUser.car.color}` : "N/A"}
+                              value={editCarColor}
+                              onChangeText={(newColor) => setEditCarColor(newColor)}
+                              returnKeyType="done"
+                            />
+                          ) : (
+                            <Text style={styles.text}>
+                              {" "}
+                              {data && data.getUser.car
+                                ? `${data.getUser.car.color}`
+                                : "N/A"}{" "}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                      <View style={{ flex: 0.5 }}>
+                        <View style={styles.fieldRowView}>
+                          <FontAwesome
+                            name="drivers-license"
+                            size={40}
+                            color="black"
+                            style={styles.iconStyle}
+                          />
+                          {isEditing ? (
+                            <TextInput
+                              style={styles.textInput}
+                              placeholder={
+                                data.getUser.car ? `${data.getUser.car.plateNumber}` : "N/A"
+                              }
+                              value={editCarPlateNumber}
+                              onChangeText={(newPlateNumber) =>
+                                setEditCarPlateNumber(newPlateNumber)
+                              }
+                              returnKeyType="done"
+                            />
+                          ) : (
+                            <Text style={styles.text}>
+                              {" "}
+                              {data && data.getUser.car
+                                ? `${data.getUser.car.plateNumber}`
+                                : "N/A"}{" "}
+                            </Text>
+                          )}
+                        </View>
+                      </View>
+                    </CollapseBody>
+                </Collapse>
+                
+                <View
+                  style={{
+                    flex: 1,
+                    flexGrow: 1,
+                    flexDirection: "row",
+                    marginBottom: 40,
+                    paddingVertical: 15,
+                  }}
+                >
                   {isEditing ? (
-                    <>
-                      <TextInput
-                        style={styles.textInputSmaller}
-                        placeholder={data.getUser.car ? `${data.getUser.car.brand}` : 'BRAND'}
-                        value={editCarBrand}
-                        returnKeyType="done"
-                        onChangeText={(newCarInfo) =>
-                          setEditCarBrand(newCarInfo)
-                        }
-                      />
-                      <TextInput
-                        style={styles.textInputSmaller}
-                        placeholder={data.getUser.car ? `${data.getUser.car.model}` : "MODEL"}
-                        value={editCarModel}
-                        returnKeyType="done"
-                        onChangeText={(newCarInfo) =>
-                          setEditCarModel(newCarInfo)
-                        }
-                      />
-                      <TextInput
-                        keyboardType="number-pad"
-                        style={[styles.textInputSmaller, { width: 85 }]}
-                        placeholder={data.getUser.car ? `${data.getUser.car.year}` : new Date().getFullYear().toString()}
-                        value={editCarYear ? editCarYear.toString() : ""}
-                        returnKeyType="done"
-                        onChangeText={(newYear) =>
-                          setEditCarYear(parseInt(newYear))
-                        }
-                        maxLength={4}
-                      />
-                    </>
-                  ) : (
-                    <Text style={styles.text}>
-                      {" "}
-                      {data && data.getUser.car
-                        ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
-                        : "N/A"}{" "}
-                    </Text>
-                  )}
-                </View>
-              </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome
-                    name="paint-brush"
-                    size={40}
-                    color="black"
-                    style={styles.iconStyle}
-                  />
-                  {isEditing ? (
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder={data.getUser.car ? `${data.getUser.car.color}` : "N/A"}
-                      value={editCarColor}
-                      onChangeText={(newColor) => setEditCarColor(newColor)}
-                      returnKeyType="done"
+                    <Button
+                      text="Save Profile"
+                      style={[styles.button, { backgroundColor: "green" }]}
+                      textStyle={styles.buttonText}
+                      onPress={handleSaveProfile}
                     />
                   ) : (
-                    <Text style={styles.text}>
-                      {" "}
-                      {data && data.getUser.car
-                        ? `${data.getUser.car.color}`
-                        : "N/A"}{" "}
-                    </Text>
-                  )}
-                </View>
-              </View>
-              <View style={{ flex: 0.5 }}>
-                <View style={styles.fieldRowView}>
-                  <FontAwesome
-                    name="drivers-license"
-                    size={40}
-                    color="black"
-                    style={styles.iconStyle}
-                  />
-                  {isEditing ? (
-                    <TextInput
-                      style={styles.textInput}
-                      placeholder={
-                        data.getUser.car ? `${data.getUser.car.plateNumber}` : "N/A"
-                      }
-                      value={editCarPlateNumber}
-                      onChangeText={(newPlateNumber) =>
-                        setEditCarPlateNumber(newPlateNumber)
-                      }
-                      returnKeyType="done"
+                    <Button
+                      text="Edit Profile"
+                      style={[styles.button, { backgroundColor }]}
+                      textStyle={styles.buttonText}
+                      onPress={() => setIsEditing(true)}
                     />
-                  ) : (
-                    <Text style={styles.text}>
-                      {" "}
-                      {data && data.getUser.car
-                        ? `${data.getUser.car.plateNumber}`
-                        : "N/A"}{" "}
-                    </Text>
                   )}
                 </View>
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexGrow: 1,
-                  flexDirection: "row",
-                  marginBottom: 40,
-                  paddingVertical: 15,
-                }}
-              >
-                {isEditing ? (
-                  <Button
-                    text="Save Profile"
-                    style={[styles.button, { backgroundColor: "green" }]}
-                    textStyle={styles.buttonText}
-                    onPress={handleSaveProfile}
-                  />
-                ) : (
-                  <Button
-                    text="Edit Profile"
-                    style={[styles.button, { backgroundColor }]}
-                    textStyle={styles.buttonText}
-                    onPress={() => setIsEditing(true)}
-                  />
-                )}
-              </View>
+              </ScrollView>
+              
             </View>
           </View>
         </View>
