@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { StartingPoint } from "../services/enums";
 
 export const buildUpdateRideAddPassengerVariables = (
   rideId: number,
@@ -57,6 +58,31 @@ export const buildUpdateRideRemovePassengerVariables = (
   },
 });
 
+export const buildUpdateRideVariables = (
+  rideId: number,
+  ride: Ride, 
+  startsAt: StartingPoint,
+  date: string,
+  availableSeats: number,
+) => ({
+  variables: {
+    data: {
+      startsAt: {
+        set: startsAt,
+      },
+      date: {
+        set: date
+      },
+      availableSeats: {
+        set: availableSeats
+      },
+    },
+    where: {
+      id: rideId,
+    },
+  },
+});
+
 export const UPDATE_ONE_RIDE = gql`
   mutation UpdateOneRide(
     $data: RideUpdateInput!
@@ -64,6 +90,7 @@ export const UPDATE_ONE_RIDE = gql`
   ) {
     updateOneRide(data: $data, where: $where) {
       id
+      startsAt
       availableSeats
       driver {
         id

@@ -1,3 +1,4 @@
+import { StartingPoint, RideStatus } from "./enums";
 declare global{
     
     type User = {
@@ -24,22 +25,6 @@ declare global{
         _count?: UserCount;
     }
 
-    /**
-     * Typescript enums autom starts at 0:
-     * Open = 0, 
-     * Closed = 1,
-    */
-   enum RideStatus {
-       Open, 
-       Closed,
-   }
-
-   enum StartingPoint {
-        DRIVER, 
-        COMPANY,
-   }
-    
-
     type Ride = {
         id: number;
         kmToGoalLocation: number;
@@ -50,7 +35,7 @@ declare global{
         driverId: number;
         passengers?: RidePassengers[];
         _count?: RideCount | null;
-        date?: string;
+        date: string;
     }
 
     type Car = {

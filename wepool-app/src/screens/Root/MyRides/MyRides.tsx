@@ -1,5 +1,5 @@
 // Packages
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
 // Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
@@ -11,16 +11,20 @@ import { RideCard } from "../../../components/RideCard";
 import { Button } from "../../../components/Button";
 // Queries
 import { useQuery } from "@apollo/client";
-import GetOpenRides from "../../../queries/GET/RideQueries";
+import { GET_MY_RIDES } from "../../../queries/GET/RideQueries";
+import { AuthContext } from "../../../AuthContext";
 
-export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
+export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) => {
   /**
    * TODO:
-   *  - A varible to know user type will be needed
-   *  - Ride variable for date and start ride hour
    *  - Ride variable for money and notes
+   *  - After editing or creating the ride, it doesnt refresh automatically
+   *  - Manage better the use of cars
+   *  - Unable to test TimePicker and ConfirmDialog
    */
-  function handleOnPressEdit(id: number) {
+  const context = useContext(AuthContext)
+  
+  const handleOnPressEdit = (id: number) => {
     // Navigate to edit ride screen of the selected ride
     // Edit ride receives params (props) to get the data from the cards
     navigation.navigate("EditRide", {
@@ -30,12 +34,18 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
   }
 
   // Getting query data
-  const { loading, error, data } = useQuery(GetOpenRides);
+  const { loading, error, data } = useQuery(GET_MY_RIDES, {
+    variables: {
+      where: { driverId: { equals: context?.authenticatedUser?.id }},
+    },
+  });
 
   const [openRides, setOpenRides] = useState<Ride[]>();
+  
   useEffect(() => {
     if (data && data.rides) setOpenRides(data.rides);
-  }, [loading]);
+    console.log(openRides)
+  }, [navigation, loading]);
 
   if (error) console.log([JSON.stringify({ data }), error, error.networkError]);
   else if (loading || !openRides) {
@@ -57,14 +67,16 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
           <View style={{flex: 1}}>
             <Header text="My Rides" />
           </View>
-          <View style={{flex: 2, paddingVertical: 15}}>
-            <Button
-              text="+ Create Ride"
-              style={[styles.button, { backgroundColor: "green" }]}
-              textStyle={styles.buttonText}
-              onPress={() => navigation.navigate("CreateNewRide")}
-            />
-          </View>
+          {openRides ? (
+            <View style={{flex: 2, paddingVertical: 15}}>
+              <Button
+                text="+ Create Ride"
+                style={[styles.button, { backgroundColor: "green" }]}
+                textStyle={styles.buttonText}
+                onPress={() => navigation.navigate("CreateNewRide")}
+              />
+            </View>
+          ): null}
         </View>
         <View style={styles.cardsContainer}>
           {openRides ? (
@@ -73,8 +85,6 @@ export const MyRides = ({ navigation }: RootTabScreenProps<"MyRides">) => {
                 return (
                   <View key={ride.id} style={styles.card}>
                     <RideCard
-                      date="20 Apr"
-                      time="08:00"
                       ride={ride}
                       cardId={ride.id}
                       handleOnPressEdit={handleOnPressEdit}
