@@ -1,5 +1,5 @@
 // Packages
-import { StyleSheet, View, Text, TextInput, ScrollView } from "react-native";
+import { StyleSheet, View, Text, TextInput, ScrollView, TouchableOpacity } from "react-native";
 import { Collapse,CollapseHeader, CollapseBody, AccordionList } from "accordion-collapse-react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { Button } from "../../../components/Button";
@@ -37,6 +37,7 @@ export const Profile = () => {
   const [updateUserMutation, { loading: mutationLoading }] =
     useMutation(UPDATE_ONE_USER);
   const [isEditing, setIsEditing] = useState(false);
+  const [editingSection, setSection] = useState(-1)
 
   const verifyCarData = (): {
     brand: string;
@@ -92,6 +93,7 @@ export const Profile = () => {
   const [editCarColor, setEditCarColor] = useState<string>("");
   const [editCarPlateNumber, setEditCarPlateNumber] = useState<string>("");
   const [userHasCar, setUserHasCar] = useState(false);
+  
   useEffect(() => {
     if (data && data.getUser) {
       setEditPhoneNumber(data.getUser.phoneNumber);
@@ -194,13 +196,37 @@ export const Profile = () => {
                       <View style = {styles.accordionHeader}>
                         <FontAwesome name= {myInfoExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
                         <Header text="My Info" size={25}/>
+                        <View style = {{flex: 1, justifyContent: "flex-end"}}>
+                          {isEditing && editingSection === 1 ? (
+                            <Button
+                              text="Save Profile"
+                              style={[styles.button, { backgroundColor: "green" }]}
+                              textStyle={styles.buttonText}
+                              onPress={handleSaveProfile}
+                            />
+                          ) : (
+                            <Button
+                              text="Edit"
+                              style={[styles.button, { backgroundColor }]}
+                              textStyle={styles.buttonText}
+                              onPress={() => {
+                                setIsEditing(true)
+                                setSection(1)
+                                setMyInfoExpanded(true)
+                                // setMyAdressExpanded(true)
+                                // setMyCarsExpanded(true)
+                              }}
+                            />
+                          )}
+
+                        </View>
                       </View>
                     </CollapseHeader>
                     <CollapseBody>
                       <View style={{ flex: 0.5 }}>
                         <View style={styles.fieldRowView}>
                           <FontAwesome name="phone" size={40} color="black" />
-                          {isEditing ? (
+                          {isEditing && editingSection === 1 ? (
                             <TextInput
                               style={styles.textInput}
                               placeholder={data.getUser.phoneNumber ?? "N/A"}
@@ -242,6 +268,30 @@ export const Profile = () => {
                       <View style = {styles.accordionHeader}>
                           <FontAwesome name= {myAdressExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
                           <Header text="My Addresses" size={25}/>
+                          <View style = {{flex: 1, justifyContent: "flex-end"}}>
+                          {isEditing && editingSection === 2 ? (
+                            <Button
+                              text="Save Profile"
+                              style={[styles.button, { backgroundColor: "green" }]}
+                              textStyle={styles.buttonText}
+                              onPress={handleSaveProfile}
+                            />
+                          ) : (
+                            <Button
+                              text="Edit"
+                              style={[styles.button, { backgroundColor }]}
+                              textStyle={styles.buttonText}
+                              onPress={() => {
+                                setIsEditing(true)
+                                setSection(2)
+                                // setMyInfoExpanded(true)
+                                setMyAdressExpanded(true)
+                                // setMyCarsExpanded(true)
+                              }}
+                            />
+                          )}
+
+                        </View>
                       </View>
                     </CollapseHeader>
                     <CollapseBody>
@@ -272,6 +322,30 @@ export const Profile = () => {
                       <View style = {styles.accordionHeader}>
                         <FontAwesome name= {myCarsExpanded ? "chevron-down" : "chevron-right"} size={40} color = {colors.colors.primary} />
                         <Header text="My Cars" size={25}/>
+                        <View style = {{flex: 1, justifyContent: "flex-end"}}>
+                          {isEditing && editingSection === 3 ? (
+                            <Button
+                              text="Save Profile"
+                              style={[styles.button, { backgroundColor: "green" }]}
+                              textStyle={styles.buttonText}
+                              onPress={handleSaveProfile}
+                            />
+                          ) : (
+                            <Button
+                              text="Edit"
+                              style={[styles.button, { backgroundColor }]}
+                              textStyle={styles.buttonText}
+                              onPress={() => {
+                                setIsEditing(true)
+                                setSection(3)
+                                // setMyInfoExpanded(true)
+                                // setMyAdressExpanded(true)
+                                setMyCarsExpanded(true)
+                              }}
+                            />
+                          )}
+
+                        </View>
                       </View>
                     </CollapseHeader>
                     <CollapseBody>
@@ -302,7 +376,7 @@ export const Profile = () => {
                                   color="black"
                                   style={styles.iconStyle}
                                 />
-                                {isEditing ? (
+                                {isEditing && editingSection === 3? (
                                   <>
                                     <TextInput
                                       style={styles.textInputSmaller}
@@ -407,37 +481,6 @@ export const Profile = () => {
                       )}
                     </CollapseBody>
                 </Collapse>
-                
-                <View
-                  style={{
-                    flex: 1,
-                    flexGrow: 1,
-                    flexDirection: "row",
-                    marginBottom: 40,
-                    paddingVertical: 15,
-                  }}
-                >
-                  {isEditing ? (
-                    <Button
-                      text="Save Profile"
-                      style={[styles.button, { backgroundColor: "green" }]}
-                      textStyle={styles.buttonText}
-                      onPress={handleSaveProfile}
-                    />
-                  ) : (
-                    <Button
-                      text="Edit Profile"
-                      style={[styles.button, { backgroundColor }]}
-                      textStyle={styles.buttonText}
-                      onPress={() => {
-                        setIsEditing(true)
-                        setMyInfoExpanded(true)
-                        setMyAdressExpanded(true)
-                        setMyCarsExpanded(true)
-                      }}
-                    />
-                  )}
-                </View>
               </ScrollView>
               
             </View>
