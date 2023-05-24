@@ -12,7 +12,8 @@ export type RootStackParamList = {
     MatchedDrivers: undefined;
     EditRide: {
       rides?: Ride[], 
-      cardId: number
+      cardId: number, 
+      driverCar: Car | undefined,
     };
     CreateNewRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;

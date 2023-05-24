@@ -7,7 +7,7 @@ import { StartingPoint, RideStatus} from '../services/enums';
 
 type Props = {
     ride: Ride,
-    handleOnPressEdit: (cardId: number) => void,
+    handleOnPressEdit: (cardId: number, driverCar: Car | undefined) => void,
     cardId: number
 }
 
@@ -49,7 +49,7 @@ export const RideCard = ({ride, handleOnPressEdit, cardId}: Props) => {
                 </View>
             </View>
             <View style = {styles.edit}>
-                <TouchableOpacity onPress={() => handleOnPressEdit(cardId)}>
+                <TouchableOpacity onPress={() => handleOnPressEdit(cardId, ride.driver.car)}>
                     <FontAwesome name="edit" size={24} color="black" />
                 </TouchableOpacity>
             </View>

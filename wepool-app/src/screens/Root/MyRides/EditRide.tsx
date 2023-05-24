@@ -26,7 +26,6 @@ import { useMutation } from "@apollo/client";
  * TODO:
  * - CONFIRM DIALOG IS NOT WORKING IN MY BROWSER, NEEDS TO BE TESTED IN MOBILES
  * - WHEN UPDATING, AFTER NAVIGATION SCREENS DOESNT UPDATE.
- * - LETS UPDATE THE WAY CARS ARE MANAGED IN PROFILE AND CREATE RIDE
  * - WE SHOULD HAVE TIME AND DATE SEPARETED
  */
 
@@ -35,7 +34,7 @@ export const EditRide = ({
   navigation,
 }: RootStackScreenProps<"EditRide">) => {
   /** Getting the props */
-  const { rides, cardId } = route.params;
+  const { rides, cardId, driverCar } = route.params;
 
   const confirmDialog = () => {
     return Alert.alert(
@@ -117,7 +116,7 @@ export const EditRide = ({
           </TouchableOpacity>
         </View>
         <View style ={styles.contentContainer}>
-          <RidesForm selectedRide={selectedRide} handleUpdateRide={handleUpdateRide}/>
+          <RidesForm selectedRide={selectedRide} handleUpdateRide={handleUpdateRide} driverCar={driverCar}/>
         </View>
       </View>
     );

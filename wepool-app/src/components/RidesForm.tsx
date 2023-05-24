@@ -1,5 +1,5 @@
 // From Packages
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -22,15 +22,21 @@ import SelectDropdown from "react-native-select-dropdown";
 
 // Components
 import { StartingPoint } from "../services/enums";
+import { AuthContext } from "../AuthContext";
 
 type Props = {
     selectedRide: Ride | null,
     handleUpdateRide: (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => Promise<void>,
+    driverCar?: Car,
+
 }
 
-export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
+export const RidesForm = ({selectedRide, handleUpdateRide, driverCar}: Props) => {
     
-        /** Variables and functions*/
+    /** Get Driver info */
+    const context = useContext(AuthContext)
+
+    /** Variables and functions*/
     const today = new Date();
     const startDate = getFormatedDate(
         new Date(today.setDate(today.getDate() + 1)),
@@ -119,33 +125,33 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
 
     //Initialize selected ride data to fetch on form
     useEffect(() => {
-    if (selectedRide && selectedRide.driver.car) {
-        setStartsAt(selectedRide.startsAt)
-        setSeats(selectedRide.availableSeats.toString())
-        const car = selectedRide.driver.car
-        setModel(car.model)
-        setColor(car.color)
-        setLicensePlate(car.plateNumber)
-        // setMoney()
-        // setExtraNotes()
-        const start_loc =
-        selectedRide.startsAt === StartingPoint.DRIVER
-        ? selectedRide.driver?.street
-        : selectedRide.driver?.company.street;
-        const final_loc =
-        selectedRide.startsAt === StartingPoint.DRIVER
-        ? selectedRide.driver?.company.street
-        : selectedRide.driver?.street;
-        setFrom(start_loc)
-        setTo(final_loc)
-        const getDate = new Date(selectedRide?.date) //selectedRide.date = ISO date string
-        const hours = getDate.getHours()
-        const min = getDate.getMinutes()
-        console.log(`${getDate} || ${formatDate(getDate)} || ${formatTime(hours, min)} ||`)
-        setDate(getDate)
-        setDateString(formatDate(getDate))
-        setTime(formatTime(hours, min))
-    }
+        if (selectedRide && selectedRide.driver.car) {
+            setStartsAt(selectedRide.startsAt)
+            setSeats(selectedRide.availableSeats.toString())
+            const car = selectedRide.driver.car
+            setModel(car.model)
+            setColor(car.color)
+            setLicensePlate(car.plateNumber)
+            // setMoney()
+            // setExtraNotes()
+            const start_loc =
+            selectedRide.startsAt === StartingPoint.DRIVER
+            ? selectedRide.driver?.street
+            : selectedRide.driver?.company.street;
+            const final_loc =
+            selectedRide.startsAt === StartingPoint.DRIVER
+            ? selectedRide.driver?.company.street
+            : selectedRide.driver?.street;
+            setFrom(start_loc)
+            setTo(final_loc)
+            const getDate = new Date(selectedRide?.date) //selectedRide.date = ISO date string
+            const hours = getDate.getHours()
+            const min = getDate.getMinutes()
+            console.log(`${getDate} || ${formatDate(getDate)} || ${formatTime(hours, min)} ||`)
+            setDate(getDate)
+            setDateString(formatDate(getDate))
+            setTime(formatTime(hours, min))
+        }
     }, []);
     return (
         <View style={{flex: 1}}>
@@ -254,7 +260,7 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                 <View style={{ flex: 2, flexDirection: "row" }}>
                     <View
                     style={{
-                        flex: 1,
+                        flex: 0.5,
                         alignSelf: "center",
                         alignItems: "center",
                         justifyContent: "center",
@@ -264,45 +270,45 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                     </View>
                     <Divider orientation="vertical" />
                     <View style={{
-                        flex: 1,
+                        flex: 1.5,
                         alignItems: "flex-start",
                         justifyContent: "center",
                         }}
                     >
                         <View style={{paddingLeft: 10}}>
-                        <Text>START FROM:</Text>
-                        
-                        <SelectDropdown
-                        buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
-                        data={["DRIVER'S HOME", "COMPANY"]}
-                        defaultValueByIndex={0}
-                        onSelect={(selectedItem, index) => {
-                            console.log(selectedItem, index);
-                            // console.log(startsAt, startsAt.toString(), StartingPoint.DRIVER.toString(), startsAt === StartingPoint.DRIVER)
-                            if (index === 0 && startsAt === StartingPoint.COMPANY) {
-                                setStartsAt(StartingPoint.DRIVER);
-                                let change = to
-                                setTo(from);
-                                setFrom(change);
+                            <Text>START FROM:</Text>
+                            
+                            <SelectDropdown
+                            buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
+                            data={["DRIVER'S HOME", "COMPANY"]}
+                            defaultValueByIndex={0}
+                            onSelect={(selectedItem, index) => {
+                                console.log(selectedItem, index);
+                                // console.log(startsAt, startsAt.toString(), StartingPoint.DRIVER.toString(), startsAt === StartingPoint.DRIVER)
+                                if (index === 0 && startsAt === StartingPoint.COMPANY) {
+                                    setStartsAt(StartingPoint.DRIVER);
+                                    let change = to
+                                    setTo(from);
+                                    setFrom(change);
 
-                            } else if (index === 1 && startsAt === StartingPoint.DRIVER) {
-                                setStartsAt(StartingPoint.COMPANY);
-                                let change = to
-                                setTo(from);
-                                setFrom(change);
-                            }
-                        }}
-                        buttonTextAfterSelection={(selectedItem, index) => {
-                            // text represented after item is selected
-                            // if data array is an array of objects then return selectedItem.property to render after item is selected
-                            return selectedItem;
-                        }}
-                        rowTextForSelection={(item, index) => {
-                            // text represented for each item in dropdown
-                            // if data array is an array of objects then return item.property to represent item in dropdown
-                            return item;
-                        }}
-                        />
+                                } else if (index === 1 && startsAt === StartingPoint.DRIVER) {
+                                    setStartsAt(StartingPoint.COMPANY);
+                                    let change = to
+                                    setTo(from);
+                                    setFrom(change);
+                                }
+                            }}
+                            buttonTextAfterSelection={(selectedItem, index) => {
+                                // text represented after item is selected
+                                // if data array is an array of objects then return selectedItem.property to render after item is selected
+                                return selectedItem;
+                            }}
+                            rowTextForSelection={(item, index) => {
+                                // text represented for each item in dropdown
+                                // if data array is an array of objects then return item.property to represent item in dropdown
+                                return item;
+                            }}
+                            />
                         </View>
                     </View>
                     <Divider orientation="vertical" />
@@ -412,7 +418,7 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
 
                 <Divider></Divider>
 
-                <View style={styles.doubleInput}>
+                {/* <View style={styles.doubleInput}>
                     <View style={{ flexDirection: "row", flex: 1 }}>
                     <View
                         style={{
@@ -468,11 +474,46 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         />
                     </View>
                     </View>
-                </View>
+                </View> */}
 
                 <Divider></Divider>
 
-                <View
+                <View style={{paddingLeft: 10}}>
+                    <Text>SELECT CAR:</Text>
+                    <SelectDropdown
+                        buttonStyle={{ width: "100%", backgroundColor: "lightgray" }}
+                        data={[driverCar ? `${driverCar.brand} ${driverCar.model} ${driverCar.year}` : "N/A"]}
+                        defaultValueByIndex={0}
+                        onSelect={(selectedItem, index) => {
+                            console.log(selectedItem, index);
+                            // console.log(startsAt, startsAt.toString(), StartingPoint.DRIVER.toString(), startsAt === StartingPoint.DRIVER)
+                            if (index === 0 && startsAt === StartingPoint.COMPANY) {
+                                setStartsAt(StartingPoint.DRIVER);
+                                let change = to
+                                setTo(from);
+                                setFrom(change);
+
+                            } else if (index === 1 && startsAt === StartingPoint.DRIVER) {
+                                setStartsAt(StartingPoint.COMPANY);
+                                let change = to
+                                setTo(from);
+                                setFrom(change);
+                            }
+                        }}
+                        buttonTextAfterSelection={(selectedItem, index) => {
+                            // text represented after item is selected
+                            // if data array is an array of objects then return selectedItem.property to render after item is selected
+                            return selectedItem;
+                        }}
+                        rowTextForSelection={(item, index) => {
+                            // text represented for each item in dropdown
+                            // if data array is an array of objects then return item.property to represent item in dropdown
+                            return item;
+                        }}
+                    />
+                </View>
+
+                {/* <View
                     style={{
                     flexDirection: "row",
                     flex: 1,
@@ -498,7 +539,7 @@ export const RidesForm = ({selectedRide, handleUpdateRide}: Props) => {
                         }
                     />
                     </View>
-                </View>
+                </View> */}
 
                 <Divider></Divider>
 
