@@ -1,5 +1,5 @@
 // From Packages
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -13,8 +13,9 @@ import { RidesForm } from "../../../components/RidesForm";
 import { StartingPoint } from "../../../services/enums";
 // queries
 import { createOneRide, buildCreateOneRideVariables } from "../../../mutations/createOneRide";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { AuthContext } from "../../../AuthContext";
+import { getCar } from "../../../queries/getCar";
 
 /**
  * TODO:
@@ -25,19 +26,37 @@ export const CreateNewRide = ({
   navigation,
 }: RootStackScreenProps<"CreateNewRide">) => {
 
+  /** Get User info */
   const context = useContext(AuthContext)
+  // Getting query data
+  const { loading, error, data } = useQuery(getCar, {
+    variables: {
+      where: { driverId: context?.authenticatedUser?.id },
+    },
+  });
+
+  const [driverCar, setDriverCar] = useState<Car>()
+
+  useEffect(() => {
+    if (data && data.getCar) {
+      setDriverCar(data.getCar)
+    }
+  }, [data]);
  
   /** Create ride Mutation */
   const [createRideMutation, mutationResult] = useMutation(createOneRide)
   const handleCreateRide = async (getISODateString: string, startsAt: StartingPoint, availableSeats: number) => {
-    const mutationResult = await createRideMutation(
-      buildCreateOneRideVariables(startsAt, getISODateString, availableSeats, context?.authenticatedUser?.id ?? 2 , 200)
-    )
-    if (mutationResult.data && mutationResult.data.createOneRide) {
-      console.log("Created ride");
-      console.log(mutationResult.data.createOneRide)
-      navigation.navigate("Root");
-    }    
+    if(context && context.authenticatedUser)
+    {
+      const mutationResult = await createRideMutation(
+        buildCreateOneRideVariables(startsAt, getISODateString, availableSeats, context.authenticatedUser.id, 200)
+      )
+      if (mutationResult.data && mutationResult.data.createOneRide) {
+        console.log("Created ride");
+        console.log(mutationResult.data.createOneRide)
+        navigation.navigate("Root");
+      }
+    }
   }
   /** Screen UI */
   return (
@@ -49,7 +68,7 @@ export const CreateNewRide = ({
         <Text style={styles.title}>CREATE RIDE</Text>
       </View>
       <View style ={styles.contentContainer}>
-          <RidesForm selectedRide={null} handleUpdateRide={handleCreateRide}/>
+          <RidesForm selectedRide={null} handleUpdateRide={handleCreateRide} driverCar={driverCar}/>
       </View>      
     </View>
   );
