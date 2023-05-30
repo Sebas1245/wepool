@@ -370,14 +370,14 @@ export const Profile = () => {
                           <CollapseBody>
                             <View style={{ flex: 0.5 }}>
                               <View style={styles.fieldRowView}>
-                                <FontAwesome
-                                  name="car"
-                                  size={40}
-                                  color="black"
-                                  style={styles.iconStyle}
-                                />
                                 {isEditing && editingSection === 3? (
                                   <>
+                                    <FontAwesome
+                                      name="car"
+                                      size={40}
+                                      color="black"
+                                      style={styles.iconStyle}
+                                    />
                                     <TextInput
                                       style={styles.textInputSmaller}
                                       placeholder={data.getUser.car ? `${data.getUser.car.brand}` : 'BRAND'}
@@ -408,14 +408,7 @@ export const Profile = () => {
                                       maxLength={4}
                                     />
                                   </>
-                                ) : (
-                                  <Text style={styles.text}>
-                                    {" "}
-                                    {data && data.getUser.car
-                                      ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
-                                      : "N/A"}{" "}
-                                  </Text>
-                                )}
+                                ) : null }
                               </View>
                             </View>
                             <View style={{ flex: 0.5 }}>
