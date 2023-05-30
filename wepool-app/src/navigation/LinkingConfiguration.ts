@@ -34,6 +34,7 @@ const linking: LinkingOptions<RootStackParamList> = {
               MyRides: 'MyRides',
               EditRide: 'EditRide',
               CreateNewRide: 'CreateNewRide',
+              NavigateRide: 'NavigateRide',
             },
           },
           Profile: {

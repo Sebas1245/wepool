@@ -16,6 +16,7 @@ export type RootStackParamList = {
       driverCar: Car | undefined,
     };
     CreateNewRide: undefined;
+    NavigateRide: undefined;
     Root: NavigatorScreenParams<RootTabParamList> | undefined;
   };
   

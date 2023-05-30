@@ -8,10 +8,11 @@ import { StartingPoint, RideStatus} from '../services/enums';
 type Props = {
     ride: Ride,
     handleOnPressEdit: (cardId: number, driverCar: Car | undefined) => void,
-    cardId: number
+    cardId: number,
+    handleOnPressStart: () => void,
 }
 
-export const RideCard = ({ride, handleOnPressEdit, cardId}: Props) => {
+export const RideCard = ({ride, handleOnPressEdit, cardId, handleOnPressStart}: Props) => {
     
     const { colors } = useThemeColors();
     const backgroundColor = colors.tint
@@ -33,6 +34,7 @@ export const RideCard = ({ride, handleOnPressEdit, cardId}: Props) => {
                         style={[styles.button, {backgroundColor: ride.status == RideStatus.OPEN ? 'green': 'gray'}]} 
                         textStyle ={styles.buttonText}
                         props={{"disabled": ride.status == RideStatus.OPEN ? false : true}}
+                        onPress={() => handleOnPressStart()}
                         />
                     <Button 
                         text="Riders" 

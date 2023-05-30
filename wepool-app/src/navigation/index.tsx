@@ -34,6 +34,7 @@ import { EditRide } from '../screens/Root/MyRides/EditRide';
 import { MyRides } from "../screens/Root/MyRides/MyRides";
 import { Profile } from '../screens/Root/Profile/Profile';
 import { AuthContext, AuthenticatedUser } from "../AuthContext";
+import { NavigateRide } from "../screens/Root/MyRides/NavigateRide";
 
 export default function Navigation({
   colorScheme,
@@ -97,6 +98,11 @@ function RootNavigator() {
       <Stack.Screen 
         name="CreateNewRide" 
         component={CreateNewRide}
+        options={{headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="NavigateRide" 
+        component={NavigateRide}
         options={{headerShown: false}} 
       />
     </Stack.Navigator>
