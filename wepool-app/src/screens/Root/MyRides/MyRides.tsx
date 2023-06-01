@@ -33,6 +33,10 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
     });
   }
 
+  const handleOnPressStart = () => {
+    navigation.navigate('NavigateRide');
+  }
+
   // Getting query data
   const { loading, error, data } = useQuery(GET_MY_RIDES, {
     variables: {
@@ -88,6 +92,7 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
                       ride={ride}
                       cardId={ride.id}
                       handleOnPressEdit={handleOnPressEdit}
+                      handleOnPressStart={handleOnPressStart}
                     />
                   </View>
                 );

@@ -12,6 +12,7 @@ import { DriverCard } from "../../../components/DriverCard";
 import { RideDetailsModal } from "../../../components/RideDetailsModal";
 // Queries
 import GetOpenRides from "../../../queries/GET/RideQueries";
+import * as Location from "expo-location";
 
 export const RideDisplay = ({
   navigation,
@@ -35,11 +36,23 @@ export const RideDisplay = ({
       setCardId(id)
   }
 
+
+  const requestLocation = async () => {
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    console.log("Status -> ", status);
+    if (status !== "granted") {
+      alert("Location permission not granted. Unable to navigate.");
+    }
+    return;
+  };
+
+
   // Getting query data
   const { loading, error, data } = useQuery(GetOpenRides);
 
   const [openRides, setOpenRides] = useState<Ride[]>();
   useEffect(() => {
+    requestLocation()
     if (data && data.rides) setOpenRides(data.rides);
   }, [loading]);
 
