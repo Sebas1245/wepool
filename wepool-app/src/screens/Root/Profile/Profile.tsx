@@ -166,7 +166,7 @@ export const Profile = () => {
         <View style={[{ flex: 1 }]}>
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <View style={{ flex: 1, marginTop: 10, alignSelf: "center" }}>
+              <View style={{ flex: 0, marginTop: 10, alignSelf: "center" }}>
                 <Text style={styles.text}>
                   {" "}
                   {data
@@ -187,7 +187,7 @@ export const Profile = () => {
                   <FontAwesome name="star" size={30} color={"black"} />
                 </View>
               </View>
-              <ScrollView style = {{flex: 3, width: "100%"}}>
+              <ScrollView style = {{flex: 1, width: "100%", marginTop: 10}}>
                 <Collapse 
                   isExpanded = {myInfoExpanded}
                   onToggle = {(isExpanded: boolean) => setMyInfoExpanded(isExpanded)}
@@ -370,14 +370,14 @@ export const Profile = () => {
                           <CollapseBody>
                             <View style={{ flex: 0.5 }}>
                               <View style={styles.fieldRowView}>
-                                <FontAwesome
-                                  name="car"
-                                  size={40}
-                                  color="black"
-                                  style={styles.iconStyle}
-                                />
                                 {isEditing && editingSection === 3? (
                                   <>
+                                    <FontAwesome
+                                      name="car"
+                                      size={40}
+                                      color="black"
+                                      style={styles.iconStyle}
+                                    />
                                     <TextInput
                                       style={styles.textInputSmaller}
                                       placeholder={data.getUser.car ? `${data.getUser.car.brand}` : 'BRAND'}
@@ -408,14 +408,7 @@ export const Profile = () => {
                                       maxLength={4}
                                     />
                                   </>
-                                ) : (
-                                  <Text style={styles.text}>
-                                    {" "}
-                                    {data && data.getUser.car
-                                      ? `${data.getUser.car.brand} ${data.getUser.car.model} ${data.getUser.car.year}`
-                                      : "N/A"}{" "}
-                                  </Text>
-                                )}
+                                ) : null }
                               </View>
                             </View>
                             <View style={{ flex: 0.5 }}>
@@ -535,7 +528,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     borderRadius: 15,
-    paddingVertical: 10,
+    paddingVertical: 7,
+    paddingHorizontal: 30,
   },
   buttonText: {
     color: "white",
