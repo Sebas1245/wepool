@@ -85,11 +85,6 @@ function RootNavigator() {
         options={{ headerShown: false }}
       />
       {/* SECONDARY SCREENS INSIDE TAB FUNCTIONALITIES */}
-      <Stack.Screen
-        name="MatchedDrivers"
-        component={MatchedDrivers}
-        options={{ headerShown: false, animationTypeForReplace: "pop" }}
-      />
       <Stack.Screen 
         name="EditRide" 
         component={EditRide}
@@ -144,14 +139,14 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="SearchRide"
-        component={SearchRide}
-        options={({ navigation }: RootTabScreenProps<"SearchRide">) => ({
+        name="MatchedDrivers"
+        component={MatchedDrivers}
+        options={({ navigation }: RootTabScreenProps<"MatchedDrivers">) => ({
           title: "Search",
           tabBarIcon: ({ color }) => <TabBarIcon name="search" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("SearchRide")}
+              onPress={() => navigation.navigate("MatchedDrivers")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

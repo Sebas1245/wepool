@@ -27,7 +27,7 @@ export type RootStackParamList = {
   export type RootTabParamList = {
     Home: undefined;
     MyRides: undefined;
-    SearchRide: undefined;
+    MatchedDrivers: undefined;
     Profile: undefined;
 };
 

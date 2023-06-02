@@ -141,10 +141,11 @@ export const MatchedDrivers = ({
         <HeaderBar />
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.backButton}>
+        {/* TODO: Enable this button when SearchRide screen is finished */}
+        {/* <View style={styles.backButton}>
           <BackButton onPress={() => navigation.goBack()} />
-        </View>
-        <Header text="Matched Drivers" />
+        </View> */}
+        <Header text="Sign up for a Ride" />
         <View style={styles.cardsContainer}>
           {openRides ? (
             <ScrollView>
