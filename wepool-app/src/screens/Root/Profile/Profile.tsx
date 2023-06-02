@@ -349,7 +349,7 @@ export const Profile = () => {
                       </View>
                     </CollapseHeader>
                     <CollapseBody>
-                      {data && data.getUser.car ? (
+                      {data ? (
                         <Collapse>
                           <CollapseHeader>
                             <View style = {[styles.fieldRowView, {backgroundColor: colors.tint, shadowColor: 'black', shadowRadius: 5}]}>
