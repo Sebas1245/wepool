@@ -13,7 +13,10 @@ import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { Oops } from "../../../components/Oops";
 
 // queries
-import GetOpenRides from "../../../queries/GET/RideQueries";
+import GetOpenRides, {
+  GET_MY_RIDES,
+  buildGetMyRidesVariables,
+} from "../../../queries/GET/RideQueries";
 import { AuthContext } from "../../../AuthContext";
 import {
   UPDATE_ONE_RIDE,
@@ -52,7 +55,9 @@ export const MatchedDrivers = ({
   }
 
   // Getting query data
-  const { loading, error, data } = useQuery(GetOpenRides);
+  const { loading, error, data } = useQuery(GET_MY_RIDES, {
+    variables: buildGetMyRidesVariables(context?.authenticatedUser?.id),
+  });
   const [queryPassengerRides] = useLazyQuery(PASSENGER_RIDES, {
     variables: { where: { id: context?.authenticatedUser?.id } },
     fetchPolicy: "network-only",
@@ -136,10 +141,11 @@ export const MatchedDrivers = ({
         <HeaderBar />
       </View>
       <View style={styles.contentContainer}>
-        <View style={styles.backButton}>
+        {/* TODO: Enable this button when SearchRide screen is finished */}
+        {/* <View style={styles.backButton}>
           <BackButton onPress={() => navigation.goBack()} />
-        </View>
-        <Header text="Matched Drivers" />
+        </View> */}
+        <Header text="Sign up for a Ride" />
         <View style={styles.cardsContainer}>
           {openRides ? (
             <ScrollView>

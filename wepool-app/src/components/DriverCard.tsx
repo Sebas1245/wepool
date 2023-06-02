@@ -19,8 +19,8 @@ type Props = {
   handleCardId?: any;
   cardId: number;
   joined: boolean;
-  handleAddPassenger: (rideId: number) => Promise<void>
-  handleRemovePassenger: (rideId: number) => Promise<void>
+  handleAddPassenger?: (rideId: number) => Promise<void>;
+  handleRemovePassenger?: (rideId: number) => Promise<void>;
 };
 
 export const DriverCard = ({
@@ -31,7 +31,7 @@ export const DriverCard = ({
   cardId,
   joined,
   handleAddPassenger,
-  handleRemovePassenger
+  handleRemovePassenger,
 }: Props) => {
   const { colors } = useThemeColors();
   const backgroundColor = colors.tint;
@@ -73,21 +73,23 @@ export const DriverCard = ({
             textStyle={styles.buttonText}
             onPress={handleOnPressRideDetails}
           />
-          {joined ? (
-            <Button
-              text="Cancel"
-              style={[styles.button, { backgroundColor: "red" }]}
-              textStyle={styles.buttonText}
-              onPress={() => handleRemovePassenger(ride.id)}
-            />
-          ) : (
-            <Button
-              text="Join Ride"
-              style={[styles.button, { backgroundColor: "green" }]}
-              textStyle={styles.buttonText}
-              onPress={() => handleAddPassenger(ride.id)}
-            />
-          )}
+          {handleRemovePassenger && handleAddPassenger ? (
+            joined ? (
+              <Button
+                text="Cancel"
+                style={[styles.button, { backgroundColor: "red" }]}
+                textStyle={styles.buttonText}
+                onPress={() => handleRemovePassenger(ride.id)}
+              />
+            ) : (
+              <Button
+                text="Join Ride"
+                style={[styles.button, { backgroundColor: "green" }]}
+                textStyle={styles.buttonText}
+                onPress={() => handleAddPassenger(ride.id)}
+              />
+            )
+          ) : null}
         </View>
       </View>
     </View>

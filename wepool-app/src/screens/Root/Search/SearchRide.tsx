@@ -20,6 +20,7 @@ import { HeaderBar } from "../../../components/HeaderBar";
 import SelectDropdown from "react-native-select-dropdown";
 import { formattedDisplayStartDate } from "../../../core/dateUtils";
 
+// TODO: This screen needs more work before being implemented into the app
 export const SearchRide = ({
   navigation,
 }: RootTabScreenProps<"SearchRide">) => {
