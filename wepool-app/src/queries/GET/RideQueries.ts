@@ -1,7 +1,8 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-export default gql`query GetOpenRides {
-    rides(where: {status: {equals: OPEN}}) {
+export default gql`
+  query GetOpenRides {
+    rides(where: { status: { equals: OPEN } }) {
       id
       driver {
         id
@@ -40,9 +41,11 @@ export default gql`query GetOpenRides {
       status
       date
     }
-  }`;
+  }
+`;
 
-  export const GET_MY_RIDES = gql`query GetMyRides($where: RideWhereInput) {
+export const GET_MY_RIDES = gql`
+  query GetMyRides($where: RideWhereInput) {
     rides(where: $where) {
       id
       driverId
@@ -83,4 +86,22 @@ export default gql`query GetOpenRides {
       status
       date
     }
-  }`
+  }
+`;
+
+export const buildGetMyRidesVariables = (userId: number | undefined) => ({
+  where: {
+    driverId: {
+      not: {
+        equals: userId,
+      },
+    },
+    passengers: {
+      every: {
+        passengerId: {
+          equals: userId,
+        },
+      },
+    },
+  },
+});
