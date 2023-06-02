@@ -1,7 +1,13 @@
 // Packages
 import { useState, useEffect, useContext } from "react";
-import { useQuery } from "@apollo/client";
-import { StyleSheet, View, ScrollView, Text } from "react-native";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  RefreshControl,
+} from "react-native";
 // Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
 // Components
@@ -13,7 +19,8 @@ import { RideDetailsModal } from "../../../components/RideDetailsModal";
 // Queries
 import GetOpenRides, {
   GET_MY_RIDES,
-  buildGetMyRidesVariables,
+  buildGetMySignedUpRidesVariables,
+  buildGetOpenRidesVariables,
 } from "../../../queries/GET/RideQueries";
 import * as Location from "expo-location";
 import { AuthContext } from "../../../AuthContext";
@@ -49,8 +56,23 @@ export const RideDisplay = ({ navigation }: RootTabScreenProps<"Home">) => {
 
   // Getting query data
   const { loading, error, data } = useQuery(GET_MY_RIDES, {
-    variables: buildGetMyRidesVariables(context?.authenticatedUser?.id),
+    variables: buildGetMySignedUpRidesVariables(context?.authenticatedUser?.id),
   });
+  const [queryRides] = useLazyQuery(GET_MY_RIDES, {
+    variables: buildGetMySignedUpRidesVariables(context?.authenticatedUser?.id),
+    fetchPolicy: 'network-only',
+  });
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    const rides = await queryRides();
+    console.log(rides.data);
+    if (rides.data.rides) {
+      setOpenRides(rides.data.rides);
+    }
+    setRefreshing(false);
+  };
   const [openRides, setOpenRides] = useState<Ride[]>();
   useEffect(() => {
     requestLocation();
@@ -76,20 +98,40 @@ export const RideDisplay = ({ navigation }: RootTabScreenProps<"Home">) => {
         <Header text="Current Rides" />
         <View style={styles.cardsContainer}>
           {openRides ? (
-            <ScrollView>
-              {openRides.map((ride) => (
-                <View key={ride.id} style={styles.card}>
-                  <DriverCard
-                    date={ride.date ?? ""}
-                    ride={ride}
-                    handleOpenDetails={handleOpenDetails}
-                    handleCardId={handleCardId}
-                    cardId={ride.id}
-                    joined={true}
+            openRides.length > 0 ? (
+              <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
                   />
-                </View>
-              ))}
-            </ScrollView>
+                }
+              >
+                {openRides.map((ride) => (
+                  <View key={ride.id} style={styles.card}>
+                    <DriverCard
+                      date={ride.date ?? ""}
+                      ride={ride}
+                      handleOpenDetails={handleOpenDetails}
+                      handleCardId={handleCardId}
+                      cardId={ride.id}
+                      joined={true}
+                    />
+                  </View>
+                ))}
+              </ScrollView>
+            ) : (
+              <ScrollView
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                  />
+                }
+              >
+                <Oops text="You have not signed up for any rides yet! Go to the Search tab to sign up for a ride " />
+              </ScrollView>
+            )
           ) : (
             <Oops />
           )}

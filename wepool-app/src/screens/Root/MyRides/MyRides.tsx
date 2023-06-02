@@ -1,6 +1,6 @@
 // Packages
 import { useState, useEffect, useContext } from "react";
-import { StyleSheet, View, ScrollView, Text, Touchable } from "react-native";
+import { StyleSheet, View, ScrollView, Text, Touchable, RefreshControl } from "react-native";
 // Navigation
 import { RootTabScreenProps } from "../../../navigation/types";
 // Components
@@ -10,7 +10,7 @@ import { Oops } from "../../../components/Oops";
 import { RideCard } from "../../../components/RideCard";
 import { Button } from "../../../components/Button";
 // Queries
-import { useQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { GET_MY_RIDES } from "../../../queries/GET/RideQueries";
 import { AuthContext } from "../../../AuthContext";
 
@@ -42,7 +42,25 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
     variables: {
       where: { driverId: { equals: context?.authenticatedUser?.id }},
     },
+    fetchPolicy: 'network-only'
   });
+
+  const [queryRides] = useLazyQuery(GET_MY_RIDES, {
+    variables: {
+      where: { driverId: { equals: context?.authenticatedUser?.id }},
+    },
+    fetchPolicy: 'network-only'
+  });
+  const [refreshing, setRefreshing] = useState(false);
+  
+  const onRefresh = async () => {
+    setRefreshing(true);
+    const rides = await queryRides();
+    if (rides.data.rides) {
+      setOpenRides(rides.data.rides);
+    }
+    setRefreshing(false);
+  };
 
   const [openRides, setOpenRides] = useState<Ride[]>();
   
@@ -84,7 +102,7 @@ export const MyRides = ({ navigation, route }: RootTabScreenProps<"MyRides">) =>
         </View>
         <View style={styles.cardsContainer}>
           {openRides ? (
-            <ScrollView>
+            <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
               {openRides.map((ride) => {
                 return (
                   <View key={ride.id} style={styles.card}>

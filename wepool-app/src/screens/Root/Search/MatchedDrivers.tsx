@@ -15,7 +15,8 @@ import { Oops } from "../../../components/Oops";
 // queries
 import GetOpenRides, {
   GET_MY_RIDES,
-  buildGetMyRidesVariables,
+  buildGetMySignedUpRidesVariables,
+  buildGetOpenRidesVariables,
 } from "../../../queries/GET/RideQueries";
 import { AuthContext } from "../../../AuthContext";
 import {
@@ -56,7 +57,8 @@ export const MatchedDrivers = ({
 
   // Getting query data
   const { loading, error, data } = useQuery(GET_MY_RIDES, {
-    variables: buildGetMyRidesVariables(context?.authenticatedUser?.id),
+    variables: buildGetOpenRidesVariables(context?.authenticatedUser?.id),
+    fetchPolicy: 'network-only'
   });
   const [queryPassengerRides] = useLazyQuery(PASSENGER_RIDES, {
     variables: { where: { id: context?.authenticatedUser?.id } },
