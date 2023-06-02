@@ -6,13 +6,19 @@ import MapViewDirections from "react-native-maps-directions";
 import { googleMapsAPIKey } from "../../../../clientIds";
 import * as Location from "expo-location";
 import { useThemeColors } from "../../../hooks/useThemeColors";
+import { BackButton } from "../../../components/BackButton";
+import navigation from "../../../navigation";
+import { RootStackScreenProps } from "../../../navigation/types";
 
 const { width, height } = Dimensions.get("window");
 const ASPECT_RATIO = width / height;
 const LATITUDE_DELTA = 0.09;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
-export const NavigateRide = () => {
+export const NavigateRide = ({
+  navigation,
+  route,
+}: RootStackScreenProps<"NavigateRide">) => {
   const {
     colors: { colors },
   } = useThemeColors();
@@ -49,11 +55,14 @@ export const NavigateRide = () => {
   }, [location]);
   return (
     <View style={styles.container}>
+      <View style={styles.backButton}>
+        <BackButton onPress={() => navigation.goBack()} />
+      </View>
       <MapView
         style={styles.map}
         initialRegion={{
-          latitude: origin.latitude,
-          longitude: origin.longitude,
+          latitude: location?.latitude || origin.latitude,
+          longitude: location?.longitude || origin.longitude,
           latitudeDelta: LATITUDE_DELTA,
           longitudeDelta: LONGITUDE_DELTA,
         }}
@@ -81,6 +90,13 @@ const styles = StyleSheet.create({
   },
   map: {
     width: "100%",
-    height: "100%",
+    height: "90%",
+  },
+  backButton: {
+    flex: 1,
+    width: "100%",
+    alignItems: "flex-start",
+    paddingTop: 40,
+    paddingHorizontal: 25,
   },
 });
