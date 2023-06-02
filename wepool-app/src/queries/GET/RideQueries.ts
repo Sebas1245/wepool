@@ -89,19 +89,33 @@ export const GET_MY_RIDES = gql`
   }
 `;
 
-export const buildGetMyRidesVariables = (userId: number | undefined) => ({
+export const buildGetMySignedUpRidesVariables = (userId: number | undefined) => ({
+  where: {
+    AND: [
+      {
+        driverId: {
+          not: {
+            equals: userId,
+          },
+        },
+        passengers: {
+          some: {
+            passengerId: {
+              equals: userId,
+            },
+          },
+        },
+      },
+    ],
+  },
+});
+
+export const buildGetOpenRidesVariables = (userId: number | undefined) => ({
   where: {
     driverId: {
       not: {
-        equals: userId,
-      },
-    },
-    passengers: {
-      every: {
-        passengerId: {
-          equals: userId,
-        },
-      },
-    },
-  },
+        equals: userId
+      }
+    }
+  }
 });
